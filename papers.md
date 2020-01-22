@@ -2,7 +2,7 @@
 layout: article
 titles:
   # @start locale config
-  en      : &EN       About
+  en      : &EN       Academic papers
   # @end locale config
 key: page-papers
 ---

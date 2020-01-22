@@ -1,5 +1,5 @@
 ---
-tags: Eucalyptus, tutorials
+tags: Eucalyptus tutorials
 date: 2013-02-19 13:30:00
 title: How to compile and install Eucalyptus 3.2.0 on Ubuntu 12.04/12.10 from Github sources (cloud-in-a-box)
 ---

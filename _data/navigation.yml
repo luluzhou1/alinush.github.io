@@ -1,13 +1,5 @@
 header:
   - titles:
-      en      : &EN       Papers
-    url: /papers.html
-
-  - titles:
-      en      : &EN       CV
-    url: /files/cv.pdf
-
-  - titles:
       # @start locale config
       en      : &EN       Archive
       en-GB   : *EN
@@ -32,6 +24,14 @@ header:
       tr      : &TR       Arşivdekiler
       # @end locale config
     url: /archive.html
+
+  - titles:
+      en      : &EN       Papers
+    url: /papers.html
+
+  - titles:
+      en      : &EN       CV
+    url: /files/cv.pdf
 
   - titles:
       # @start locale config

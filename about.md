@@ -30,9 +30,25 @@ key: page-about
 #    src: /pictures/pitesti.jpg
 ---
 
-<div class="grid">
-  <div class="cell cell--6">
-    I was born and raised in [Pitești](https://en.wikipedia.org/wiki/Pitesti), a small town in Romania.
-  </div>
-  <div class="cell cell--2">2 cells</div>
-</div>
+<!-- See notes here about HTML blocks: https://kramdown.gettalong.org/syntax.html#html-blocks -->
+
+### The official statement
+
+<!-- ![](/pictures/tbow-th.jpg){: .align-right} -->
+
+I was born and raised in [Pitești](https://en.wikipedia.org/wiki/Pitesti), a small city in Romania, and moved to the US in 2008.
+I was always fascinated with computers: playing on them, fixing them & programming them.
+My [research interests](/papers.html) are mainly in cryptography and its practical applications. 
+I am very interested in secure public-key distribution for the web, email and secure messaging apps. 
+In the past, I've worked on oblivious file systems, "encrypted Facebooks," append-only logs on top of Bitcoin, anonymous cryptocurrencies and Byzantine Fault Tolerance (BFT) protocols.
+
+### The truth
+
+Alin is a prolific slav-squatter. 
+In his free time, he likes to play piano, sit in coffee shops, and lift things up and put them back down again.
+Slowly.
+He also enjoys travelling, but only to destinations with total solar eclipses.
+Naturally, he dislikes clouds.
+(Please join him in Antarctica, in 2021.) 
+Alin might buy a motorcycle and risk the few, still-functioning limbs in his body.
+Someone should convince him not to do this.

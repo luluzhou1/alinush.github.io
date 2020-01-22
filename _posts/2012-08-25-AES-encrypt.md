@@ -1,5 +1,5 @@
 ---
-tags: AES, OpenSSL, encryption, C, tutorials
+tags: AES OpenSSL encryption C tutorials
 date: 2012-08-25 13:30:00
 title: How to encrypt a file using AES in 256-bit CBC/CTR mode using OpenSSL in C
 ---
