@@ -1,0 +1,11 @@
+--- orig-src/storage/Makefile	2013-06-17 17:53:56.843552609 -0400
++++ mod-src/storage/Makefile	2013-06-18 11:50:24.228543584 -0400
+@@ -78,7 +78,7 @@ TEST_BLOB_OBJS  =
+ TEST_VBR_OBJS   = iscsi.o blobstore.o walrus.o http.o diskutil.o       ../util/hash.o ../util/log.o ../util/misc.o ../util/euca_string.o ../util/ipc.o ../util/euca_auth.o ebs_utils.o storage-controller.o
+ 
+ STORAGE_LIBS    = $(LDFLAGS) -lcurl -lssl -lcrypto -pthread -lpthread
+-TESTS           = test_vbr test_blobstore test_ebs
++TESTS           = test_blobstore test_ebs
+ #EFENCE          = -lefence
+ 
+ #all: vbr.o backing.o storage-windows.o walrus.o diskutil.o map.o Wclient euca-blobs generated/stubs $(SCCLIENT) $(TESTS)

@@ -99,6 +99,22 @@
         </a>
       </li>
     {%- endif -%}
+    
+    {%- if _author.youtube -%}
+      <li title="{{ _locale_string_follow | replace: '[NAME]', 'YouTube' }}">
+        <a class="button button--circle youtube-button" itemprop="sameAs" href="https://www.youtube.com/{{ _author.youtube }}" target="_blank">
+          <div class="icon">{%- include svg/icon/social/youtube.svg -%}</div>
+        </a>
+      </li>
+    {%- endif -%}
+    
+    {%- if _author.stackoverflow -%}
+      <li title="{{ _locale_string_follow | replace: '[NAME]', 'StackOverflow' }}">
+        <a class="button button--circle stackoverflow-button" itemprop="sameAs" href="https://www.stackoverflow.com/{{ _author.stackoverflow }}" target="_blank">
+          <div class="icon">{%- include svg/icon/social/stackoverflow.svg -%}</div>
+        </a>
+      </li>
+    {%- endif -%}
 
     {%- if _author.github -%}
       <li title="{{ _locale_string_follow | replace: '[NAME]', 'Github' }}">

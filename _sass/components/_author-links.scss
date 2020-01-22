@@ -32,6 +32,12 @@
       .linkedin-button {
         @include clickable($text-color-1, $linkedin-color);
       }
+      .youtube-button {
+        @include clickable($text-color-1, $youtube-color);
+      }
+      .stackoverflow-button {
+        @include clickable($text-color-1, $stackoverflow-color);
+      }
       .github-button {
         @include clickable($text-color-1, $github-color);
       }

@@ -1,5 +1,13 @@
 header:
   - titles:
+      en      : &EN       Papers
+    url: /papers.html
+
+  - titles:
+      en      : &EN       CV
+    url: /files/cv.pdf
+
+  - titles:
       # @start locale config
       en      : &EN       Archive
       en-GB   : *EN
