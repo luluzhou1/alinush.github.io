@@ -1,14 +1,18 @@
 ---
 tags: books                
 date: 2020-01-23 09:37:00
-title: "Book summary: Ego is the enemy"
+title: "Book summary: Ego is the enemy, by Ryan Holiday"
 article_header:
   type: cover
   image:
     src: /pictures/ego-is-the-enemy.jpg
 ---
 
-A summary of the ideas from Ryan Holiday's "Ego is the enemy," in bullet-point form.
+This is [Ryan Holiday's "Ego is the enemy"](https://www.amazon.com/gp/product/1591847818/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=alinush-20&creative=9325&linkCode=as2&creativeASIN=1591847818&linkId=e844a94e61d7d5aaa549fc5af11e68da) in bullet-point form.
+(Support this article by buying the book using this link.)
+
+These are the ideas I found interesting from the book, without the excellent stories used to back them.
+For those, you'll have to [buy the book](https://www.amazon.com/gp/product/1591847818/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=alinush-20&creative=9325&linkCode=as2&creativeASIN=1591847818&linkId=e844a94e61d7d5aaa549fc5af11e68da).
 I changed some of the excerpts from 2nd person to 1st person, so they resonate more.
 I kept the same table of contents as in the book, except I changed some of the chapter titles.
 
