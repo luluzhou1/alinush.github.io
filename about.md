@@ -28,6 +28,10 @@ key: page-about
 #  type: cover
 #  image:
 #    src: /pictures/pitesti.jpg
+article_header:
+  type: cover
+  image:
+    src: /pictures/tbow-header.jpg
 ---
 
 <!-- See notes here about HTML blocks: https://kramdown.gettalong.org/syntax.html#html-blocks -->
