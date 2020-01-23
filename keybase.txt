@@ -1,0 +1,69 @@
+==================================================================
+https://keybase.io/alinush
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://alinush.github.io
+  * I am alinush (https://keybase.io/alinush) on keybase.
+  * I have a public key with fingerprint D729 B209 4137 DFAA A906  919C 0F7B 2557 0802 3006
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "01011cb0891041829d201e4d0af4f454b1454a4261347b4f425416f028a4751f2dae0a",
+      "fingerprint": "d729b2094137dfaaa906919c0f7b255708023006",
+      "host": "keybase.io",
+      "key_id": "0f7b255708023006",
+      "kid": "01011cb0891041829d201e4d0af4f454b1454a4261347b4f425416f028a4751f2dae0a",
+      "uid": "1981294125b03d16273222e819d87319",
+      "username": "alinush"
+    },
+    "service": {
+      "hostname": "alinush.github.io",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1522503704,
+  "expire_in": 157680000,
+  "prev": "aa1615192b53cdfb7d78d6bac66323f095f2a3e0a7c0b99d0e76503d9f54abf6",
+  "seqno": 24,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.76
+Comment: https://keybase.io/crypto
+
+yMIvAnicrVJZaBNBGE6qqTWtUrVKPYh2EVEa68zsHR/ECAWhRQsqtUrT3exssmnN
+xt1NNIZqBfFAFIXiUcQTNB4UrUqtB1YRrHi3RUXxPh5EkSqahwZ1tuqD+Oo8zDD/
+fN/3f//HXBs2yOF2Zg699Xw7mz3uvHllT9xRc3lbcYqSdSVJ+VJUPR44cIOCTStQ
+rymUjwIQQBiUgSBCwEABiQoCEDMKkFRGZVhGhmSTGMRBmuFlUkIsAzkVIEFieBaq
+SJEwkCgvpWrREDZihha1iKzCI1FGQGQgzSuqJEki4EQoBoHKy4hleSAARAPAEWJY
+N20GMSdLJi7TdFIjl8Ave//i/7Pv+IAcFAWIiFvEyoBWIId4GiGEBSgqAk9D0Qaa
+2IhKyzBBSw1aNG6GqUYvRYoJLYjtXO1B/gaUhTQrHJd/zRQzdEsP6g3kOWxZMdNn
+061kzMavwHLgt1JA1qIKyZIwEtgwNT1K+SBBBi3NloYsQiygecB4Kbwyphk4oNkI
+lucEQJbdBydsCxLkIAtFJLN0UFFlXuEFhZOlIMfRiFaByKpIokkGfBDIoqgAzHNE
+WBFVkpus2kmbeHlUp3yItLKkENE0tVBUsuIGphqvdi4d7HC6HbmuHPuTOdxDC/98
+vfZnQ36kFr16PPbupooe3b+qttDzdOrmpqNZ77n6TGfJ1ILec/snTGwtRxu7R+/N
+HVc2srh8Zt+CIm5JXs3zjw8qus5k/T3zbt3ja3Kae4d//tZRUfC1/+T8930XbkRa
+dkQ+vRmvVU/Ledh1sThzfdLu3LbcF5lxpdc3lHScrpvWfdWPSw83fUp7Zs3O1A5b
+3BiYXOl4f39Kuivf86L//KH1B9lHnUUzmics3bl5+rr+SN8H5mVe+uvCm1VzXI++
+327ddSxjiJVraznHjoK5Wz4e3Zp/Z1bHCdeIwdlNp1rGTH88as2+pDHn3bq61elL
+kSeJ9u3+18Kztuoj6W5XkTuLmlIHnFUzvzS/Tf4ElltCBA==
+=lhtn
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/alinush
+
+==================================================================
+
