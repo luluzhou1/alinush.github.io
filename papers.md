@@ -22,4 +22,4 @@ key: page-papers
 
 **PriviPK: Certificate-less and secure email communication**, Mashael AlSabah, Alin Tomescu, Ilia Lebedev, Dimitrios Serpanos, Srini Devadas, in _Computer & Security 2017_. [ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0167404817300834)
 
-**PrivateFS: A Parallel Oblivious File System**, Peter Williams, Radu Sion and Alin Tomescu, in _ACM CCS 2012_. [PDF](papers/privatefs-ccs2012.pdf)
+**PrivateFS: A Parallel Oblivious File System**, Peter Williams, Radu Sion and Alin Tomescu, in _CCS 2012_. [PDF](papers/privatefs-ccs2012.pdf)
