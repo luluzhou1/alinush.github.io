@@ -10,7 +10,7 @@ key: page-papers
 `PhD thesis`{:.error}
 **How to Keep a Secret and Share a Public Key (Using Polynomial Commitments)**, Alin Tomescu, [PDF](papers/phd-thesis-mit2020.pdf), [LaTeX](https://www.github.com/alinush/phd-thesis)
 
-**Towards Scalable Threshold Cryptosystems**, Alin Tomescu, Robert Chen, Yiming Zheng, Ittai Abraham, Benny Pinkas, Guy Golan Gueta and Srinivas Devadas, in _IEEE S&amp;P 2020_. [PDF](papers/dkg-sp2020.pdf), [LaTeX](https://www.github.com/alinush/dkg-paper), [Code](https://www.github.com/alinush/libpolycrypto)
+**Towards Scalable Threshold Cryptosystems**, Alin Tomescu, Robert Chen, Yiming Zheng, Ittai Abraham, Benny Pinkas, Guy Golan Gueta and Srinivas Devadas, in _IEEE S&amp;P 2020_. [blogpost](/2020/03/12/scalable-bls-threshold-signatures.html), [PDF](papers/dkg-sp2020.pdf), [LaTeX](https://www.github.com/alinush/dkg-paper), [Code](https://www.github.com/alinush/libpolycrypto)
 
 **Efficient Verifiable Secret Sharing with Share Recovery in BFT Protocols**, Soumya Basu, Alin Tomescu, Ittai Abraham, Dahlia Malkhi, Mike Reiter, Emin Gun Sirer, in _CCS 2019_. [DL ACM](https://dl.acm.org/citation.cfm?id=3354207), [arXiv](https://arxiv.org/abs/1807.03720)
 

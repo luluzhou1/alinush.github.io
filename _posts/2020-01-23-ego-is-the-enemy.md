@@ -1,7 +1,7 @@
 ---
-tags: books                
+tags: books ego
 date: 2020-01-23 09:37:00
-title: "Book summary: Ego is the enemy, by Ryan Holiday"
+title: "\"Ego is the enemy\", by Ryan Holiday"
 article_header:
   type: cover
   image:
