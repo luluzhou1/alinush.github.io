@@ -24,7 +24,6 @@ $$</p>
 
 Let $[n]=\\{1,2,3,\dots,n\\}$.
 Let $p$ be a sufficiently large prime that denotes the order of our groups.
-We use $\langle g \rangle = \G$ to denote $g$ generates a group $\G$.
 
 In this post, beyond basic group theory for cryptographers[^KL15], I will assume you are familiar with a few concepts:
 
