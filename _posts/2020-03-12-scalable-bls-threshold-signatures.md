@@ -3,13 +3,15 @@ tags: papers polynomials boneh-lynn-shacham bls interpolation
 title: "Fast and Scalable BLS Threshold Signatures"
 #published: false
 ---
+{: .info}
 **tl;dr:** We use $O(t\log^2{t})$-time algorithms to interpolate secrets "in the exponent."
 This makes aggregating $(t,n)$ BLS threshold signatures much faster, both at small and large scales.
 
 The question of scaling threshold signatures came to us at [VMware Research](https://research.vmware.com) after we finished working on SBFT[^GAGplus19], a scalable Byzantine Fault Tolerance (BFT) protocol that uses BLS threshold signatures[^BLS04].
 
 We recently published our work[^TCZplus20] in [IEEE S&P'20](https://www.ieee-security.org/TC/SP2020/).
-Our work also address how to scale the necessary _distributed key generation (DKG)_ protocol needed to bootstrap a BLS threshold signature scheme, but we will present these results in a different post.
+Our work also address how to scale the necessary _distributed key generation (DKG)_ protocol needed to bootstrap a BLS threshold signature scheme.
+We present these results in [another post](2020/03/12/towards-scalable-vss.html).
 
 A **prototype implementation** is available on GitHub [here](https://github.com/alinush/libpolycrypto/).
 
@@ -116,7 +118,7 @@ This last step takes $\Theta(t)$ time and is sped up in practice using multi-exp
 This naive algorithm works quite well, especially at small scales, but the performance deteriorates fast, as computing the $\Ell_j^T(0)$'s becomes very expensive.
 The figure below depicts this trend.
 
-![](/pictures/bls-thresh-naive.png){: .align-center}
+![Naive aggregation time for BLS threshold signatures](/pictures/bls-thresh-naive.png){: .align-center}
 
 {: .info}
 The $x$-axis is $\log_2(t)$ where $t$ is the threshold, which doubles for every tick.
@@ -234,7 +236,7 @@ The road so far (to fast BLS threshold signature aggregation):
     - Then, $V_T'(X) = \sum_{i=1}^{\|T\|} i \cdot c_i \cdot X^{i-1}$
  - Evaluate $V_T'(X)$ at all points in $T$. **Let's see how!**
 
-![](/pictures/vanishing-poly-tree.png){: .align-center}
+![Computing a vanishing polynomial recursively](/pictures/vanishing-poly-tree.png){: .align-center}
 
 {: .info}
 Here we are computing $V_T(X)$ when $T=\\{2,4,5,8,9,13,16,20\\}$.
@@ -256,7 +258,7 @@ To understand how a multipoint eval works, first you must understand two things:
 A multipoint eval computes $\phi(j)$ by _recursively_ computing $\phi(X) \bmod (X-j)$ in an efficient manner.
 Since a picture is worth a thousands words, please take a look at the figure below, which depicts a multipoint eval of $\phi$ at $T=\\{1,2,\dots,8\\}$.
 
-![](/pictures/multipoint-eval-tree.png){: .align-center}
+![A multipoint evaluation at 1, 2, ..., 8](/pictures/multipoint-eval-tree.png){: .align-center}
 
 {: .info}
 Each node $w$ in the multipoint eval tree stores two polynomials: a vanishing polynomial $V_w$ and a remainder $r_w$.
@@ -294,7 +296,7 @@ they would be of the form $\prod_{j\in T}(X-\omega_N^{j-1})$ rather than $\prod_
 This is actually the route we take in our paper[^TCZplus20], since a single FFT will be much faster than a polynomial multipoint evaluation which requires multiple polynomial divisions, which in turn require multiple FFTs.
 You can see the performance boost and scalability gained in the figure below.
 
-![](/pictures/bls-thresh-eff.png){: .align-center}
+![Fast aggregation time for BLS threshold signatures](/pictures/bls-thresh-eff.png){: .align-center}
 
 {: .info}
 The $x$-axis is $\log_2(t)$ where $t$ is the threshold, which doubles for every tick.
