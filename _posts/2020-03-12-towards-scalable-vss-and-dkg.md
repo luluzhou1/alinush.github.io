@@ -39,16 +39,6 @@ A prototype implementation of our VSS and DKG benchmarks is available on GitHub 
 <p hidden>$$
 \def\G{\mathbb{G}}
 \def\Zp{\mathbb{Z}_p}
-\def\Ell{\mathcal{L}}
-\def\blskeygen{\mathbf{BLS}.\mathbf{Keygen}}
-\definecolor{myBlueColor}{HTML}{268BD2}
-\definecolor{myYellowColor}{HTML}{B58900}
-\definecolor{myGreenColor}{HTML}{859900}
-\definecolor{myRedColor}{HTML}{DC322F}
-\newcommand{\myblue}[1]{\textcolor{myBlueColor}{#1}}
-\newcommand{\myred}[1]{\textcolor{myRedColor}{#1}}
-\newcommand{\myyellow}[1]{\textcolor{myYellowColor}{#1}}
-\newcommand{\mygreen}[1]{\textcolor{myGreenColor}{#1}}
 $$</p>
 <!--  \overset{\mathrm{def}}{=} -->
 

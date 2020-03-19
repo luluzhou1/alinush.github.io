@@ -19,7 +19,6 @@ A **prototype implementation** is available on GitHub [here](https://github.com/
 \def\G{\mathbb{G}}
 \def\Zp{\mathbb{Z}_p}
 \def\Ell{\mathcal{L}}
-\def\blskeygen{\mathbf{BLS}.\mathbf{Keygen}}
 $$</p>
 
 ## Preliminaries
