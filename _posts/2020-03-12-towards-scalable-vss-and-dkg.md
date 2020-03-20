@@ -1,5 +1,5 @@
 ---
-tags: papers polynomials verifiable-secret-sharing distributed-key-generation kate-zaverucha-goldberg kzg commitments polycommit
+tags: papers polynomials verifiable-secret-sharing vss distributed-key-generation dkg kate-zaverucha-goldberg kzg polycommit fast-fourier-transform fft
 title: "Scalable Verifiable Secret Sharing and Distributed Key Generation"
 date: 2020-03-12 14:00:00
 #published: false
