@@ -3,6 +3,8 @@ tags: polynomials
 title: "Introduction to Polynomials for Cryptography"
 date: 2020-03-16 10:38:00
 published: false
+sidebar:
+    nav: crypto-for-currencies
 ---
 
 A *polynomial* $\phi$ of *degree* $d$ is a vector of $d+1$ *coefficients*:

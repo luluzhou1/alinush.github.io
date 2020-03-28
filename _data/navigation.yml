@@ -58,3 +58,15 @@ header:
       tr      : &TR       Hakkında
       # @end locale config
     url: /about.html
+
+crypto-for-currencies:
+  - title: Math background
+    #children:
+    #  - title: Group Theory
+    #    url: /tbd.html
+    children:
+      - title: Polynomials
+        url: /2020/03/16/polynomials-for-crypto.html
+#  - title: Hashing
+#  - title: Digital Signatures
+#  - title: (Zero-Knowledge) Proof Systems
