@@ -293,6 +293,15 @@ Thus, the improvement in DKG dealing times is perfectly illustrated by the graph
 An important thing to note here is that our AMT proofs have a _homomorphic property_ which is necessary for using them in DKGs.
 Specifically, an AMT proof for $\phi(i)$ and another proof for $\psi(i)$ can be combined into a proof for $\left(\phi+\psi\right)(i)$.
 
+## Caveats
+
+We also want to emphasize several limitations of our work:
+
+ - VSS and DKG protocols seem to inherently require a _broadcast channel_, which is as hard to scale as any consensus algorithm. We do not address this.
+ - Our results only apply to synchronous VSS and DKG protocols, which make strong assumptions about the broadcast channel.
+ - Our VSS and DKG protocols are not proven to be adaptively secure.
+ - We do not address the large communication overhead of VSS and DKG protocols deployed at large scales.
+
 ## Remaining questions
 
 Can we precompute constant-sized, rather than logarithmic-sized, KZG evaluation proofs in quasilinear time? 
