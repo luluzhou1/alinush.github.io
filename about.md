@@ -42,9 +42,13 @@ article_header:
 
 I was born and raised in [Pitești](https://en.wikipedia.org/wiki/Pitesti), a small city in Romania, and moved to the US in 2008.
 I was always fascinated with computers: playing on them, fixing them & programming them.
-My [research interests](/papers.html) are mainly in cryptography and its practical applications. 
-I am very interested in secure public-key distribution for the web, email and secure messaging apps. 
-In the past, I've worked on oblivious file systems, "encrypted Facebooks," append-only logs on top of Bitcoin, anonymous cryptocurrencies and Byzantine Fault Tolerance (BFT) protocols.
+I like to read, write and talk about _ideas_.
+You can see some of my writing on [this website](/archive.html) and on [Decentralized Thoughts](https://decentralizedthoughts.github.io/).
+
+I am currently a _Postdoctoral Researcher_ at [VMware Research](https://research.vmware.com).
+My broad [research interests](/papers.html) are in cryptography and its practical applications. 
+I am very interested in authenticated data structures, especially if based on more exotic primitives, such as [constant-sized polynomial commitments](/2020/05/06/kzg-polynomial-commitments.html). 
+In the past, I’ve worked on transparency logs, threshold cryptography, anonymous cryptocurrencies, scalable Byzantine Fault Tolerance (BFT) protocols, append-only logs on top of Bitcoin, and oblivious file systems.
 
 ### The truth
 
