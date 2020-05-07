@@ -59,11 +59,11 @@ In this post, beyond basic group theory for cryptographers[^KL15] and basic poly
  - The **polynomial remainder theorem (PRT)** which says that $\forall z$: $\phi(z) = \phi(X) \bmod (X-z)$,
     - Or, equivalently, $\exists q, \phi(X) = q(X)(X-z) + \phi(z)$.
         - We'll refer to this as the _PRT equation_
- - **KZG**[^KZG10a] **polynomial commitments**. Specifically,
+ - **KZG**[^KZG10a] **polynomial commitments** (see [here](/2020/05/06/kzg-polynomial-commitments.html)). Specifically,
     - To commit to degree $\le \ell$ polynomials, need $\ell$-SDH public parameters $(g,g^\tau,g^{\tau^2},\dots,g^{\tau^\ell}) = (g^{\tau^i})_{i\in[0,\ell]}$,
     - Commitment to $\phi(X)=\prod_{i\in[0,d]} \phi_i X^i$ is $c=g^{\phi(\tau)}$ computed as $c=\prod_{i\in[0,\deg{\phi}]} \left(g^{\tau^i}\right)^{\phi_i}$,
     - To prove an evaluation $\phi(a) = b$, a _quotient_ $q(X) = \frac{\phi(X) - b}{X - a}$ is computed and the _evaluation proof_ is $g^{q(\tau)}$.
-    - A verifier who has the commitmet $c=g^{\phi(\tau)}$ and the proof $\pi=g^{q(\tau)}$ can verify it using a bilinear map:
+    - A verifier who has the commitment $c=g^{\phi(\tau)}$ and the proof $\pi=g^{q(\tau)}$ can verify it using a bilinear map:
         - $e(c / g^b, g) = e(\pi, g^\tau / g^a) \Leftrightarrow$
         - $e(g^{\phi(\tau)-b}, g) = e(g^{q(\tau)}, g^{\tau-a}) \Leftrightarrow$
         - $e(g,g)^{\phi(\tau)-b} = e(g,g)^{q(\tau)(\tau-a)}$.
