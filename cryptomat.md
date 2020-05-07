@@ -1,5 +1,6 @@
 ---
 layout: article
+title: The Cryptomat
 key: page-cryptomat
 #article_header:
 #  type: cover
@@ -8,8 +9,6 @@ key: page-cryptomat
 sidebar:
     nav: cryptomat
 ---
-
-# The Cryptomat
 
 This is a work-in-progress document, meant to summarize various concepts in cryptography.
 

@@ -63,17 +63,22 @@ header:
       # @end locale config
     url: /about.html
 
+# NOTE: For some reason, only depth-1 nesting works here.
+# I tried using subfolderitems and subsubfolderitems with 'page' rather than 'title' but no luck
 cryptomat:
-  - title: The Cryptomat
-    #children:
-    #  - title: Group Theory
-    #    url: /tbd.html
+  #- title: Group Theory
+  #   url: /tbd.html
+  #- title: Hashing
+  #- title: Digital Signatures
+  - title: Polynomials
     children:
-      - title: Polynomials
+      - title: Basics of Polynomials
         url: /2020/03/16/polynomials-for-crypto.html
 
       - title: KZG Polynomial Commitments
         url: /2020/05/06/kzg-polynomial-commitments.html
-#  - title: Hashing
-#  - title: Digital Signatures
-#  - title: (Zero-Knowledge) Proof Systems
+
+  #- title: (Zero-Knowledge) Proof Systems
+  #  children:
+  #    - title: Simulation
+  #      url: /2020/05/07/zero-knowledge-simulation.html
