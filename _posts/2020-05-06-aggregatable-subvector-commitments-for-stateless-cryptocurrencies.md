@@ -160,8 +160,8 @@ The VC scheme presented so far has several nice features:
 
 It also has additional features, which we didn't explain:
 
- - _Homomorphic proofs:_ given a proof $\pi_i$ for $v_i$ w.r.t. $c$ and a proof $\pi_i'$ for $v_i'$ w.r.t. to $c'$, can obtain a proof $\Pi_i$ for $v_i + v_i'$ w.r.t. $C$.
- - _Hiding:_ can commit to a vector as $g^{\phi(\tau)} h^r(\tau)$ to get a commitment that hides all information about $\vect{v}$.
+ - _Homomorphic proofs:_ given a proof $\pi_i$ for $v_i$ w.r.t. a commitment $c$ for $\vect{v}$ and a proof $\pi_i'$ for $v_i'$ w.r.t. to $c'$ for vector $\vect{v'}$, can obtain a proof $\Pi_i$ for $v_i + v_i'$ w.r.t. $C=c_1 c_2$, which is a commitment to $\vect{v}+\vect{v'}$.
+ - _Hiding:_ can commit to a vector as $g^{\phi(\tau)} h^{r(\tau)}$ to get a commitment that hides all information about $\vect{v}$.
     - Here, will need extra $h^{\tau^i}$'s.
     - Also, $r(X)$ is a random, degree $n-1$ polynomial.
 <!-- 
@@ -359,7 +359,7 @@ As a result, $u_i$ can now be verified as a KZG proof that $\lagr_i(i) = 1$ agai
 
 ## Precomputing all proofs fast
 
-Computing all $n$ $O(1)$-sized proofs for $v_i=\phi(i)$ in less than quadratic time seems very difficult.
+Computing all $n$ constant-sized proofs for $v_i=\phi(i)$ in less than quadratic time seems very difficult.
 Fortunately, Feist and Khovratovich[^FK20] give a beautiful technique that can do this, subject to the restriction that the evaluation points are roots of unity, rather than $[0,1,\dots, n-1]$.
 Thus, if we change our scheme to store $v_i$ at $\phi(\omega^i)$ where $\omega$ is an $n$th primitive root of unity, we can use this technique to compute all VC proofs $(\pi_i)_{i\in [0,n)}$ in $O(n\log{n})$ time.
 
