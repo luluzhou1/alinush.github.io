@@ -45,6 +45,8 @@ Then, the _constant-sized_ **evaluation proof** is:
 
 $$\pi = g^{q(\tau)}$$
 
+Note that this leverages the [polynomial remainder theorem](/2020/03/16/polynomials-for-crypto.html#the-polynomial-remainder-theorem).
+
 ### Verifying an evaluation proof
 
 A verifier who has the commitment $c=g^{\phi(\tau)}$ and the proof $\pi=g^{q(\tau)}$ can verify it in _constant-time_ using two pairings:
@@ -57,6 +59,7 @@ e(g,g)^{\phi(\tau)-y} &= e(g,g)^{q(\tau)(\tau-a)}\\\\\
 \end{align}
 
 This effectively checks that $q(X) = \frac{\phi(X) - y}{X-a}$ by checking this equality holds for $X=\tau$.
+In other words, it checks that the [polynomial remainder theorem](/2020/03/16/polynomials-for-crypto.html#the-polynomial-remainder-theorem) holds at $X\=\tau$.
 
 ## Batch proofs
 

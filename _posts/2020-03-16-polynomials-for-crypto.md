@@ -38,6 +38,8 @@ For example, $\phi = [1, 10, 9]$ and $\phi(X) = 9X^2 + 10X + 1$ are one and the 
 ### Adding and subtracting polynomials
 
 ### Multiplying polynomials
+
+### Lagrange interpolation
 -->
 
 ### The polynomial remainder theorem
@@ -63,6 +65,8 @@ Importantly, $\deg{q} = \deg{a} - \deg{b}$ and $\deg{r} < \deg{b}$.
 <!-- TODO: 
 # The Discrete Fourier Transform (DFT) 
 Should have its own article.
+
+# Multipoint evaluations
 -->
 
 [^kzg-eval-proofs]: Evaluation proofs in [KZG polynomial commitments](/2020/05/06/kzg-polynomial-commitments.html#evaluation-proofs) leverage the polynomial remainder theorem.
