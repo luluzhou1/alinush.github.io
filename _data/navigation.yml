@@ -29,6 +29,10 @@ header:
       en      : &EN       Papers
     url: /papers.html
   
+  #- titles:
+  #    en      : &EN       Slides
+  #  url: /slides.html
+  
   - titles:
       en      : &EN       Cryptomat
     url: /cryptomat.html
