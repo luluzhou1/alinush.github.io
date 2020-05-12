@@ -62,8 +62,8 @@ Recall that given a vector $\vect{v} = [v_0, v_1, \dots, v_{n-1}]$, we can inter
 
 It is well-known that this Lagrange representation of $\vect{v}$ naturally gives rise to a **vector commitment (VC)** scheme[^CF13].
 The key idea is to commit to $\vect{v}$ by committing to $\phi(X)$ using KZG polynomial commitments (see [here](/2020/05/06/kzg-polynomial-commitments.html)).
-Then, proving evaluations for $\phi(i)$ is the same as proving that $v_i$ is the element of the vector at position $i$.
-Here's briefly how it works and what features it has.
+Then, proving $\phi(i) = v_i$ proves that $v_i$ is the $i$th element in the vector.
+Next, we describe how this scheme works in more detail and what features it has.
 
 ## Trusted setup
 
@@ -82,8 +82,8 @@ The **verification key** is $\vrk=(g,g^{\tau})$ and will be used to verify proof
 
 ## Committing to a vector
 
-The **commitment** to a vector is just a KZG commitment $c=g^{\phi(\tau)}$ to $\phi(X)$ from $\vect{v}$.
-This can be computed very fast, given the proving key $\prk$ in $O(n)$ time as:
+The **commitment** to a vector $\vect{v}$ is just a KZG commitment $c=g^{\phi(\tau)}$ to its polynomial $\phi(X)$.
+This can be computed very fast, in $O(n)$ time, given the proving key $\prk$:
 
 \begin{align}
 c &= \sum_{i=0}^{n-1} \ell_i^{v_i}\\\\\
@@ -160,7 +160,7 @@ The VC scheme presented so far has several nice features:
 
 It also has additional features, which we didn't explain:
 
- - _Homomorphic proofs:_ given a proof $\pi_i$ for $v_i$ w.r.t. a commitment $c$ for $\vect{v}$ and a proof $\pi_i'$ for $v_i'$ w.r.t. to $c'$ for vector $\vect{v'}$, can obtain a proof $\Pi_i$ for $v_i + v_i'$ w.r.t. $C=c_1 c_2$, which is a commitment to $\vect{v}+\vect{v'}$.
+ - _Homomorphic proofs:_ Suppose we are given (1) a proof $\pi_i$ for $v_i$ w.r.t. a commitment $c$ for $\vect{v}$ and (2) a proof $\pi_i'$ for $v_i'$ w.r.t. to $c'$ for vector $\vect{v'}$. Then, can obtain a proof $\Lambda_i=\pi_i \cdot \pi_i'$ for $v_i + v_i'$ w.r.t. $C=c\cdot c'$, which is a commitment to $\vect{v}+\vect{v'}$.
  - _Hiding:_ can commit to a vector as $g^{\phi(\tau)} h^{r(\tau)}$ to get a commitment that hides all information about $\vect{v}$.
     - Here, will need extra $h^{\tau^i}$'s.
     - Also, $r(X)$ is a random, degree $n-1$ polynomial.
@@ -223,7 +223,7 @@ q_I(X)
    &= \phi(X)\frac{1}{A_I(X)}- R_I(X)\frac{1}{A_I(X)}\\\\\
 \end{align}
 
-Next we replace $\frac{1}{A_I(X)}$ with its partial fraction decomposition $\sum_{i\in I} \frac{1}{A_I'(i)(X-i)}$.
+Next, we replace $\frac{1}{A_I(X)}$ with its partial fraction decomposition $\sum_{i\in I} \frac{1}{A_I'(i)(X-i)}$.
 
 \begin{align}
 q_I(X)
