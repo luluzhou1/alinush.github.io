@@ -136,8 +136,8 @@ To prove multiple positions $(v_i)_{i\in I}$, an **$I$-subvector proof** $\pi_I$
 For this, the prover has to interpolate the following polynomials in $O(\vert I\vert \log^2{\vert I\vert})$ time:
 
 \begin{align}
-A_I(X) &=\prod_{i\in I} (X - a_i)\\\\\
-R_I(X)=\sum_{i\in I} y_i \prod_{j\in I,j\ne i}\frac{X - j}{i - j}\ \text{s.t.}\ R_I(a_i) &= y_i,\forall i\in I
+A_I(X) &=\prod_{i\in I} (X - i)\\\\\
+R_I(X) &=\sum_{i\in I} v_i \prod_{j\in I,j\ne i}\frac{X - j}{i - j}\ \text{s.t.}\ R_I(i) = v_i,\forall i\in I
 \end{align}
 
 Verifying the proof can also be done with two pairings:
@@ -334,7 +334,7 @@ u_{i,j}
     &= \left(a_j^{c_j} \cdot a_i^{c_i}\right)^\frac{1}{A'(j)}
 \end{align}
 
-What are $c_i$ and $c_j$? Just define $A_{i,j}(X) = (X-i)(X-j)$, take its derivative $A_{1,2}'(X)=(X-i)+(X-j)$ and, [as mentioned before](#partial-fraction-decomposition), you have $c_i=1/A_{1,2}'(i)=1/(i-j)$ and $c_j=1/A_{1,2}'(j)=1/(j-i)$
+What are $c_i$ and $c_j$? Just define $A_{i,j}(X) = (X-i)(X-j)$, take its derivative $A_{i,j}'(X)=(X-i)+(X-j)$ and, [as mentioned before](#partial-fraction-decomposition), you have $c_i=1/A_{i,j}'(i)=1/(i-j)$ and $c_j=1/A_{i,j}'(j)=1/(j-i)$
 
 Thus, it is sufficient to set each user's $\upk_i=(u_i, a_i, A'(i))$.
 
