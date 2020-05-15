@@ -198,13 +198,13 @@ Specifically, the verifier is given a commitment to $q(X)$ and checks that the p
 In AMTs, the intuition remains the same, except the verifier will **indirectly** check the PRT holds.
 Specifically, for the example above, the verifier will check that, $\exists q_{1,8}(X), q_{1,4}(X), q_{3,4}(X), q_{3,3}(X)$ such that:
 
-\begin{align\*}
+\begin{align}
     \phi(X) &=q_{1,8}(X)\cdot(X-1)\cdots(X-8) + {}\\\\\
             &+ q_{1,4}(X)\cdot(X-1)\cdots(X-4) + {}\\\\\
             &+ q_{3,4}(X)\cdot(X-3)(X-4) + {}\\\\\
             &+ q_{3,3}(X)\cdot(X-3) + {}\\\\\
             &+ \phi(3)
-\end{align\*}
+\end{align}
 
 We'll refer to this as the _AMT equation_.
 
@@ -219,24 +219,24 @@ You can easily derive the AMT equation if you "expand" $\phi(X)$'s expression st
 \end{align\*}
 
 Note that by factoring out $(X-3)$ in the AMT equation, we can obtain the quotient $q(X)$ that satisfies the PRT equation:
-\begin{align\*}
+\begin{align}
 q(X) &=q_{1,8}(X)\cdot\frac{(X-1)\cdots(X-8)}{X-3} + {}\\\\\
      &+ q_{1,4}(X)\cdot(X-1)(X-2)(X-4) + {}\\\\\
      &+ q_{3,4}(X)\cdot(X-4) + {}\\\\\
      &+ q_{3,3}(X)\\\\\
-\end{align\*}
+\end{align}
 
 In other words, the quotient $q(X)$ from the KZG proof is just a linear combination of the quotients from the AMT proof.
 This is why checking the AMT equation is equivalent to checking the PRT equation.
 
 In conclusion, to verify the AMT proof for $\phi(3)$, the verifier will use the bilinear map to ensure the AMT equation holds at $X=\tau$:
-\begin{align\*}
+\begin{align}
     e(g^{\phi(\tau)}, g) &= e(g^{q_{1,8}(\tau)}, g^{(\tau-1)\cdots(\tau-8)})\cdot {}\\\\\
             &\cdot e(g^{q_{1,4}(\tau)}, g^{(\tau-1)\cdots(\tau-4)})\cdot {}\\\\\
             &\cdot e(g^{q_{3,4}(\tau)}, g^{(\tau-3)(\tau-4)})\cdot {}\\\\\
             &\cdot e(g^{q_{3,3}(\tau)}, g^{\tau-3})\cdot {}\\\\\
             &\cdot e(g^{\phi(3)}, g)
-\end{align\*}
+\end{align}
 
 {: .info}
 Note that for this, the verifier needs commitments to the vanishing polynomials along the path to $\phi(3)$.

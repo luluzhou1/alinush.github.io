@@ -14,6 +14,22 @@ Our scheme is compatible with recent techniques to aggregate subvector proofs ac
 This is joint work with [Ittai Abraham](https://twitter.com/ittaia), [Vitalik Buterin](https://twitter.com/VitalikButerin), [Justin Drake](https://twitter.com/drakefjustin), [Dankrad Feist](https://twitter.com/dankrad) and [Dmitry Khovratovich](https://twitter.com/khovr).
 Our **full paper** is available online [here](https://eprint.iacr.org/2020/527) and is currently under peer review.
 
+I also [recently presented this work](https://www.youtube.com/watch?v=KGRnpjPjduI&list=PLj80z0cJm8QHm_9BdZ1BqcGbgE-BEn-3Y&index=22&t=0s) to the [zkStudyClub](https://www.youtube.com/playlist?list=PLj80z0cJm8QHm_9BdZ1BqcGbgE-BEn-3Y).
+You can find the slides in [this GitHub repo](https://github.com/alinush/asvc-zkstudyclub-talk).
+
+**A little backstory:**
+I've been interested in vector commitments (VCs) ever since [Madars Virza](https://madars.org/) first showed me how KZG and roots of unity gives rise to a simple VC scheme.
+In 2018, I was trying to figure out if VC proofs can be updated fast in such a construction.
+I came up with a KZG-based scheme that could update a proof for $v_i$ given a change to any $v_j $.
+Unfortunately, it required an $O(n)$-sized, _static_, _update key_ to do the update.
+Since each player $i$ in a stateless cryptocurrency has to update their proof for $v_i$, this $O(n)$-sized update key is an annoying storage burden for that user.
+
+Then, I saw [Vitalik Buterin's post](https://ethresear.ch/t/using-polynomial-commitments-to-replace-state-roots/7095) on using _partial fraction decomposition_ to aggregate KZG proofs.
+This was great, since it immediately implied VC proofs can be aggregated.
+However, after conversations with [Ittai Abraham](https://twitter.com/ittaia) and the Ethereum Research team, it became clear this can also be used to reduce the update key size.
+The key ingredient was turning two commitments to $A(X)/(X-i)$ and $A(X)/(X-j)$ into a commitment to $A(X)/\left((X-i)(X-j)\right)$ (see [here](#updating-proofs)).
+This post explains this technique and how to make it work by taking care of all details (e.g., making update keys verifiable, computing them from the KZG public params efficiently, etc.).
+
 <p hidden>$$
 \def\G{\mathbb{G}}
 \def\Zp{\mathbb{Z}_p}
@@ -416,7 +432,7 @@ It would be very exciting to see by how much this new VC scheme improves the per
 
 # Acknowledgements
 
-Special thanks goes to [Madars Virza](https://madars.org/) who first introduced me to Lagrange-based VCs in 2016 and helped me with some of the related work.
+Special thanks goes to [Madars Virza](https://madars.org/) who first introduced me to Lagrange-based VCs in 2017 and helped me with some of the related work.
 
 ### References
 
