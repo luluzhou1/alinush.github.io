@@ -5,7 +5,7 @@ date: 2020-05-06 14:00:00
 #published: false
 ---
 {: .info}
-**tl;dr:** We build a vector commitment (VC) scheme from KZG commitments to Lagrange polynomials which has (1) constant-sized, aggregatable proofs, which can all be precomputed in $O(n\log{n})$ time, and (2) linear public parameters, which can be derived from any "powers-of-tau" CRS in $O(n\log{n})$ time.
+**tl;dr:** We build a vector commitment (VC) scheme from KZG commitments to Lagrange polynomials that has (1) constant-sized, aggregatable proofs, which can all be precomputed in $O(n\log{n})$ time, and (2) linear public parameters, which can be derived from any "powers-of-tau" CRS in $O(n\log{n})$ time.
 Importantly, the auxiliary information needed to update proofs (a.k.a. the "update key") is $O(1)$-sized.
 Our scheme is compatible with recent techniques to aggregate subvector proofs across _different_ commitments[^GRWZ20].
 
