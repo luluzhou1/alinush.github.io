@@ -223,7 +223,7 @@ Note that by factoring out $(X-3)$ in the AMT equation, we can obtain the quotie
 q(X) &=q_{1,8}(X)\cdot\frac{(X-1)\cdots(X-8)}{X-3} + {}\\\\\
      &+ q_{1,4}(X)\cdot(X-1)(X-2)(X-4) + {}\\\\\
      &+ q_{3,4}(X)\cdot(X-4) + {}\\\\\
-     &+ q_{3,3}(X)\\\\\
+     &+ q_{3,3}(X)
 \end{align}
 
 In other words, the quotient $q(X)$ from the KZG proof is just a linear combination of the quotients from the AMT proof.
