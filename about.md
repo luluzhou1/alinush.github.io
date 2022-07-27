@@ -80,8 +80,8 @@ I've also helped with, but not led, research on
 and
 [oblivious file systems](https://dl.acm.org/doi/10.1145/2382196.2382299).
 
-Before joining Aptos Labs, I was a researcher at VMware Research.
-Before VMware, I was a PhD student at MIT, working on cryptography research with [Srini Devadas](https://people.csail.mit.edu/devadas/).
+Before joining Aptos Labs, I was a Postdoctoral Researcher and then a Research Scientist at VMware Research.
+Before VMware, I was a PhD student at MIT, becoming an applied cryptography researcher with [Srini Devadas](https://people.csail.mit.edu/devadas/), my advisor.
 Before joining MIT, I was building tamper-proof clouds and end-to-end encrypted outsourced file storage at [Private Machines](https://privatemachines.com/).
 
 ### The _truth_
