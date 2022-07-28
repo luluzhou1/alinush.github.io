@@ -6,13 +6,13 @@ sidebar:
     nav: cryptomat
 ---
 
-A **polynomial** $\phi$ of **degree** $d$ is a vector of $d+1$ **coefficients**:
+Recall from [our basics discussion](/2020/03/16/polynomials-for-crypto.html) that a **polynomial** $\phi$ of **degree** $d$ is a vector of $d+1$ **coefficients**:
 
 \begin{align}
     \phi &= [\phi_0, \phi_1, \phi_2, \dots, \phi_d]
 \end{align}
 
-### Lagrange interpolation
+## How to compute a polynomial's coefficients from a bunch of its evaluations
 
 Given $n$ pairs $(x_i, y_i)\_{i\in[n]}$, one can compute or _interpolate_ a degree $\le n-1$ polynomial $\phi(X)$ such that:
 $$\phi(x_i)=y_i,\forall i\in[n]$$ 
@@ -27,7 +27,7 @@ This formula is intimidating at first, but there's a very simple intuition behin
 The key idea is that $\lagr_i(X)$ is defined so that it has two properties:
 
  1. $\lagr_i(x_i) = 1,\forall i\in[n]$ 
- 2. $\lagr_i(x_j) = 0,\forall j \in [n]\setminus\{i\}$
+ 2. $\lagr_i(x_j) = 0,\forall j \in [n]\setminus\\{i\\}$
 
 You can actually convince yourself that $\lagr_i(X)$ has these properties by plugging in $x_i$ and $x_j$ to see what happens.
 
@@ -35,7 +35,9 @@ You can actually convince yourself that $\lagr_i(X)$ has these properties by plu
 **Important:** The $\lagr_i(X)$ polynomials are dependent on the set of $x_i$'s only (and thus on $n$)! Specifically each $\lagr_i(X)$ has degree $n-1$ and has a root at each $x_j$ when $j\ne i$!
 In this sense, a better notation for them would be $\lagr_i^{[x_i, n]}(X)$ or $\lagr_i^{[n]}(X)$ to indicate this dependence.
 
-Furthermore, consider the following example with $n=3$ pairs.
+## Example: Interpolating a polynomial from three evaluations
+
+Consider the following example with $n=3$ pairs of points.
 Then, by the Lagrange formula, we have:
 
 $$\phi(X) = y_1 \lagr_1(X) + y_2 \lagr_2(X) + y_3 \lagr_3(X)$$
@@ -55,7 +57,7 @@ The inspired reader might notice that the polynomial $\phi(X) = X$ could satisfy
 But is this what the Lagrange interpolation will return?
 After all, the interpolated $\phi(X)$ is a sum of degree $n-1$ polynomials $\lagr_i(X)$, so could it have degree 1?
 Well, it turns out, yes, because things cancel out.
-To see, this take a simple example, with $n=3$:
+To see this, take a simple example, with $n=3$:
 \begin{align}
 \phi(X) &=\sum_{i\in [3]} i \cdot \lagr_i(X) = \sum_{i\in [3]} i \cdot \prod_{j\in[3]\setminus\{i\}} \frac{X - j}{i - j}\\\\\
     &= 1\cdot \frac{X-2}{1-2}\frac{X-3}{1-3} + 2\cdot \frac{X-1}{2-1}\frac{X-3}{2-3} + 3\cdot\frac{X-1}{3-1}\frac{X-2}{3-2}\\\\\
@@ -69,7 +71,7 @@ To see, this take a simple example, with $n=3$:
     &= X
 \end{align}
 
-#### Computation overhead of Lagrange interpolation
+## Computational overhead of Lagrange interpolation
 
 If done naively, interpolating $\phi(X)$ using the Lagrange formula in Equation \ref{eq:lagrange-formula} will take $O(n^2)$ time.
 
