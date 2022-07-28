@@ -113,6 +113,9 @@ cryptomat:
       - title: Basics of Polynomials
         url: /2020/03/16/polynomials-for-crypto.html
 
+      - title: Lagrange interpolation
+        url: /2022/07/28/lagrange-interpolation.html
+
       - title: KZG Polynomial Commitments
         url: /2020/05/06/kzg-polynomial-commitments.html
 
