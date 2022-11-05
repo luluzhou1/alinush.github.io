@@ -24,6 +24,28 @@ Second, run website locally using:
 
 Then, access it at [http://localhost:4000](http://localhost:4000).
 
+## For Apple M1
+
+Had some issue getting this to run the server on Apple M1. The instructions from [here](https://www.earthinversion.com/blogging/how-to-install-jekyll-on-appple-m1-macbook/) ended up being helpful:
+
+```
+xcode-select --install
+brew install rbenv ruby-build
+
+rbenv install 3.0.0
+rbenv global 3.0.0
+ruby -v
+rbenv rehash
+
+echo 'eval "$(rbenv init - bash)"' >> ~/.bash_profile
+
+gem install --user-install bundler jekyll
+
+bundle update --bundler
+bundle add webrick
+bundle install --redownload
+```
+
 ## License
 
 TeXt Theme is [MIT licensed](https://github.com/kitian616/jekyll-TeXt-theme/blob/master/LICENSE).

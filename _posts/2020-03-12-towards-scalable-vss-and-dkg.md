@@ -23,7 +23,7 @@ _<center>"Can we efficiently bootstrap a $(t,n)$ threshold signature scheme when
 
 The answer is: use a _distributed key generation (DKG)_[^GJKR07] protocol.
 Unfortunately, DKGs do not scale well.
-Their main bottleneck is efficiently computing _evaluation proofs_ in a _polynomial commitment scheme_ such as KZG[^KZG10a].
+Their main bottleneck is efficiently computing _evaluation proofs_ in a _polynomial commitment scheme_ such as KZG[^KZG10].
 In this post, we'll introduce new techniques for speeding this up.
 
 <!-- At a high level, a DKG operates as follows:
@@ -46,13 +46,13 @@ Let $p$ be a sufficiently large prime that denotes the order of our groups.
 
 In this post, beyond basic group theory for cryptographers[^KL15] and basic polynomial arithmetic, I will assume you are familiar with a few concepts:
 
- - **Bilinear maps**[^GPS08]. Specifically, $\exists$ a bilinear map $e : \G_1 \times \G_2 \rightarrow \G_T$ such that:
-    - $\forall u\in \G_1,v\in \G_2, a\in \Zp, b\in \Zp, e(u^a, v^b) = e(u,v)^{ab}$
-    - $e(g_1,g_2)\ne 1_T$ where $g_1,g_2$ are the generators of $\G_1$ and $\G_2$ respectively and $1_T$ is the identity of $\G_T$
+ - **Bilinear maps**[^GPS08]. Specifically, $\exists$ a bilinear map $e : \Gr_1 \times \Gr_2 \rightarrow \Gr_T$ such that:
+    - $\forall u\in \Gr_1,v\in \Gr_2, a\in \Zp, b\in \Zp, e(u^a, v^b) = e(u,v)^{ab}$
+    - $e(g_1,g_2)\ne 1_T$ where $g_1,g_2$ are the generators of $\Gr_1$ and $\Gr_2$ respectively and $1_T$ is the identity of $\Gr_T$
  - The **polynomial remainder theorem (PRT)** which says that $\forall z$: $\phi(z) = \phi(X) \bmod (X-z)$,
     - Or, equivalently, $\exists q, \phi(X) = q(X)(X-z) + \phi(z)$.
         - We'll refer to this as the _PRT equation_
- - **KZG**[^KZG10a] **polynomial commitments** (see [here](/2020/05/06/kzg-polynomial-commitments.html)). Specifically,
+ - **KZG**[^KZG10] **polynomial commitments** (see [here](/2020/05/06/kzg-polynomial-commitments.html)). Specifically,
     - To commit to degree $\le \ell$ polynomials, need $\ell$-SDH public parameters $(g,g^\tau,g^{\tau^2},\dots,g^{\tau^\ell}) = (g^{\tau^i})_{i\in[0,\ell]}$,
     - Commitment to $\phi(X)=\prod_{i\in[0,d]} \phi_i X^i$ is $c=g^{\phi(\tau)}$ computed as $c=\prod_{i\in[0,\deg{\phi}]} \left(g^{\tau^i}\right)^{\phi_i}$,
     - To prove an evaluation $\phi(a) = b$, a _quotient_ $q(X) = \frac{\phi(X) - b}{X - a}$ is computed and the _evaluation proof_ is $g^{q(\tau)}$.
@@ -66,7 +66,7 @@ In this post, beyond basic group theory for cryptographers[^KL15] and basic poly
     - Let $$H=\{1, \omega, \omega^2, \omega^3, \dots, \omega^{n-1}\}$$ denote the set of all $n$ $n$th roots of unity
     - Then, FFT can be used to efficiently evaluate any polynomial $\phi(X)$ at all $X\in H$ in $\Theta(n\log{n})$ time
         - i.e., compute all $$\{\phi(\omega^{i-1})\}_{i\in[n]}$$
- - **$(t,n)$ Verifiable Secret Sharing (VSS)** via Shamir Secret Sharing. Specifically, we'll focus on _eVSS_[^KZG10a]:
+ - **$(t,n)$ Verifiable Secret Sharing (VSS)** via Shamir Secret Sharing. Specifically, we'll focus on _eVSS_[^KZG10]:
     - 1 _dealer_ with a secret $s$
     - $n$ _players_
     - The goal is for dealer to give each player $i$ a _share_ $s_i$ of the secret $s$ such that any subset of $t$ shares can be used to reconstruct $s$ 
@@ -265,7 +265,7 @@ Nonetheless, our techniques generalize to $n\ne 2^k$ and to precomputing proofs 
 ### Vector commitments (VCs)
 
 By representing a vector $v = [v_0, v_1, v_2, \dots, v_{n-1}]$ as a (univariate) polynomial $\phi(X)$ where $\phi(\omega^i) = v_i$, we can easily obtain a vector commitment scheme similar to the multivariate polynmomial-based one by Chepurnoy et al[^CPZ18].
-Our scheme also supports updating proofs efficiently (see Chapter 9.2.2., pg. 120 in my thesis[^Tomescu20] for details).
+Our scheme also supports updating proofs efficiently (see Chapter 9.2.2., pg. 120 in my thesis[^Tome20] for details).
 
 ### Faster VSS
 
@@ -313,7 +313,7 @@ We hope to address this in future work.
 
 ### References
 
-[^Boldyreva03]: **Threshold Signatures, Multisignatures and Blind Signatures Based on the Gap-Diffie-Hellman-Group Signature Scheme**, by Boldyreva, Alexandra, *in PKC 2003*, 2002
+[^Bold03]: **Threshold Signatures, Multisignatures and Blind Signatures Based on the Gap-Diffie-Hellman-Group Signature Scheme**, by Boldyreva, Alexandra, *in PKC 2003*, 2002
 [^BLS04]: **Short Signatures from the Weil Pairing**, by Boneh, Dan and Lynn, Ben and Shacham, Hovav, *in Journal of Cryptology*, 2004
 [^BT04]: **Barycentric Lagrange Interpolation**, by Berrut, J. and Trefethen, L., *in SIAM Review*, 2004
 [^CLRS09]: **Introduction to Algorithms, Third Edition**, by Cormen, Thomas H. and Leiserson, Charles E. and Rivest, Ronald L. and Stein, Clifford, 2009
@@ -323,8 +323,8 @@ We hope to address this in future work.
 [^GJKR07]: **Secure Distributed Key Generation for Discrete-Log Based Cryptosystems**, by Gennaro, Rosario and Jarecki, Stanislaw and Krawczyk, Hugo and Rabin, Tal, *in Journal of Cryptology*, 2007
 [^GPS08]: **Pairings for cryptographers**, by Steven D. Galbraith and Kenneth G. Paterson and Nigel P. Smart, *in Discrete Applied Mathematics*, 2008
 [^KL15]: **Introduction to Modern Cryptography**, by Jonathan Katz and Yehuda Lindell, 2007
-[^KZG10a]: **Constant-Size Commitments to Polynomials and Their Applications**, by Kate, Aniket and Zaverucha, Gregory M. and Goldberg, Ian, *in ASIACRYPT '10*, 2010
+[^KZG10]: **Constant-Size Commitments to Polynomials and Their Applications**, by Kate, Aniket and Zaverucha, Gregory M. and Goldberg, Ian, *in ASIACRYPT '10*, 2010
 [^Shamir79]: **How to Share a Secret**, by Shamir, Adi, *in Commun. ACM*, 1979
 [^TCZplus20]: **Towards Scalable Threshold Cryptosystems**, by Alin Tomescu and Robert Chen and Yiming Zheng and Ittai Abraham and Benny Pinkas and Guy Golan Gueta and Srinivas Devadas, *in 2020 IEEE Symposium on Security and Privacy (SP)*, 2020, [[PDF]](/papers/dkg-sp2020.pdf).
-[^Tomescu20]: **How to Keep a Secret and Share a Public Key (Using Polynomial Commitments)**, by Tomescu, Alin, 2020
+[^Tome20]: **How to Keep a Secret and Share a Public Key (Using Polynomial Commitments)**, by Tomescu, Alin, 2020
 [^vG13ModernCh10]: **Fast polynomial evaluation and interpolation**, by von zur Gathen, Joachim and Gerhard, Jurgen, *in Modern Computer Algebra*, 2013

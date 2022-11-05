@@ -1,6 +1,6 @@
 #!/bin/bash
 
-scriptdir=$(cd $(dirname $0); pwd -P)
+scriptdir=$(cd $(dirname $(readlink -f $0)); pwd -P)
 postdir="$scriptdir/"
 line=1
 
@@ -14,12 +14,16 @@ is_number()
     fi
 }
 
-files=`cd $postdir && find . -name "*.md"`
+cd "$postdir/"
+  
+files=`find . -name "*.md"`
 
 files=`echo "$files" | grep -v "/files/"`
 files=`echo "$files" | grep -v "/templ.md"`
 files=`echo "$files" | grep -v "/TODO.md"`
 files=`echo "$files" | grep -v "/refs.md"`
+files=`echo "$files" | grep -v "/*welcome.md"`
+files=`echo "$files" | grep -v "/*header-image.md"`
 
 files=`echo "$files" | cut -c 3-` # cuts the first two characters (i.e., the ./)
 
@@ -45,6 +49,6 @@ else
     files=`echo "$files" | tail -n "$line"`
     file=`echo "$files" | head -n 1`
 
-    vim "$postdir/$file"
+    vim "$file"
 fi
 

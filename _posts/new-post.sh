@@ -2,7 +2,7 @@
 
 set -e
 
-scriptdir=$(cd $(dirname $0); pwd -P)
+scriptdir=$(cd $(dirname $(readlink -f $0)); pwd -P)
 notesdir="$scriptdir"
     
 if [ $# -lt 1 ]; then

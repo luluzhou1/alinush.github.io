@@ -1,6 +1,6 @@
 ---
 tags: number-theory diophantine-equations gcd
-title: Linear Diophantine Equations
+title: Linear Diophantine equations
 #published: false
 sidebar:
     nav: cryptomat

@@ -29,13 +29,13 @@ In this post, beyond basic group theory for cryptographers[^KL15] and basic poly
  - **Bilinear maps**[^GPS08]. Specifically, $\exists$ a bilinear map $e : \Gr_1 \times \Gr_2 \rightarrow \Gr_T$ such that:
     - $\forall u\in \Gr_1,v\in \Gr_2, a\in \Zp, b\in \Zp, e(u^a, v^b) = e(u,v)^{ab}$
     - $e(g_1,g_2)\ne 1_T$ where $g_1,g_2$ are the generators of $\Gr_1$ and $\Gr_2$ respectively and $1_T$ is the identity of $\Gr_T$
- - **KZG**[^KZG10a] **polynomial commitments** (see [previous post][prevpost]),
+ - **KZG**[^KZG10] **polynomial commitments** (see [previous post][prevpost]),
  - The **Fast Fourier Transform (FFT)**[^CLRS09] applied to polynomials. Specifically,
     - Suppose $\Zp$ admits a primitive _root of unity_ $\omega$ of order $n$ (i.e., $n \mid p-1$)
     - Let $$H=\{1, \omega, \omega^2, \omega^3, \dots, \omega^{n-1}\}$$ denote the set of all $n$ $n$th roots of unity
     - Then, FFT can be used to efficiently evaluate any polynomial $\phi(X)$ at all $X\in H$ in $\Theta(n\log{n})$ time
         - i.e., compute all $$\{\phi(\omega^{i-1})\}_{i\in[n]}$$
- - **$(t,n)$ Verifiable Secret Sharing (VSS)** via Shamir Secret Sharing, specifically _eVSS_[^KZG10a] (see [previous post][prevpost]),
+ - **$(t,n)$ Verifiable Secret Sharing (VSS)** via Shamir Secret Sharing, specifically _eVSS_[^KZG10] (see [previous post][prevpost]),
  - **$(t,n)$ Distributed Key Generation (DKG)** via VSS (see [previous post][prevpost]).
 
 ### Faster VSS
@@ -62,7 +62,7 @@ We hope to address this in future work.
 
 ### References
 
-[^Boldyreva03]: **Threshold Signatures, Multisignatures and Blind Signatures Based on the Gap-Diffie-Hellman-Group Signature Scheme**, by Boldyreva, Alexandra, *in PKC 2003*, 2002
+[^Bold03]: **Threshold Signatures, Multisignatures and Blind Signatures Based on the Gap-Diffie-Hellman-Group Signature Scheme**, by Boldyreva, Alexandra, *in PKC 2003*, 2002
 [^BLS04]: **Short Signatures from the Weil Pairing**, by Boneh, Dan and Lynn, Ben and Shacham, Hovav, *in Journal of Cryptology*, 2004
 [^BT04]: **Barycentric Lagrange Interpolation**, by Berrut, J. and Trefethen, L., *in SIAM Review*, 2004
 [^CLRS09]: **Introduction to Algorithms, Third Edition**, by Cormen, Thomas H. and Leiserson, Charles E. and Rivest, Ronald L. and Stein, Clifford, 2009
@@ -72,10 +72,10 @@ We hope to address this in future work.
 [^GJKR07]: **Secure Distributed Key Generation for Discrete-Log Based Cryptosystems**, by Gennaro, Rosario and Jarecki, Stanislaw and Krawczyk, Hugo and Rabin, Tal, *in Journal of Cryptology*, 2007
 [^GPS08]: **Pairings for cryptographers**, by Steven D. Galbraith and Kenneth G. Paterson and Nigel P. Smart, *in Discrete Applied Mathematics*, 2008
 [^KL15]: **Introduction to Modern Cryptography**, by Jonathan Katz and Yehuda Lindell, 2007
-[^KZG10a]: **Constant-Size Commitments to Polynomials and Their Applications**, by Kate, Aniket and Zaverucha, Gregory M. and Goldberg, Ian, *in ASIACRYPT '10*, 2010
+[^KZG10]: **Constant-Size Commitments to Polynomials and Their Applications**, by Kate, Aniket and Zaverucha, Gregory M. and Goldberg, Ian, *in ASIACRYPT '10*, 2010
 [^Shamir79]: **How to Share a Secret**, by Shamir, Adi, *in Commun. ACM*, 1979
 [^TCZplus20]: **Towards Scalable Threshold Cryptosystems**, by Alin Tomescu and Robert Chen and Yiming Zheng and Ittai Abraham and Benny Pinkas and Guy Golan Gueta and Srinivas Devadas, *in 2020 IEEE Symposium on Security and Privacy (SP)*, 2020, [[PDF]](/papers/dkg-sp2020.pdf).
-[^Tomescu20]: **How to Keep a Secret and Share a Public Key (Using Polynomial Commitments)**, by Tomescu, Alin, 2020
+[^Tome20]: **How to Keep a Secret and Share a Public Key (Using Polynomial Commitments)**, by Tomescu, Alin, 2020
 [^vG13ModernCh10]: **Fast polynomial evaluation and interpolation**, by von zur Gathen, Joachim and Gerhard, Jurgen, *in Modern Computer Algebra*, 2013
 
 [prevpost]: https://alinush.github.io/2020/03/12/towards-scalable-vss-and-dkg.html

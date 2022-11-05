@@ -75,12 +75,14 @@ header:
 cryptomat:
   - title: Number Theory
     children:
-      - title: Basic Group Theory
-        url: /2021/04/15/basic-group-theory.html
-      - title: Linear Diophantine Equations
+      - title: Basics
+        url: /2021/04/15/basic-number-theory.html
+      - title: Linear Diophantine equations
         url: /2020/11/23/Linear-Diophantine-Equations.html
   #- title: Group Theory
-  #   url: /tbd.html
+  #  children:
+  #    - title: Pairings or bilinear maps
+  #      url: /2022/09/18/Pairings-or-bilinear-maps.html
   #- title: Hashing
   #- title: Digital Signatures
   - title: Hidden-order groups
@@ -88,13 +90,13 @@ cryptomat:
       - title: Cryptographic assumptions
         url: /2020/11/05/cryptographic-assumptions-in-hidden-order-groups.html
 
-      - title: RSA Accumulators
+      - title: RSA accumulators
         url: /2020/11/24/RSA-accumulators.html
   - title: Vector Commitments (VCs)
     children:
     #  - title: Libert-Yung
     #    url: 
-
+    #
     #  - title: Kate-Zaverucha-Goldberg
     #    url: 
     #
@@ -110,13 +112,13 @@ cryptomat:
         url: /2020/11/24/Catalano-Fiore-Vector-Commitments.html
   - title: Polynomials
     children:
-      - title: Basics of Polynomials
+      - title: Basics of polynomials
         url: /2020/03/16/polynomials-for-crypto.html
 
       - title: Lagrange interpolation
         url: /2022/07/28/lagrange-interpolation.html
 
-      - title: KZG Polynomial Commitments
+      - title: KZG polynomial commitments
         url: /2020/05/06/kzg-polynomial-commitments.html
 
   #- title: (Zero-Knowledge) Proof Systems

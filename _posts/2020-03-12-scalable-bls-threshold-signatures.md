@@ -29,15 +29,15 @@ Let $p$ be a sufficiently large prime that denotes the order of our groups.
 
 In this post, beyond basic group theory for cryptographers[^KL15], I will assume you are familiar with a few concepts:
 
- - **Bilinear maps**[^GPS08]. Specifically, $\exists$ a bilinear map $e : \G_1 \times \G_2 \rightarrow \G_T$ such that:
-    - $\forall u\in \G_1,v\in \G_2, a\in \Zp, b\in \Zp, e(u^a, v^b) = e(u,v)^{ab}$
-    - $e(g_1,g_2)\ne 1_T$ where $g_1,g_2$ are the generators of $\G_1$ and $\G_2$ respectively and $1_T$ is the identity of $\G_T$
+ - **Bilinear maps**[^GPS08]. Specifically, $\exists$ a bilinear map $e : \Gr_1 \times \Gr_2 \rightarrow \Gr_T$ such that:
+    - $\forall u\in \Gr_1,v\in \Gr_2, a\in \Zp, b\in \Zp, e(u^a, v^b) = e(u,v)^{ab}$
+    - $e(g_1,g_2)\ne 1_T$ where $g_1,g_2$ are the generators of $\Gr_1$ and $\Gr_2$ respectively and $1_T$ is the identity of $\Gr_T$
  - **BLS signatures**[^BLS04]. Specifically,
-    + Let $H : \\{0,1\\}^* \rightarrow \G_1$ be a collision-resistant hash-function (CRHF)
-    + The _secret key_ is $s\in_R \Zp$ and the _public key_ is $g_2^s\in \G_2$
-    + $\sigma = H(m)^s \in \G_1$ is a signature on $m$ under secret key $s$
+    + Let $H : \\{0,1\\}^* \rightarrow \Gr_1$ be a collision-resistant hash-function (CRHF)
+    + The _secret key_ is $s\in_R \Zp$ and the _public key_ is $g_2^s\in \Gr_2$
+    + $\sigma = H(m)^s \in \Gr_1$ is a signature on $m$ under secret key $s$
     - To verify a signature, one checks if $e(H(m), g_2^s) = e(\sigma, g_2)$
- - $(t,n)$ **BLS threshold signatures**[^Boldyreva03]. Specifically,
+ - $(t,n)$ **BLS threshold signatures**[^Bold03]. Specifically,
     - _Shamir secret sharing_[^Shamir79] of secret key $s$
     - i.e., $s = \phi(0)$ where $\phi(X)\in \Zp[X]$ is random, degree $t-1$ polynomial
     - _Signer_ $i\in\\{1,2,\dots, n\\}$ gets his _secret key share_ $s_i = \phi(i)$ and _verification key_ $g^{s_i}$
@@ -103,7 +103,7 @@ Computing a single $\lagr_j^T(0)$ can be done in $\Theta(t)$ time by simply carr
 _However_, we need to compute _all_ of them: $\lagr_j^T(0), \forall j \in T$, which takes $\Theta(t^2)$ time.
 We will describe how to reduce this time in the next subsection.
 
-The final step consists of several exponentiations in $\G_1$, which actually computes the secret key $s$ in the exponent, as per Equation \ref{eq:lagrange-sum} at $X=0$:
+The final step consists of several exponentiations in $\Gr_1$, which actually computes the secret key $s$ in the exponent, as per Equation \ref{eq:lagrange-sum} at $X=0$:
 
 \begin{align}
 \prod_{j\in T} \sigma_j^{\lagr_j^T(0)} &= \prod_{j\in T} \left(H(m)^{s_j}\right)^{\lagr_j^T(0)}\\\\\
@@ -314,7 +314,7 @@ In fact, these techniques can be applied to any threshold cryptosystem whose sec
 
 ### References
 
-[^Boldyreva03]: **Threshold Signatures, Multisignatures and Blind Signatures Based on the Gap-Diffie-Hellman-Group Signature Scheme**, by Boldyreva, Alexandra, *in PKC 2003*, 2002
+[^Bold03]: **Threshold Signatures, Multisignatures and Blind Signatures Based on the Gap-Diffie-Hellman-Group Signature Scheme**, by Boldyreva, Alexandra, *in PKC 2003*, 2002
 [^BLS04]: **Short Signatures from the Weil Pairing**, by Boneh, Dan and Lynn, Ben and Shacham, Hovav, *in Journal of Cryptology*, 2004
 [^BT04]: **Barycentric Lagrange Interpolation**, by Berrut, J. and Trefethen, L., *in SIAM Review*, 2004
 [^CLRS09]: **Introduction to Algorithms, Third Edition**, by Cormen, Thomas H. and Leiserson, Charles E. and Rivest, Ronald L. and Stein, Clifford, 2009

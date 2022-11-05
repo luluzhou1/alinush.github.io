@@ -42,10 +42,10 @@ Let $p$ be a sufficiently large prime that denotes the order of our groups.
 
 In this post, beyond basic group theory for cryptographers[^KL15] and basic polynomial arithmetic, I will assume you are familiar with a few concepts:
 
- - **Bilinear maps**[^GPS08]. Specifically, $\exists$ a bilinear map $e : \G_1 \times \G_2 \rightarrow \G_T$ such that:
-    - $\forall u\in \G_1,v\in \G_2, a\in \Zp, b\in \Zp, e(u^a, v^b) = e(u,v)^{ab}$
-    - $e(g_1,g_2)\ne 1_T$ where $g_1,g_2$ are the generators of $\G_1$ and $\G_2$ respectively and $1_T$ is the identity of $\G_T$
- - **KZG**[^KZG10a] **polynomial commitments** (see [here](/2020/05/06/kzg-polynomial-commitments.html)),
+ - **Bilinear maps**[^GPS08]. Specifically, $\exists$ a bilinear map $e : \Gr_1 \times \Gr_2 \rightarrow \Gr_T$ such that:
+    - $\forall u\in \Gr_1,v\in \Gr_2, a\in \Zp, b\in \Zp, e(u^a, v^b) = e(u,v)^{ab}$
+    - $e(g_1,g_2)\ne 1_T$ where $g_1,g_2$ are the generators of $\Gr_1$ and $\Gr_2$ respectively and $1_T$ is the identity of $\Gr_T$
+ - **KZG**[^KZG10] **polynomial commitments** (see [here](/2020/05/06/kzg-polynomial-commitments.html)),
  - The **Fast Fourier Transform (FFT)**[^CLRS09] applied to polynomials. Specifically,
     - Suppose $\Zp$ admits a primitive _root of unity_ $\omega$ of order $n$ (i.e., $n \mid p-1$)
     - Let $$H=\{1, \omega, \omega^2, \omega^3, \dots, \omega^{n-1}\}$$ denote the set of all $n$ $n$th roots of unity
@@ -54,7 +54,7 @@ In this post, beyond basic group theory for cryptographers[^KL15] and basic poly
 
 # VCs from Lagrange polynomials
 
-We build upon a previous line of work on VCs from Lagrange polynomials[^CDHK15]<sup>,</sup>[^KZG10a]<sup>,</sup>[^Tomescu20].
+We build upon a previous line of work on VCs from Lagrange polynomials[^CDHK15]<sup>,</sup>[^KZG10]<sup>,</sup>[^Tome20].
 
 Recall that given a vector $\vect{v} = [v_0, v_1, \dots, v_{n-1}]$, we can interpolate a polynomial $\phi(X)$ such that $\phi(i)=v_i$ as follows:
 \begin{align}
@@ -423,7 +423,7 @@ Special thanks goes to [Madars Virza](https://madars.org/) who first introduced 
 
 ### References
 
-[^Boldyreva03]: **Threshold Signatures, Multisignatures and Blind Signatures Based on the Gap-Diffie-Hellman-Group Signature Scheme**, by Boldyreva, Alexandra, *in PKC 2003*, 2002
+[^Bold03]: **Threshold Signatures, Multisignatures and Blind Signatures Based on the Gap-Diffie-Hellman-Group Signature Scheme**, by Boldyreva, Alexandra, *in PKC 2003*, 2002
 [^Buterin20UsingPoly]: **Using polynomial commitments to replace state roots**, by Vitalik Buterin, *in \url{https://ethresear.ch/t/using-polynomial-commitments-to-replace-state-roots/7095}*, 2020, [[URL]](https://ethresear.ch/t/using-polynomial-commitments-to-replace-state-roots/7095)
 [^BGM17]: **Scalable Multi-party Computation for zk-SNARK Parameters in the Random Beacon Model**, by Sean Bowe and Ariel Gabizon and Ian Miers, *in Cryptology ePrint Archive, Report 2017/1050*, 2017, [[URL]](https://eprint.iacr.org/2017/1050)
 [^BLS04]: **Short Signatures from the Weil Pairing**, by Boneh, Dan and Lynn, Ben and Shacham, Hovav, *in Journal of Cryptology*, 2004
@@ -438,10 +438,10 @@ Special thanks goes to [Madars Virza](https://madars.org/) who first introduced 
 [^GPS08]: **Pairings for cryptographers**, by Steven D. Galbraith and Kenneth G. Paterson and Nigel P. Smart, *in Discrete Applied Mathematics*, 2008
 [^GRWZ20]: **Pointproofs: Aggregating Proofs for Multiple Vector Commitments**, by Sergey Gorbunov and Leonid Reyzin and Hoeteck Wee and Zhenfei Zhang, *in Cryptology ePrint Archive, Report 2020/419*, 2020, [[URL]](https://eprint.iacr.org/2020/419)
 [^KL15]: **Introduction to Modern Cryptography**, by Jonathan Katz and Yehuda Lindell, 2007
-[^KZG10a]: **Constant-Size Commitments to Polynomials and Their Applications**, by Kate, Aniket and Zaverucha, Gregory M. and Goldberg, Ian, *in ASIACRYPT '10*, 2010
+[^KZG10]: **Constant-Size Commitments to Polynomials and Their Applications**, by Kate, Aniket and Zaverucha, Gregory M. and Goldberg, Ian, *in ASIACRYPT '10*, 2010
 [^Shamir79]: **How to Share a Secret**, by Shamir, Adi, *in Commun. ACM*, 1979
 [^TCZplus20]: **Towards Scalable Threshold Cryptosystems**, by Alin Tomescu and Robert Chen and Yiming Zheng and Ittai Abraham and Benny Pinkas and Guy Golan Gueta and Srinivas Devadas, *in 2020 IEEE Symposium on Security and Privacy (SP)*, 2020, [[PDF]](/papers/dkg-sp2020.pdf).
-[^Tomescu20]: **How to Keep a Secret and Share a Public Key (Using Polynomial Commitments)**, by Tomescu, Alin, 2020
+[^Tome20]: **How to Keep a Secret and Share a Public Key (Using Polynomial Commitments)**, by Tomescu, Alin, 2020
 [^vG13ModernCh8]: **Fast Multiplication**, by von zur Gathen, Joachim and Gerhard, Jurgen, *in Modern Computer Algebra*, 2013
 [^vG13ModernCh10]: **Fast polynomial evaluation and interpolation**, by von zur Gathen, Joachim and Gerhard, Jurgen, *in Modern Computer Algebra*, 2013
 [^Virza17]: **On Deploying Succinct Zero-Knowledge Proofs**, by Virza, Madars, 2017

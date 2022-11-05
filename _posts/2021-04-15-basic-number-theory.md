@@ -1,6 +1,6 @@
 ---
 tags: number-theory group-theory
-title: Basic Group Theory
+title: Basic number theory
 #published: false
 sidebar:
     nav: cryptomat
