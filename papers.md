@@ -7,7 +7,7 @@ titles:
 key: page-papers
 ---
 
-**UTT: Decentralized Ecash with Accountable Privacy**, Alin Tomescu, Adithya Bhat, Benny Applebaum, Ittai Abraham, Guy Gueta, Benny Pinkas, Avishay Yanai, _in submission_, <a class="button button--success button--rounded button--sm" href="https://eprint.iacr.org/2022/452.pdf"><i class="fas fa-download"></i>PDF</a>, [Code](https://github.com/definitelyNotFBI/utt)
+**UTT: Decentralized Ecash with Accountable Privacy**, Alin Tomescu, Adithya Bhat, Benny Applebaum, Ittai Abraham, Guy Gueta, Benny Pinkas, Avishay Yanai, _in submission_, <a class="button button--success button--rounded button--sm" href="https://eprint.iacr.org/2022/452.pdf"><i class="fas fa-download"></i>PDF</a>, [Code](https://github.com/definitelyNotFBI/utt), [a16z slides](https://docs.google.com/presentation/d/1frfS8K7RIDQIej4-pz9YSta5dH7dboyTssnvpIjpIHo/edit?usp=sharing)
 
 **Hyperproofs: Aggregating and Maintaining Proofs in Vector Commitments**, Shravan Srinivasan, Alex Chepurnoy, Charalampos Papamanthou, Alin Tomescu, Yupeng Zhang, _in USENIX Security 2022_, <a class="button button--success button--rounded button--sm" href="https://eprint.iacr.org/2021/599.pdf"><i class="fas fa-download"></i>PDF</a>, [Code](https://github.com/hyperproofs/hyperproofs)
 
