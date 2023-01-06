@@ -82,7 +82,7 @@ cryptomat:
   - title: Group Theory
     children:
       - title: Pairings or bilinear maps
-        url: /2022/09/18/pairings-or-bilinear-maps.html
+        url: /2022/12/31/pairings-or-bilinear-maps.html
   #- title: Hashing
   #- title: Digital Signatures
   - title: Hidden-order groups

@@ -7,18 +7,18 @@ sidebar:
     nav: cryptomat
 ---
 
+{: .info}
+**tl;dr:** _Pairings_, or _bilinear maps_, are a very powerful mathematical tool for cryptography.
+Without pairings, we would not have efficient succinct zero-knowledge proofs[^GGPR12e], efficient threshold signatures[^BLS04], identity-based encryption[^BF03], and so many other things.
+In this post, I'll teach you a little about the properties of pairings, their cryptographic applications and their fascinating history.
+In fact, by the end of this post, [some of you might want to spend a year or two in jail](#history).
+
 <p hidden>$$
 \def\idt{\mathbb{1}_{\Gr_T}}
 \def\msk{\mathsf{msk}}
 \def\dsk{\mathsf{dsk}}
 \def\mpk{\mathsf{mpk}}
 $$</p>
-
-{: .info}
-**tl;dr:** _Pairings_, or _bilinear maps_, are a very powerful mathematical tool for cryptography.
-Without pairings, we would not have efficient succinct zero-knowledge proofs[^GGPR12e], efficient threshold signatures[^BLS04], identity-based encryption[^BF03], and so many other things.
-In this post, I'll teach you a little about the properties of pairings, their cryptographic applications and their fascinating history.
-In fact, by the end of this post, [some of you might want to spend a year or two in jail](#history).
 
 ## Preliminaries
 
