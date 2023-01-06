@@ -1,27 +1,470 @@
 ---
 tags:
 title: Pairings or bilinear maps
-#date: 2020-11-05 20:45:59
-published: false
+date: 2022-12-31 20:45:59
+#published: false
 sidebar:
     nav: cryptomat
 ---
 
-A _pairing_, also known as a _bilinear map_, is a function $e : \Gr_1 \times \Gr_2 \rightarrow \Gr_T$ between three groups $\Gr_1, \Gr_2$ and $\Gr_T$ of prime order $p$ which has a couple of useful properties for cryptography:
+<p hidden>$$
+\def\idt{\mathbb{1}_{\Gr_T}}
+\def\msk{\mathsf{msk}}
+\def\dsk{\mathsf{dsk}}
+\def\mpk{\mathsf{mpk}}
+$$</p>
+
+{: .info}
+**tl;dr:** _Pairings_, or _bilinear maps_, are a very powerful mathematical tool for cryptography.
+Without pairings, we would not have efficient succinct zero-knowledge proofs[^GGPR12e], efficient threshold signatures[^BLS04], identity-based encryption[^BF03], and so many other things.
+In this post, I'll teach you a little about the properties of pairings, their cryptographic applications and their fascinating history.
+In fact, by the end of this post, [some of you might want to spend a year or two in jail](#history).
+
+## Preliminaries
+
+ - You are familiar with cyclic groups of prime order (e.g., elliptic curves)
+ - Let $$\idt$$ denote the identity element of the group $\Gr_T$
+ - Let $x \randget S$ denote randomly sampling an element $x$ from a set $S$
+ - Recall that $\langle g \rangle = \Gr$ denotes $g$ being a generator of the group $\Gr$
+
+## Definition of a pairing
+
+A _pairing_, also known as a _bilinear map_, is a function $e : \Gr_1 \times \Gr_2 \rightarrow \Gr_T$ between three groups $\Gr_1, \Gr_2$ and $\Gr_T$ of prime order $p$, with generators $g_1 = \langle \Gr_1 \rangle, g_2 = \langle \Gr_2 \rangle$ and $g_T = \langle \Gr_T \rangle$, respectively.
+
+When $\Gr_1 = \Gr_2$, the pairing is called **symmetric**. Otherwise, it is **asymmetric**.
+
+Most importantly, a pairing has two useful properties for cryptography: _bilinearity_ and _non-degeneracy_.
 <!--more-->
 
-1. **Bilinear:** for all $u\in\Gr_1$, $v\in\Gr_2$, and $a,b\in\Zp$:
+### Bilinearity
+
+_Bilinearity_ requires that, for all $u\in\Gr_1$, $v\in\Gr_2$, and $a,b\in\Zp$:
 
 $$e(u^a, v^b) = e(u, v)^{ab}$$
 
-2. **Non-degenerate:**
+{: .warning}
+For cryptography purposes, this is the **coolest** property. For example, this is what enables useful applications like [tripartite Diffie-Hellman](#tripartite-diffie-hellman).
 
-<p hidden>$$
-\def\Adv{\mathcal{A}}
-\def\Badv{\mathcal{B}}
-\def\vect#1{\mathbf{#1}}
-$$</p>
+### Non-degeneracy
+
+_Non-degeneracy_ requires that:
+
+$$e(g_1, g_2) \ne \idt$$
+
+{: .info}
+**Why this property?** We want non-degeneracy because, without it, it is simple (and useless) to define a (degenerate) bilinear map that, for every input, returns $\idt$. Such a map would satisfy bilinearity, but would be completely useless.
+
+### Efficiency
+
+_Efficiency_ requires that there exists a polynomial-time algorithm in the size of a group element (i.e.; in $\lambda = \log_2{p}$) that can be used to evaluate the pairing $e$ on any inputs.
+
+<details>
+<summary><b>Why this requirement?</b> It precludes trivial-but-computationally-intractable pairings. <i>(Click to expand.)</i></summary>
+<p markdown="1" style="margin-left: .3em; border-left: .15em solid black; padding-left: .5em;">
+For example, let $r$ be a random element in $\Gr_T$.
+First, the pairing is defined so that $e(g_1, g_2) = r$.
+This way, the pairing satisfies _non-degeneracy_.
+<br /><br />
+
+Second, given $(u,v)\in \Gr\_1 \times \Gr\_2$, an algorithm could spend exponential time $O(2^\lambda)$ to compute the discrete logs $x = \log\_{g\_1}{(u)}$ and $y = \log\_{g\_2}{(v)}$ and return $e(u, v) = e(g_1^x, g_2^y) = r^{xy}$.
+This way, the pairing satisfies _bilinearity_ because:
+<br /><br />
+
+\begin{align}
+e(u^a, v^b)
+    &= e\left((g_1^x)^a, (g_2^y)^b\right)\\\\\
+    &= e\left(g_1^{(ax)}, g_2^{(by)}\right)\\\\\
+    &= r^{(ax)\cdot (by)}\\\\\
+    &= \left(r^{xy}\right)^{ab}\\\\\
+    &= e(u, v)^{ab}
+\end{align}
+</p>
+</details>
+
+## History
+
+{: .warning}
+This is my limited historical understanding of pairings, mostly informed from [Dan Boneh's account in this video](https://www.youtube.com/watch?v=1RwkqZ6JNeo) and from my own research into the relevant literature. Please email me if you are aware of more history and I can try to incorporate it.
+
+### A mathematician in prison
+
+The history of (cryptographic) pairings begins with a mathematician named **André Weil**[^Wiki22Weil] who, during World War II, is sent to jail for refusing to serve in the French army.
+There, Weil, _"managed to convince the liberal-minded prison director to put [him] in an individual cell where [he] was allowed to keep [..] a pen, ink, and paper."_
+
+Weil used his newly-acquired tools to define a pairing across two elliptic curve groups.
+**However**, what was **very odd** at that time was that Weil put in a lot of effort to make sure his definition of a pairing is _computable_.
+And this extra effort is what made today's pairing-based cryptography possible[^danboneh-shimuranote].
+
+### Go to prison, not to university?
+
+Funnily, Weil's time in jail was so productive that he began wondering if he should spend a few months there every year.
+Even better, Weil contemplated if he should **recommend to the relevant authorities that every mathematician spend some amount of time in jail.**
+Weil writes:
+ 
+ > I'm beginning to think that nothing is more conducive to the abstract sciences than prison.
+ >
+ > [...]
+ >
+ > My mathematics work is proceeding beyond my wildest hopes, and I am even a bit worried - if it's only in prison that I work so well, will I have to arrange to spend two or three months locked up every year? 
+ >
+ > In the meantime, I am contemplating writing a report to the proper authorities, as follows: _"To the Director of Scientific Research: Having recently been in a position to discover through personal experience the considerable advantages afforded to pure and disinterested research by a stay in the establishments of the Penitentiary System, I take the liberty of, etc. etc."_
+
+You can read all of this and more in his fascinating autobiography on World War II, written from his perspective as a mathematician[^Weil92]. 
+
+### From breaking cryptography to building cryptography
+
+Weil's work was the foundation. 
+But three more developments were needed for pairing-based cryptography to rise.
+
+_First development:_ 
+In 1986, **Victor Miller** shows that Weil's pairing, which actually involves evaluating a polynomial of exponential degree, can in fact be computed efficiently in polynomial time[^Mill86Short].
+
+_Second development:_ 
+In 1991, **Menezes, Vanstone and Okamoto**[^MVO91] leverage Miller's efficient algorithm for evaluating the Weil pairing to break the discrete logarithm assumption on certain elliptic curves **in sub-exponential time**.
+This was quite amazing since, at that time, no sub-exponential time algorithms were known for elliptic curves.
+
+{: .info}
+Their attack, called the _MOV attack_, mapped an elliptic curve discrete logarithm challenge $g^a\in \Gr$ into a **target group** as $e(g^a, g)=e(g,g)^a \in \Gr_T$ using the pairing.
+Since the target group was a subgroup of a finite field $\mathbb{F}_q^{k}$, this allowed the use of faster, sub-exponential time algorithms for computing the discrete log on $e(g,g)^a$.
+
+_Third development:_
+So far, pairings only seemed useful for **cryptanalysis.** 
+No one knew how to use them for building (instead of breaking) cryptography.
+
+This changed in 2000, when **Joux**[^Joux00] used pairings to implement a 1-round key-exchange protocol between three parties, or [tripartite Diffie-Hellman](#tripartite-diffie-hellman).
+Previously, such 1-round protocols were only known between two parties while three parties required 2 rounds.
+
+From there, an abundance of new, efficient cryptography started pouring over:
+
+ - BLS (short) signatures[^BLS04]
+ - identity-based encryption[^BF03]
+ - additively-homomorphic encryption with support for one multiplication[^BGN05]
+ - succinct zero-knowledge proofs[^GGPR12e]
+
+{: .info}
+An interesting pattern to notice here is how pairings evolved from a _cryptanalytic tool_ used to break cryptosystems, to a **constructive tool** used to build cryptosystems.
+Interestingly, the same pattern also arose in the development of lattice-based cryptography.
+
+## Arithmetic tricks with pairings
+
+There are a few tricks cryptographers often use when dealing with pairings in their proofs of correctness or security of a cryptosystem.
+
+The most obvious trick, **"multiplying in the exponent"**, comes from the bilinearity property.
+
+\begin{align}
+e(u^a, v^b) = e(u, v)^{ab}
+\end{align}
+
+Bilinearity also implies the following trick:
+\begin{align}
+e(u, v^b) = e(u, v)^b
+\end{align}
+Or, alternatively:
+\begin{align}
+e(u^a, v) = e(u, v)^a
+\end{align}
+
+Another trick, which is just an analogous way of defining bilinearity, is:
+\begin{align}
+e(u, v\cdot w) = e(u, v)\cdot e(u, w)
+\end{align}
+
+{: .info}
+**Why does this work?** Let $y,z$ denote the discrete logs (w.r.t. $g_2$) of $v$ and $w$, respectively.
+Then, we have:
+\begin{align}
+e(u, v\cdot w) 
+    &= e(u, g_2^y \cdot g_2^z)\\\\\
+    &= e(u, g_2^{y + z})\\\\\
+    &= e(u, g_2)^{y + z}\\\\\
+    &= e(u, g_2)^y \cdot e(u, g_2)^z\\\\\
+    &= e(u, g_2^y) \cdot e(u, g_2^z)\\\\\
+    &= e(u, v)\cdot e(u, w)
+\end{align}
+
+Or, alternatively:
+\begin{align}
+e(u, v / w) = \frac{e(u, v)}{e(u, w)}
+\end{align}
+
+## Applications of pairings
+
+### Tripartite Diffie-Hellman
+
+This protocol was introduced by Joux in 2006[^Joux06] and assumes a **symmetric pairing**: i.e., where $$\Gr_1 = \Gr_2 = \langle g\rangle \stackrel{\mathsf{def}}{=} \Gr$$. 
+
+We have three parties Alice, Bob and Charles with secret keys $a, b$, and $c$ (respectively).
+They send each other their public keys $g^a, g^b, g^c$ and agree on a shared secret key $k = e(g, g)^{abc}$.[^dhe]
+
+How? 
+
+Consider Alice's point of view.
+She gets $g^b$ and $g^c$ from Bob and Charles. 
+First, she can use her secret $a$ to compute $g^{ab}$. 
+Second, she can use the pairing to compute $e(g^{ab}, g^c) = e(g, g)^{abc} = k$. 
+
+By symmetry, all other players can do the same and agree on the same $k$.
+
+{: .info}
+The protocol can be generalized to [**a**symmetric pairings](#asymmetric-pairings) too, where $\Gr_1 \neq \Gr_2$.
+
+### BLS signatures
+
+Boneh, Lynn and Shacham give a very short signature scheme from pairings[^BLS04], which works as follows:
+
+- Assume $\Gr\_2 = \langle g_2 \rangle$ and that there exists a hash function $H : \\{0,1\\}^\* \rightarrow \Gr\_1$ modeled as a random oracle.
+ - The secret key is $s \in \Zp$ while the public key is $\pk = g\_2^s \in \Gr\_2$.
+ - To sign a message $m$, the signer computes $\sigma = H(m)^s\in \Gr\_1$.
+ - To verify a signature $\sigma$ on $m$ under public key $\pk$, one checks if $e(\sigma, g_2) \stackrel{?}{=} e(H(m), \pk)$
+
+Notice that correctly-computed signatures will always verify since:
+\begin{align}
+e(\sigma, g_2) \stackrel{?}{=} e(H(m), \pk) \Leftrightarrow\\\\\
+e(H(m)^s, g_2) \stackrel{?}{=} e(H(m), g_2^s) \Leftrightarrow\\\\\
+e(H(m), g_2)^s \stackrel{?}{=} e(H(m), g_2)^s \Leftrightarrow\\\\\
+e(H(m), g_2) = e(H(m), g_2)
+\end{align}
+
+See the BLS paper[^BLS04] for how to prove that no attacker can forge BLS signatures given access to $\pk$ and a signing oracle.
+
+#### Cool properties of BLS signatures
+
+BLS signatures are quite amazing:
+
+1. They are one of the **simplest** schemes to implement, given access to an elliptic-curve library. 
+1. One can **aggregate** many signatures from different public keys on the same message $m$ into a single _multi-signature_ that continues to verify using just 2 pairings. 
+1. One can even **aggregate** such signatures across different messages into a single _aggregate signature_.
+    + However, such aggregate signatures take $n+1$ pairings to verify. 
+1. One can easily and efficiently[^TCZplus20] build a **threshold** BLS signature scheme, where any subset of $\ge t$ out of $n$ signers can collaborate to sign a message $m$ but no less than $t$ can ever produce a valid signature. 
+    + Even better, BLS threshold signatures are **deterministic** and give rise to _threshold verifiable random functions (VRFs)_ which are useful for generating randomness on chain.
+1. One can define very-efficient **blind**-variants of BLS signatures, where the signer can sign a message $m$ without learning the message $m$.
+1. BLS signatures are very **efficient** in practice.
+    - As far as I remember, they are the most efficient scheme for (1) multi-signatures, (2) aggregate signatures and (3) threshold signatures
+    - For single-signer BLS, they are slower than Schnorr signatures over non-pairing-friendly curves
+
+{: .warning}
+If you find yourself confused between the various notions of multi-signatures, aggregate signatures and threshold signatures, see [my slides](https://docs.google.com/presentation/d/1G4XGqrBLwqMyDQce_xpPQUEMOK4lFrneuvGYU3MVDsI/edit?usp=sharing).
+
+### Identity-based encryption (IBE)
+
+In an IBE scheme, one can encrypt directly to a user-friendly email address (or a phone number), instead of a cumbersome public key which is difficult to remember or type-in correctly.
+
+Boneh and Franklin give a very efficient IBE scheme from pairings[^BF03].
+
+For IBE to work, a trusted third-party (TTP) called a **private key generate (PKG)** must be introduced, who will issue secret keys to users based on their email addresses.
+This PKG has a **master secret key (MSK)** $\msk \in \Zp$ with an associated **master public key (MPK)** $\mpk = g_2^s$, where $\langle g_2 \rangle = \Gr_2$.
+
+The $\mpk$ is made public and can be used to encrypt a message to any user given their email address.
+Crucially, the PKG must keep the $\msk$ secret.
+Otherwise, an attacker who steals it can derive any user's secret key and decrypt everyone's messages.
+
+{: .warning}
+As you can tell the PKG is a central point of failure: theft of the $\msk$ compromises everyone's secrecy.
+To mitigate against this, the PKG can be decentralized into multiple authorities such that a threshold number of authorities must be compromised in order to steal the $\msk$.
+
+Let $H_1 : \\{0,1\\}^\* \rightarrow \Gr_1^\*$ and $H_T : \Gr_T \rightarrow \\{0,1\\}^n$ be two hash functions modeled as random oracles.
+To encrypt an $n$-bit message $m$ to a user with email address $id$, one computes:
+\begin{align}
+    g_{id} &= e(H_1(id), \mpk) \in \Gr_T\\\\\
+    r &\randget \Zp\\\\\
+    \label{eq:ibe-ctxt}
+    c &= \left(g_2^r, m \xor H_T\left(\left(g_{id}\right)^r\right)\right) \in \Gr_2\times \\{0,1\\}^n
+\end{align}
+
+To decrypt, the user with email address $id$ must first obtain their **decryption secret key** $\dsk_{id}$ from the PKG.
+For this, we assume the PKG has a way of authenticating the user, before handing them their secret key. 
+For example this could be done via email.
+
+The PKG computes the user's decryption secret key as:
+\begin{align}
+    \dsk_{id} = H_1(id)^s \in \Gr_1
+\end{align}
+
+Now that the user has their decryption secret key, they can decrypt the ciphertext $c = (u, v)$ from Equation $\ref{eq:ibe-ctxt}$ as:
+\begin{align}
+    m &= v \xor H_T(e(\dsk_{id}, u))
+\end{align}
+
+You can see why correctly-encrypted ciphertexts will decrypt successfully, since:
+\begin{align}
+v \xor H_T(e(\dsk_{id}, u))
+    &= \left(m \xor       H_T\left((g_{id})^r            \right)\right) \xor H_T\left(e(H_1(id)^s, g_2^r)     \right)\\\\\
+    &= \left(m \xor       H_T\left(e(H_1(id), \mpk )^r   \right)\right) \xor H_T\left(e(H_1(id),   g_2  )^{rs}\right)\\\\\
+    &=       m \xor \left(H_T\left(e(H_1(id), g_2^s)^r   \right)        \xor H_T\left(e(H_1(id),   g_2  )^{rs}\right)\right)\\\\\
+    &=       m \xor \left(H_T\left(e(H_1(id), g_2  )^{rs}\right)        \xor H_T\left(e(H_1(id),   g_2  )^{rs}\right)\right)\\\\\
+    &= m
+\end{align}
+
+To see why this scheme is secure under chosen-plaintext attacks, refer to the original paper[^BF03].
+
+## How do pairings actually work?
+
+Mostly, I have no idea.
+How come?
+Well, I never really needed to know.
+And that's the beauty of pairings: one can use them in a black-box fashion, with zero awareness of their internals.
+
+Still, let's take a small peek inside this black box. 
+Let us consider the popular pairing-friendly _BLS12-381_ curve[^Edgi22], from the family of BLS curves characterized by Barreto, Lynn and Scott[^BLS02e].
+
+{: .warning}
+**Public service announcement:**
+Some of you might've heard about _Boneh-Lynn-Shacham (BLS)_ signatures. Please know that this is a different BLS than the BLS in _Barretto-Lynn-Scott_ curves. Confusingly, both acronyms do share one author, Ben Lynn. (In case this was not confusing enough, wait until you have to work with BLS signatures over BLS12-381 curves.)
+
+For BLS12-381, the three groups $\Gr\_1, \Gr\_2, \Gr\_T$ involved are:
+
+ - The group $\Gr_1$ is a subgroup of an elliptic curve $E(\F_q) = \left\\{(x, y) \in \F\_q\ \vert\ y^2 = x^3 + 4 \right\\}$ where $\vert\Gr_1\vert = p$
+ - The group $\Gr_2$ is a subgroup of a different elliptic curve $E'(\F_{q^2}) = \left\\{(x, y) \in \F\_q\ \vert\ y^2 = x^3 + 4(1+i) \right\\}$ where $i$ is the square root of $-1$ and $\vert\Gr_2\vert = p$.
+ - The group $\Gr_T$ are all the $p$th roots of unity in $\F_{q^{k}}$, where $k=12$ is called the _embedding degree_
+
+How does the pairing map across these three groups work? Well, the pairing $e(\cdot,\cdot)$ expands to something like:
+\begin{align}
+\label{eq:pairing-def}
+e(u, v) = f_{p, u}(v)^{(q^k - 1)/p}
+\end{align}
+It's useful to know that computing a pairing consists of two steps:
+
+1. Evaluating the base $f_{p, u}(v)$, also known as a **Miller loop**, in honor of [Victor Miller's work](#history)
+2. Raising this base to the constant exponent $(q^k - 1)/p$, also known as a **final exponentiation**.
+    - This step is a few times more expensive than the first
+
+For more on the internals, see other resources[^Cost12]$^,$[^GPS08]$^,$[^Mene05].
+
+## Implementation details
+
+### (A)symmetric pairings
+
+The pairing over BLS12-381 is _**a**symmetric_: i.e., $\Gr_1 \ne \Gr_2$ are two **different** groups (of the same order $p$). However, there also exist **symmetric** pairings where $\Gr_1 = \Gr_2$ are the same group.
+
+Unfortunately, _"such symmetric pairings only exist on supersingular curves, which places a heavy restriction on either or both of the underlying efficiency and security of the protocol"_[^BCMplus15e].
+In other words, such supersingular curves are not as efficient at the same security level as the curves used in **a**symmetric pairings.
+
+Therefore, practitioners today, as far as I am aware, exclusively rely on **a**symmetric pairings.
+
+### Performance of asymmetric pairings
+
+<!--
+	alinush@MacBook [~/repos/blstrs] (master *%) $ gd
+	diff --git a/benches/bls12_381/ec.rs b/benches/bls12_381/ec.rs
+	index 639bcad..8dcec20 100644
+	--- a/benches/bls12_381/ec.rs
+	+++ b/benches/bls12_381/ec.rs
+	@@ -167,3 +167,34 @@ mod g2 {
+			 });
+		 }
+	 }
+	+
+	+mod gt {
+	+    use rand_core::SeedableRng;
+	+    use rand_xorshift::XorShiftRng;
+	+
+	+    use blstrs::*;
+	+    use ff::Field;
+	+    use group::Group;
+	+
+	+    #[bench]
+	+    fn bench_gt_mul_assign(b: &mut ::test::Bencher) {
+	+        const SAMPLES: usize = 1000;
+	+
+	+        let mut rng = XorShiftRng::from_seed([
+	+            0x59, 0x62, 0xbe, 0x5d, 0x76, 0x3d, 0x31, 0x8d, 0x17, 0xdb, 0x37, 0x32, 0x54, 0x06,
+	+            0xbc, 0xe5,
+	+        ]);
+	+
+	+        let v: Vec<(Gt, Scalar)> = (0..SAMPLES)
+	+            .map(|_| (Gt::random(&mut rng), Scalar::random(&mut rng)))
+	+            .collect();
+	+
+	+        let mut count = 0;
+	+        b.iter(|| {
+	+            let mut tmp = v[count].0;
+	+            tmp *= v[count].1;
+	+            count = (count + 1) % SAMPLES;
+	+            tmp
+	+        });
+	+    }
+	+}
+	alinush@MacBook [~/repos/blstrs] (master *%) $ cargo +nightly bench -- mul_assign
+	   Compiling blstrs v0.6.1 (/Users/alinush/repos/blstrs)
+		Finished bench [optimized] target(s) in 0.75s
+		 Running unittests src/lib.rs (target/release/deps/blstrs-349120dc60ef3711)
+
+	running 2 tests
+	test fp::tests::test_fp_mul_assign ... ignored
+	test scalar::tests::test_scalar_mul_assign ... ignored
+
+	test result: ok. 0 passed; 0 failed; 2 ignored; 0 measured; 115 filtered out; finished in 0.00s
+
+		 Running benches/blstrs_benches.rs (target/release/deps/blstrs_benches-a6732e3e4e5c6a4d)
+
+	running 4 tests
+	test bls12_381::ec::g1::bench_g1_mul_assign            ... bench:      72,167 ns/iter (+/- 1,682)
+	test bls12_381::ec::g2::bench_g2_mul_assign            ... bench:     136,184 ns/iter (+/- 1,300)
+	test bls12_381::ec::gt::bench_gt_mul_assign            ... bench:     497,330 ns/iter (+/- 7,802)
+	test bls12_381::scalar::bench_scalar_mul_assign        ... bench:          14 ns/iter (+/- 0)
+
+	test result: ok. 0 passed; 0 failed; 0 ignored; 4 measured; 21 filtered out; finished in 5.30s
+-->
+
+#### Exponentiation times
+
+ - $\Gr_1$ exponentiations are the fastest
+    + 72 microseconds ([blstrs](https://github.com/filecoin-project/blstrs) microbenchmarks on a 2021 Apple M1 Max)
+ - $\Gr_2$ exponentiations are around 2$\times$ slower
+    + 136 microseconds
+ - $\Gr_T$ exponentiations are around 3.5$\times$ slower than in $\Gr_2$
+    + 500 microseconds 
+
+#### Group element sizes
+
+ - $\Gr_1$ group elements are the smallest
+	+ e.g., 48 bytes for BLS12-381 or 32 bytes for BN254 curves[^BN06Pair]
+ - $\Gr_2$ group elements are 2$\times$ larger
+    + e.g., 96 bytes on BLS12-381
+ - $\Gr_T$ elements are 12$\times$ larger
+    + In general, for a pairing-friendly curve with _embedding degree_ $k$, they are $k$ times larger
+
+#### Switching between $\Gr_1$ and $\Gr_2$
+
+When designing a pairing-based cryptographic protocol, you will want to carefully pick what to use $\Gr_1$ and what to use $\Gr_2$ for.
+
+For example, in BLS signatures, if you want small signatures, then you would compute the signature $\sigma = H(m)^s \in \Gr_1$ and settle for a slightly-larger public key be in $\Gr_2$.
+On the other hand, if you wanted to minimize public key size, then you would let it be in $\Gr_1$ while taking slightly longer to compute the signature in $\Gr_2$.
+
+{: .warning}
+Other things will also influence how you use $\Gr_1$ and $\Gr_2$, such as the existence of an isomorphism $\phi : \Gr_2 \rightarrow \Gr_1$ or the ability to hash uniformly into these groups.
+In fact, the existence of such an isomorphism separates between two types of asymmetric pairings:  Type 2 and Type 3 (see *Galbraith et al.*[^GPS08] for more information on the different types of pairings)
+
+### Multi-pairings
+
+If you recall how a pairing actually works (see Eq. $\ref{eq:pairing-def}$), you'll notice the following optimization:
+
+Whenever, we have to compute the product of $n$ pairings, we can first compute the $n$ Miller loops and do a single final exponentiation instead of $n$.
+This drastically reduces the pairing computation time in many applications.
+\begin{align}
+\prod_i e(u_i, v_i)
+    &= \prod_i \left(f_{p, u_i}(v_i)^{(q^k - 1)/p}\right)\\\\\
+    &= \left(\prod_i f_{p, u_i}(v_i)\right)^{(q^k - 1)/p}
+\end{align}
+
+
+## Conclusion
+
+This blog post was supposed to be just a short summary of the [three properties of pairings](#definition-of-a-pairing): bilinearity, non-degeneracy and efficiency.
+
+Unfortunately, I felt compelled to discuss their [fascinating history](#history).
+And I couldn't let you walk away without seeing a few powerful [cryptographic applications of pairings](#applications-of-pairings).
+
+After that, I realized practitioners who implement pairing-based cryptosystems might benefit from knowing a little about their [internal workings](#how-do-pairings-actually-work), since some of these details can be leveraged to speed up [implementations](#implementation-details).
+
+#### Acknowledgements
+
+I would like to thank Dan Boneh for helping me clarify and contextualize the history around Weil, as well as for inspiring me to do a little more research and write this historical account.
 
 ---
+
+[^dhe]: Typically, there will be some key-derivation function $\mathsf{KDF}$ used to derive the key as $k = \mathsf{KDF}(e(g,g)^{abc})$.
+
+[^danboneh-shimuranote]: Thanks to Dan Boneh, who contrasted Weil's definition with a different one by Shimura from his classic book on modular forms. While Shimura's definition makes it much easier to prove all the properties of the pairing, it defines a pairing of order $n$ as a **sum of $n$ points of order $n^2$**. This makes it hopelessly non-computable. Weil's definition, on the other hand, involves an evaluation of a very concrete function -- there are no exponential-sized sums -- but requires much more work to prove all its pairing properties.
 
 {% include refs.md %}

@@ -186,6 +186,8 @@
 
 [^BCL20]: **Zero-Knowledge Succinct Arguments with a Linear-Time Prover**, by Jonathan Bootle and Alessandro Chiesa and Siqi Liu, *in Cryptology ePrint Archive, Report 2020/1527*, 2020, [[URL]](https://eprint.iacr.org/2020/1527)
 
+[^BCLL22e]: **Network-Agnostic Security Comes for Free in DKG and MPC**, by Renas Bacho and Daniel Collins and Chen-Da Liu-Zhang and Julian Loss, *in Cryptology ePrint Archive, Paper 2022/1369*, 2022, [[URL]](https://eprint.iacr.org/2022/1369)
+
 [^BCMplus15e]: **Subgroup security in pairing-based cryptography**, by Paulo S.  L.  M.  Barreto and Craig Costello and Rafael Misoczki and Michael Naehrig and Geovandro C.  C.  F.  Pereira and Gustavo Zanon, *in Cryptology ePrint Archive, Paper 2015/247*, 2015, [[URL]](https://eprint.iacr.org/2015/247)
 
 [^BCM05]: **Efficient Proofs of Knowledge of Discrete Logarithms and Representations in Groups with Hidden Order**, by Bangerter, Endre and Camenisch, Jan and Maurer, Ueli, *in Public Key Cryptography - PKC 2005*, 2005
@@ -548,6 +550,8 @@
 
 [^CDT19]: **Multi-Protocol UC and its Use for Building Modular and Efficient Protocols**, by Jan Camenisch and Manu Drijvers and Björn Tackmann, *in Cryptology ePrint Archive, Report 2019/065*, 2019, [[URL]](https://eprint.iacr.org/2019/065)
 
+[^CDT19e]: **Multi-Protocol UC and its Use for Building Modular and Efficient Protocols**, by Jan Camenisch and Manu Drijvers and Björn Tackmann, *in Cryptology ePrint Archive, Paper 2019/065*, 2019, [[URL]](https://eprint.iacr.org/2019/065)
+
 [^CDVplus03]: **Incremental Multiset Hash Functions and Their Application to Memory Integrity Checking**, by Clarke, Dwaine and Devadas, Srinivas and van Dijk, Marten and Gassend, Blaise and Suh, G. Edward, *in Advances in Cryptology - ASIACRYPT 2003*, 2003
 
 [^CEO21e]: **Zero-Knowledge for Homomorphic Key-Value Commitments with Applications to Privacy-Preserving Ledgers**, by Matteo Campanelli and Felix Engelmann and Claudio Orlandi, *in Cryptology ePrint Archive, Report 2021/1678*, 2021, [[URL]](https://ia.cr/2021/1678)
@@ -628,6 +632,10 @@
 
 [^CK20]: **From Rerandomizability to Sequential Aggregation: Efficient Signature Schemes Based on SXDH Assumption**, by Sanjit Chatterjee and R. Kabaleeshwaran, *in Cryptology ePrint Archive, Report 2020/575*, 2020, [[URL]](https://eprint.iacr.org/2020/575)
 
+[^CKGS98]: **Private information retrieval**, by Benny Chor and Eyal Kushilevitz and Oded Goldreich and Madhu Sudan, *in Journal of the {ACM}*, 1998, [[URL]](https://doi.org/10.1145%2F293347.293350)
+
+[^CKKS16e]: **Homomorphic Encryption for Arithmetic of Approximate Numbers**, by Jung Hee Cheon and Andrey Kim and Miran Kim and Yongsoo Song, *in Cryptology ePrint Archive, Paper 2016/421*, 2016, [[URL]](https://eprint.iacr.org/2016/421)
+
 [^CKLM13]: **Succinct Malleable NIZKs and an Application to Compact Shuffles**, by Chase, Melissa and Kohlweiss, Markulf and Lysyanskaya, Anna and Meiklejohn, Sarah, *in Theory of Cryptography*, 2013
 
 [^CKLR21e]: **Efficient Range Proofs with Transparent Setup from Bounded Integer Commitments**, by Geoffroy Couteau and Michael Klooß and Huang Lin and Michael Reichle, *in Cryptology ePrint Archive, Report 2021/540*, 2021, [[URL]](https://ia.cr/2021/540)
@@ -695,6 +703,8 @@
 [^CNQ09]: **Comparing with {RSA**, by Julien Cathalo and David Naccache and Jean-Jacques Quisquater, *in Cryptography and Coding*, 2009, [[URL]](https://doi.org/10.1007%2F978-3-642-10868-6_19)
 
 [^CNRplus22e]: **Linear-map Vector Commitments and their Practical Applications**, by Matteo Campanelli and Anca Nitulescu and Carla Rafols and Alexandros Zacharakis and Arantxa Zapico, *in Cryptology ePrint Archive, Paper 2022/705*, 2022, [[URL]](https://eprint.iacr.org/2022/705)
+
+[^COPZ22e]: **Proofs of discrete logarithm equality across groups**, by Melissa Chase and Michele Orrù and Trevor Perrin and Greg Zaverucha, *in Cryptology ePrint Archive, Paper 2022/1593*, 2022, [[URL]](https://eprint.iacr.org/2022/1593)
 
 [^COS19]: **Fractal: Post-Quantum and Transparent Recursive Proofs from Holography**, by Alessandro Chiesa and Dev Ojha and Nicholas Spooner, *in Cryptology ePrint Archive, Report 2019/1076*, 2019, [[URL]](https://eprint.iacr.org/2019/1076)
 
@@ -924,6 +934,8 @@
 
 [^EFR21]: **Large-Scale Non-Interactive Threshold Cryptosystems Through Anonymity**, by Andreas Erwig and Sebastian Faust and Siavash Riahi, *in Cryptology ePrint Archive, Report 2021/1290*, 2021, [[URL]](https://ia.cr/2021/1290)
 
+[^EFR21e]: **Large-Scale Non-Interactive Threshold Cryptosystems in the YOSO Model**, by Andreas Erwig and Sebastian Faust and Siavash Riahi, *in Cryptology ePrint Archive, Paper 2021/1290*, 2021, [[URL]](https://eprint.iacr.org/2021/1290)
+
 [^EG13]: **Fine-Tuning Groth-Sahai Proofs**, by Alex Escala and Jens Groth, *in Cryptology ePrint Archive, Report 2013/662*, 2013, [[URL]](https://eprint.iacr.org/2013/662)
 
 [^EG20]: **Optimized and secure pairing-friendly elliptic curves suitable for one layer proof composition**, by Youssef El Housni and Aurore Guillevic, *in Cryptology ePrint Archive, Report 2020/351*, 2020, [[URL]](https://eprint.iacr.org/2020/351)
@@ -940,7 +952,7 @@
 
 [^Eage22e]: **Zero Knowledge Proofs of Elliptic Curve Inner Products from Principal Divisors and Weil Reciprocity**, by Liam Eagen, *in Cryptology ePrint Archive, Paper 2022/596*, 2022, [[URL]](https://eprint.iacr.org/2022/596)
 
-[^Eage22eECe]: **Zero Knowledge Proofs of Elliptic Curve Inner Products from Principal Divisors and Weil Reciprocity**, by Liam Eagen, *in Cryptology ePrint Archive, Paper 2022/596*, 2022, [[URL]](https://eprint.iacr.org/2022/596)
+[^Edgi22]: **BLS12-381 For The Rest Of Us**, by Ben Edgington, 2022, [[URL]](https://hackmd.io/@benjaminion/bls12-381)
 
 [^Ekera16]: **Modifying Shor’s algorithm to compute short discrete logarithms**, by Martin Ekerå, *in Cryptology ePrint Archive, Report 2016/1128*, 2016, [[URL]](https://eprint.iacr.org/2016/1128)
 
@@ -1038,6 +1050,8 @@
 
 [^GGN16]: **Threshold-Optimal DSA/ECDSA Signatures and an Application to Bitcoin Wallet Security**, by Gennaro, Rosario and Goldfeder, Steven and Narayanan, Arvind, *in Applied Cryptography and Network Security*, 2016
 
+[^GGPR12e]: **Quadratic Span Programs and Succinct NIZKs without PCPs**, by Rosario Gennaro and Craig Gentry and Bryan Parno and Mariana Raykova, *in Cryptology ePrint Archive, Paper 2012/215*, 2012, [[URL]](https://eprint.iacr.org/2012/215)
+
 [^GHL21]: **Practical Non-interactive Publicly Verifiable Secret Sharing with Thousands of Parties**, by Craig Gentry and Shai Halevi and Vadim Lyubashevsky, *in Cryptology ePrint Archive, Report 2021/1397*, 2021, [[URL]](https://ia.cr/2021/1397)
 
 [^GHL21e]: **Practical Non-interactive Publicly Verifiable Secret Sharing with Thousands of Parties**, by Craig Gentry and Shai Halevi and Vadim Lyubashevsky, *in Cryptology ePrint Archive, Report 2021/1397*, 2021, [[URL]](https://ia.cr/2021/1397)
@@ -1063,6 +1077,8 @@
 [^GJKR99]: **Secure Distributed Key Generation for Discrete-Log Based Cryptosystems**, by Gennaro, Rosario and Jarecki, Stanisław and Krawczyk, Hugo and Rabin, Tal, *in Advances in Cryptology --- EUROCRYPT '99*, 1999
 
 [^GJMplus21e]: **Aggregatable Distributed Key Generation**, by Kobi Gurkan and Philipp Jovanovic and Mary Maller and Sarah Meiklejohn and Gilad Stern and Alin Tomescu, *in Cryptology ePrint Archive, Report 2021/005*, 2021, [[URL]](https://eprint.iacr.org/2021/005)
+
+[^GJMplus22e]: **Cryptography with Weights: MPC, Encryption and Signatures**, by Sanjam Garg and Abhishek Jain and Pratyay Mukherjee and Rohit Sinha and Mingyuan Wang and Yinuo Zhang, *in Cryptology ePrint Archive, Paper 2022/1632*, 2022, [[URL]](https://eprint.iacr.org/2022/1632)
 
 [^GJM02]: **Cryptographic Primitives Enforcing Communication and Storage Complexity**, by Golle, Philippe and Jarecki, Stanislaw and Mironov, Ilya, *in Financial Cryptography*, 2003
 
@@ -1105,6 +1121,8 @@
 [^GLSplus21]: **Brakedown: Linear-time and post-quantum SNARKs for R1CS**, by Alexander Golovnev and Jonathan Lee and Srinath Setty and Justin Thaler and Riad S. Wahby, *in Cryptology ePrint Archive, Report 2021/1043*, 2021, [[URL]](https://ia.cr/2021/1043)
 
 [^GLSplus21e]: **Brakedown: Linear-time and post-quantum SNARKs for R1CS**, by Alexander Golovnev and Jonathan Lee and Srinath Setty and Justin Thaler and Riad S.  Wahby, *in Cryptology ePrint Archive, Paper 2021/1043*, 2021, [[URL]](https://eprint.iacr.org/2021/1043)
+
+[^GLS08e]: **Endomorphisms for faster elliptic curve cryptography on a large class of curves**, by Steven D.  Galbraith and Xibin Lin and Michael Scott, *in Cryptology ePrint Archive, Paper 2008/194*, 2008, [[URL]](https://eprint.iacr.org/2008/194)
 
 [^GM06]: **Independent Zero-Knowledge Sets**, by Gennaro, Rosario and Micali, Silvio, *in Automata, Languages and Programming*, 2006
 
@@ -1225,6 +1243,8 @@
 [^Grot15]: **Efficient Fully Structure-Preserving Signatures for Large Messages**, by Groth, Jens, *in Advances in Cryptology -- ASIACRYPT 2015*, 2015
 
 [^Grot16]: **On the Size of Pairing-Based Non-interactive Arguments**, by Groth, Jens, *in Advances in Cryptology -- EUROCRYPT 2016*, 2016
+
+[^Grot16e]: **On the Size of Pairing-based Non-interactive Arguments**, by Jens Groth, *in Cryptology ePrint Archive, Paper 2016/260*, 2016, [[URL]](https://eprint.iacr.org/2016/260)
 
 [^Grot21]: **Non-interactive distributed key generation and key resharing**, by Jens Groth, *in Cryptology ePrint Archive, Report 2021/339*, 2021, [[URL]](https://eprint.iacr.org/2021/339)
 
@@ -1400,6 +1420,8 @@
 
 [^KKK20]: **Kachina - Foundations of Private Smart Contracts**, by Thomas Kerber and Aggelos Kiayias and Markulf Kohlweiss, *in Cryptology ePrint Archive, Report 2020/543*, 2020, [[URL]](https://eprint.iacr.org/2020/543)
 
+[^KKK20e]: **Kachina - Foundations of Private Smart Contracts**, by Thomas Kerber and Aggelos Kiayias and Markulf Kohlweiss, *in Cryptology ePrint Archive, Paper 2020/543*, 2020, [[URL]](https://eprint.iacr.org/2020/543)
+
 [^KKK21]: **Efficient State Management in Distributed Ledgers**, by Dimitris Karakostas and Nikos Karayannidis and Aggelos Kiayias, *in Cryptology ePrint Archive, Report 2021/183*, 2021, [[URL]](https://eprint.iacr.org/2021/183)
 
 [^KKK21Comp]: **Composition with Knowledge Assumptions**, by Thomas Kerber and Aggelos Kiayias and Markulf Kohlweiss, *in Cryptology ePrint Archive, Report 2021/165*, 2021, [[URL]](https://eprint.iacr.org/2021/165)
@@ -1445,6 +1467,8 @@
 [^KOR05]: **Identity-Based Zero-Knowledge**, by Katz, Jonathan and Ostrovsky, Rafail and Rabin, Michael O., *in Security in Communication Networks*, 2005
 
 [^KOR19]: **Revisiting User Privacy for Certificate Transparency**, by D. Kales and O. Omolola and S. Ramacher, *in 2019 IEEE European Symposium on Security and Privacy (EuroS P)*, 2019
+
+[^KP05]: **Modular Security Proofs for Key Agreement Protocols**, by Kudla, Caroline and Paterson, Kenneth G., *in Advances in Cryptology - ASIACRYPT 2005*, 2005
 
 [^KP19]: **Towards Instantiating the Algebraic Group Model**, by Julia Kastner and Jiaxin Pan, *in Cryptology ePrint Archive, Report 2019/1018*, 2019, [[URL]](https://eprint.iacr.org/2019/1018)
 
@@ -1572,6 +1596,8 @@
 
 [^LYKplus19]: **HoneyBadgerMPC and AsynchroMix: Practical Asynchronous MPC and its Application to Anonymous Communication**, by Donghang Lu and Thomas Yurek and Samarth Kulshreshtha and Rahul Govind and Aniket Kate and Andrew Miller, *in Proceedings of the 2019 {ACM} {SIGSAC} Conference on Computer and Communications Security*, 2019, [[URL]](https://doi.org/10.1145%2F3319535.3354238)
 
+[^LZ22]: **Matproofs**, by Jing Liu and Liang Feng Zhang, *in Proceedings of the 2022 {ACM} {SIGSAC} Conference on Computer and Communications Security*, 2022, [[URL]](https://doi.org/10.1145%2F3548606.3560591)
+
 [^Lach18]: **Security of BLS and BGLS signatures in a multi-user setting**, by Lacharité, Marie-Sarah, *in Cryptography and Communications*, 2018, [[URL]](https://doi.org/10.1007/s12095-017-0253-6)
 
 [^Lamp01]: **Paxos Made Simple**, by Leslie Lamport, 2001, [[URL]](https://lamport.azurewebsites.net/pubs/paxos-simple.pdf)
@@ -1594,9 +1620,9 @@
 
 [^Lind07]: **https://www.cs.jhu.edu/~susan/600.641/scribes/lecture10.pdf**, by Jennifer Lindsay and Susan Hohenberger, 2007, [[URL]](https://www.cs.jhu.edu/~susan/600.641/scribes/lecture10.pdf)
 
-[^Lind22e]: **Simple Three-Round Multiparty Schnorr Signing with Full Simulatability**, by Yehuda Lindell, *in Cryptology ePrint Archive, Report 2022/374*, 2022, [[URL]](https://ia.cr/2022/374)
+[^Lind16e]: **How To Simulate It - A Tutorial on the Simulation Proof Technique**, by Yehuda Lindell, *in Cryptology ePrint Archive, Report 2016/046*, 2016, [[URL]](https://eprint.iacr.org/2016/046)
 
-[^Lindell16]: **How To Simulate It - A Tutorial on the Simulation Proof Technique**, by Yehuda Lindell, *in Cryptology ePrint Archive, Report 2016/046*, 2016, [[URL]](https://eprint.iacr.org/2016/046)
+[^Lind22e]: **Simple Three-Round Multiparty Schnorr Signing with Full Simulatability**, by Yehuda Lindell, *in Cryptology ePrint Archive, Report 2022/374*, 2022, [[URL]](https://ia.cr/2022/374)
 
 [^Lindell20]: **Secure Multiparty Computation (MPC)**, by Yehuda Lindell, *in Cryptology ePrint Archive, Report 2020/300*, 2020, [[URL]](https://eprint.iacr.org/2020/300)
 
@@ -1688,6 +1714,8 @@
 
 [^McDonald20]: **The Landscape of Pointcheval-Sanders Signatures: Mapping to Polynomial-Based Signatures and Beyond**, by Kristian L. McDonald, *in Cryptology ePrint Archive, Report 2020/450*, 2020, [[URL]](https://eprint.iacr.org/2020/450)
 
+[^Mene05]: **An Introduction to Pairing-Based Cryptography**, by Alfred Menezes, 2005, [[URL]](https://www.math.uwaterloo.ca/~ajmeneze/publications/pairings.pdf)
+
 [^Merk21]: **DAOs, Democracy and Governance**, by Ralph Merkle, 2021, [[URL]](https://merkle.com/papers/DAOdemocracyDraft.pdf)
 
 [^Merkle87]: **A Digital Signature Based on a Conventional Encryption Function**, by Merkle, Ralph C., *in CRYPTO '87*, 1988
@@ -1696,7 +1724,13 @@
 
 [^Mermin07]: **Quantum Computer Science**, by N. David Marmin, 2007
 
+[^Mill04]: **The Weil Pairing, and Its Efficient Calculation**, by Miller, Victor S., *in Journal of Cryptology*, 2004, [[URL]](https://doi.org/10.1007/s00145-004-0315-8)
+
 [^Mill76]: **Riemann's hypothesis and tests for primality**, by Gary L. Miller, *in Journal of Computer and System Sciences*, 1976, [[URL]](http://www.sciencedirect.com/science/article/pii/S0022000076800438)
+
+[^Mill86]: **Use of Elliptic Curves in Cryptography**, by Miller, Victor S., *in Advances in Cryptology --- CRYPTO '85 Proceedings*, 1986
+
+[^Mill86Short]: **Short Programs for functions on Curves**, by Victor S. Miller, 1986, [[URL]](https://crypto.stanford.edu/miller)
 
 [^Moor20]: **Dancing the Wild Divine: Drums, Drugs, and Individuation**, by D. J. Moores, 2020, [[URL]](https://doi.org/10.29173/jjs126s)
 
@@ -1713,6 +1747,8 @@
 [^NC10]: **Quantum Computation and Quantum Information: 10th Anniversary Edition**, by Nielsen, Michael A. and Chuang, Isaac L., 2011
 
 [^NN98]: **Certificate Revocation and Certificate Update**, by Moni Naor and Kobbi Nissim, *in 7th USENIX Security Symposium (USENIX Security 98)*, 1998, [[URL]](https://www.usenix.org/conference/7th-usenix-security-symposium/certificate-revocation-and-certificate-update)
+
+[^NRBB22e]: **Powers-of-Tau to the People: Decentralizing Setup Ceremonies**, by Valeria Nikolaenko and Sam Ragsdale and Joseph Bonneau and Dan Boneh, *in Cryptology ePrint Archive, Paper 2022/1592*, 2022, [[URL]](https://eprint.iacr.org/2022/1592)
 
 [^NRS20]: **MuSig2: Simple Two-Round Schnorr Multi-Signatures**, by Jonas Nick and Tim Ruffing and Yannick Seurin, *in Cryptology ePrint Archive, Report 2020/1261*, 2020, [[URL]](https://eprint.iacr.org/2020/1261)
 
@@ -1765,6 +1801,8 @@
 [^PBFplus19]: **Confidential Assets**, by Poelstra, Andrew and Back, Adam and Friedenbach, Mark and Maxwell, Gregory and Wuille, Pieter, *in Financial Cryptography and Data Security*, 2019
 
 [^PD16]: **The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments**, by Joseph Poon and Thaddeus Dryja, 2016, [[URL]](https://lightning.network/lightning-network-paper.pdf)
+
+[^PGHR13e]: **Pinocchio: Nearly Practical Verifiable Computation**, by Bryan Parno and Craig Gentry and Jon Howell and Mariana Raykova, *in Cryptology ePrint Archive, Paper 2013/279*, 2013, [[URL]](https://eprint.iacr.org/2013/279)
 
 [^PK96]: **New ElGamal Type Threshold Digital Signature Scheme**, by Park, Choonsik and Kurosawa, Kaoru, *in IEICE Trans. Fundamentals, A*, 1999, [[URL]](https://ci.nii.ac.jp/naid/110003216008/en/)
 
@@ -1966,6 +2004,8 @@
 
 [^SJSW19]: **ETHDKG: Distributed Key Generation with Ethereum Smart Contracts**, by Philipp Schindler and Aljosha Judmayer and Nicholas Stifter and Edgar Weippl, *in Cryptology ePrint Archive, Report 2019/985*, 2019, [[URL]](https://eprint.iacr.org/2019/985)
 
+[^SKBP22]: **Batching, Aggregation, and Zero-Knowledge Proofs in Bilinear Accumulators**, by Shravan Srinivasan and Ioanna Karantaidou and Foteini Baldimtsi and Charalampos Papamanthou, *in Proceedings of the 2022 {ACM} {SIGSAC} Conference on Computer and Communications Security*, 2022, [[URL]](https://doi.org/10.1145%2F3548606.3560676)
+
 [^SL20]: **Quarks: Quadruple-efficient transparent zkSNARKs**, by Srinath Setty and Jonathan Lee, *in Cryptology ePrint Archive, Report 2020/1275*, 2020, [[URL]](https://eprint.iacr.org/2020/1275)
 
 [^SLBG20]: **Avalanche Platform**, by Kevin Sekniqi and Daniel Laine and Stephen Buttolph and Emin Gun Sirer, 2020, [[URL]](https://assets.website-files.com/5d80307810123f5ffbb34d6e/6008d7bbf8b10d1eb01e7e16_Avalanche%20Platform%20Whitepaper.pdf)
@@ -1997,6 +2037,8 @@
 [^SS76]: **A Fast Monte-Carlo Test for Primality**, by Solovay, R. and Strassen, V., *in SIAM Journal on Computing*, 1977, [[URL]](https://doi.org/10.1137/0206006)
 
 [^SSKP22e]: **Structure-Preserving Threshold Signatures**, by Mahdi Sedaghat and Daniel Slamanig and Markulf Kohlweiss and Bart Preneel, *in Cryptology ePrint Archive, Paper 2022/839*, 2022, [[URL]](https://eprint.iacr.org/2022/839)
+
+[^SSSplus22e]: **The inspection model for zero-knowledge proofs and efficient Zerocash with secp256k1 keys**, by Huachuang Sun and Haifeng Sun and Kevin Singh and Akhil Sai Peddireddy and Harshad Patil and Jianwei Liu and Weikeng Chen, *in Cryptology ePrint Archive, Paper 2022/1079*, 2022, [[URL]](https://eprint.iacr.org/2022/1079)
 
 [^SSY01]: **Blind, Auditable Membership Proofs**, by Sander, Tomas and Ta-Shma, Amnon and Yung, Moti, *in Financial Cryptography*, 2001
 
@@ -2114,6 +2156,8 @@
 
 [^TXN20e]: **Authenticated Dictionaries with Cross-Incremental Proof (Dis)aggregation**, by Alin Tomescu and Yu Xia and Zachary Newman, *in Cryptology ePrint Archive, Report 2020/1239*, 2020, [[URL]](https://eprint.iacr.org/2020/1239)
 
+[^Tang20]: **Co6GC: Simulation-based proofs**, by Titouan Tanguy, 2020, [[URL]](https://www.esat.kuleuven.be/cosic/blog/simulation-based-proofs/)
+
 [^Tewa21]: **T-Cash: Transferable Fiat Backed Coins**, by Hitesh Tewari, 2021
 
 [^Thakur19]: **Batching non-membership proofs with bilinear accumulators**, by Steve Thakur, *in Cryptology ePrint Archive, Report 2019/1147*, 2019, [[URL]](https://eprint.iacr.org/2019/1147)
@@ -2200,11 +2244,15 @@
 
 [^Waters05]: **Efficient Identity-Based Encryption Without Random Oracles**, by Waters, Brent, *in Advances in Cryptology -- EUROCRYPT 2005*, 2005
 
+[^Weil92]: **The Apprenticeship of a Mathematician**, by Weil, Andre, 1992, [[URL]](https://books.google.ro/books?id=73REHmJ9JNUC)
+
 [^Weso18]: **Efficient verifiable delay functions**, by Benjamin Wesolowski, *in Cryptology ePrint Archive, Report 2018/623*, 2018, [[URL]](https://ia.cr/2018/623)
 
 [^Weso19]: **Efficient Verifiable Delay Functions**, by Wesolowski, Benjamin, *in Advances in Cryptology -- EUROCRYPT 2019*, 2019
 
 [^Whit15]: **A Theory for Lightweight Cryptocurrency**, by Bill White, 2015, [[URL]](https://github.com/input-output-hk/qeditas-ledgertheory/raw/master/lightcrypto.pdf)
+
+[^Wiki22Weil]: **André Weil --- Wikipedia, The Free Encyclopedia**, by Wikipedia contributors, 2022, [[URL]](https://en.wikipedia.org/w/index.php?title=Andr%C3%A9_Weil&oldid=1124211220)
 
 [^Wikstrom04]: **Universally Composable DKG with Linear Number of Exponentiations**, by Wikström, Douglas, *in Security in Communication Networks*, 2005
 
@@ -2241,6 +2289,8 @@
 [^ZBKplus22e]: **Caulk: Lookup Arguments in Sublinear Time**, by Arantxa Zapico and Vitalik Buterin and Dmitry Khovratovich and Mary Maller and Anca Nitulescu and Mark Simkin, *in Cryptology ePrint Archive, Paper 2022/621*, 2022, [[URL]](https://eprint.iacr.org/2022/621)
 
 [^ZCQplus20]: **The Move Prover**, by Zhong, Jingyi Emma and Cheang, Kevin and Qadeer, Shaz and Grieskamp, Wolfgang and Blackshear, Sam and Park, Junkil and Zohar, Yoni and Barrett, Clark and Dill, David L., *in Computer Aided Verification*, 2020
+
+[^ZDLplus22e]: **Practical Asynchronous Distributed Key Generation: Improved Efficiency, Weaker Assumption, and Standard Model**, by Haibin Zhang and Sisi Duan and Chao Liu and Boxin Zhao and Xuanji Meng and Shengli Liu and Yong Yu and Fangguo Zhang and Liehuang Zhu, *in Cryptology ePrint Archive, Paper 2022/1678*, 2022, [[URL]](https://eprint.iacr.org/2022/1678)
 
 [^ZGKplus17]: **vSQL: Verifying Arbitrary SQL Queries over Dynamic Outsourced Databases**, by Y. Zhang and D. Genkin and J. Katz and D. Papadopoulos and C. Papamanthou, *in IEEE SP'17*, 2017
 
