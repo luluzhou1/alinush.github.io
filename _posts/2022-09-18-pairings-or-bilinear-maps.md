@@ -109,7 +109,7 @@ Weil writes:
  >
  > In the meantime, I am contemplating writing a report to the proper authorities, as follows: _"To the Director of Scientific Research: Having recently been in a position to discover through personal experience the considerable advantages afforded to pure and disinterested research by a stay in the establishments of the Penitentiary System, I take the liberty of, etc. etc."_
 
-You can read all of this and more in his fascinating autobiography on World War II, written from his perspective as a mathematician[^Weil92]. 
+You can read all of this and more in his fascinating autobiography, written from his perspective as a mathematician[^Weil92].
 
 ### From breaking cryptography to building cryptography
 
