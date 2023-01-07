@@ -459,7 +459,7 @@ After that, I realized practitioners who implement pairing-based cryptosystems m
 
 #### Acknowledgements
 
-I would like to thank Dan Boneh for helping me clarify and contextualize the history around Weil, as well as for inspiring me to do a little more research and write this historical account.
+I would like to thank Dan Boneh for helping me clarify and contextualize the history around Weil, as well as for [his 2015 Simons talk](https://www.youtube.com/watch?v=1RwkqZ6JNeo), which inspired me to do a little more research and write this historical account.
 
 ---
 
