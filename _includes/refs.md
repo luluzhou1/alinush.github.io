@@ -242,6 +242,8 @@
 
 [^BEKS20]: **Improving Speed and Security in Updatable Encryption Schemes**, by Dan Boneh and Saba Eskandarian and Sam Kim and Maurice Shih, *in Cryptology ePrint Archive, Report 2020/222*, 2020, [[URL]](https://eprint.iacr.org/2020/222)
 
+[^BF01]: **Identity-Based Encryption from the Weil Pairing**, by Boneh, Dan and Franklin, Matt, *in Advances in Cryptology --- CRYPTO 2001*, 2001
+
 [^BF03]: **Identity-Based Encryption from the Weil Pairing**, by Boneh, Dan and Franklin, Matthew, *in SIAM Journal on Computing*, 2003, [[URL]](https://doi.org/10.1137/S0097539701398521)
 
 [^BF20]: **Efficient Signatures on Randomizable Ciphertexts**, by Balthazar Bauer and Georg Fuchsbauer, *in Cryptology ePrint Archive, Report 2020/524*, 2020, [[URL]](https://eprint.iacr.org/2020/524)
@@ -293,6 +295,8 @@
 [^BGG94]: **Incremental Cryptography: The Case of Hashing and Signing**, by Bellare, Mihir and Goldreich, Oded and Goldwasser, Shafi, *in Advances in Cryptology --- CRYPTO '94*, 1994
 
 [^BGH19]: **Halo: Recursive Proof Composition without a Trusted Setup**, by Sean Bowe and Jack Grigg and Daira Hopwood, *in Cryptology ePrint Archive, Report 2019/1021*, 2019, [[URL]](https://eprint.iacr.org/2019/1021)
+
+[^BGJT14]: **A Heuristic Quasi-Polynomial Algorithm for Discrete Logarithm in Finite Fields of Small Characteristic**, by Barbulescu, Razvan and Gaudry, Pierrick and Joux, Antoine and Thomé, Emmanuel, *in Advances in Cryptology -- EUROCRYPT 2014*, 2014
 
 [^BGKplus19]: **Handel: Practical Multi-Signature Aggregation for Large Byzantine Committees**, by Olivier Bégassat and Blazej Kolad and Nicolas Gailly and Nicolas Liochon, *in CoRR*, 2019, [[URL]](http://arxiv.org/abs/1906.05132)
 
@@ -371,6 +375,8 @@
 [^BLOR22e]: **Publicly verifiable anonymous tokens with private metadata bit**, by Fabrice Benhamouda and Tancrède Lepoint and Michele Orrù and Mariana Raykova, *in Cryptology ePrint Archive, Report 2022/004*, 2022, [[URL]](https://ia.cr/2022/004)
 
 [^BLR93]: **Self-testing/correcting with applications to numerical problems**, by Manuel Blum and Michael Luby and Ronitt Rubinfeld, *in Journal of Computer and System Sciences*, 1993, [[URL]](http://www.sciencedirect.com/science/article/pii/002200009390044W)
+
+[^BLS01]: **Short Signatures from the Weil Pairing**, by Boneh, Dan and Lynn, Ben and Shacham, Hovav, *in Advances in Cryptology --- ASIACRYPT 2001*, 2001
 
 [^BLS02e]: **Constructing Elliptic Curves with Prescribed Embedding Degrees**, by Paulo S.  L.  M.  Barreto and Ben Lynn and Michael Scott, *in Cryptology ePrint Archive, Paper 2002/088*, 2002, [[URL]](https://eprint.iacr.org/2002/088)
 
@@ -1015,6 +1021,8 @@
 [^FS21]: **On Publicly-Accountable Zero-Knowledge and Small Shuffle Arguments**, by Nils Fleischhacker and Mark Simkin, *in Cryptology ePrint Archive, Report 2021/228*, 2021, [[URL]](https://eprint.iacr.org/2021/228)
 
 [^FS87]: **How To Prove Yourself: Practical Solutions to Identification and Signature Problems**, by Fiat, Amos and Shamir, Adi, *in Advances in Cryptology --- CRYPTO' 86*, 1987
+
+[^FST06e]: **A taxonomy of pairing-friendly elliptic curves**, by David Freeman and Michael Scott and Edlyn Teske, *in Cryptology ePrint Archive, Paper 2006/372*, 2006, [[URL]](https://eprint.iacr.org/2006/372)
 
 [^Feis20Multi]: **Multi-layer hashmaps for state storage**, by Dankrad Feist, 2020, [[URL]](https://ethresear.ch/t/multi-layer-hashmaps-for-state-storage/7211/print)
 
@@ -2101,6 +2109,8 @@
 [^Shoup00]: **Practical Threshold Signatures**, by Shoup, Victor, *in Advances in Cryptology --- EUROCRYPT 2000*, 2000
 
 [^Shoup97]: **Lower Bounds for Discrete Logarithms and Related Problems**, by Shoup, Victor, *in Advances in Cryptology --- EUROCRYPT '97*, 1997
+
+[^Silv09]: **The Arithmetic of Elliptic Curves**, by Silverman, J.H., 2009, [[URL]](https://books.google.com/books?id=Z90CA\_EUCCkC)
 
 [^Silverberg20]: **Mathematics and Cryptography: A Marriage of Convenience?**, by Alice Silverberg, *in Cryptology ePrint Archive, Report 2020/429*, 2020, [[URL]](https://eprint.iacr.org/2020/429)
 

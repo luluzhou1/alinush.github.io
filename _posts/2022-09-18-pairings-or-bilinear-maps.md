@@ -9,7 +9,7 @@ sidebar:
 
 {: .info}
 **tl;dr:** _Pairings_, or _bilinear maps_, are a very powerful mathematical tool for cryptography.
-Without pairings, we would not have efficient succinct zero-knowledge proofs[^GGPR12e], efficient threshold signatures[^BLS04], identity-based encryption[^BF03], and so many other things.
+Without pairings, we would not have efficient succinct zero-knowledge proofs[^GGPR12e], efficient threshold signatures[^BLS01], identity-based encryption[^BF01], and so many other things.
 In this post, I'll teach you a little about the properties of pairings, their cryptographic applications and their fascinating history.
 In fact, by the end of this post, [some of you might want to spend a year or two in jail](#history).
 
@@ -136,8 +136,8 @@ Previously, such 1-round protocols were only known between two parties while thr
 
 From there, an abundance of new, efficient cryptography started pouring over:
 
- - BLS (short) signatures[^BLS04]
- - identity-based encryption[^BF03]
+ - BLS (short) signatures[^BLS01]
+ - identity-based encryption[^BF01]
  - additively-homomorphic encryption with support for one multiplication[^BGN05]
  - succinct zero-knowledge proofs[^GGPR12e]
 
@@ -210,7 +210,7 @@ The protocol can be generalized to [**a**symmetric pairings](#asymmetric-pairing
 
 ### BLS signatures
 
-Boneh, Lynn and Shacham give a very short signature scheme from pairings[^BLS04], which works as follows:
+Boneh, Lynn and Shacham give a very short signature scheme from pairings[^BLS01], which works as follows:
 
 - Assume $\Gr\_2 = \langle g_2 \rangle$ and that there exists a hash function $H : \\{0,1\\}^\* \rightarrow \Gr\_1$ modeled as a random oracle.
  - The secret key is $s \in \Zp$ while the public key is $\pk = g\_2^s \in \Gr\_2$.
@@ -225,7 +225,7 @@ e(H(m), g_2)^s \stackrel{?}{=} e(H(m), g_2)^s \Leftrightarrow\\\\\
 e(H(m), g_2) = e(H(m), g_2)
 \end{align}
 
-See the BLS paper[^BLS04] for how to prove that no attacker can forge BLS signatures given access to $\pk$ and a signing oracle.
+See the BLS paper[^BLS01] for how to prove that no attacker can forge BLS signatures given access to $\pk$ and a signing oracle.
 
 #### Cool properties of BLS signatures
 
@@ -249,7 +249,7 @@ If you find yourself confused between the various notions of multi-signatures, a
 
 In an IBE scheme, one can encrypt directly to a user-friendly email address (or a phone number), instead of a cumbersome public key which is difficult to remember or type-in correctly.
 
-Boneh and Franklin give a very efficient IBE scheme from pairings[^BF03].
+Boneh and Franklin give a very efficient IBE scheme from pairings[^BF01].
 
 For IBE to work, a trusted third-party (TTP) called a **private key generate (PKG)** must be introduced, who will issue secret keys to users based on their email addresses.
 This PKG has a **master secret key (MSK)** $\msk \in \Zp$ with an associated **master public key (MPK)** $\mpk = g_2^s$, where $\langle g_2 \rangle = \Gr_2$.
@@ -295,7 +295,7 @@ v \xor H_T(e(\dsk_{id}, u))
     &= m
 \end{align}
 
-To see why this scheme is secure under chosen-plaintext attacks, refer to the original paper[^BF03].
+To see why this scheme is secure under chosen-plaintext attacks, refer to the original paper[^BF01].
 
 ## How do pairings actually work?
 
