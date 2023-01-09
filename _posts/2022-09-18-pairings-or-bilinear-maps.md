@@ -313,8 +313,8 @@ Some of you might've heard about _Boneh-Lynn-Shacham (BLS)_ signatures. Please k
 
 For BLS12-381, the three groups $\Gr\_1, \Gr\_2, \Gr\_T$ involved are:
 
- - The group $\Gr_1$ is a subgroup of an elliptic curve $E(\F_q) = \left\\{(x, y) \in \F\_q\ \vert\ y^2 = x^3 + 4 \right\\}$ where $\vert\Gr_1\vert = p$
- - The group $\Gr_2$ is a subgroup of a different elliptic curve $E'(\F_{q^2}) = \left\\{(x, y) \in \F\_q\ \vert\ y^2 = x^3 + 4(1+i) \right\\}$ where $i$ is the square root of $-1$ and $\vert\Gr_2\vert = p$.
+ - The group $\Gr_1$ is a subgroup of an elliptic curve $E(\F_q) = \left\\{(x, y) \in (\F\_q)^2\ \vert\ y^2 = x^3 + 4 \right\\}$ where $\vert\Gr_1\vert = p$
+ - The group $\Gr_2$ is a subgroup of a different elliptic curve $E'(\F_{q^2}) = \left\\{(x, y) \in (\F\_{q^2})^2\ \vert\ y^2 = x^3 + 4(1+i) \right\\}$ where $i$ is the square root of $-1$ and $\vert\Gr_2\vert = p$.
  - The group $\Gr_T$ are all the $p$th roots of unity in $\F_{q^{k}}$, where $k=12$ is called the _embedding degree_
 
 How does the pairing map across these three groups work? Well, the pairing $e(\cdot,\cdot)$ expands to something like:
@@ -460,6 +460,8 @@ After that, I realized practitioners who implement pairing-based cryptosystems m
 #### Acknowledgements
 
 I would like to thank Dan Boneh for helping me clarify and contextualize the history around Weil, as well as for [his 2015 Simons talk](https://www.youtube.com/watch?v=1RwkqZ6JNeo), which inspired me to do a little more research and write this historical account.
+
+Thanks to [Sergey Vasilyev](https://twitter.com/swasilyev) for pointing out typos in the BLS12-381 elliptic curve definitions. 
 
 ---
 
