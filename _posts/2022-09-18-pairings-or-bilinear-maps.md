@@ -9,9 +9,12 @@ sidebar:
 
 {: .info}
 **tl;dr:** _Pairings_, or _bilinear maps_, are a very powerful mathematical tool for cryptography.
-Without pairings, we would not have efficient succinct zero-knowledge proofs[^GGPR12e], efficient threshold signatures[^BLS01], identity-based encryption[^BF01], and so many other things.
+Pairings gave us our most succinct zero-knowledge proofs[^GGPR12e]$^,$[^PGHR13e]$^,$[^Grot16], our most efficient threshold signatures[^BLS01], our first usable identity-based encryption (IBE)[^BF01] scheme, and many other efficient cryptosystems[^KZG10].
 In this post, I'll teach you a little about the properties of pairings, their cryptographic applications and their fascinating history.
 In fact, by the end of this post, [some of you might want to spend a year or two in jail](#history).
+
+{: .warning}
+**Twitter correction:** The [original tweet announcing this blog post](https://twitter.com/alinush407/status/1612518576862408705) stated that _"**S**NARKs would not be possible without [pairings]"_, with the highlighted **S** meant to emphasize the "succinctness" of such SNARKs. However, [thanks to a several folks on Twitter](#acknowledgements), I realized this is **not** exactly true and depends on what one means by "succinct." Specifically, "succinct" SNARKs, in the _polylogarithmic proof size_ sense defined by Gentry and Wichs[^GW10], exist from a plethora of assumptions, including discrete log[^BCCplus16] or random oracles[^Mica98]. Furthermore, "succinct" SNARKs, in the sense of $O(1)$ group elements proof size, exist from RSA assumptions too[^LM18]. What pairings do give us, currently, are SNARKs with the smallest, concrete proof sizes (i.e., in # of bytes).
 
 <p hidden>$$
 \def\idt{\mathbb{1}_{\Gr_T}}
@@ -116,10 +119,28 @@ You can read all of this and more in his fascinating autobiography, written from
 Weil's work was the foundation. 
 But three more developments were needed for pairing-based cryptography to rise.
 
-_First development:_ 
-In 1986, **Victor Miller** shows that Weil's pairing, which actually involves evaluating a polynomial of exponential degree, can in fact be computed efficiently in polynomial time[^Mill86Short].
+#### First development: Miller's algorithm
 
-_Second development:_ 
+In 1985, **Victor Miller** writes up a manuscript showing that Weil's pairing, which actually involves evaluating a polynomial of exponential degree, can in fact be computed efficiently in polynomial time[^Mill86Short].
+
+
+In December 1984, Miller gave a talk at IBM about elliptic curve cryptography where he claimed that elliptic curve discrete logs were more difficult to compute than ordinary discrete logs over finite fields[^miller-talk].
+Miller was challenged by Manuel Blum, who was in the audience, to back up this claim by giving a [reduction](https://en.wikipedia.org/wiki/Reduction_(complexity)): i.e., showing that an algorithm $B$ for solving discrete log on elliptic curves can be efficiently turned into another algorithm $A$ for solving discrete logs in finite fields.
+Such a reduction would imply the problem solved by $B$ (i.e., computing elliptic curve discrete logs) is at least as hard, if not harder, than $A$'s problem (i.e., computing finite field discrete logs).
+
+Miller set out to find a reduction by thinking about the only thing that related an elliptic curve group and a finite field: the Weil pairing.
+Funnily, what he quickly realized was that, although the Weil pairing gives a reduction, it's in the opposite direction: i.e., it turned out an algorithm $A$ for discrete log in finite fields could be efficiently turned into an algorithm $B$ for discrete logs in elliptic curves with the help of the Weil pairing.
+This "unwanted" reduction is easy to see.
+Since $e(g^a, g) = e(g,g)^a$, solving discrete log on the elliptic curve element $g_a\in \Gr$ is just a matter of solving it on $e(g,g)^a\in \Gr_T$, which is actually a multiplicative subgroup of a finite field (see [the inner details of pairings](#how-do-pairings-actually-work)).
+
+This almost showed the opposite of what Miller sought to prove, potentially destroying elliptic curve cryptography, but fortunately the degree of the extension field that the Weil pairing mapped into was too large, making this "unwanted" reduction inefficient and thus not a reduction after all.
+
+This whole affair got Miller interested in seeing if the Weil pairing could be computed efficiently, which led to the discovery of his algorithm.
+Interestingly, he submitted this manuscript to FOCS, a top theoretical computer science conference, but the paper got rejected and would not be published until much later in the Journal of Cryptology (according to Miller)[^alin-where].
+
+
+#### Second development: MOV attack
+
 In 1991, **Menezes, Vanstone and Okamoto**[^MVO91] leverage Miller's efficient algorithm for evaluating the Weil pairing to break the discrete logarithm assumption on certain elliptic curves **in sub-exponential time**.
 This was quite amazing since, at that time, no sub-exponential time algorithms were known for elliptic curves.
 
@@ -127,7 +148,7 @@ This was quite amazing since, at that time, no sub-exponential time algorithms w
 Their attack, called the _MOV attack_, mapped an elliptic curve discrete logarithm challenge $g^a\in \Gr$ into a **target group** as $e(g^a, g)=e(g,g)^a \in \Gr_T$ using the pairing.
 Since the target group was a subgroup of a finite field $\mathbb{F}_q^{k}$, this allowed the use of faster, sub-exponential time algorithms for computing the discrete log on $e(g,g)^a$.
 
-_Third development:_
+#### Third development: Joux's tripartite Diffie-Hellman
 So far, pairings only seemed useful for **cryptanalysis.** 
 No one knew how to use them for building (instead of breaking) cryptography.
 
@@ -191,7 +212,7 @@ e(u, v / w) = \frac{e(u, v)}{e(u, w)}
 
 ### Tripartite Diffie-Hellman
 
-This protocol was introduced by Joux in 2006[^Joux06] and assumes a **symmetric pairing**: i.e., where $$\Gr_1 = \Gr_2 = \langle g\rangle \stackrel{\mathsf{def}}{=} \Gr$$. 
+This protocol was introduced by Joux in 2000[^Joux00] and assumes a **symmetric pairing**: i.e., where $$\Gr_1 = \Gr_2 = \langle g\rangle \stackrel{\mathsf{def}}{=} \Gr$$. 
 
 We have three parties Alice, Bob and Charles with secret keys $a, b$, and $c$ (respectively).
 They send each other their public keys $g^a, g^b, g^c$ and agree on a shared secret key $k = e(g, g)^{abc}$.[^dhe]
@@ -409,11 +430,14 @@ Therefore, practitioners today, as far as I am aware, exclusively rely on **a**s
 #### Exponentiation times
 
  - $\Gr_1$ exponentiations are the fastest
-    + 72 microseconds ([blstrs](https://github.com/filecoin-project/blstrs) microbenchmarks on a 2021 Apple M1 Max)
+    + 72 microseconds ([blstrs](https://github.com/filecoin-project/blstrs) [microbenchmarks](https://github.com/filecoin-project/blstrs/blob/e70aff6505fb6f87f9a13e409c080995bd0f244e/benches/bls12_381/ec.rs#L10) on a 2021 Apple M1 Max)
  - $\Gr_2$ exponentiations are around 2$\times$ slower
     + 136 microseconds
  - $\Gr_T$ exponentiations are around 3.5$\times$ slower than in $\Gr_2$
     + 500 microseconds 
+
+{: .info}
+**Note:** These benchmarks pick the exponentiated base randomly and do **not** perform any precomputation on it, which would speed up these times by $2\times$-$4\times$.
 
 #### Group element sizes
 
@@ -434,6 +458,23 @@ On the other hand, if you wanted to minimize public key size, then you would let
 {: .warning}
 Other things will also influence how you use $\Gr_1$ and $\Gr_2$, such as the existence of an isomorphism $\phi : \Gr_2 \rightarrow \Gr_1$ or the ability to hash uniformly into these groups.
 In fact, the existence of such an isomorphism separates between two types of asymmetric pairings:  Type 2 and Type 3 (see *Galbraith et al.*[^GPS08] for more information on the different types of pairings)
+
+#### Comparison to non-pairing-friendly elliptic curves
+
+When compared to an elliptic curve that does not admit pairings, pairing-friendly elliptic curves are around two times slower.
+
+For example, the popular prime-order elliptic curve group [Ristretto255](https://ristretto.group/) offers:
+
+<!--
+ristretto255/basepoint_mul
+                        time:   [10.259 µs 10.263 µs 10.267 µs]
+
+ristretto255/point_mul  time:   [40.163 µs 40.187 µs 40.212 µs]
+-->
+
+ - $\approx 2\times$ faster exponentiations of 40 microseconds
+	+ which can be sped up to 10 microseconds, using precomputation when the exponentiation base is fixed
+ - 32 byte group element sizes
 
 ### Multi-pairings
 
@@ -457,16 +498,28 @@ And I couldn't let you walk away without seeing a few powerful [cryptographic ap
 
 After that, I realized practitioners who implement pairing-based cryptosystems might benefit from knowing a little about their [internal workings](#how-do-pairings-actually-work), since some of these details can be leveraged to speed up [implementations](#implementation-details).
 
-#### Acknowledgements
+## Acknowledgements
 
 I would like to thank Dan Boneh for helping me clarify and contextualize the history around Weil, as well as for [his 2015 Simons talk](https://www.youtube.com/watch?v=1RwkqZ6JNeo), which inspired me to do a little more research and write this historical account.
 
-Thanks to [Sergey Vasilyev](https://twitter.com/swasilyev) for pointing out typos in the BLS12-381 elliptic curve definitions. 
+Big thanks to:
+
+ - [Lúcás Meier](https://twitter.com/cronokirby), [Pratyush Mishra](https://twitter.com/zkproofs), [Ariel Gabizon](https://twitter.com/rel_zeta_tech) and [Dario Fiore](https://twitter.com/dariofiore0) for their enlightening points on what "succinct" (S) stands for in **S**NARKs[^GW10] and for reminding me that SNARKs with $O(1)$ group elements proof size exist from RSA assumptions[^LM18].
+ - [Sergey Vasilyev](https://twitter.com/swasilyev) for pointing out typos in the BLS12-381 elliptic curve definitions. 
+ - [@BlakeMScurr](https://twitter.com/BlakeMScurr) for pointing out an incorrect reference to Joux's work[^Joux00].
+ - [Conrado Guovea](https://twitter.com/conradoplg) for pointing me to Victor Miller's account of how he developed his algorithm for evaluating the Weil pairing (discussed [here](#first-development-millers-algorithm)).
+ - [Chris Peikert](https://twitter.com/ChrisPeikert) for pointing out that there are plenty-fast IBE schemes out there that do not rely on pairings[^DLP14e].
+
+**PS:** Twitter threads are a pain to search through, so if I missed acknowledging your contribution, please kindly let me know.
 
 ---
 
 [^dhe]: Typically, there will be some key-derivation function $\mathsf{KDF}$ used to derive the key as $k = \mathsf{KDF}(e(g,g)^{abc})$.
 
 [^danboneh-shimuranote]: Thanks to Dan Boneh, who contrasted Weil's definition with a different one by Shimura from his classic book on modular forms. While Shimura's definition makes it much easier to prove all the properties of the pairing, it defines a pairing of order $n$ as a **sum of $n$ points of order $n^2$**. This makes it hopelessly non-computable. Weil's definition, on the other hand, involves an evaluation of a very concrete function -- there are no exponential-sized sums -- but requires much more work to prove all its pairing properties.
+
+[^miller-talk]: Miller tells this story himself in [a talk he gave at Microsoft Research](https://www.youtube.com/watch?v=yK5fYfn6HJg&t=2901s) on October 10th, 2010.
+
+[^alin-where]: I am unable to find any trace of Miller's published work on this beyond the manuscript Boneh published in[^Mill86Short]. Any pointers would be appreciated.
 
 {% include refs.md %}

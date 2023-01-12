@@ -188,6 +188,8 @@
 
 [^BCLL22e]: **Network-Agnostic Security Comes for Free in DKG and MPC**, by Renas Bacho and Daniel Collins and Chen-Da Liu-Zhang and Julian Loss, *in Cryptology ePrint Archive, Paper 2022/1369*, 2022, [[URL]](https://eprint.iacr.org/2022/1369)
 
+[^BCLS22e]: **Efficient Aggregatable BLS Signatures with Chaum-Pedersen Proofs**, by Jeff Burdges and Oana Ciobotaru and Syed Lavasani and Alistair Stewart, *in Cryptology ePrint Archive, Paper 2022/1611*, 2022, [[URL]](https://eprint.iacr.org/2022/1611)
+
 [^BCMplus15e]: **Subgroup security in pairing-based cryptography**, by Paulo S.  L.  M.  Barreto and Craig Costello and Rafael Misoczki and Michael Naehrig and Geovandro C.  C.  F.  Pereira and Gustavo Zanon, *in Cryptology ePrint Archive, Paper 2015/247*, 2015, [[URL]](https://eprint.iacr.org/2015/247)
 
 [^BCM05]: **Efficient Proofs of Knowledge of Discrete Logarithms and Representations in Groups with Hidden Order**, by Bangerter, Endre and Camenisch, Jan and Maurer, Ueli, *in Public Key Cryptography - PKC 2005*, 2005
@@ -854,6 +856,8 @@
 
 [^DLPplus11e]: **On the Joint Security of Encryption and Signature in EMV**, by Jean Paul Degabriele and Anja Lehmann and Kenneth G.  Paterson and Nigel P.  Smart and Mario Strefler, *in Cryptology ePrint Archive, Paper 2011/615*, 2011, [[URL]](https://eprint.iacr.org/2011/615)
 
+[^DLP14e]: **Efficient Identity-Based Encryption over NTRU Lattices**, by Léo Ducas and Vadim Lyubashevsky and Thomas Prest, *in Cryptology ePrint Archive, Paper 2014/794*, 2014, [[URL]](https://eprint.iacr.org/2014/794)
+
 [^DLS88]: **Consensus in the presence of partial synchrony**, by Cynthia Dwork and Nancy Lynch and Larry Stockmeyer, *in Journal of the {ACM}*, 1988, [[URL]](https://doi.org/10.1145%2F42282.42283)
 
 [^DM10]: **Efficient, Robust and Constant-Round Distributed RSA Key Generation**, by Damgård, Ivan and Mikkelsen, Gert Læssøe, *in Theory of Cryptography*, 2010
@@ -1047,6 +1051,8 @@
 [^GAGplus19]: **SBFT: A Scalable and Decentralized Trust Infrastructure**, by G. Golan Gueta and I. Abraham and S. Grossman and D. Malkhi and B. Pinkas and M. Reiter and D. Seredinschi and O. Tamir and A. Tomescu, *in 2019 49th Annual IEEE/IFIP International Conference on Dependable Systems and Networks (DSN)*, 2019
 
 [^GCD20]: **A Generalization of Paillier's Public-Key System With Fast Decryption**, by Ying Guo and Zhenfu Cao and Xiaolei Dong, *in Cryptology ePrint Archive, Report 2020/796*, 2020, [[URL]](https://eprint.iacr.org/2020/796)
+
+[^GG19e]: **Fast Multiparty Threshold ECDSA with Fast Trustless Setup**, by Rosario Gennaro and Steven Goldfeder, *in Cryptology ePrint Archive, Paper 2019/114*, 2019, [[URL]](https://eprint.iacr.org/2019/114)
 
 [^GG20]: **One Round Threshold ECDSA with Identifiable Abort**, by Rosario Gennaro and Steven Goldfeder, *in Cryptology ePrint Archive, Report 2020/540*, 2020, [[URL]](https://eprint.iacr.org/2020/540)
 
@@ -1732,6 +1738,8 @@
 
 [^Mermin07]: **Quantum Computer Science**, by N. David Marmin, 2007
 
+[^Mica98]: **Computationally-Sound Proofs**, by Silvio Micali, *in Logic Colloquium '95: Proceedings of the Annual European Summer Meeting of the Association of Symbolic Logic*, 1998, [[URL]](https://projecteuclid.org/ebooks/lecture-notes-in-logic/Computationally-Sound-Proofs/chapter/Computationally-Sound-Proofs/lnl/1235415908?tab=ChapterArticleLink)
+
 [^Mill04]: **The Weil Pairing, and Its Efficient Calculation**, by Miller, Victor S., *in Journal of Cryptology*, 2004, [[URL]](https://doi.org/10.1007/s00145-004-0315-8)
 
 [^Mill76]: **Riemann's hypothesis and tests for primality**, by Gary L. Miller, *in Journal of Computer and System Sciences*, 1976, [[URL]](http://www.sciencedirect.com/science/article/pii/S0022000076800438)
@@ -2186,6 +2194,8 @@
 
 [^Trev03]: **Notes for Lecture 1**, by Luca Trevisan, 2003
 
+[^Unge15]: **Deniable Key Exchanges for Secure Messaging**, by Unger, Nik, 2015, [[URL]](http://hdl.handle.net/10012/9406)
+
 [^VASplus16e]: **Measuring small subgroup attacks against Diffie-Hellman**, by Luke Valenta and David Adrian and Antonio Sanso and Shaanan Cohney and Joshua Fried and Marcella Hastings and J.  Alex Halderman and Nadia Heninger, *in Cryptology ePrint Archive, Paper 2016/995*, 2016, [[URL]](https://eprint.iacr.org/2016/995)
 
 [^VB20]: **Dynamic Universal Accumulator with Batch Update over Bilinear Groups**, by Giuseppe Vitto and Alex Biryukov, *in Cryptology ePrint Archive, Report 2020/777*, 2020, [[URL]](https://eprint.iacr.org/2020/777)
@@ -2227,6 +2237,8 @@
 [^WLGplus78]: **SIFT: Design and analysis of a fault-tolerant computer for aircraft control**, by J. H. Wensley and L. Lamport and J. Goldberg and M. W. Green and K. N. Levitt and P. M. Melliar-Smith and R. E. Shostak and C. B. Weinstock, *in Proceedings of the IEEE*, 1978
 
 [^WR19]: **How to End Password Reuse on the Web**, by Wang, Ke Coby and Reiter, Michael K, *in NDSS'19*, 2019
+
+[^WRK17e]: **Global-Scale Secure Multiparty Computation**, by Xiao Wang and Samuel Ranellucci and Jonathan Katz, *in Cryptology ePrint Archive, Paper 2017/189*, 2017, [[URL]](https://eprint.iacr.org/2017/189)
 
 [^WS07]: **An Efficient Identification Protocol and the Knowledge-of-Exponent Assumption**, by J. Wu and D.R. Stinson, *in Cryptology ePrint Archive, Report 2007/479*, 2007, [[URL]](https://eprint.iacr.org/2007/479)
 
@@ -2289,6 +2301,8 @@
 [^YOHH20e]: **Alt-Coin Traceability**, by Claire Ye and Chinedu Ojukwu and Anthony Hsu and Ruiqi Hu, *in Cryptology ePrint Archive, Paper 2020/593*, 2020, [[URL]](https://eprint.iacr.org/2020/593)
 
 [^YSLplus19]: **Coded Merkle Tree: Solving Data Availability Attacks in Blockchains**, by Mingchao Yu and Saeid Sahraei and Songze Li and Salman Avestimehr and Sreeram Kannan and Pramod Viswanath, *in Cryptology ePrint Archive, Report 2019/1139*, 2019, [[URL]](https://eprint.iacr.org/2019/1139)
+
+[^YWZ19e]: **More Efficient MPC from Improved Triple Generation and Authenticated Garbling**, by Kang Yang and Xiao Wang and Jiang Zhang, *in Cryptology ePrint Archive, Paper 2019/1104*, 2019, [[URL]](https://eprint.iacr.org/2019/1104)
 
 [^YXXplus21]: **Two Efficient Regulatory Confidential Transaction Schemes**, by Min Yang and Changtong Xu and  Zhe Xia and Li Wang and Qingshu Meng, *in Cryptology ePrint Archive, Report 2021/329*, 2021, [[URL]](https://eprint.iacr.org/2021/329)
 
