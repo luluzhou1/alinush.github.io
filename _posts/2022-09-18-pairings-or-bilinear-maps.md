@@ -351,21 +351,52 @@ It's useful to know that computing a pairing consists of two steps:
 
 For more on the internals, see other resources[^Cost12]$^,$[^GPS08]$^,$[^Mene05].
 
-## Implementation details
+## Implementing pairing-based crypto
 
-### (A)symmetric pairings
+This section discusses various implementation-level details that practitioners can leverage to speed up their implementations.
+
+### Use asymmetric pairings!
 
 The pairing over BLS12-381 is _**a**symmetric_: i.e., $\Gr_1 \ne \Gr_2$ are two **different** groups (of the same order $p$). However, there also exist **symmetric** pairings where $\Gr_1 = \Gr_2$ are the same group.
 
 Unfortunately, _"such symmetric pairings only exist on supersingular curves, which places a heavy restriction on either or both of the underlying efficiency and security of the protocol"_[^BCMplus15e].
 In other words, such supersingular curves are not as efficient at the same security level as the curves used in **a**symmetric pairings.
 
-Therefore, practitioners today, as far as I am aware, exclusively rely on **a**symmetric pairings.
+Therefore, practitioners today, as far as I am aware, exclusively rely on **a**symmetric pairings due to their higher efficiency when the security level is kept the same.
 
-### Performance of asymmetric pairings
+### BLS12-381 performance
+
+I will give a few key performance numbers for the BLS12-381 curve implemented in Filecoin's ([blstrs](https://github.com/filecoin-project/blstrs) Rust wrapper around the popular [blst](https://github.com/supranational/blst) library.
+These microbenchmarks were run on a 10-core 2021 Apple M1 Max using `cargo bench`.
+
+#### Pairing computation times
 
 <!--
-	alinush@MacBook [~/repos/blstrs] (master *%) $ gd
+	alinush@MacBook [~/repos/blstrs] (master %) $ cargo +nightly bench -- pairing_
+	running 4 tests
+	test bls12_381::bench_pairing_final_exponentiation     ... bench:     276,809 ns/iter (+/- 1,911)
+	test bls12_381::bench_pairing_full                     ... bench:     484,718 ns/iter (+/- 2,510)
+	test bls12_381::bench_pairing_g2_preparation           ... bench:      62,395 ns/iter (+/- 4,161)
+	test bls12_381::bench_pairing_miller_loop              ... bench:     148,534 ns/iter (+/- 1,203)
+-->
+
+As explained in Eq. \ref{eq:pairing-def}, a pairing involves two steps:
+
+ - a Miller loop computation
+    - 210 microseconds
+ - a final exponentiation
+    - 276 microseconds
+
+Therefore, a pairing takes around 486 microseconds (i.e., the sum of the two).
+
+#### Exponentiation times
+
+{: .warning}
+The $\Gr_T$ microbenchmarks were done by slightly-modifying the `blstrs` benchmarking code [here](https://github.com/filecoin-project/blstrs/blob/e70aff6505fb6f87f9a13e409c080995bd0f244e/benches/bls12_381/ec.rs#L10).
+(See the HTML comments of this page for those modifications.)
+
+<!--
+	alinush@MacBook [~/repos/blstrs] (master *%) $ git diff
 	diff --git a/benches/bls12_381/ec.rs b/benches/bls12_381/ec.rs
 	index 639bcad..8dcec20 100644
 	--- a/benches/bls12_381/ec.rs
@@ -427,10 +458,8 @@ Therefore, practitioners today, as far as I am aware, exclusively rely on **a**s
 	test result: ok. 0 passed; 0 failed; 0 ignored; 4 measured; 21 filtered out; finished in 5.30s
 -->
 
-#### Exponentiation times
-
  - $\Gr_1$ exponentiations are the fastest
-    + 72 microseconds ([blstrs](https://github.com/filecoin-project/blstrs) [microbenchmarks](https://github.com/filecoin-project/blstrs/blob/e70aff6505fb6f87f9a13e409c080995bd0f244e/benches/bls12_381/ec.rs#L10) on a 2021 Apple M1 Max)
+    + 72 microseconds 
  - $\Gr_2$ exponentiations are around 2$\times$ slower
     + 136 microseconds
  - $\Gr_T$ exponentiations are around 3.5$\times$ slower than in $\Gr_2$
@@ -438,6 +467,29 @@ Therefore, practitioners today, as far as I am aware, exclusively rely on **a**s
 
 {: .info}
 **Note:** These benchmarks pick the exponentiated base randomly and do **not** perform any precomputation on it, which would speed up these times by $2\times$-$4\times$.
+
+#### Multi-exponentiations
+
+This is a well-known optimization that I'm including for completeness.
+
+Specifically, many libraries allow you to compute a product $\prod_{0 < i < k} \left(g_i\right)^{x_i}$ of $k$ exponentiations much faster than individually computing the $k$ exponentiations and aggregating their product.
+
+For example, [blstrs](https://github.com/filecoin-project/blstrs) seems to be incredibly fast in this regard:
+
+<!--
+running 4 tests
+test bls12_381::bench_g1_multi_exp                     ... bench:     760,554 ns/iter (+/- 47,355)
+test bls12_381::bench_g1_multi_exp_naive               ... bench:  18,575,716 ns/iter (+/- 42,688)
+test bls12_381::bench_g2_multi_exp                     ... bench:   1,876,416 ns/iter (+/- 58,743)
+test bls12_381::bench_g2_multi_exp_naive               ... bench:  35,272,720 ns/iter (+/- 266,279)
+-->
+
+ - a size-256 multi-exponentiation in $\Gr_1$
+    + takes 760 microseconds in total, or 3 microseconds per exponentiation!
+    - done naively, it would take 18.5 milliseconds in total, which is $24\times$ longer
+ - a size-256 multi-exponentiation in $\Gr_2$
+    - takes 1.88 milliseconds in total, or 7.33 microseconds per exponentiation!
+    - done naively, it would take 35.3 milliseconds, which is $18.8\times$ longer
 
 #### Group element sizes
 
