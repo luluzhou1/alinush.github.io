@@ -8,6 +8,8 @@ sidebar:
 
 <!-- TODO:
 
+A nice explanation of ZK via two games by Groth at MSR: https://youtu.be/KSZB9hsrh3c?t=1146
+
 Interesting subtleties to cover:
 
 1. signatures are zkpoks of a secret key or not?

@@ -1,3 +1,11 @@
+# TODOs
+
+ - fix `\nmid` issue in Linear diophantine article (`amssymb`) probably due to new jsdelivr URL for MathJax
+ - re-tag everything
+ - front page with highlights
+ - add more cross-links between articles
+
+
 # Jekyll with TeXt Theme
 
 See original [README here](https://github.com/kitian616/jekyll-TeXt-theme)

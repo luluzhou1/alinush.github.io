@@ -81,6 +81,8 @@ cryptomat:
         url: /2020/11/23/Linear-Diophantine-Equations.html
   - title: Group Theory
     children:
+      - title: Abelian groups
+        url: /2023/01/14/Abelian-groups.html
       - title: Pairings or bilinear maps
         url: /2022/12/31/pairings-or-bilinear-maps.html
   #- title: Hashing

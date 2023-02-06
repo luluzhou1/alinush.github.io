@@ -256,9 +256,9 @@ $$\Pr
 
 ### The low-order assumption (LOA)
 
-This assumption was first used by Pietrzak[^Piet18e] to construct _verifiable delay functions (VDFs)_ and later formalized by Boneh et al.[^BBF18A]
-Informally, the assumptions says that the **low-order problem** is "hard" to solve.
-Specifically, given a group $\Gho$ of hidden-order, it is hard to find $g\in \Gho$ and $\ell \ne 0$ such that $g^{\ell} = \Ghoid$.
+This assumption was first formalized by Boneh et al[^BBF18A] in order to prove the security of Pietrzak[^Piet18e]'s _verifiable delay function (VDF)_ in _any_ hidden order group.
+(In contrast, Pietrzak proved his VDF secure in the subgroup of quadratic residues modulo a composite $N$ where this assumption holds unconditionally.)
+Informally, the assumptions says that the **low-order problem** is "hard" to solve: i.e., given a group $\Gho$ of hidden-order, it is hard to find $g\in \Gho$ and $\ell \ne 0$ such that $g^{\ell} = \Ghoid$.
 <!-- In other words, it is hard to find the order of any element in $\Gho$. -->
 
 $$\Pr

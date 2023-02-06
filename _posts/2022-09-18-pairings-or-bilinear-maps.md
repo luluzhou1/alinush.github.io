@@ -1,11 +1,18 @@
 ---
 tags:
+- bilinear maps
+- boneh-lynn-shacham
+- cryptography
+- encryption
+- group-theory
 title: Pairings or bilinear maps
 date: 2022-12-31 20:45:59
 #published: false
 sidebar:
     nav: cryptomat
 ---
+
+<!-- TODO: Add example of pairing (insecure). -->
 
 {: .info}
 **tl;dr:** _Pairings_, or _bilinear maps_, are a very powerful mathematical tool for cryptography.

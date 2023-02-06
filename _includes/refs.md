@@ -62,6 +62,8 @@
 
 [^AGMS18]: **State Machine Replication Is More Expensive Than Consensus**, by Karolos Antoniadis and Rachid Guerraoui and Dahlia Malkhi and Dragos-Adrian Seredinschi, *in 32nd International Symposium on Distributed Computing  (DISC 2018)*, 2018, [[URL]](http://drops.dagstuhl.de/opus/volltexte/2018/9796)
 
+[^AGOT14e]: **Structure-Preserving Signatures from Type II Pairings**, by Masayuki Abe and Jens Groth and Miyako Ohkubo and Mehdi Tibouchi, *in Cryptology ePrint Archive, Paper 2014/312*, 2014, [[URL]](https://eprint.iacr.org/2014/312)
+
 [^AGT01]: **Persistent Authenticated Dictionaries and Their Applications**, by Anagnostopoulos, Aris and Goodrich, Michael T. and Tamassia, Roberto, *in Information Security*, 2001
 
 [^AH20]: **On Bounded Distance Decoding with Predicate: Breaking the "Lattice Barrier" for the Hidden Number Problem**, by Martin R. Albrecht and Nadia Heninger, *in Cryptology ePrint Archive, Report 2020/1540*, 2020, [[URL]](https://eprint.iacr.org/2020/1540)
@@ -76,6 +78,8 @@
 
 [^AHS20]: **A Survey of ECDSA Threshold Signing**, by Jean-Philippe Aumasson and Adrian Hamelink and Omer Shlomovits, *in Cryptology ePrint Archive, Report 2020/1390*, 2020, [[URL]](https://eprint.iacr.org/2020/1390)
 
+[^AJMplus22e]: **Bingo:  Adaptively Secure Packed Asynchronous Verifiable Secret Sharing and Asynchronous Distributed Key Generation**, by Ittai Abraham and Philipp Jovanovic and Mary Maller and Sarah Meiklejohn and Gilad Stern, *in Cryptology ePrint Archive, Paper 2022/1759*, 2022, [[URL]](https://eprint.iacr.org/2022/1759)
+
 [^AKPW13e]: **Learning with Rounding, Revisited: New Reduction, Properties and Applications**, by Joel Alwen and Stephan Krenn and Krzysztof Pietrzak and Daniel Wichs, *in Cryptology ePrint Archive, Paper 2013/098*, 2013, [[URL]](https://eprint.iacr.org/2013/098)
 
 [^AM08e]: **Breaking RSA Generically is Equivalent to Factoring**, by Divesh Aggarwal and Ueli Maurer, *in Cryptology ePrint Archive, Report 2008/260*, 2008, [[URL]](https://eprint.iacr.org/2008/260)
@@ -85,6 +89,8 @@
 [^AMS19]: **Asymptotically Optimal Validated Asynchronous Byzantine Agreement**, by Ittai Abraham and Dahlia Malkhi and Alexander Spiegelman, *in Proceedings of the 2019 {ACM} Symposium on Principles of Distributed Computing*, 2019, [[URL]](https://doi.org/10.1145%2F3293611.3331612)
 
 [^ANRS20]: **On the Optimality of Optimistic Responsiveness**, by Ittai Abraham and Kartik Nayak and Ling Ren and Nibesh Shrestha, *in Cryptology ePrint Archive, Report 2020/458*, 2020, [[URL]](https://eprint.iacr.org/2020/458)
+
+[^APBplus04]: **Batch Verification for Equality of Discrete Logarithms and Threshold Decryptions**, by Aditya, Riza and Peng, Kun and Boyd, Colin and Dawson, Ed and Lee, Byoungcheon, *in Applied Cryptography and Network Security*, 2004
 
 [^APS15e]: **On the concrete hardness of Learning with Errors**, by Martin R. Albrecht and Rachel Player and Sam Scott, *in Cryptology ePrint Archive, Report 2015/046*, 2015, [[URL]](https://ia.cr/2015/046)
 
@@ -198,6 +204,8 @@
 
 [^BCMS20e]: **Proof-Carrying Data from Accumulation Schemes**, by Benedikt Bünz and Alessandro Chiesa and Pratyush Mishra and Nicholas Spooner, *in Theory of Cryptography*, 2020, [[URL]](https://eprint.iacr.org/2020/499)
 
+[^BCP03]: **A Simple Public-Key Cryptosystem with a Double Trapdoor Decryption Mechanism and Its Applications**, by Bresson, Emmanuel and Catalano, Dario and Pointcheval, David, *in Advances in Cryptology - ASIACRYPT 2003*, 2003
+
 [^BCPR14]: **On the Existence of Extractable One-way Functions**, by Bitansky, Nir and Canetti, Ran and Paneth, Omer and Rosen, Alon, *in Proceedings of the Forty-sixth Annual ACM Symposium on Theory of Computing*, 2014, [[URL]](http://doi.acm.org/10.1145/2591796.2591859)
 
 [^BCRplus19]: **Aurora: Transparent Succinct Arguments for R1CS**, by Ben-Sasson, Eli and Chiesa, Alessandro and Riabzev, Michael and Spooner, Nicholas and Virza, Madars and Ward, Nicholas P., *in Advances in Cryptology -- EUROCRYPT 2019*, 2019
@@ -235,6 +243,8 @@
 [^BDLO12]: **Faster batch forgery identification**, by Daniel J. Bernstein and Jeroen Doumen and Tanja Lange and Jan-Jaap Oosterwijk, *in Cryptology ePrint Archive, Report 2012/549*, 2012, [[URL]](https://eprint.iacr.org/2012/549)
 
 [^BDN18]: **Compact Multi-Signatures for Smaller Blockchains**, by Dan Boneh and Manu Drijvers and Gregory Neven, *in Cryptology ePrint Archive, Report 2018/483*, 2018, [[URL]](https://eprint.iacr.org/2018/483)
+
+[^BDO22e]: **Secure Multiparty Computation from Threshold Encryption based on Class Groups**, by Lennart Braun and Ivan Damgård and Claudio Orlandi, *in Cryptology ePrint Archive, Paper 2022/1437*, 2022, [[URL]](https://eprint.iacr.org/2022/1437)
 
 [^BDQplus20]: **Resources: A Safe Language Abstraction for Money**, by Sam Blackshear and David L. Dill and Shaz Qadeer and Clark W. Barrett and John C. Mitchell and Oded Padon and Yoni Zohar, 2020
 
@@ -440,6 +450,8 @@
 
 [^BS21]: **Merkle Trees Optimized for Stateless Clients in Bitcoin**, by Bolton Bailey and Suryanarayana Sankagiri, *in Cryptology ePrint Archive, Report 2021/340*, 2021, [[URL]](https://ia.cr/2021/340)
 
+[^BS23]: **A Graduate Course in Applied Cryptography**, by Dan Boneh and Victor Shoup, 2023, [[URL]](https://crypto.stanford.edu/~dabo/cryptobook/BonehShoup_0_6.pdf)
+
 [^BSKD22e]: **Zef: Low-latency, Scalable, Private Payments**, by Mathieu Baudet and Alberto Sonnino and Mahimna Kelkar and George Danezis, *in Cryptology ePrint Archive, Paper 2022/083*, 2022, [[URL]](https://eprint.iacr.org/2022/083)
 
 [^BSKN20]: **RandPiper -- Reconfiguration-Friendly Random Beacons with Quadratic Communication**, by Adithya Bhat and Nibesh Shreshta and Aniket Kate and Kartik Nayak, *in Cryptology ePrint Archive, Report 2020/1590*, 2020, [[URL]](https://eprint.iacr.org/2020/1590)
@@ -461,6 +473,8 @@
 [^BV98]: **Breaking RSA may not be equivalent to factoring**, by Boneh, Dan and Venkatesan, Ramarathnam, *in Advances in Cryptology --- EUROCRYPT'98*, 1998
 
 [^BW06]: **Monotone circuits for monotone weighted threshold functions**, by Beimel, Amos and Weinreb, Enav, *in Information Processing Letters*, 2006, [[URL]](https://www.cs.bgu.ac.il/~beimel/Papers/monoIPL.pdf)
+
+[^BW07]: **Full-Domain Subgroup Hiding and Constant-Size Group Signatures**, by Boyen, Xavier and Waters, Brent, *in Public Key Cryptography -- PKC 2007*, 2007
 
 [^BW88]: **A Key-Exchange System Based on Imaginary Quadratic Fields**, by Johannes Buchmann and Hugh C. Williams, *in Journal of Cryptology*, 1988
 
@@ -722,6 +736,8 @@
 
 [^CPKplus18]: **FASTER: A Concurrent Key-Value Store with In-Place Updates**, by Badrish Chandramouli and Guna Prasaad and Donald Kossmann and Justin Levandoski and James Hunter and Mike Barnett, *in Proceedings of the 2018 International Conference on Management of Data*, 2018, [[URL]](https://doi.org/10.1145%2F3183713.3196898)
 
+[^CPP06]: **Encoding-Free ElGamal Encryption Without Random Oracles**, by Chevallier-Mames, Benoît and Paillier, Pascal and Pointcheval, David, *in Public Key Cryptography - PKC 2006*, 2006
+
 [^CPP15]: **Encryption Switching Protocols**, by Geoffroy Couteau and Thomas Peters and David Pointcheval, *in Cryptology ePrint Archive, Report 2015/990*, 2015, [[URL]](https://eprint.iacr.org/2015/990)
 
 [^CPP17]: **Removing the Strong RSA Assumption from Arguments over the Integers**, by Couteau, Geoffroy and Peters, Thomas and Pointcheval, David, *in Advances in Cryptology -- EUROCRYPT 2017*, 2017
@@ -731,6 +747,8 @@
 [^CR93]: **Fast Asynchronous Byzantine Agreement with Optimal Resilience**, by Canetti, Ran and Rabin, Tal, *in Proceedings of the Twenty-Fifth Annual ACM Symposium on Theory of Computing*, 1993, [[URL]](https://doi.org/10.1145/167088.167105)
 
 [^CRSplus21]: **Updatable Signatures and Message Authentication Codes**, by Valerio Cini and Sebastian Ramacher and Daniel Slamanig and Christoph Striecks and Erkan Tairi, *in Cryptology ePrint Archive, Report 2021/365*, 2021, [[URL]](https://eprint.iacr.org/2021/365)
+
+[^CS03]: **Practical Verifiable Encryption and Decryption of Discrete Logarithms**, by Camenisch, Jan and Shoup, Victor, *in Advances in Cryptology - CRYPTO 2003*, 2003
 
 [^CS04]: **Practical Large-Scale Distributed Key Generation**, by Canny, John and Sorkin, Stephen, *in Advances in Cryptology - EUROCRYPT 2004*, 2004
 
@@ -813,6 +831,8 @@
 [^DG06]: **Hidden Pairings and Trapdoor DDH Groups**, by Dent, Alexander W. and Galbraith, Steven D., *in Algorithmic Number Theory*, 2006
 
 [^DG20]: **Trustless Groups of Unknown Order with Hyperelliptic Curves**, by Samuel Dobson and Steven D. Galbraith, *in Cryptology ePrint Archive, Report 2020/196*, 2020, [[URL]](https://eprint.iacr.org/eprint-bin/getfile.pl?entry=2020/196\&version=20200219:050142\&file=196.pdf)
+
+[^DGHV09e]: **Fully Homomorphic Encryption over the Integers**, by Marten van Dijk and Craig Gentry and Shai Halevi and Vinod Vaikuntanathan, *in Cryptology ePrint Archive, Paper 2009/616*, 2009, [[URL]](https://eprint.iacr.org/2009/616)
 
 [^DGKplus20]: **Balancing Privacy and Accountability in Blockchain Transactions**, by Ivan Damgård and Chaya Ganesh and Hamidreza Khoshakhlagh and Claudio Orlandi and Luisa Siniscalchi, *in Cryptology ePrint Archive, Report 2020/1511*, 2020, [[URL]](https://eprint.iacr.org/2020/1511)
 
@@ -908,6 +928,8 @@
 
 [^DW20]: **SodsMPC: FSM based Anonymous and Private Quantum-safe Smart Contracts**, by Shlomi Dolev and Ziyu Wang, *in Cryptology ePrint Archive, Report 2020/1346*, 2020, [[URL]](https://eprint.iacr.org/2020/1346)
 
+[^DXKR22e]: **Practical Asynchronous High-threshold Distributed Key Generation and Distributed Polynomial Sampling**, by Sourav Das and Zhuolun Xiang and Lefteris Kokoris-Kogias and Ling Ren, *in Cryptology ePrint Archive, Paper 2022/1389*, 2022, [[URL]](https://eprint.iacr.org/2022/1389)
+
 [^DXR21]: **Asynchronous Data Dissemination and its Applications**, by Sourav Das and Zhuolun Xiang and Ling Ren, *in Cryptology ePrint Archive, Report 2021/777*, 2021, [[URL]](https://eprint.iacr.org/2021/777)
 
 [^DY05]: **A Verifiable Random Function with Short Proofs and Keys**, by Dodis, Yevgeniy and Yampolskiy, Aleksandr, *in Public Key Cryptography - PKC 2005*, 2005
@@ -965,6 +987,8 @@
 [^Edgi22]: **BLS12-381 For The Rest Of Us**, by Ben Edgington, 2022, [[URL]](https://hackmd.io/@benjaminion/bls12-381)
 
 [^Ekera16]: **Modifying Shor’s algorithm to compute short discrete logarithms**, by Martin Ekerå, *in Cryptology ePrint Archive, Report 2016/1128*, 2016, [[URL]](https://eprint.iacr.org/2016/1128)
+
+[^Elga85]: **A public key cryptosystem and a signature scheme based on discrete logarithms**, by Elgamal, T., *in IEEE Transactions on Information Theory*, 1985
 
 [^Eric15]: **Static-to-dynamic tranformations**, by Jeff Erickson, 2015, [[URL]](http://jeffe.cs.illinois.edu/teaching/datastructures/notes/01-statictodynamic.pdf)
 
@@ -1028,7 +1052,7 @@
 
 [^FST06e]: **A taxonomy of pairing-friendly elliptic curves**, by David Freeman and Michael Scott and Edlyn Teske, *in Cryptology ePrint Archive, Paper 2006/372*, 2006, [[URL]](https://eprint.iacr.org/2006/372)
 
-[^Feis20Multi]: **Multi-layer hashmaps for state storage**, by Dankrad Feist, 2020, [[URL]](https://ethresear.ch/t/multi-layer-hashmaps-for-state-storage/7211/print)
+[^Feis20Multi]: **Multi-layer hashmaps for state storage**, by Dankrad Feist, 2020, [[URL]](https://ethresear.ch/t/multi-layer-hashmaps-for-state-storage/7211/)
 
 [^Feld87]: **A Practical Scheme for Non-interactive Verifiable Secret Sharing**, by Feldman, Paul, *in FOCS '87*, 1987, [[URL]](https://doi.org/10.1109/SFCS.1987.4)
 
@@ -1077,6 +1101,8 @@
 [^GHMplus20]: **Random-index PIR and Applications**, by Craig Gentry and Shai Halevi and Bernardo Magri and Jesper Buus Nielsen and Sophia Yakoubov, *in Cryptology ePrint Archive, Report 2020/1248*, 2020, [[URL]](https://ia.cr/2020/1248)
 
 [^GHMR18]: **Registration-Based Encryption: Removing Private-Key Generator from IBE**, by Sanjam Garg and Mohammad Hajiabadi and Mohammad Mahmoody and Ahmadreza Rahimi, *in Cryptology ePrint Archive, Report 2018/919*, 2018, [[URL]](https://eprint.iacr.org/2018/919)
+
+[^GHR99]: **Secure Hash-and-Sign Signatures Without the Random Oracle**, by Gennaro, Rosario and Halevi, Shai and Rabin, Tal, *in Advances in Cryptology --- EUROCRYPT '99*, 1999
 
 [^GHW21]: **Jellyfish Merkle Tree**, by Zhenhuan Gao and Yuxuan Hu and Qinfan Wu, 2021, [[URL]](https://developers.diem.com/papers/jellyfish-merkle-tree/2021-01-14.pdf)
 
@@ -1210,11 +1236,15 @@
 
 [^GW20]: **A simplified polynomial protocol for lookup tables**, by Ariel Gabizon and Zachary J. Williamson, *in Cryptology ePrint Archive, Report 2020/315*, 2020, [[URL]](https://eprint.iacr.org/2020/315)
 
+[^GW20e]: **plookup: A simplified polynomial protocol for lookup tables**, by Ariel Gabizon and Zachary J.  Williamson, *in Cryptology ePrint Archive, Paper 2020/315*, 2020, [[URL]](https://eprint.iacr.org/2020/315)
+
 [^GW21]: **fflonk: a Fast-Fourier inspired verifier efficient version of PlonK**, by Ariel Gabizon and Zachary J. Williamson, *in Cryptology ePrint Archive, Report 2021/1167*, 2021, [[URL]](https://ia.cr/2021/1167)
 
 [^GWC19]: **PLONK: Permutations over Lagrange-bases for Oecumenical Noninteractive arguments of Knowledge**, by Ariel Gabizon and Zachary J. Williamson and Oana Ciobotaru, *in Cryptology ePrint Archive, Report 2019/953*, 2019, [[URL]](https://eprint.iacr.org/2019/953)
 
 [^GWYplus19]: **BlockMaze: An Efficient Privacy-Preserving Account-Model Blockchain Based on zk-SNARKs**, by Zhangshuang Guan and Zhiguo Wan and Yang Yang and Yan Zhou and Butian Huang, *in Cryptology ePrint Archive, Report 2019/1354*, 2019, [[URL]](https://eprint.iacr.org/2019/1354)
+
+[^GWZ15e]: **Computing Elliptic Curve Discrete Logarithms with Improved Baby-step Giant-step Algorithm**, by Steven D.  Galbraith and Ping Wang and Fangguo Zhang, *in Cryptology ePrint Archive, Paper 2015/605*, 2015, [[URL]](https://eprint.iacr.org/2015/605)
 
 [^Gabi19]: **AuroraLight: Improved prover efficiency and SRS size in a Sonic-like system**, by Ariel Gabizon, *in Cryptology ePrint Archive, Report 2019/601*, 2019, [[URL]](https://eprint.iacr.org/2019/601)
 
@@ -1311,6 +1341,8 @@
 [^HMW18]: **DFINITY Technology Overview Series Consensus System**, by Timo Hanke and Mahnush Movahedi and Dominic Williams, 2018, [[URL]](https://dfinity.org/pdf-viewer/pdfs/viewer?file=../library/dfinity-consensus.pdf)
 
 [^HP01]: **Securely combining public-key cryptosystems**, by Stuart Haber and Benny Pinkas, *in Proceedings of the 8th {ACM} conference on Computer and Communications Security  - {CCS} {\textquotesingle}01*, 2001, [[URL]](https://doi.org/10.1145%2F501983.502013)
+
+[^HR22e]: **Faster Sounder Succinct Arguments and IOPs**, by Justin Holmgren and Ron Rothblum, *in Cryptology ePrint Archive, Paper 2022/994*, 2022, [[URL]](https://eprint.iacr.org/2022/994)
 
 [^HS21]: **With a Little Help from My Friends: Constructing Practical Anonymous Credentials**, by Lucjan Hanzlik and Daniel Slamanig, *in Cryptology ePrint Archive, Report 2021/1419*, 2021, [[URL]](https://ia.cr/2021/1419)
 
@@ -1572,7 +1604,7 @@
 
 [^LMPR08]: **SWIFFT: A Modest Proposal for FFT Hashing**, by Lyubashevsky, Vadim and Micciancio, Daniele and Peikert, Chris and Rosen, Alon, *in Fast Software Encryption*, 2008
 
-[^LMPY16]: **Practical “Signatures with Efficient Protocols” from Simple Assumptions**, by Libert, Benoundefinedt and Mouhartem, Fabrice and Peters, Thomas and Yung, Moti, *in Proceedings of the 11th ACM on Asia Conference on Computer and Communications Security*, 2016, [[URL]](https://doi.org/10.1145/2897845.2897898)
+[^LMPY16]: **Practical “Signatures with Efficient Protocols” from Simple Assumptions**, by Libert, Benoit and Mouhartem, Fabrice and Peters, Thomas and Yung, Moti, *in Proceedings of the 11th ACM on Asia Conference on Computer and Communications Security*, 2016, [[URL]](https://doi.org/10.1145/2897845.2897898)
 
 [^LMR19e]: **Succinct Arguments for Bilinear Group Arithmetic: Practical Structure-Preserving Cryptography**, by Russell W. F. Lai and Giulio Malavolta and Viktoria Ronge, *in Cryptology ePrint Archive, Report 2019/969*, 2019, [[URL]](https://eprint.iacr.org/2019/969)
 
@@ -1590,11 +1622,15 @@
 
 [^LP04]: **A Proof of Yao's Protocol for Secure Two-Party Computation**, by Yehuda Lindell and Benny Pinkas, *in Cryptology ePrint Archive, Report 2004/175*, 2004, [[URL]](https://eprint.iacr.org/2004/175)
 
+[^LPR22]: **Pointproofs, Revisited**, by Benoît Libert and Alain Passelegue and Mahshid Riahinia, 2022, [[URL]](https://hal.science/hal-03903981/file/asiacrypt2022-final314.pdf)
+
 [^LRY16]: **Functional Commitment Schemes: From Polynomial Commitments to Pairing-Based Accumulators from Simple Assumptions**, by Benoît Libert and Somindu C. Ramanna and Moti Yung, *in 43rd International Colloquium on Automata, Languages, and Programming (ICALP 2016)*, 2016, [[URL]](http://drops.dagstuhl.de/opus/volltexte/2016/6309)
 
 [^LRY16e]: **Functional Commitment Schemes: From Polynomial Commitments to Pairing-Based Accumulators from Simple Assumptions**, by Benoît Libert and Somindu C. Ramanna and Moti Yung, *in Cryptology ePrint Archive, Report 2016/766*, 2016, [[URL]](https://eprint.iacr.org/2016/766)
 
 [^LS21e]: **Efficient Zero-Knowledge Argument in Discrete Logarithm Setting: Sublogarithmic Proof or Sublinear Verifier**, by Hyeonbum Lee and Jae Hong Seo, *in Cryptology ePrint Archive, Report 2021/1450*, 2021, [[URL]](https://ia.cr/2021/1450)
+
+[^LSJ23]: **Performance of EdDSA and BLS Signatures in Committee-Based Consensus**, by Zhuolun Li and Alberto Sonnino and Philipp Jovanovic, 2023
 
 [^LSTW21]: **Linear-time zero-knowledge SNARKs for R1CS**, by Jonathan Lee and Srinath Setty and Justin Thaler and Riad Wahby, *in Cryptology ePrint Archive, Report 2021/030*, 2021, [[URL]](https://eprint.iacr.org/2021/030)
 
@@ -1784,6 +1820,8 @@
 
 [^Noet15]: **Ring Signature Confidential Transactions for Monero**, by Shen Noether, *in Cryptology ePrint Archive, Report 2015/1098*, 2015, [[URL]](https://ia.cr/2015/1098)
 
+[^Noet15e]: **Ring Signature Confidential Transactions for Monero**, by Shen Noether, *in Cryptology ePrint Archive, Paper 2015/1098*, 2015, [[URL]](https://eprint.iacr.org/2015/1098)
+
 [^OB21e]: **Experimenting with Collaborative zk-SNARKs: Zero-Knowledge Proofs for Distributed Secrets**, by Alex Ozdemir and Dan Boneh, *in Cryptology ePrint Archive, Report 2021/1530*, 2021, [[URL]](https://ia.cr/2021/1530)
 
 [^OCGO96]: **The log-structured merge-tree (LSM-tree)**, by O'Neil, Patrick and Cheng, Edward and Gawlick, Dieter and O'Neil, Elizabeth, *in Acta Informatica*, 1996, [[URL]](https://doi.org/10.1007/s002360050048)
@@ -1870,7 +1908,7 @@
 
 [^Pail99]: **Public-Key Cryptosystems Based on Composite Degree Residuosity Classes**, by Paillier, Pascal, *in Advances in Cryptology --- EUROCRYPT '99*, 1999
 
-[^Papamanthou11]: **Cryptography for Efficiency: New Directions in Authenticated Data Structures**, by Charalampos Papamanthou, 2011, [[URL]](https://user.eng.umd.edu/~cpap/published/theses/cpap-phd.pdf)
+[^Papa11]: **Cryptography for Efficiency: New Directions in Authenticated Data Structures**, by Charalampos Papamanthou, 2011, [[URL]](https://user.eng.umd.edu/~cpap/published/theses/cpap-phd.pdf)
 
 [^Pass21]: **A Tutorial on Concurrent Zero Knowledge**, by Rafael Pass, *in Cryptology ePrint Archive, Report 2021/615*, 2021, [[URL]](https://eprint.iacr.org/2021/615)
 
@@ -1897,6 +1935,8 @@
 [^Porn20]: **Double-Odd Elliptic Curves**, by Thomas Pornin, *in Cryptology ePrint Archive, Report 2020/1558*, 2020, [[URL]](https://eprint.iacr.org/2020/1558)
 
 [^Pornin20]: **Efficient Elliptic Curve Operations On Microcontrollers With Finite Field Extensions**, by Thomas Pornin, *in Cryptology ePrint Archive, Report 2020/009*, 2020, [[URL]](https://eprint.iacr.org/2020/009)
+
+[^Pugh90]: **Skip lists: a probabilistic alternative to balanced trees**, by William Pugh, *in Communications of the {ACM}*, 1990, [[URL]](https://doi.org/10.1145%2F78973.78977)
 
 [^QZCP14]: **Streaming Authenticated Data Structures: Abstraction and Implementation**, by Yi Qian and Yupeng Zhang and Xi Chen and Charalampos Papamanthou, *in CCSW'14*, 2014, [[URL]](https://doi.org/10.1145%2F2664168.2664177)
 
@@ -1927,6 +1967,8 @@
 [^RP22e]: **Security Analysis of Coconut, an Attribute-Based Credential Scheme with Threshold Issuance**, by Alfredo Rial and Ania M. Piotrowska, *in Cryptology ePrint Archive, Report 2022/011*, 2022, [[URL]](https://ia.cr/2022/011)
 
 [^RPKplus18]: **mLSM: Making Authenticated Storage Faster in Ethereum**, by Pandian Raju and Soujanya Ponnapalli and Evan Kaminsky and Gilad Oved and Zachary Keener and Vijay Chidambaram and Ittai Abraham, *in 10th {USENIX} Workshop on Hot Topics in Storage and File Systems (HotStorage 18)*, 2018, [[URL]](https://www.usenix.org/conference/hotstorage18/presentation/raju)
+
+[^RR21e]: **Proving as Fast as Computing: Succinct Arguments with Constant Prover Overhead**, by Noga Ron-Zewi and Ron D.  Rothblum, *in Cryptology ePrint Archive, Paper 2021/1673*, 2021, [[URL]](https://eprint.iacr.org/2021/1673)
 
 [^RS04]: **Cryptographic Hash-Function Basics: Definitions, Implications and Separations for Preimage Resistance, Second-Preimage Resistance, and Collision Resistance**, by Phillip Rogaway and Thomas Shrimpton, *in Cryptology ePrint Archive, Report 2004/035*, 2004, [[URL]](https://eprint.iacr.org/2004/035)
 
@@ -2201,6 +2243,8 @@
 [^VB20]: **Dynamic Universal Accumulator with Batch Update over Bilinear Groups**, by Giuseppe Vitto and Alex Biryukov, *in Cryptology ePrint Archive, Report 2020/777*, 2020, [[URL]](https://eprint.iacr.org/2020/777)
 
 [^VGSplus21e]: **Plumo: An Ultralight Blockchain Client**, by Psi Vesely and Kobi Gurkan and Michael Straka and Ariel Gabizon and Philipp Jovanovic and Georgios Konstantopoulos and Asa Oines and Marek Olszewski and Eran Tromer, *in Cryptology ePrint Archive, Report 2021/1361*, 2021, [[URL]](https://ia.cr/2021/1361)
+
+[^VGSplus22ee]: **Plumo: An Ultralight Blockchain Client**, by Psi Vesely and Kobi Gurkan and Michael Straka and Ariel Gabizon and Philipp Jovanovic and Georgios Konstantopoulos and Asa Oines and Marek Olszewski and Eran Tromer, *in Cryptology ePrint Archive, Paper 2021/1361*, 2021, [[URL]](https://eprint.iacr.org/2021/1361)
 
 [^VK20]: **Groth16 SNARKs are Randomizable and (Weakly) Simulation Extractable**, by Markulf Kohlweiss and Mikhail Volkhov, *in Cryptology ePrint Archive, Report 2020/811*, 2020, [[URL]](https://eprint.iacr.org/2020/811)
 
