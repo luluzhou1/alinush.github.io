@@ -2,7 +2,7 @@
 title: What is a Merkle tree?
 tags:
 - cryptography
-- merkle-trees
+- merkle
 - vc
 - vector-commitments
 - security-proofs
