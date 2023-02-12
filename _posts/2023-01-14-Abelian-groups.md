@@ -188,6 +188,8 @@ Importantly, the inverse is in $\Zq$ because we have $0 \le -a < q \Leftrightarr
 
 ## Prize-winning stuff
 
+TODO: see cryptomat/ notes
+
 Example of Z_7^* and generators
 
 Could start by giving an example where if $g, g^a$ is given, and getting $a$ is hard, we could do something interesting.

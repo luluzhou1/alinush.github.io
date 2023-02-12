@@ -180,6 +180,23 @@ It is also not so great when the Merkle tree is stored on disk since it can doub
 
 Furthermore, actually achieving the best-case proof size complexity in an implementation can be tricky: the developer must efficiently batch the fetching of the two Merkle proofs from disk or memory, taking care never to fetch the same sibling hash twice (or waste I/O).
 
+## If you really _MUST_ sort your leaves...
+
+...and you want to maintain strong (non)membership soundness, then there is a simple way to fix your construction.
+
+All you have to do is store, inside each internal node of your tree, the minimum and maximum element in that node's subtree.
+
+Now, a Merkle proof, whether for membership or not, has to additionally reveal the minimum and maximum's along the proven path.
+Importantly, when hashing up to verify the Merkle proof, the verifier must ensure the revealed leaf and all min/max pairs revealed are consistent and hashed correctly as part of the verification. 
+
+This will of course further increase the proof size of your construction.
+It will also increase the complexity of implementing the verification procedure, since the min/max ranges have to be incorporated into the hashing and one must check that, for all revealed ranges in the proof, a parent's range encompasses their child's range.
+
+Feel free to consider this approach.
+You could try reproducing [the attack from above](#problem-1-security).
+You'll see that while you can present one proof, you'll have difficulty presenting the other because you will not be able to forge the authenticated min/max ranges.
+Thus, this construction has **strong (non)membership soundness**.
+
 ## Probably use a Merkle trie
 
 This deserves its own post, but here are the key reasons **you should probably use a Merkle trie**:
@@ -202,6 +219,39 @@ There are of course some disadvantages too, but I find them negligible:
 {: .info}
 In fact, some folks argue that the best trie implementation is via [critbit trees](https://cr.yp.to/critbit.html)[^alnoki].
 Unfortunately, I do not know enough about their benefits, especially when Merkleized, but this is probably very much worth exploring.
+
+## History of non-membership proofs
+
+Kocher[^Koch98] proves non-revocation of certificates via a sorted-leaves-like approach.
+His approach Merkelizes a list of sorted, non-revoked certificate ID ranges.
+Specifically, each leaf is a pair $(a, c)$ that says $a$ has been revoked but all certificates $b$ such that $b > a$ and $b < c$ have **not** been revoked.
+
+Thus, one can prove non-revocation of $b$ by revealing the leaf $(a, c)$ that encompasses the non-revoked ID $b \in (a, c)$.
+One can also prove revocation of $a$ by revealing the leaf $(a, c)$.
+
+<div align="center"><img style="width:100%" src="/pictures/koch98-crt.png" /></div>
+
+{: .info}
+A depiction of the sorted-leaves-like approach from Kocher's original paper[^BLL00].
+The set of elements being authenticated here (i.e., revoked certificates) is $S = \\{5, 12, 13, 15, 20, 50, 99\\}$.
+
+Of course, Kocher's approach is vulnerable to the same [mis-ordering attack we discussed above](#problem-1-security).
+(Furthermore, it also suffers from [inefficiency of updates](#problem-2-insertions-and-deletions).)
+
+Indeed, Buldas et al.[^BLL00] point out the mis-ordering attack and solve the problem by Merkelizing a binary search tree (BST) instead, which they baptize as an _authenticated search tree_.
+However, as far as I could tell, the paper does not describe how to efficiently update such authenticated search trees while keeping them balanced (i.e., solve [problem 2](#problem-2-insertions-and-deletions)).
+
+<div align="center"><img style="width:100%" src="/pictures/bll00-ast.png" /></div>
+
+{: .info}
+A depiction of the authenticated (binary) search tree approach from Buldas et al.'s original paper[^BLL00].
+The set of elements being authenticated here is $S = \\{10, 12, 30, 40, 42, 56, 70, 80\\}$.
+
+Fortunately, a few years earlier, Naor and Nissim[^NN98] had proposed an authenticated 2-3 tree construction which did solve the problem of efficient updates, addressing all problems highlighted in this post.
+Surprisingly, Naor and Nissim did not point out the mis-ordering attack on Kocher's work, only the inefficiency of updating it.
+Also surprisingly, there are no pictures of trees in their paper **:(**
+
+I still find Merkle tries much easier to implement, but I never tried implementing a 2-3 tree.
 
 ## Conclusion
 
