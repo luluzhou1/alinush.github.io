@@ -382,7 +382,7 @@
 
 [^BL90]: **Generalized Secret Sharing and Monotone Functions**, by Benaloh, Josh and Leichter, Jerry, *in Advances in Cryptology --- CRYPTO' 88*, 1990
 
-[^BLL00]: **Accountable certificate management using undeniable attestations**, by Ahto Buldas and Peeter Laud and Helger Lipmaa, *in Proceedings of the 7th {ACM} conference on Computer and communications security  - {CCS} {\textquotesingle}00*, 2000, [[URL]](https://doi.org/10.1145%2F352600.352604)
+[^BLL00]: **Accountable certificate management using undeniable attestations**, by Ahto Buldas and Peeter Laud and Helger Lipmaa, *in ACM CCS'00*, 2000, [[URL]](https://doi.org/10.1145%2F352600.352604)
 
 [^BLL02e]: **Eliminating Counterevidence with Applications to Accountable Certificate Management**, by Buldas, Ahto and Laud, Peeter and Lipmaa, Helger, 2002, [[URL]](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.21.5161&rep=rep1&type=pdf)
 
