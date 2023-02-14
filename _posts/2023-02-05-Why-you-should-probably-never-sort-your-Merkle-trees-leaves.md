@@ -201,6 +201,7 @@ Thus, this construction has **strong (non)membership soundness**.
 
 This deserves its own post, but here are the key reasons **you should probably use a Merkle trie**:
 
+ - Tries over $n$ elements have height $O(\log{n})$, assuming you compress tree paths, which you can! For example, see the CONIKS line of work[^MBBplus15].
  - Tries are an intuitive data structure
  - Tries do not require rotations to keep the tree well-balanced
  - Merkle tries offer **strong (non)membership soundness**
