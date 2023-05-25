@@ -507,6 +507,17 @@ test bls12_381::bench_g2_multi_exp_naive               ... bench:  35,272,720 ns
  - $\Gr_T$ elements are 12$\times$ larger
     + In general, for a pairing-friendly curve with _embedding degree_ $k$, they are $k$ times larger
 
+#### Other operations
+
+ - $\Gr_1$ multiplications (recall we are using multiplicative notation for groups, not additive notation)
+   - Normal: 565 nanoseconds (when both points are in projective $(X, Y)$ coordinates)
+   - Mixed: 438 nanoseconds (when first point is in projective coordinates, second is in affine $(X, Y, Z)$ coordinates)
+       - Faster, because saves one projective-to-affine conversion
+ - $\Gr_2$ multiplications
+   - Normal: 1,484 nanoseconds
+   - Mixed: 1,095 nanoseconds
+ - Hashing to $\Gr_1$ takes around 50 microseconds (not accounting for the extra time required to hash down larger messages using SHA2-256)
+
 #### Switching between $\Gr_1$ and $\Gr_2$
 
 When designing a pairing-based cryptographic protocol, you will want to carefully pick what to use $\Gr_1$ and what to use $\Gr_2$ for.
