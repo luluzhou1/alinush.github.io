@@ -162,7 +162,7 @@ $$\Pr
     \Gho \leftarrow \GenGho(\lambda),\\
     g\xleftarrow{\$} \Gho,\\
     \ell \leftarrow \Adv(\Gho, g) : \\
-    g^\ell = \Ghoid
+    \ell \ne 0 \wedge g^\ell = \Ghoid
 \end{bmatrix} \leq \negl(\lambda)$$
 
 _Biehl et al._ highlight that _"The order problem can only be difficult if the order of random elements in G is large with a very high probability."_[^BBHM02]
