@@ -196,7 +196,7 @@ Claims like these should be critically inspected.
 _One suggestion:_ Mentally-remove the word "science" (and its derivatives) from sentences.
 See if those sentences still sounds as convincing.
 If not, something is being left out and you could investigate.
-More and more, the word "science" is used authoritatively without as little as even a citation to the scientific works.
+More and more, the word "science" is used authoritatively without so much as a citation to the relevant scientific work(s).
  
 I do admire deGrasse Tyson's efforts to bring the scientific process to the masses.
 And I hope he means well in (mis)stating that "science is true".
