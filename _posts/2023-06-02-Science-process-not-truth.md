@@ -1,6 +1,6 @@
 ---
 tags: science feynman falsifiable
-title: Richard Feynman on the uncertainity of science
+title: "Science: Process, not Truth"
 article_header:
   type: cover
   image:
@@ -25,7 +25,7 @@ You can see the short video below:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/yRxx8pen6JY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-## Newsflash: science isn't "true"
+## The misconception: Science is not intrinsically "true"
 
 The way to conceptualize, and popularize[^neil], science is not as being "true" or "false."
 
@@ -33,8 +33,10 @@ Science is a **process** that we engage in to discover truths.
 And it often leads us astray[^galileo]$^,$[^aether], which is why this idea of "science being true" can be so misleading.
 
 Science is not a **belief** in any sense of the word. 
-While many religions might be based on belief, science is an entirely different beast.
-It requires not belief, but _experimentation_, _theory postulation_ and _theory falsification (or refinement)_.
+Although many religions might be based on belief, science is an entirely different beast.
+
+{: .success}
+Science requires not belief, but _experimentation_, _theory postulation_ and _theory falsification (or refinement)_.
 
 Those are fancy words, but here's an example everyone can understand:
  
@@ -50,20 +52,19 @@ Those are fancy words, but here's an example everyone can understand:
      - Therefore, your proposed theory above is actually false, since it does not hold for feathers.
      - Refine it as: _"When dropped on Earth, but in a vacuum, all objects accelerate with $9.8\ m/s^2$"_[^feathers]. 
 
-## Thinking of "science" as "true" is plain wrong
+### Richard Feynman on the uncertainty of science
 
-Why science is not simply just "true" is best explained by Richard Feynman, a physicist who some of you might know from his work on [quantum electrodynamics (QED)](https://en.wikipedia.org/wiki/Quantum_electrodynamics)[^nobel].
+Richard Feynman, a physicist you might know[^surely] from his work on [quantum electrodynamics (QED)](https://en.wikipedia.org/wiki/Quantum_electrodynamics)[^nobel], explains very beautifully:
 
-{: .info}
-Or, if you are like me, you know him more from his hilarious autobiographical books such as _"[Surely you're joking, Mr. Feynman! (Adventures of a Curious Character)](https://www.amazon.com/Surely-Feynman-Adventures-Curious-Character/dp/0393316041)"_.
+**What is inherent in science is not "truth" but "uncertainty."**
 
-In one of his famous physics lecture, Feynman simply and beautifully explains the **leap of faith** scientist must make when going from a **concrete** scientific experiment to a **general** law that predicts beyond what the experiment tested for.
+In one of his famous physics lecture, Feynman beautifully elucidates the **leap of faith** scientists must make when going from a **concrete** scientific experiment to a **general** law that predicts beyond what the experiment tested for.
 
 I include an excerpt below, but I find the [video](https://www.youtube.com/watch?v=tRxFf3p8Ia8) to be much more convincing (and entertaining) to watch: 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/tRxFf3p8Ia8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-So, Feynman asks:
+In the video above, Feynman genuinely asks the audience:
 
 {: .success}
 _Why are we able to extend our laws to regions that we're not sure?
@@ -73,7 +74,8 @@ How is it possible?
 Why are we so confident??_
 
 He then explains that extending such general laws is **the thing we must do** if we are to learn anything new beyond the outcome of the concrete experiment.
-The **price we pay**, of course, is we (scientists) stand to be proven wrong in the future:
+The **price we pay**, of course, is we (scientists) stand to be proven wrong in the future.
+In other words, the nature of scientific laws or theories is they are "uncertain," subject to be fully-falsified or partially-refined.
 
 {: .success}
 _It's not a **mistake** to say that [the law] is true in a region where you haven't looked yet.
@@ -106,13 +108,7 @@ And there's nothing wrong with that, that's the success, that's the point!
 And, uhh, that makes the science uncertain.
 If you thought before that science is certain, well, that's just an error on your part._
 
-Again, Feynman explains the necessity of generalizing "laws" (of physics) from observations made in an experiment.
-He stresses that, without generalizing such laws, one could never predict anything beyond what was observed in the experiment.
-He also reminds us the price we pay for this: the possibility that one might incorrectly generalize. 
-Therefore, science is, by its nature, "uncertain." 
-In other words, its laws or (falsifiable) theories are subject to refinement.
-
-## If science isn't "true", then what is it?
+## The solution: Understanding and engaging with science 
  
 Please don't be fooled into thinking "science is true" (whatever that's supposed to mean).
 Such claims are nonsensical.
@@ -142,9 +138,9 @@ Yet other scientists are people like you and me.
 And we make mistakes, are inherently ignorant or have perverse incentives[^books].
 
 {: .info}
-I recognize that engaging in the scientific process is a very high bar. I also recognize it's not clear how to reach consensus faster on scientific theories of high importance such as anthropogenic climate change. But I do know that preaching "science is true; believe science" is steadfast way of moving from scientific (falsifiable) territory into religious (unfalsifiable) territory. This would defeat the original goals science set out to solve: making sure we find out when we are wrong.
+I recognize that engaging in the scientific process is a very high bar to meet. I also recognize it's not clear how to reach consensus faster on scientific theories of high importance such as anthropogenic climate change. But I do know that preaching "science is true; believe science" is a steadfast way of moving from scientific (falsifiable) territory into religious (unfalsifiable) territory. This would defeat the original goals of science: **to ensure we find out when we are wrong and, as a result, get a bit closer to the truth.**
 
-## A digression on non-falsifiable (and thus non-scientific) theories
+### Digression on non-falsifiable (and thus non-scientific) theories
 
 The most widely-accepted philosophy of science comes from Karl Popper, who argued that a theory or statement is scientific only if it can, in principle, be empirically **falsified** (a.k.a., disproven). 
 In other words, if a theory does not admit any tests that could potentially show it to be false, then the theory is not scientific. 
@@ -227,12 +223,14 @@ In this sense, I hope this blog convinced you that knowing what the **scientific
 
 [^feathers]: This principle of air resistance was famously demonstrated, albeit on the Moon, by astronaut David Scott during the Apollo 15 mission.He dropped a feather and a hammer side by side on the Moon. Due to the absence of air resistance on the Moon, they hit the lunar surface at the same time, providing a visual demonstration of this principle.
 
-[^galileo]: For example, in some less enlightened parts of the word, the "scientific" belief used to be that Earth was in the centre of our solar system and that the Sun and stars revolved around it. Galileo Galilei was put into house arrest for the "heresy" of giving evidence that this theory may be wrong.
+[^galileo]: For example, in some less enlightened parts of the word, the "scientific" belief used to be that Earth was in the center of our solar system and that the Sun and stars revolved around it. Galileo Galilei was put into house arrest for the "heresy" of giving evidence that this theory may be wrong.
 
 [^idonot]: I do not. Just trying to make a point.
 
 [^neil]: I do want to recognize Neil deGrasse Tyson's amazing efforts in popularizing science by speaking about it in a particularly entertaining way. In a way, that's likely the problem behind his "science is true" claim: he did not carefully balance between entertainment and actual education.
 
 [^nobel]: Feynman, Julian Schwinger and Shin'ichirō Tomonaga were jointly awarded the Nobel Prize in 1965 for their contributions to QED.
+
+[^surely]: You might also know Feynman from his hilarious autobiographical books such as _"[Surely you're joking, Mr. Feynman! (Adventures of a Curious Character)](https://www.amazon.com/Surely-Feynman-Adventures-Curious-Character/dp/0393316041)"_.
 
 {% include refs.md %}
