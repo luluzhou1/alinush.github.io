@@ -218,7 +218,7 @@ I hope this blog post clearly articulated that science is a (fallible) process a
 
 [^feathers]: This principle of air resistance was famously demonstrated, albeit on the Moon, by astronaut David Scott during the Apollo 15 mission.He dropped a feather and a hammer side by side on the Moon. Due to the absence of air resistance on the Moon, they hit the lunar surface at the same time, providing a visual demonstration of this principle.
 
-[^galileo]: For example, in some less enlightened parts of the word, the "scientific" belief used to be that Earth was in the center of our solar system and that the Sun and stars revolved around it. Galileo Galilei was put into house arrest by the Roman Cathalic church for the "heresy" of giving evidence that this theory may be wrong.
+[^galileo]: For example, in some less enlightened parts of the word, the "scientific" belief used to be that Earth was in the center of our solar system and that the Sun and stars revolved around it. Galileo Galilei was put into house arrest by the Roman Catholic church for the "heresy" of giving evidence that this theory may be wrong.
 
 [^idonot]: I do not. Just trying to make a point.
 
