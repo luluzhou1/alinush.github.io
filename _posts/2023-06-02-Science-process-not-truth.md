@@ -201,16 +201,11 @@ More and more, the word "science" is used authoritatively without as little as e
 I do admire deGrasse Tyson's efforts to bring the scientific process to the masses.
 And I hope he means well in (mis)stating that "science is true".
 
-Nonetheless, his conflation of "truth" with "science" and the implication that one should "believe" science worries me.
-I find it borderline-dangerous in our increasingly-polarized society.
-I am of the opinion that less "beliefs" that separate us would be good.
-And turning science into another belief system would not serve anyone.
+Nonetheless, the conflation of "truth" with "science" and the implication that one should "believe" science worries me.
+I, for one, find it borderline-dangerous in our increasingly-polarized society, which is more and more filled with separating beliefs.
+Adding science to this list of beliefs would not serve anyone.
 
-As a parting note, remember that Galileo Galilei was put into house arrest by the Roman Catholic Church for falsifying the theory that the Earth is in the center of the solar system[^galileo].
-Less of that would be good too.
-
-In this sense, I hope this blog convinced you that knowing what the **scientific process** is helps: it is **one of our best tools to correct our mistakes and our ignorance.**
-
+I hope this blog post clearly articulated that science is a (fallible) process and must not be blindly trusted.
 
 ---
 
@@ -223,7 +218,7 @@ In this sense, I hope this blog convinced you that knowing what the **scientific
 
 [^feathers]: This principle of air resistance was famously demonstrated, albeit on the Moon, by astronaut David Scott during the Apollo 15 mission.He dropped a feather and a hammer side by side on the Moon. Due to the absence of air resistance on the Moon, they hit the lunar surface at the same time, providing a visual demonstration of this principle.
 
-[^galileo]: For example, in some less enlightened parts of the word, the "scientific" belief used to be that Earth was in the center of our solar system and that the Sun and stars revolved around it. Galileo Galilei was put into house arrest for the "heresy" of giving evidence that this theory may be wrong.
+[^galileo]: For example, in some less enlightened parts of the word, the "scientific" belief used to be that Earth was in the center of our solar system and that the Sun and stars revolved around it. Galileo Galilei was put into house arrest by the Roman Cathalic church for the "heresy" of giving evidence that this theory may be wrong.
 
 [^idonot]: I do not. Just trying to make a point.
 
