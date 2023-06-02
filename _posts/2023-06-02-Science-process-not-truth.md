@@ -27,10 +27,10 @@ You can see the short video below:
 
 ## The misconception: Science is not intrinsically "true"
 
-The way to conceptualize, and popularize[^neil], science is not as being "true" or "false."
+The way to conceptualize, and popularize[^neil], science is **not** as being "true" or "false."
 
 Science is a **process** that we engage in to discover truths. 
-And it often leads us astray[^galileo]$^,$[^aether], which is why this idea of "science being true" can be so misleading.
+And it often leads us astray[^galileo]$^,$[^aether], which is why the idea of "science being true" is at best misleading and at worst dangerous.
 
 Science is not a **belief** in any sense of the word. 
 Although many religions might be based on belief, science is an entirely different beast.
@@ -93,17 +93,18 @@ And that of course means that the science is uncertain!_
 \
 [...]
 \
-_We **always** must make statements about the regions that we haven't seen or there's no use in the whole business._
-\
-[...]
-\
+_We **always** must make statements about the regions that we haven't seen, or [else] there's no use in the whole business._
+
+Feynman reiterates on this point to make it stick:
+
+{: .success}
 _We do not know all the conditions that we need for an experiment!_
 \
 [...]
 \
 _So in order to have any utility at all to the science...
 In order not simply to describe an experiment that's just been done, we have to propose laws beyond their range.
-And there's nothing wrong with that, that's the success, that's the point!
+And there's nothing wrong with that. That's the success; that's the point!
 \
 And, uhh, that makes the science uncertain.
 If you thought before that science is certain, well, that's just an error on your part._
@@ -113,10 +114,10 @@ If you thought before that science is certain, well, that's just an error on you
 Please don't be fooled into thinking "science is true" (whatever that's supposed to mean).
 Such claims are nonsensical.
 
-First, because science is a process.
+First, they are nonsensical, because science is a process.
 Processes cannot be "true" or "false"; they are just a way of doing things.
 Second, because scientific theories are (mostly) **falsifiable**, which is a fancy way of saying there is room to prove them wrong.
-(i.e., they might actually be wrong!)
+(i.e., they might actually be false!)
 
 If one cannot rely on science "to be true", what should one do instead?
 
@@ -138,7 +139,7 @@ Yet other scientists are people like you and me.
 And we make mistakes, are inherently ignorant or have perverse incentives[^books].
 
 {: .info}
-I recognize that engaging in the scientific process is a very high bar to meet. I also recognize it's not clear how to reach consensus faster on scientific theories of high importance such as anthropogenic climate change. But I do know that preaching "science is true; believe science" is a steadfast way of moving from scientific (falsifiable) territory into religious (unfalsifiable) territory. This would defeat the original goals of science: **to ensure we find out when we are wrong and, as a result, get a bit closer to the truth.**
+I recognize that engaging in the scientific process is a very high bar to meet. I also recognize it's not clear how to reach consensus faster on scientific theories of high importance such as anthropogenic climate change. But I do know that preaching _"science is true; believe science"_ is a steadfast way of moving from scientific (falsifiable) territory into religious (unfalsifiable) territory. This would defeat the original goals of science: **to ensure we find out when we are wrong and, as a result, get a bit closer to the truth.**
 
 ### Digression on non-falsifiable (and thus non-scientific) theories
 
@@ -147,16 +148,15 @@ In other words, if a theory does not admit any tests that could potentially show
 
 But not all philosophers of science agree with Popper.
 Some argue that scientific theories must not only be _falsifiable_ but also **empirically-confirmed** to some degree. 
-Others argue that certain scientific theories are **unfalsifiable in practice** but remain scientific because they are part of broader theoretical framework that are testable as a whole.
-Or, because they might be falsifiable with better technology (e.g., string theory). 
-In this last case, indirect evidence, logical coherence, and the theory's ability to explain and predict phenomena play a crucial role is what gets the theory to be viewed as scientific.
-
+Others argue that scientific theories can be **unfalsifiable in practice** if they are part of broader theoretical frameworks that are testable as a whole.
+Or, if they might become falsifiable with future, better technology (e.g., string theory). 
+In this last case, indirect evidence, logical coherence, and the theory's ability to explain and predict phenomena is what gets the theory to be viewed as scientific.
 
 {: .info}
 In general, celebrating the scientific method does **not** mean we should dispense with all unfalsifiable theories.
 
 A **contrived-but-simple example**: your friend tells you _"There exist pink cars with yellow stripes!"_
-That is an unfalsifiable theory, so you should ignore everything coming out their mouth? 
+That is an unfalsifiable theory. Should ignore everything coming out their mouth next?
 
 Admittedly, it would be very difficult to convince your friend such cars don't exist: you'd have to show them that all cars in the universe don't match this description, which would (likely) take infinite time. 
 Yet the theory can be shown to be true by a trivial observation of such a car.
@@ -176,8 +176,8 @@ She said _"Okay, how about the theory that **love exists in the world**. Are you
 
 ## Conclusion
 
-Science is "not true". 
-It is a process that you and me could engage in.
+Science is not simply "true". 
+It is a process that you could engage in.
 It is not an axiom that you take for granted. 
 It is not an authority that you defer to.
 
@@ -187,22 +187,22 @@ However, there is a risk you'll be deceived by:
  - "scientific" "experts"
  - "scientific" evidence
  - "scientific" truth
- - claims that "science" shows [that X causes Y]
+ - claims that "science" shows that $X$ causes $Y$
  - claims that "studies" show
 
-Claims like these should be critically inspected.
+Sentences like these should be critically inspected.
 
 {: .success}
 _One suggestion:_ Mentally-remove the word "science" (and its derivatives) from sentences.
-See if those sentences still sounds as convincing.
-If not, something is being left out and you could investigate.
+See if those sentences still sound convincing.
+If they do not, something is being left out and you could investigate.
 More and more, the word "science" is used authoritatively without so much as a citation to the relevant scientific work(s).
  
 I do admire deGrasse Tyson's efforts to bring the scientific process to the masses.
 And I hope he means well in (mis)stating that "science is true".
 
 Nonetheless, the conflation of "truth" with "science" and the implication that one should "believe" science worries me.
-I, for one, find it borderline-dangerous in our increasingly-polarized society, which is more and more filled with separating beliefs.
+I, for one, find this borderline-dangerous in our increasingly-polarized society, which is more and more filled with separating beliefs.
 Adding science to this list of beliefs would not serve anyone.
 
 I hope this blog post clearly articulated that science is a (fallible) process and must not be blindly trusted.
