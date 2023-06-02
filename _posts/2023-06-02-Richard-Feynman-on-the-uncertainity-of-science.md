@@ -14,8 +14,9 @@ article_header:
 {: .success}
 **tl;dr:** _"If you thought before that science is certain, well, that's just an error on your part."_ -- [Richard Feynman](http://en.wikipedia.org/wiki/Richard_Feynman)
 
-I once ran into a [video](https://www.youtube.com/watch?v=yRxx8pen6JY) where Neil deGrasse Tyson 
-said the following (in relation to a debate where some of the debaters didn't "believe"[^believe] in global warming nor in evolution):
+<!--more-->
+
+I once ran into a [video](https://www.youtube.com/watch?v=yRxx8pen6JY) where Neil deGrasse Tyson, in relation to a debate with folks who didn't "believe"[^believe] in global warming nor in evolution, said the following:
 
 _"The good thing about science is that it's true whether or not you believe in it"_ -- **Neil deGrasse Tyson** 
 {: .error}
@@ -24,18 +25,18 @@ You can see the short video below:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/yRxx8pen6JY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-## Uhm, nope. No. Wrong. Sorry, Neil. I like you, but no.
+## Newsflash: science isn't "true"
 
-The way to think about, or popularize[^neil], science is not as being "true" or "false."
+The way to conceptualize, and popularize[^neil], science is not as being "true" or "false."
 
 Science is a **process** that we engage in to discover truths. 
 And it often leads us astray[^galileo]$^,$[^aether], which is why this idea of "science being true" can be so misleading.
 
 Science is not a **belief** in any sense of the word. 
 While many religions might be based on belief, science is an entirely different beast.
-It requires not belief, but experimentation, theory postulation and theory falsification (or refinement).
+It requires not belief, but _experimentation_, _theory postulation_ and _theory falsification (or refinement)_.
 
-For example:
+Those are fancy words, but here's an example everyone can understand:
  
  - **Experimentation**:
      - Drop apples of different sizes several times from the same height
@@ -49,30 +50,7 @@ For example:
      - Therefore, your proposed theory above is actually false, since it does not hold for feathers.
      - Refine it as: _"When dropped on Earth, but in a vacuum, all objects accelerate with $9.8\ m/s^2$"_[^feathers]. 
 
-## A digression on non-falsifiable (and thus non-scientific) theories
-
-The discussion above is **not** to say that unfalsifiable theories[^falsifiable] are junk and are to be dispensed with. 
-
-If your friend tells you, _"there exist pink cars with yellow stripes"_ that is an unfalsifiable theory. 
-But is it completely useless? 
-
-Well, it would be very difficult to convince your friend such cars don't exist, so maybe it is?
-To change their mind, your friend would have to be shown that all cars in the universe don't match this description, which would take (likely) infinite time. 
-
-Yet the theory can be shown to be true by a trivial observation of such a car.
-And indeed, I know a person with such a car (so I know the theory is true)![^idonot]
-
-Interestingly, **religious theories** (e.g., "there is a God") fall into the same category of unfalsifiable but potentially-true theories.
-And people who claim to have had direct experiences of the divine are firmly-convinced of their veracity.
-I no longer believe these theories should be thrown away (i.e., I recognize the limitations of my own form of consciousness). 
-Instead, I think that the alleged consequences of such theories should be acted upon carefully since, if they are false, there is no way to find out due to their unfalsifiable nature. (In layman terms, don't burn or kill people because they don't believe in the same things you do.)
-
-Here's a more palatable unfalsifiable theory, though harder to formalize.
-My wise mother once proposed this theory to me when I was being a smartass about how bad unfalsifiable theories can be.
-She said _"Okay, how about the theory that **love exists in the world**. Are you gonna throw that theory away too because it's unfalsifiable?"_.
-(If you don't know this theory to be true, then you have other problems and I wish I could give you a warm hug.)
-
-## Thinking of "science" as "true" is wrong
+## Thinking of "science" as "true" is plain wrong
 
 Why science is not simply just "true" is best explained by Richard Feynman, a physicist who some of you might know from his work on [quantum electrodynamics (QED)](https://en.wikipedia.org/wiki/Quantum_electrodynamics)[^nobel].
 
@@ -137,10 +115,14 @@ In other words, its laws or (falsifiable) theories are subject to refinement.
 ## If science isn't "true", then what is it?
  
 Please don't be fooled into thinking "science is true" (whatever that's supposed to mean).
-Such claims are nonsensical: science is a process and its theories are (mostly) **falsifiable**, which is a fancy way of saying there is room to prove them wrong.
-As explained before, this stands in contrast to **non-falsifiable** theories such as _"there exists a bird fully-colored with `#c23ea7`"_ or _"there exists a God"_.
+Such claims are nonsensical.
 
-Instead, do any one of two things.
+First, because science is a process.
+Processes cannot be "true" or "false"; they are just a way of doing things.
+Second, because scientific theories are (mostly) **falsifiable**, which is a fancy way of saying there is room to prove them wrong.
+(i.e., they might actually be wrong!)
+
+If one cannot rely on science "to be true", what should one do instead?
 
 The **first option** is to take a scientific theory and try to falsify it. 
 For example, Einstein picked Newton's laws of motion, showed they cannot properly describe motion for objects moving close to the speed of light and generalized them. 
@@ -159,6 +141,42 @@ If you must _"believe in <strike>science</strike> [the scientific process]"_, re
 Yet other scientists are people like you and me. 
 And we make mistakes, are inherently ignorant or have perverse incentives[^books].
 
+{: .info}
+I recognize that engaging in the scientific process is a very high bar. I also recognize it's not clear how to reach consensus faster on scientific theories of high importance such as anthropogenic climate change. But I do know that preaching "science is true; believe science" is steadfast way of moving from scientific (falsifiable) territory into religious (unfalsifiable) territory. This would defeat the original goals science set out to solve: making sure we find out when we are wrong.
+
+## A digression on non-falsifiable (and thus non-scientific) theories
+
+The most widely-accepted philosophy of science comes from Karl Popper, who argued that a theory or statement is scientific only if it can, in principle, be empirically **falsified** (a.k.a., disproven). 
+In other words, if a theory does not admit any tests that could potentially show it to be false, then the theory is not scientific. 
+
+But not all philosophers of science agree with Popper.
+Some argue that scientific theories must not only be _falsifiable_ but also **empirically-confirmed** to some degree. 
+Others argue that certain scientific theories are **unfalsifiable in practice** but remain scientific because they are part of broader theoretical framework that are testable as a whole.
+Or, because they might be falsifiable with better technology (e.g., string theory). 
+In this last case, indirect evidence, logical coherence, and the theory's ability to explain and predict phenomena play a crucial role is what gets the theory to be viewed as scientific.
+
+
+{: .info}
+In general, celebrating the scientific method does **not** mean we should dispense with all unfalsifiable theories.
+
+A **contrived-but-simple example**: your friend tells you _"There exist pink cars with yellow stripes!"_
+That is an unfalsifiable theory, so you should ignore everything coming out their mouth? 
+
+Admittedly, it would be very difficult to convince your friend such cars don't exist: you'd have to show them that all cars in the universe don't match this description, which would (likely) take infinite time. 
+Yet the theory can be shown to be true by a trivial observation of such a car.
+And indeed, I know a person with such a car (so I know the theory is true)![^idonot]
+
+The point is, we make unfalsifiable statements (theories) like this all the time and we get along just fine.
+
+Interestingly, **religious theories** (e.g., "there is a God") fall into the same category of unfalsifiable but potentially-true theories.
+In fact, people who claim to have had direct experiences of the divine are firmly-convinced of their veracity.
+I no longer believe these theories should be thrown away (i.e., I recognize the limitations of my own form of consciousness). 
+Instead, I think that the alleged consequences of such theories should be acted upon carefully since, if they are false, there is no way to find out due to their unfalsifiable nature. (In layman terms, don't burn or kill people because they don't believe in the same things you do.)
+
+Here's a more palatable unfalsifiable theory, though harder to formalize.
+My wise mother once proposed this theory to me when I was being a smartass about how bad unfalsifiable theories can be.
+She said _"Okay, how about the theory that **love exists in the world**. Are you gonna throw away that theory too because it's unfalsifiable?"_.
+(If you don't know this theory to be true, then you have other problems and I wish I could give you a warm hug.)
 
 ## Conclusion
 
@@ -174,45 +192,38 @@ However, there is a risk you'll be deceived by:
  - "scientific" evidence
  - "scientific" truth
  - claims that "science" shows [that X causes Y]
- - claims that "studies show"
+ - claims that "studies" show
 
 Claims like these should be critically inspected.
 
 {: .success}
-Ideally, try and mentally-remove the word "science" (and its derivatives) from sentences.
-See if they still sounds as convincing.
+_One suggestion:_ Mentally-remove the word "science" (and its derivatives) from sentences.
+See if those sentences still sounds as convincing.
 If not, something is being left out and you could investigate.
+More and more, the word "science" is used authoritatively without as little as even a citation to the scientific works.
  
 I do admire deGrasse Tyson's efforts to bring the scientific process to the masses.
 And I hope he means well in (mis)stating that "science is true".
 
 Nonetheless, his conflation of "truth" with "science" and the implication that one should "believe" science worries me.
 I find it borderline-dangerous in our increasingly-polarized society.
-Less "beliefs" that separate us would be good.
+I am of the opinion that less "beliefs" that separate us would be good.
+And turning science into another belief system would not serve anyone.
 
-Remember that Galileo Galilei was put into house arrest by the Roman Catholic Church for falsifying the theory that the Earth is in the center of the solar system[^galileo].
+As a parting note, remember that Galileo Galilei was put into house arrest by the Roman Catholic Church for falsifying the theory that the Earth is in the center of the solar system[^galileo].
 Less of that would be good too.
-And knowing what the **scientific process** is could help: it is **one of our best tools to correct our mistakes and our ignorance.**
 
---
+In this sense, I hope this blog convinced you that knowing what the **scientific process** is helps: it is **one of our best tools to correct our mistakes and our ignorance.**
 
-<!--more-->
-
-<p hidden>$$
-\def\Adv{\mathcal{A}}
-\def\Badv{\mathcal{B}}
-\def\vect#1{\mathbf{#1}}
-$$</p>
 
 ---
+
 [^aether]: Another falsified theory was the _"Aether Theory."_ Aether was believed to be a medium that filled space and enabled the propagation of light. The famous Michelson-Morley experiment in 1887 failed to detect aether, leading to the eventual acceptance of Einstein's theory of relativity, which does not require the existence of aether.
 
 
 [^believe]: I write "believe" in quotes because I find the usage of the term "believe" to be over-simplifying when it comes to how one should engage with complex scientific theories like the theory of anthropogenic climate change. In other words, to simply have to pick between _"Do you or do you not believe in global warming?"_ is a disastrous way of getting any clarity on the causes of global warming. A better way might be to ask someone _"What evidence is there for anthropogenic climate change and have you taken a close look at it?"_. (PS: This blog post is not about the climate change issue.)
 
 [^books]: Several books can be (and probably have been) written on the perverse incentives in academia, in scientific peer-review, science funding, etc.
-
-[^falsifiable]: The most widespread philosophy of science comes from Karl Popper, who argued that a theory or statement is scientific only if it can, in principle, be empirically falsified or disproven. In other words, if there's no way to test a theory such that it could potentially be shown to be false, then it's not a scientific theory. But not all philosophers of science agree with Popper. For example, some argue that scientific theories must not only be falsifiable but also empirically confirmed to some degree. Others argue that certain scientific theories are unfalsifiable in practice but remain scientific because they are part of broader theoretical framework that are testable as a whole and/or because they might be falsifiable with better technology (e.g., string theory). In this last case, indirect evidence, logical coherence, and the theory's ability to explain and predict phenomena play a crucial role is what gets the theory to be viewed as scientific.
 
 [^feathers]: This principle of air resistance was famously demonstrated, albeit on the Moon, by astronaut David Scott during the Apollo 15 mission.He dropped a feather and a hammer side by side on the Moon. Due to the absence of air resistance on the Moon, they hit the lunar surface at the same time, providing a visual demonstration of this principle.
 
