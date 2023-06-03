@@ -156,7 +156,8 @@ In this last case, indirect evidence, logical coherence, and the theory's abilit
 In general, celebrating the scientific method does **not** mean we should dispense with all unfalsifiable theories.
 
 A **contrived-but-simple example**: your friend tells you _"There exist pink cars with yellow stripes!"_
-That is an unfalsifiable theory. Should ignore everything coming out their mouth next?
+That is an unfalsifiable theory.
+Should you ignore everything coming out of their mouth next?
 
 Admittedly, it would be very difficult to convince your friend such cars don't exist: you'd have to show them that all cars in the universe don't match this description, which would (likely) take infinite time. 
 Yet the theory can be shown to be true by a trivial observation of such a car.
