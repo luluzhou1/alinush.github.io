@@ -200,7 +200,7 @@ If they do not, something is being left out and you could investigate.
 More and more, the word "science" is used authoritatively without so much as a citation to the relevant scientific work(s).
  
 I do admire deGrasse Tyson's efforts to bring the scientific process to the masses.
-And I hope he means well in (mis)stating that "science is true".
+And I'm sure he meant well in (mis)stating that "science is true" (e.g., perhaps he meant to convey, in an entertaining way, his own confidence in the scientific process).
 
 Nonetheless, the conflation of "truth" with "science" and the implication that one should "believe" science worries me.
 I, for one, find this borderline-dangerous in our increasingly-polarized society, which is more and more filled with separating beliefs.
