@@ -57,6 +57,15 @@ problem, but more interesting than how you solved the problem:
  - What does this mean?
  - What should people take out of this?
 
+### Don't
+
+ - Have more than one graph per slide
+    + Graphs are complex to understand for your audience.
+    + (They may not be so for you. But that's irrelevant.)
+ - Use units that are too small: e.g., 120000 ms instead of 2 minutes.
+ - Use units inconsistently: e.g., 1024 bytes on one slide, 1 KiB on the other.
+
+
 How to _deliver_ a presentation
 -------------------------------
 
@@ -78,8 +87,7 @@ Hardest thing, most of you will fail on:
      that.
    + Conclusion of your slide should be on the slide.
    + Know the conclusions for each slide.
-   + Basically your "topic sentence" now becomes your ending concluding sentence
-     (opposite to normal writing).
+   + Basically your "topic sentence" now becomes your ending concluding sentence (opposite to normal writing).
  - Pause after conclusions, let yourself and the audience breathe.
    + One reason you don't do this is because you're concerned about time, or
      you can't wait to move on to the next slide.
@@ -126,9 +134,12 @@ Make your talk self-contained, that's the easiest way to present.
    + How do you say something is complicated?
      - Personal stories.
 
-**Don't:**
+### Don't
 
- - Be nervous. Okay in the beginning, but shake it off.
+ - Be nervous.
+    + Okay in the beginning, but shake it off.
  - Stare down at the floor.
- - Keep your hand in your pocket(s). My personal preference, at least.
+ - Keep your hand in your pocket(s). (My personal preference, at least.)
+ - If presenting graphs, do not explain them in detail. Instead, just say "this looks very good as you can see."
+ - If you have four graphs in one slide, only refer to one of them. Be sure to ignore the others.
 
