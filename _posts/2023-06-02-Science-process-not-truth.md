@@ -39,18 +39,28 @@ Although many religions might be based on belief, science is an entirely differe
 Science requires not belief, but _experimentation_, _theory postulation_ and _theory falsification (or refinement)_.
 
 Those are fancy words, but here's an example everyone can understand:
+
+**Question:** How might we find out if there is a universal acceleration that falling objects have? 
+Is it $5\ m/s^2$?
+Is it $10\ m/s^2$?
+
+**Poor answer:** We could just **blindly** accept whatever answer Neil DeGrasse Tyson gives us. After all _"science is true whether you believe it or not,"_ no?
+
+**Better answer:** No.
+That is a kind of "scientism" akin to religious belief.
+Instead, we could engage in the scientific process:
  
  - **Experimentation**:
      - Drop apples of different sizes several times from the same height
      - Measure the time they take to fall down
-     - Compute each apple's acceleration 
+     - Compute each apple's acceleration
      - Observe that all apples, no matter their size, have the same acceleration $g\approx 9.8\ m/s^2$
  - **Theory postulation**:
      - Propose a theory that says, _"When dropped on Earth, all objects accelerate with $9.8\ m/s^2$"_.
  - **Falsification**:
      - Notice that, for some objects like a light feather, they drop with a smaller acceleration.
      - Therefore, your proposed theory above is actually false, since it does not hold for feathers.
-     - Refine it as: _"When dropped on Earth, but in a vacuum, all objects accelerate with $9.8\ m/s^2$"_[^feathers]. 
+     - Refine it as: _"When dropped **in a vacuum** on Earth all objects accelerate with $9.8\ m/s^2$"_[^feathers]. 
 
 ### Richard Feynman on the uncertainty of science
 
@@ -75,7 +85,7 @@ Why are we so confident??_
 
 He then explains that extending such general laws is **the thing we must do** if we are to learn anything new beyond the outcome of the concrete experiment.
 The **price we pay**, of course, is we (scientists) stand to be proven wrong in the future.
-In other words, the nature of scientific laws or theories is they are "uncertain," subject to be fully-falsified or partially-refined.
+In other words, the nature of scientific laws or theories is they are **uncertain**, subject to be fully-falsified or partially-refined.
 
 {: .success}
 _It's not a **mistake** to say that [the law] is true in a region where you haven't looked yet.
@@ -148,8 +158,8 @@ In other words, if a theory does not admit any tests that could potentially show
 
 But not all philosophers of science agree with Popper.
 Some argue that scientific theories must not only be _falsifiable_ but also **empirically-confirmed** to some degree. 
-Others argue that scientific theories can be **unfalsifiable in practice** if they are part of broader theoretical frameworks that are testable as a whole.
-Or, if they might become falsifiable with future, better technology (e.g., string theory). 
+Others argue that scientific theories can be **unfalsifiable in practice** as long as they are part of broader theoretical frameworks that are testable as a whole.
+Or, as long as these theories could become falsifiable with future, better technology (e.g., string theory). 
 In this last case, indirect evidence, logical coherence, and the theory's ability to explain and predict phenomena is what gets the theory to be viewed as scientific.
 
 {: .info}
@@ -194,7 +204,7 @@ However, there is a risk you'll be deceived by:
 Sentences like these should be critically inspected.
 
 {: .success}
-_One suggestion:_ Mentally-remove the word "science" (and its derivatives) from sentences.
+**Thumb rule:** Mentally-remove the word "science" (and its derivatives) from sentences.
 See if those sentences still sound convincing.
 If they do not, something is being left out and you could investigate.
 More and more, the word "science" is used authoritatively without so much as a citation to the relevant scientific work(s).
