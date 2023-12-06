@@ -7,7 +7,7 @@ titles:
 key: page-talks
 ---
 
-#### Sensibly-anonymous payments without zkSNARKs (SBC'23 and Stanford)
+#### UTT: Sensibly-anonymous payments without zkSNARKs (SBC'23 and Stanford)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ktKzDz5dZ1I?si=t-OtFUAm3SA0RLsc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
