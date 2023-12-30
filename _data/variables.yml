@@ -63,5 +63,6 @@ sources:
     valine: 'https//unpkg.com/valine/dist/Valine.min.js'
     #mathjax: 'https://unpkg.com/mathjax@2.7.4/unpacked/MathJax.js?config=TeX-MML-AM_CHTML' # seems to be flaky
     #mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.4/unpacked/MathJax.js' # does not work
-    mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.4/MathJax.js?config=default'
+    #mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.4/MathJax.js?config=default'
+    mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
     mermaid: 'https://unpkg.com/mermaid@8.0.0-rc.8/dist/mermaid.min.js'
