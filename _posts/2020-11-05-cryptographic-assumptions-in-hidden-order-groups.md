@@ -184,7 +184,7 @@ The Extended Euclidean Algorithm (EEA) can be used to obtain the inverse $a = e^
 
 $$ae + b\ell = 1 \Rightarrow a = (1 - b\ell)/e$$
 
-Also, note that that $u^e = g$ and so $(u, \ell)$ are a solution for the Strong RSA problem $g$:
+Also, note that that $u^e = g$ and so $(u, e)$ is a solution to the Strong RSA problem $g$:
 
 $$u^e = (g^{e^{-1} \bmod \ell})^e = (g^\frac{1-b\ell}{e})^e = g^{1-b\ell} = g/(g^{\ell})^b= g$$
 
@@ -299,6 +299,10 @@ Stephanie Blanda gives an [intuitive explanation](https://blogs.ams.org/mathgrad
 
 _Theorem:_ For all $a < N$, $\exists r\in \Z$, such that $a^r = 1 \pmod N$ iff. $\gcd(a, N)=1$ (see [here](https://proofwiki.org/wiki/Integer_has_Multiplicative_Order_Modulo_n_iff_Coprime_to_n)).
 <!-- TODO: Eh, why did I write this down again? -->
+
+#### Acknowledgements
+
+Big thanks to _Munshi Rejwan Ala Muid_ for pointing out a typo in the _"Strong RSA assumption implies OA"_ subsection.
 
 [^ellprime]: One way to see why $g^{\ell'} = \Ghoid$ is to note that $g^{\ell} = g^{\ell' e} = \Ghoid$ and, since $e$ does not divide $\Ghosz$ and $e$ is prime, it follows that $\gcd(e, \Ghosz)$ = 1. Thus, $e$ can be inverted. Raising $g^{\ell' e} = \Ghoid$ to the inverse $e^{-1}$ gives $g^{\ell'} = \Ghoid$.
 [^reduction]: A _reduction_ from the RSA problem to the order problem is an algorithm that solves the RSA problem given an oracle for solving the order problem.
