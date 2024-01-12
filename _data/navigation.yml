@@ -1,7 +1,7 @@
 header:
   - titles:
       # @start locale config
-      en      : &EN       Posts
+      en      : &EN       Posts & Tags
       en-GB   : *EN
       en-US   : *EN
       en-CA   : *EN

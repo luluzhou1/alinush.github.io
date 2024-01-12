@@ -91,7 +91,7 @@ In his free time, he likes to play piano, ride motorcycles to coffee shops, and 
 Slowly.
 He also enjoys travelling, but only to destinations with total solar eclipses.
 Naturally, he dislikes clouds.
-(Please join him in Antarctica, in 2021.)
+(Please join him <strike>in Antarctica, in 2021; or, in Winnemucca, Nevada on October 14th, 2023</strike> in Austin, Texas, on April 8th, 2024.)
 
 <strike><b>Alin might buy a motorcycle and risk the few, still-functioning limbs in his body.
 Someone should convince him not to do this.</b></strike>
