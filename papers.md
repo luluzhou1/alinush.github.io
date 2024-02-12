@@ -7,6 +7,8 @@ titles:
 key: page-papers
 ---
 
+**Distributed Randomness using Weighted VRFs**, by Sourav Das and Benny Pinkas and Alin Tomescu and Zhuolun Xiang, *in Cryptology ePrint Archive, Paper 2024/198*, 2024, *in submission*, <a class="button button--success button--rounded button--sm" href="https://eprint.iacr.org/2024/198"><i class="fas fa-download"></i>PDF</a>
+
 **A New Paradigm for Verifiable Secret Sharing**, Sourav Das, Zhuolun Xiang, Alin Tomescu, Alexander Spiegelman, Benny Pinkas, Ling Ren, *in submission*, <a class="button button--success button--rounded button--sm" href="https://eprint.iacr.org/2023/1196.pdf"><i class="fas fa-download"></i>PDF</a>
 
 **UTT: Decentralized Ecash with Accountable Privacy**, Alin Tomescu, Adithya Bhat, Benny Applebaum, Ittai Abraham, Guy Gueta, Benny Pinkas, Avishay Yanai, _in submission_, <a class="button button--success button--rounded button--sm" href="https://eprint.iacr.org/2022/452.pdf"><i class="fas fa-download"></i>PDF</a>, [Code](https://github.com/definitelyNotFBI/utt), [SBC'23 slides](https://docs.google.com/presentation/d/1gROYWWXabwqbxFVGLV4KKOMuQbmvoGjqo502I0W6W7Q/edit#slide=id.g277ae8ab1df_0_0), [a16z slides](https://docs.google.com/presentation/d/1frfS8K7RIDQIej4-pz9YSta5dH7dboyTssnvpIjpIHo/edit?usp=sharing), [Yale slides](https://docs.google.com/presentation/d/1WW7qqnM8GCX7x8pLGk2IbB1xc1TZPO6jTCtRmXYpbfY/edit?usp=sharing)
