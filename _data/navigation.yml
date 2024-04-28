@@ -122,6 +122,10 @@ cryptomat:
 
       - title: KZG polynomial commitments
         url: /2020/05/06/kzg-polynomial-commitments.html
+  - title: Secret sharing
+    children:
+      - title: How to reshare a secret
+        url: 2024/04/26/How-to-reshare-a-secret.html
 
   #- title: (Zero-Knowledge) Proof Systems
   #  children:

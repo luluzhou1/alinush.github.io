@@ -7,6 +7,7 @@ article_header:
   image:
     src: /pictures/baam-thanos-does-a-chinup.gif
 ---
+
 {: .info}
 **tl;dr:** We "authenticate" a polynomial multipoint evaluation using Kate-Zaverucha-Goldberg (KZG) commitments.
 This gives a new way to precompute $n$ proofs on a degree $t$ polynomial in $\Theta(n\log{t})$ time, rather than $\Theta(nt)$.
