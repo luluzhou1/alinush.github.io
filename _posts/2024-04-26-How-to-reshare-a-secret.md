@@ -8,7 +8,7 @@ published: true
 ---
 
 {: .info}
-**tl;dr:** A $t$-out-of-$n$ sharing of $s$ can be reshared as a $t'$-out-of-$n'$ sharing. 
+**tl;dr:** A $t$-out-of-$n$ sharing of $s$ can be reshared as a $t'$-out-of-$n'$. 
 How?
 Each _old_ player $t'$-out-of-$n'$ reshares their share with the **new** players. 
 Let $H$ denote an agreed-upon set of $\ge t$ _old_ players who (re)shared correctly. 
@@ -24,10 +24,12 @@ $$</p>
 
 ## Preliminaries: How to share a secret
 
-### Shamir secret sharing
-Recall that a secret $\color{green}{s}\in \Zp$ is $t$-out-of-$n$ secret-shared as follows:
+This article assumes familiarity with _Shamir secret sharing_[^Shamir79], a technique that allows a **dealer** to "split up" a **secret** $s$ amongst $n$ **players** such that any subset of size $\ge t$ can reconstruct $s$ yet no subset of size $<t$ learns _anything_ about the secret.
 
- 1. The dealer encodes $s$ as the 0th coefficient in a random degree-$(t-1)$ polynomial $\color{green}{f(X)}$:
+### Shamir secret sharing
+Recall that a secret ${\color{green}s}\in \Zp$ is $t$-out-of-$n$ secret-shared as follows:
+
+ 1. The **dealer** encodes $s$ as the 0th coefficient in a random degree-$(t-1)$ polynomial $\color{green}{f(X)}$:
 \begin{align}
     f(X) &= s + \sum_{k=1}^{t-1} f_k X^k,\ \text{where each}\ f_k\randget \Zp
 \end{align}
@@ -46,7 +48,7 @@ Recall the definition of a [Lagrange polynomial](/2022/07/28/lagrange-interpolat
     \forall i\in[n],
     \color{green}{\lagr_i(X)} &= \prod_{k\in T, k\ne i} \frac{X - k}{i - k}
 \end{align}
-The interesting properties of $L_i^T(X)$ are that:
+The relevant properties of $L_i^T(X)$ are that:
 \begin{align}
     L_i(i) &= 1,\forall i \in T\\\\\
     L_i(j) &= 0,\forall i, j\in T, i\ne j\\\\\
@@ -61,15 +63,14 @@ Any subset $T\subseteq[n]$ of $t$ or more players can reconstruct $s$ by combini
 
 ## How to reshare a secret
 
-Suppose the _old_ players who have a $t$-out-of-$n$ sharing of $s$ want to **reshare** s with a set of $\color{green}{n'}$ **new** players such that any $\color{green}{t'}$ players can reconstruct $s$.
+Suppose the _old_ players, who have a $t$-out-of-$n$ sharing of $s$, want to **reshare** s with a set of $\color{green}{n'}$ **new** players such that any $\color{green}{t'}$ players can reconstruct $s$.
 
-In other words, they want to $t'$-out-of-$n'$ reshare $s$!
+In other words, they want to $t'$-out-of-$n'$ reshare $s$.
 
 Importantly, they want to do this without leaking $s$ or any info about the current $t$-out-of-$n$ sharing of $s$.
-A technique for this was (originally?) introduced by Cachin et al.[^CKLS02] and works as follows:
+A technique for this was (originally?) introduced by Cachin et al.[^CKLS02] and involves four steps:
 
-1. First, each _old_ player $i$ first _"shares their share"_ with the **new** $n'$ players.
-Specifically, _old_ player $i$ picks a degree-$(t'-1)$ polynomial $\color{green}{r_i(X)}$ that shares their $s_i$:
+1. Each _old_ player $i$ first _"shares their share"_ with the **new** $n'$ players: i.e., randomly sample a degree-$(t'-1)$ polynomial $\color{green}{r_i(X)}$ that shares their $s_i$:
 \begin{align}
 \color{green}{r_i(X)} &= s_i +  \sum_{k=1}^{t'-1} {\color{green}r_{i,k}} X^k,\ \text{where each}\ r_{i,k}\randget \Zp\\
 \end{align}
@@ -78,11 +79,11 @@ Specifically, _old_ player $i$ picks a degree-$(t'-1)$ polynomial $\color{green}
 \begin{align}
 {\color{green}z_{i,j}} = r_i(j)
 \end{align}
-Then, each old player $i$ will send $z_{i,j}$ to each new player $j\in [n']$.
+Then, each _old_ player $i$ will send $z_{i,j}$ to each **new** player $j\in [n']$.
 
-3. The **new** players agree[^consensus] on a set $\color{green}{H}$ of _old_ players that correctly shared their share $s_i$ (i.e., for all $i \in H$, every new player $j\in[n']$ has their $z_{i,j}$).
+3. The **new** players agree[^consensus] on a set $\color{green}{H}$ of _old_ players who correctly-shared their share $s_i$ (i.e., for all _old_ players $i \in H$, at least $t'$ **new** players received their correct $z_{i,j}$).
 
-4. Each new player $j\in [n']$ interpolates their share $\color{green}{z_j}$ of $s$ as:
+4. Each **new** player $j\in [n']$ interpolates their share $\color{green}{z_j}$ of $s$ as:
 \begin{align}
     \label{eq:newshare}
     {\color{green}z_j} 
@@ -90,7 +91,7 @@ Then, each old player $i$ will send $z_{i,j}$ to each new player $j\in [n']$.
         &= \sum_{i\in H} \lagr_i^H(0) r_i(j)
 \end{align}
 
-This is **SUCH A BEAUTIFUL PROTOCOL!!**!!
+And voilà: **SUCH A BEAUTIFUL, SIMPLE PROTOCOL** for secret **re**sharing.
 
 ### Why does this work?
 
@@ -104,7 +105,8 @@ r(x) &= \sum_{i\in H} \lagr_i^H(0) r_i(X)\\\\\
     &\stackrel{\mathsf{def}}{=} s + \sum_{k=1}^{t'-1} {\color{green}r_k} X^k
 \end{align}
 
-In other words, the $r_k$'s are the coefficients of the polynomial obtained from the linear combination of the $r_i(X)$'s by the Lagrange coefficients $\lagr_i^H(0)$.
+In other words, $[s, r_1, r_2,\ldots,r_{t'-1}]$ are the coefficients of the polynomial obtained from the linear combination of the $r_i(X)$'s by the Lagrange coefficients $\lagr_i^H(0)$.
+
 In more detail:
 \begin{align}
 r(x) &= s + \left(\begin{matrix}
