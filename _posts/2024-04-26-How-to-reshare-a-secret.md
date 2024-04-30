@@ -68,7 +68,7 @@ Suppose the _old_ players, who have a $t$-out-of-$n$ sharing of $s$, want to **r
 In other words, they want to $t'$-out-of-$n'$ reshare $s$.
 
 Importantly, they want to do this without leaking $s$ or any info about the current $t$-out-of-$n$ sharing of $s$.
-A technique for this was (originally?) introduced by Cachin et al.[^CKLS02] and involves four steps:
+A technique for this, whose origins are (likely?) in the BGW paper[^BGW88], is described by Cachin et al.[^CKLS02] and involves four steps:
 
 1. Each _old_ player $i$ first _"shares their share"_ with the **new** $n'$ players: i.e., randomly sample a degree-$(t'-1)$ polynomial $\color{green}{r_i(X)}$ that shares their $s_i$:
 \begin{align}
@@ -81,7 +81,7 @@ A technique for this was (originally?) introduced by Cachin et al.[^CKLS02] and 
 \end{align}
 Then, each _old_ player $i$ will send $z_{i,j}$ to each **new** player $j\in [n']$.
 
-3. The **new** players agree[^consensus] on a set $\color{green}{H}$ of _old_ players who correctly-shared their share $s_i$ (i.e., for all _old_ players $i \in H$, at least $t'$ **new** players received their correct $z_{i,j}$).
+3. The **new** players agree[^consensus] on a set $\color{green}{H}$ of _old_ players who correctly-shared their share $s_i$.
 
 4. Each **new** player $j\in [n']$ interpolates their share $\color{green}{z_j}$ of $s$ as:
 \begin{align}
@@ -133,12 +133,16 @@ Then, we can rewrite the above as:
 r(x) &\stackrel{\mathsf{def}}{=} s + \sum_{k=1}^{t'-1} r_k X^k
 \end{align}
 
-And, as we saw in Equation \ref{eq:newshare} above, any **new** player $i\in[n']$ can get their share of $r(X)$ via:
+And, as we saw in Equation \ref{eq:newshare} above, any **new** player $j\in[n']$ can get their share of $r(X)$ via:
 \begin{align}
 z_j
     &= \sum_{i\in H} \lagr_i^H(0) r_i(j)\\\\\
     &= r(j)
 \end{align}
+
+## Acknowledgements
+
+Big thanks to [Benny Pinkas](https://twitter.com/bennypinkas) for pointing me to the BGW paper[^BGW88] and for pointing out subtleties in what it means for an old player to correctly share their share.
 
 [^consensus]: This step is non-trivial and is where most protocols work hard to achieve efficiency. For example, see [^CKLS02]. Publicly-verifiable secret sharing (PVSS) on a public bulletin board such as a blockchain is a simple (albeit naive) way of achieving this: there will be $n$ PVSS transcripts, one for each-reshared $s_i$, and everyone can agree on the set $H$ of valid transcripts.
 
