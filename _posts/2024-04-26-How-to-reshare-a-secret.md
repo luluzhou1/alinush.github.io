@@ -3,8 +3,8 @@ tags: cryptography, secret-sharing
 title: How to reshare a secret
 #date: 2020-11-05 20:45:59
 published: true
-#sidebar:
-#    nav: cryptomat
+sidebar:
+    nav: cryptomat
 ---
 
 {: .info}
@@ -81,7 +81,8 @@ A technique for this, whose origins are (likely?) in the BGW paper[^BGW88], is d
 \end{align}
 Then, each _old_ player $i$ will send $z_{i,j}$ to each **new** player $j\in [n']$.
 
-3. The **new** players agree[^consensus] on a set $\color{green}{H}$ of _old_ players who correctly-shared their share $s_i$.
+3. The **new** players agree[^consensus] on a set $\color{green}{H}$ of _old_ players who correctly-shared their share $s_i$ with all $n'$ **new** players. 
+ - This is certainly sufficient and easily achievable via PVSS[^consensus], but may not be necessary.
 
 4. Each **new** player $j\in [n']$ interpolates their share $\color{green}{z_j}$ of $s$ as:
 \begin{align}
