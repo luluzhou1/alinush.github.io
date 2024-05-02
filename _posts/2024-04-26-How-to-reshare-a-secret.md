@@ -1,5 +1,7 @@
 ---
-tags: cryptography, secret-sharing
+tags: 
+ - secret sharing
+ - shamir
 title: How to reshare a secret
 #date: 2020-11-05 20:45:59
 published: true

@@ -1,16 +1,14 @@
 ---
-tags: 
-- vc
-- vector commitments
-title: "Hyperproofs: Faster Merkle proof aggregation without SNARKs"
+tags: ecdsa signatures
+title: It's 2024, are you still using ECDSA?
 #date: 2020-11-05 20:45:59
-#published: false
+published: false
 #sidebar:
 #    nav: cryptomat
 ---
 
 {: .info}
-**tl;dr:** For now, see our Hyperproofs paper[^SCPplus22].
+**tl;dr:** Write an intro paragraph here.
 
 <!--more-->
 

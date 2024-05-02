@@ -4,8 +4,8 @@ tags:
 - cryptography
 - merkle
 - vc
-- vector-commitments
-- security-proofs
+- vector commitments
+- security proofs
 author: Alin Tomescu
 ---
 

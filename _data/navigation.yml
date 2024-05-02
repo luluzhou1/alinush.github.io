@@ -125,7 +125,11 @@ cryptomat:
   - title: Secret sharing
     children:
       - title: How to reshare a secret
-        url: 2024/04/26/How-to-reshare-a-secret.html
+        url: /2024/04/26/How-to-reshare-a-secret.html
+  - title: Signatures
+    children:
+      - title: Baird et al.'s unique threshold signature scheme
+        url: /2024/05/01/baird-et-al-unique-threshold-signature-scheme.html
 
   #- title: (Zero-Knowledge) Proof Systems
   #  children:

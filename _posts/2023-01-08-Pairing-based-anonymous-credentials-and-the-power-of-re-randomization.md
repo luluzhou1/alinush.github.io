@@ -1,5 +1,6 @@
 ---
 tags:
+ - bilinear maps
 title: Pairing-based anonymous credentials and the power of re-randomization
 #sidebar:
 #    nav: cryptomat

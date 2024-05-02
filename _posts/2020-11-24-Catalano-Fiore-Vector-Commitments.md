@@ -1,7 +1,12 @@
 ---
-tags:
+tags: 
+ - accumulators
+ - aggregation
+ - vector commitments
+ - vc 
+ - rsa
+ - hidden-order groups
 title: Catalano-Fiore Vector Commitments
-tags: accumulators aggregation cryptography vector-commitments vc rsa hidden-order-groups
 #published: false
 sidebar:
     nav: cryptomat

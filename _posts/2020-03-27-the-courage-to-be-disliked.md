@@ -1,5 +1,7 @@
 ---
-tags: books alfred-adler
+tags:
+ - books
+ - alfred adler
 title: "\"The Courage to be Disliked\", by Ichiro Kishimi and Fumitake Koga" 
 date: 2020-03-27 14:00:00
 published: false

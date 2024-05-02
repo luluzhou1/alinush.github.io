@@ -1,5 +1,11 @@
 ---
-tags: papers polynomials boneh-lynn-shacham bls interpolation fast-fourier-transform fft cryptography
+tags: 
+ - papers 
+ - polynomials 
+ - bls
+ - interpolation
+ - fast fourier transform
+ - fft
 title: Fast and Scalable BLS Threshold Signatures
 article_header:
   type: cover
