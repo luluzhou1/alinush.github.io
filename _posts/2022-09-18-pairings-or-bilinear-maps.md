@@ -1,10 +1,9 @@
 ---
 tags:
 - bilinear maps
-- boneh-lynn-shacham
 - cryptography
 - encryption
-- group-theory
+- group theory
 title: Pairings or bilinear maps
 date: 2022-12-31 20:45:59
 #published: false
@@ -279,8 +278,8 @@ In an IBE scheme, one can encrypt directly to a user-friendly email address (or 
 
 Boneh and Franklin give a very efficient IBE scheme from pairings[^BF01].
 
-For IBE to work, a trusted third-party (TTP) called a **private key generate (PKG)** must be introduced, who will issue secret keys to users based on their email addresses.
-This PKG has a **master secret key (MSK)** $\msk \in \Zp$ with an associated **master public key (MPK)** $\mpk = g_2^s$, where $\langle g_2 \rangle = \Gr_2$.
+For IBE to work, a trusted third-party (TTP) called a **private key generator (PKG)** must be introduced, who will issue secret keys to users based on their email addresses.
+This PKG has a **master secret key (MSK)** $\msk \in \Zp$ with an associated **master public key (MPK)** $\mpk = g_2^\msk$, where $\langle g_2 \rangle = \Gr_2$.
 
 The $\mpk$ is made public and can be used to encrypt a message to any user given their email address.
 Crucially, the PKG must keep the $\msk$ secret.
@@ -293,10 +292,10 @@ To mitigate against this, the PKG can be decentralized into multiple authorities
 Let $H_1 : \\{0,1\\}^\* \rightarrow \Gr_1^\*$ and $H_T : \Gr_T \rightarrow \\{0,1\\}^n$ be two hash functions modeled as random oracles.
 To encrypt an $n$-bit message $m$ to a user with email address $id$, one computes:
 \begin{align}
-    g_{id} &= e(H_1(id), \mpk) \in \Gr_T\\\\\
+    \pk_{id} &= e(H_1(id), \mpk) \in \Gr_T\\\\\
     r &\randget \Zp\\\\\
     \label{eq:ibe-ctxt}
-    c &= \left(g_2^r, m \xor H_T\left(\left(g_{id}\right)^r\right)\right) \in \Gr_2\times \\{0,1\\}^n
+    c &= \left(g_2^r, m \xor H_T\left(\left(\pk_{id}\right)^r\right)\right) \in \Gr_2\times \\{0,1\\}^n
 \end{align}
 
 To decrypt, the user with email address $id$ must first obtain their **decryption secret key** $\dsk_{id}$ from the PKG.
@@ -305,7 +304,7 @@ For example this could be done via email.
 
 The PKG computes the user's decryption secret key as:
 \begin{align}
-    \dsk_{id} = H_1(id)^s \in \Gr_1
+    \dsk_{id} = H_1(id)^\msk \in \Gr_1
 \end{align}
 
 Now that the user has their decryption secret key, they can decrypt the ciphertext $c = (u, v)$ from Equation $\ref{eq:ibe-ctxt}$ as:
@@ -316,10 +315,10 @@ Now that the user has their decryption secret key, they can decrypt the cipherte
 You can see why correctly-encrypted ciphertexts will decrypt successfully, since:
 \begin{align}
 v \xor H_T(e(\dsk_{id}, u))
-    &= \left(m \xor       H_T\left((g_{id})^r            \right)\right) \xor H_T\left(e(H_1(id)^s, g_2^r)     \right)\\\\\
-    &= \left(m \xor       H_T\left(e(H_1(id), \mpk )^r   \right)\right) \xor H_T\left(e(H_1(id),   g_2  )^{rs}\right)\\\\\
-    &=       m \xor \left(H_T\left(e(H_1(id), g_2^s)^r   \right)        \xor H_T\left(e(H_1(id),   g_2  )^{rs}\right)\right)\\\\\
-    &=       m \xor \left(H_T\left(e(H_1(id), g_2  )^{rs}\right)        \xor H_T\left(e(H_1(id),   g_2  )^{rs}\right)\right)\\\\\
+    &= \left(m \xor H_T\left((\pk_{id})^r\right)\right) \xor H_T\left(e(H_1(id)^\msk, g_2^r)\right)\\\\\
+    &= m \xor H_T\left((\pk_{id})^r\right) \xor H_T\left(e(H_1(id), g_2^\msk)^r\right)\\\\\
+    &= m \xor H_T\left((\pk_{id})^r\right) \xor H_T\left(e(H_1(id), \mpk)^r\right)\\\\\
+    &= m \xor H_T\left((\pk_{id})^r\right) \xor H_T\left((\pk_{id})^r\right)\\\\\
     &= m
 \end{align}
 
