@@ -2,13 +2,12 @@
 #layout: article
 tags:
 - vc
-- vector-commitments
+- vector commitments
 - kzg
-- kate-zaverucha-goldberg 
 - bilinear maps
 - toeplitz
 - fft
-- fast-fourier-transform
+- fast fourier transform
 title: Feist-Khovratovich technique for computing KZG proofs fast
 #published: false
 sidebar:

@@ -1,5 +1,8 @@
 ---
-tags: number-theory diophantine-equations gcd
+tags: 
+ - number theory
+ - diophantine equations
+ - gcd
 title: Linear Diophantine equations
 #published: false
 sidebar:

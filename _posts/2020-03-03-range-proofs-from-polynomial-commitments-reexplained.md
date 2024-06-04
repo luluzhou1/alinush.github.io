@@ -1,5 +1,10 @@
 ---
-tags: polynomials polycommit kate-zaverucha-goldberg kzg range-proofs zero-knowledge cryptography
+tags:
+ - polynomials
+ - polynomial commitments
+ - kzg
+ - range proofs
+ - zero knowledge
 title: Range Proofs from Polynomial Commitments, Re-explained
 ---
 

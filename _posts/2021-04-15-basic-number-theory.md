@@ -1,5 +1,7 @@
 ---
-tags: number-theory group-theory
+tags:
+ - number theory
+ - group theory
 title: Basic number theory
 #published: false
 sidebar:

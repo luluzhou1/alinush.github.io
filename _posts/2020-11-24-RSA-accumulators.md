@@ -1,8 +1,11 @@
 ---
-tags:
+tags: 
+ - accumulators
+ - aggregation 
+ - rsa
+ - hidden-order groups
 title: RSA Accumulators
 #published: false
-tags: accumulators aggregation cryptography rsa hidden-order-groups
 sidebar:
     nav: cryptomat
 ---

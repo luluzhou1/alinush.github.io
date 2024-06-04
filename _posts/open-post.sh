@@ -50,5 +50,6 @@ else
     file=`echo "$files" | head -n 1`
 
     vim "$file"
+    echo "$file"
 fi
 
