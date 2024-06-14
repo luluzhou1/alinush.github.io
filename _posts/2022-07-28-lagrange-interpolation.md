@@ -29,7 +29,11 @@ The key idea is that $\lagr_i(X)$ is defined so that it has two properties:
  1. $\lagr_i(x_i) = 1,\forall i\in[n]$ 
  2. $\lagr_i(x_j) = 0,\forall j \in [n]\setminus\\{i\\}$
 
-You can actually convince yourself that $\lagr_i(X)$ has these properties by plugging in $x_i$ and $x_j$ to see what happens.
+You can actually convince yourself that $\lagr_i(X)$ has these properties by plugging in $x_i$ and $x_j$ to see what happens. For example, assume $n=3$. Let's look at $\mathcal{L}_2(X)$:
+\begin{align}
+\mathcal{L}_2(X) = \frac{X - x_1}{x_2 - x_1} \cdot \frac{X - x_3}{x_2 - x_3}
+\end{align}
+Clearly, $\mathcal{L}_2(x_2) = 1$ and $\mathcal{L}_2(x_3) = 0$.
 
 {: .warning}
 **Important:** The $\lagr_i(X)$ polynomials are dependent on the set of $x_i$'s only (and thus on $n$)! Specifically each $\lagr_i(X)$ has degree $n-1$ and has a root at each $x_j$ when $j\ne i$!
