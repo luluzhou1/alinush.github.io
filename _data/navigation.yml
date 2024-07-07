@@ -81,12 +81,11 @@ cryptomat:
         url: /2020/11/23/Linear-Diophantine-Equations.html
   - title: Group Theory
     children:
-      - title: Abelian groups
-        url: /2023/01/14/Abelian-groups.html
+      #- title: Abelian groups
+      #  url: /2023/01/14/Abelian-groups.html
       - title: Pairings or bilinear maps
         url: /2022/12/31/pairings-or-bilinear-maps.html
   #- title: Hashing
-  #- title: Digital Signatures
   - title: Hidden-order groups
     children:
       - title: Cryptographic assumptions
@@ -122,6 +121,10 @@ cryptomat:
 
       - title: KZG polynomial commitments
         url: /2020/05/06/kzg-polynomial-commitments.html
+  - title: Signature schemes
+    children:
+      - title: Schnorr signatures
+        url: 2024/05/31/Schnorr-signatures.html
   - title: Secret sharing
     children:
       - title: How to reshare a secret
