@@ -77,9 +77,9 @@ Then, pick $z\_i \randget \\{0,1\\}^\lambda,\forall i\in[n]$ and check:
 \begin{align}
 \prod_{i \in [n]} R\_i^{-z\_i} g^{s\_i \cdot z\_i} \pk\_i^{H(R\_i, m\_i)\cdot z\_i} \equals 1
 \end{align}
-This will be much faster when using fast multi-exponentiation algorithms such as Bos-Coster or BDL+12[^BDLplus12].
+This will be much faster when using multi-exponentiation algorithms such as Bos-Coster or BDL+12[^BDLplus12].
 
-Even better, when the public keys are the same (i.e., $\pk_i = \pk, \forall i\in[n]$), then the size of the multiexponentiation can be reduced:
+Even better, when the public keys are the same (i.e., $\pk_i = \pk, \forall i\in[n]$), then the size of the multi-exponentiation can be reduced:
 \begin{align}
 \left(\prod_{i \in [n]} R\_i^{-z\_i} g^{s\_i \cdot z\_i}\right) \pk^{\sum_{i\in[n]} H(R\_i, m\_i)\cdot z\_i} \equals 1
 \end{align}
