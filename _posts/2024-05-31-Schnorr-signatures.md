@@ -62,8 +62,8 @@ The scheme is correct if signatures created via $\mathsf{Schnorr.Sign}$ verify c
 Let's see why this holds:
 \begin{align}
 R &\equals g^s \cdot \pk^{H(R, m)}\\\\\
-g^r &\equals g^{r-H(m,R)\cdot \sk} \cdot (g^\sk)^{H(R, m)}\\\\\
-g^r &\equals g^{r-H(m,R)\cdot \sk} \cdot g^{H(R, m) \cdot \sk}\\\\\
+g^r &\equals g^{r-H(R, m)\cdot \sk} \cdot (g^\sk)^{H(R, m)}\\\\\
+g^r &\equals g^{r-H(R, m)\cdot \sk} \cdot g^{H(R, m) \cdot \sk}\\\\\
 g^r &\equals g^r
 \end{align}
 
