@@ -395,6 +395,9 @@ As explained in Eq. \ref{eq:pairing-def}, a pairing involves two steps:
 
 Therefore, a pairing takes around 486 microseconds (i.e., the sum of the two).
 
+{: .info}
+The Miller loop is actually two steps: (1) a G2 point "preparation", which takes 62 microseconds and (2) the actual loop which takes 148 microseconds.
+
 #### Exponentiation times
 
 {: .warning}
@@ -508,6 +511,18 @@ test bls12_381::bench_g2_multi_exp_naive               ... bench:  35,272,720 ns
 
 #### Other operations
 
+<!--
+alinush@Aptos-MacBook [~/repos/blstrs/benches] (master *) $ cargo bench -- _add
+
+test bls12_381::ec::g1::bench_g1_add_assign            ... bench:         571.84 ns/iter (+/- 15.35)
+test bls12_381::ec::g1::bench_g1_add_assign_mixed      ... bench:         443.40 ns/iter (+/- 20.77)
+test bls12_381::ec::g2::bench_g2_add_assign            ... bench:       1,505.08 ns/iter (+/- 80.49)
+test bls12_381::ec::g2::bench_g2_add_assign_mixed      ... bench:       1,170.71 ns/iter (+/- 12.09)
+test bls12_381::ec::gt::bench_gt_add_assign            ... bench:       1,617.53 ns/iter (+/- 44.66)
+test bls12_381::scalar::bench_scalar_add_assign        ... bench:           3.06 ns/iter (+/- 0.01)
+
+ -->
+
  - $\Gr_1$ multiplications (recall we are using multiplicative notation for groups, not additive notation)
    - Normal: 565 nanoseconds (when both points are in projective $(X, Y)$ coordinates)
    - Mixed: 438 nanoseconds (when first point is in projective coordinates, second is in affine $(X, Y, Z)$ coordinates)
@@ -515,6 +530,8 @@ test bls12_381::bench_g2_multi_exp_naive               ... bench:  35,272,720 ns
  - $\Gr_2$ multiplications
    - Normal: 1,484 nanoseconds
    - Mixed: 1,095 nanoseconds
+ - $\Gr_T$ multiplications
+   - 1,617 nanoseconds
  - Hashing to $\Gr_1$ takes around 50 microseconds (not accounting for the extra time required to hash down larger messages using SHA2-256)
 
 #### Switching between $\Gr_1$ and $\Gr_2$
