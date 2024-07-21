@@ -69,26 +69,35 @@ g^r &\equals g^r
 
 ## Batch verification
 
-Schnorr signature verification is significantly faster when done **in batch**.
+Schnorr signature verification is significantly faster when done **in batch**, rather than individually via $\mathsf{Schnorr.Verify}$.
+
 Specifically, given $(\sigma\_i, m\_i, \pk\_i)\_{i\in [n]}$, one can ensure all signatures verify (i.e., that $\mathsf{Schnorr.Verify}(m\_i, \pk\_i, \sigma\_i) = 1,\forall i\in [n]$) by taking a random linear combination of the verification equations and combining them into one.
 
-Assume $\sigma\_i = (R\_i, s\_i)$.
-Then, pick $z\_i \randget \\{0,1\\}^\lambda,\forall i\in[n]$ and check:
-\begin{align}
-\prod_{i \in [n]} R\_i^{-z\_i} g^{s\_i \cdot z\_i} \pk\_i^{H(R\_i, m\_i)\cdot z\_i} \equals 1
-\end{align}
-This will be much faster when using multi-exponentiation algorithms such as Bos-Coster or BDL+12[^BDLplus12].
+More formally, the  **batch verification** algorithm looks like this:
 
-Even better, when the public keys are the same (i.e., $\pk_i = \pk, \forall i\in[n]$), then the size of the multi-exponentiation can be reduced:
+$\mathsf{Schnorr.BatchVerify}((m\_i, \pk\_i, \sigma\_i)\_{i\in[n]}) \rightarrow \\{0,1\\}$:
+ - $z\_i \randget \\{0,1\\}^\lambda,\forall i\in[n]$
+ - $(R\_i, s\_i) \gets \sigma\_i,\forall i\in[n]$
+ - **assert** $\prod_{i \in [n]} R\_i^{-z\_i} g^{s\_i \cdot z\_i} \pk\_i^{H(R\_i, m\_i)\cdot z\_i} \equals 1$
+
+The speed-up comes from using multi-exponentiation algorithms such as Bos-Coster or BDL+12[^BDLplus12] in the last check.
+
+**Note:** When the public keys are the same (i.e., $\pk_i = \pk, \forall i\in[n]$), then the size of the multi-exponentiation can be reduced, which further speeds up the verification:
 \begin{align}
 \left(\prod_{i \in [n]} R\_i^{-z\_i} g^{s\_i \cdot z\_i}\right) \pk^{\sum_{i\in[n]} H(R\_i, m\_i)\cdot z\_i} \equals 1
 \end{align}
 
+{: .warning}
+Implementing batch verification so that it returns the same results as individual verification may be trickier than it appears over non-prime order groups like Edwards 25519[^devalence]$^,$[^CGN20e].
+
 ## Alternative $(e, s)$ formulation
 
 In this formulation, the signature includes the hash $e = H(R, m)$ instead of $R$.
-This may have advantages if the hash can be made smaller.
+
+This may have **advantages** if the hash can be made smaller.
 The original Schnorr paper[^Schn89] claims $\lambda$-bit hashes (as opposed to $2\lambda$) are sufficient for $\lambda$-bit security, but not sure if that has changed.
+
+On the other hand, a **disadvantage** is that this formulation does **not** allow for more efficient [batch verification](#batch-verification).
 
 $\mathsf{Schnorr}'$.$\mathsf{Sign}(m, \sk) \rightarrow \sigma$:
  - $r\randget\Zp$
@@ -101,13 +110,14 @@ $\mathsf{Schnorr}'$.$\mathsf{Verify}(m, \pk, \sigma) \rightarrow \\{0,1\\}$:
  - $(e, s) \gets \sigma$
  - **assert** $e \equals H(g^s \cdot \pk^e, m)$
 
+
 ## EdDSA and Ed25519 formulation
 
 ### EdDSA
 
 EdDSA is a Schnorr-based signature scheme designed for groups $\Gr$ of non-prime order $p = h\cdot q$, where $q\approx 2^{2\lambda}$ and $h=8$ (but can be generalized to $h=2^c$, for any $c$[^BCJZ20e]).
 EdDSA has a few modifications for security.
-In particular, (1) the nonce $r$ is generated **pseudo**-randomly from the SK and the message $m$ and (2) the signing additionally hashes over the public key.
+In particular, (1) the nonce $r$ is generated **pseudo**-randomly from the SK and the message $m$ and (2) the signing additionally hashes over the public key and (3) EdDSA has been designed so that the SK can be _safely_ reused in Diffie-Hellman (DH) key exchange protocols like X25519.
 
 EdDSA uses multiple hash functions:
 
@@ -140,6 +150,7 @@ $\mathsf{EdDSA}$.$\mathsf{Sign}(m, \sk) \rightarrow \sigma$:
 As per [BDL+12][^BDLplus12] the inclusion of $\pk$ in $H_3$ is _"an inexpensive way to alleviate concerns that several public keys could be attacked simultaneously"_.
 Another yet-to-be explored advantage is that it prevents an adversary who is given a target signature $\sigma$ from finding a message $m$ and a public key $\pk$ for which it verifies.
 For example, this is possible in [plain Schnorr](#the-schnorr-signature-scheme) where, given any $\sigma$, the adversary can pick any message $m$ it wants and compute the PK as $\pk = (g^s / R)^{1/H(R, m)}$. 
+(In the future, I hope to expand on why such a security notion may be useful.)
 
 $\mathsf{EdDSA}$.$\mathsf{Verify}(m, \pk, \sigma) \rightarrow \\{0,1\\}$:
  - $(R, s) \gets \sigma$
@@ -147,7 +158,7 @@ $\mathsf{EdDSA}$.$\mathsf{Verify}(m, \pk, \sigma) \rightarrow \\{0,1\\}$:
 
 {: .info}
 An alternative version of the verification function multiplies by the cofactor $h$ in the exponent: $g^{h\cdot s} \equals R^h \cdot \pk^{h\cdot H(R, \pk, m)}$.
-The subtleties of this are discussed by Henry de Valence[^devalance].
+The subtleties of this are discussed by Henry de Valence[^devalence].
 
 ### Ed25519
 
@@ -200,9 +211,9 @@ This attack works even when using the alternative $(e, s)$ formulation of Schnor
 ### Pitfall #2: Non-canonical serialization
 
 {: .error}
-**Pitfall:** The description above and, in fact, most academic descriptions, do not distinguish between a group (or field) element and its **serialization** into bytes.
-Yet developers who implement Schnorr must come up with a serialization format for these elements before they can, say, be sent over the network or fed into a hash function.
-Ambiguities in this format can create signature malleability issues.
+**Pitfall:** The description above and, in fact, most academic descriptions, do not distinguish between a group element and its **serialization** into bytes.
+(Same applies to field elements.)
+Yet developers who implement Schnorr must understand the caveats of (de)serializing these elements to (1) avoid issues such as signature malleability and (2) maintain compatibility with other libraries.
 
 For example, consider the code that deserializes the $s\in \Zp$ component of the Schnor signature.
 Typically, naively-written code will not check that the positive integer encoded in the bytes is $< p$.
@@ -215,7 +226,7 @@ In the past, such attacks may have been used to drain money from (poorly-impleme
 
 {: .success}
 **Recommendation:** Developers need to ensure that each group (or field) element has a single / unique / canonical serialized representation into bytes **and** that deserialization **only** accepts this canonical representation.
-Recently, Ristretto255[^ristretto] is a popular elliptic curve group that offers canonical (de)serialization. 
+Ristretto255[^ristretto] is a recently-proposed elliptic curve group that offers canonical (de)serialization. 
 
 ### Pitfall #3: Using non-prime order groups
 
@@ -234,6 +245,13 @@ This actually creates subtle issues when batch-verifying Schnorr signatures, for
 By now, you should be pretty well-versed in Schnorr signatures and a few of their properties: nonce reuse attacks, batch verification, alternative forms, etc.
 There is so much more to say about them.
 Perhaps this article will grow over time.
+
+### Questions for the reader
+
+ 1. What other aspects of Schnorr signatures should this blog post address?
+ 1. The original Schnorr paper[^Schn89] claims $\lambda$-bit hashes (as opposed to $2\lambda$) are sufficient for $\lambda$-bit security. I believe this analysis remains true?
+ 1. What is a good academic reference for the *cleanest* EUF-CMA security proof for (single-signer) Schnorr?
+ 1. What is the the earliest work that defines Schnorr signatures over elliptic curves?
 
 ---
 

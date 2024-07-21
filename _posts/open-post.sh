@@ -32,7 +32,7 @@ files=`echo "$files" | sort`
 sorted_files=`echo "$files" | sort -r`
 
 if [ "$1" == "l" -o "$1" == "list" -o "$1" == "-l" ]; then
-    titles=`grep '^title:' $sorted_files | cut -f 3 -d':' | sed -e 's/^[[:space:]]*//'`
+    titles=`grep '^title:' $sorted_files | cut -f 3- -d':' | sed -e 's/^[[:space:]]*//'`
 
     # remove quotes from titles of the form "<title>" and just use <title>
     titles=`echo "$titles" | gsed -e 's/^"//'  -e 's/"$//'`
