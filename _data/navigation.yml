@@ -85,6 +85,8 @@ cryptomat:
       #  url: /2023/01/14/Abelian-groups.html
       - title: Pairings or bilinear maps
         url: /2022/12/31/pairings-or-bilinear-maps.html
+      #- title: Elliptic curves
+      #  url: /2024/07/21/Elliptic-curves.html
   #- title: Hashing
   - title: Hidden-order groups
     children:

@@ -12,6 +12,7 @@ published: false
 
 <!--more-->
 
+<!-- Here you can define LaTeX macros -->
 <p hidden>$$
 $$</p>
 
