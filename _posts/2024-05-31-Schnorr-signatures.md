@@ -2,7 +2,7 @@
 tags: 
  - signatures
  - schnorr
-title: Schnorr signatures
+title: "Schnorr signatures: everything you wanted to know, but were afraid to ask!"
 #date: 2020-11-05 20:45:59
 #published: false
 sidebar:
