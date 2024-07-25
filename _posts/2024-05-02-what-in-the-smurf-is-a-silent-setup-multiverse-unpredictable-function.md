@@ -15,8 +15,8 @@ published: true
 
 {: .info}
 **tl;dr:** This blog post investigates whether _threshold_ **verifiable unpredictable functions (VUFs)** can be efficiently instantiated in the **silent setup** setting, which avoids the need for an interactive, expensive and often complex [distributed key generation (DKG)](/2020/03/12/towards-scalable-vss-and-dkg.html) phase.
-We show that (1) silent setup threshold VUFs are possible from multilinear maps and (2) efficient constructions may be as hard to obtain as $n$-party non-interactive key exchange.
-In fact, we focus on a more general **multiverse** setting, which captures the threshold setting.
+We show that (1) silent setup threshold VUFs are possible from multilinear maps and (2) efficient constructions are as hard to obtain as $n$-party non-interactive key exchange; so **very hard**.
+Lastly, we focus on a more general **multiverse** setting, which captures the threshold setting.
 
 <!--more-->
 
@@ -73,10 +73,12 @@ Generalizing this to **a**symmetric ones would be interesting.
 ## Related work
 
 Recently, there has been increased interest in **silent-setup threshold signatures**: i.e., threshold signatures that avoid DKGs[^DCXplus23e]$^,$[^BGJplus23]$^,$[^GJMplus23e]$^,$[^Lee23e].
-However, _silent-setup_ **unique** _threshold signatures_, a.k.a. [threshold VUFs](#unique-signature-schemes-or-verifiable-unpredictable-functions-vufs), have not received much attention.
+However, _silent-setup_ **unique** _threshold signatures_ have not received much attention.
+(Recall that: unique threshold signature = [threshold VUFs](#unique-signature-schemes-or-verifiable-unpredictable-functions-vufs).)
 
-Part of the reason may be that a silent-setup threshold VUF is actually a **strong primitive**: it implies $n$-party non-interactive key exchange (NIKE). Specifically, a $1$-out-of-$n$ silent-setup threshold VUF $=$ an $n$-party NIKE[^guru].
-Nonetheless, it may be that higher-threshold silent setup VUFs are still efficiently-instantiatable, since they should not imply $n$-party NIKE.
+Part of the reason may be that a silent-setup threshold VUF is actually a **strong primitive**: it implies $n$-party non-interactive key exchange (NIKE).
+Specifically, a $1$-out-of-$n$ silent-setup threshold VUF $=$ an $n$-party NIKE[^guru].
+Furthermore, a $t$-out-of-$n$ silent-setup threshold VUF = an $(n-t+1)$-party NIKE, because $t-1$ of the SKs can be exposed, which yields a $1$-out-of-$(n-t+1)$ silent VUF.
 
 **Note:** While [the strawman silent-setup threshold signature construction](/2024/05/01/baird-et-al-unique-threshold-signature-scheme.html) from \[BGJ+23\][^BGJplus23] (see [a screenshot here](/pictures/2024-05-08-mts.png)) does satisfy **uniqueness**, it **lacks** silent setup: it still requires a DKG-like protocol for exposing evaluations on a degree-$(n-1)$ polynomial.
 
@@ -310,6 +312,8 @@ Unfortunately, if efficient SMURFs exist (or even their weaker, threshold varian
  1. A SMURF with $O(1)$-sized aggregation keys.
 
 **Acknowledgements:** Thanks to [Valeria Nikolaenko](https://twitter.com/lera_banda), [Joe Bonneau](https://twitter.com/josephbonneau), [Rex Fernando](https://twitter.com/rex1fernando), [Benny Pinkas](https://twitter.com/bennypinkas), [Dan Boneh](https://crypto.stanford.edu/~dabo/) and [Trisha Datta](https://twitter.com/TrishaCDatta) for reading, providing feedback and brainstorming together!
+
+Big thanks to [Guru Vamsi Policharla](https://twitter.com/gvamsip) for pointing out that $t$-out-of-$n$ silent setup VUFs also imply $(n-t+1)$-NIKE.
 
 ## Appendix: Formalizing SMURFs
 
