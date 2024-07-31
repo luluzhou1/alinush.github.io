@@ -95,7 +95,7 @@ cryptomat:
 
       - title: RSA accumulators
         url: /2020/11/24/RSA-accumulators.html
-  - title: Signature schemes
+  - title: Digital signatures
     children:
       - title: Baird et al.'s unique threshold signature scheme
         url: /2024/05/01/baird-et-al-unique-threshold-signature-scheme.html
