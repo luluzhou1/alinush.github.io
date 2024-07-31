@@ -73,13 +73,13 @@ header:
 # NOTE: For some reason, only depth-1 nesting works here.
 # I tried using subfolderitems and subsubfolderitems with 'page' rather than 'title' but no luck
 cryptomat:
-  - title: Number Theory
+  - title: Number theory
     children:
       - title: Basics
         url: /2021/04/15/basic-number-theory.html
       - title: Linear Diophantine equations
         url: /2020/11/23/Linear-Diophantine-Equations.html
-  - title: Group Theory
+  - title: Group theory
     children:
       #- title: Abelian groups
       #  url: /2023/01/14/Abelian-groups.html
@@ -95,7 +95,13 @@ cryptomat:
 
       - title: RSA accumulators
         url: /2020/11/24/RSA-accumulators.html
-  - title: Vector Commitments (VCs)
+  - title: Signature schemes
+    children:
+      - title: Baird et al.'s unique threshold signature scheme
+        url: /2024/05/01/baird-et-al-unique-threshold-signature-scheme.html
+      - title: Schnorr signatures
+        url: 2024/05/31/Schnorr-signatures.html
+  - title: Vector commitments
     children:
     #  - title: Libert-Yung
     #    url: 
@@ -123,18 +129,10 @@ cryptomat:
 
       - title: KZG polynomial commitments
         url: /2020/05/06/kzg-polynomial-commitments.html
-  - title: Signature schemes
-    children:
-      - title: Schnorr signatures
-        url: 2024/05/31/Schnorr-signatures.html
   - title: Secret sharing
     children:
       - title: How to reshare a secret
         url: /2024/04/26/How-to-reshare-a-secret.html
-  - title: Signatures
-    children:
-      - title: Baird et al.'s unique threshold signature scheme
-        url: /2024/05/01/baird-et-al-unique-threshold-signature-scheme.html
 
   #- title: (Zero-Knowledge) Proof Systems
   #  children:
