@@ -7,6 +7,12 @@ titles:
 key: page-talks
 ---
 
+#### Aptos randomness using weighted VRFs (SBC'24)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hvBRPh-K5gc?si=M32PQkflH7mMFUQ-&amp;start=8697" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+ - SBC'24 [slides here](https://docs.google.com/presentation/d/1PktTUXC41CeYNRRgmwmIvqCBHPbXf7E_Ne9ZaDQK6hc)
+
 #### Aptos keyless accounts (zkSummit11)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/sKqeGR4BoI0?si=ZvzMgNySRxBh2-xE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
