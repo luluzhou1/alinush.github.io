@@ -18,6 +18,7 @@ As a result, the risk of account loss is (more or less), the risk of losing your
 One day, I hope to edit this into a full blog post but, until then:
 1. I wrote a **high-level** explanation of how keyless accounts work on the [Aptos](https://twitter.com/aptos) blockchain [here](https://aptos.dev/aptos-keyless/how-keyless-works).
 2. I wrote an **in-depth** document explaining how keyless accounts work and their many caveats in [the 61th Aptos Improvement Proposal](https://github.com/aptos-foundation/AIPs/blob/main/aips/aip-61.md).
+3. I did a few more things below 👇
 
 ## Other resources
 
