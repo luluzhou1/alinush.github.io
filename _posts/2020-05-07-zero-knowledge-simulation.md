@@ -10,6 +10,10 @@ sidebar:
 
 A nice explanation of ZK via two games by Groth at MSR: https://youtu.be/KSZB9hsrh3c?t=1146
 
+See ZK definition in 20.3.5 of Boneh-Shoup'23, which discusses why the simulator must have "extra power":
+ - without extra power, it would allow anyone to forge proofs for x \notin L
+ - and if you say, well, maybe the simulator could work just for x \in L and fail for x \notin L, then that gives a poly-time decider for L. since many L's are in NP or NP-complete, this will not work
+
 Interesting subtleties to cover:
 
 1. signatures are zkpoks of a secret key or not?
