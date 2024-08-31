@@ -9,7 +9,7 @@ key: page-talks
 
 #### Aptos randomness using weighted VRFs (SBC'24)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/hvBRPh-K5gc?si=M32PQkflH7mMFUQ-&amp;start=8697" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/47TRNUTMAyo?si=Vgf53nLh_oaDWrAS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
  - SBC'24 [slides here](https://docs.google.com/presentation/d/1PktTUXC41CeYNRRgmwmIvqCBHPbXf7E_Ne9ZaDQK6hc)
 
