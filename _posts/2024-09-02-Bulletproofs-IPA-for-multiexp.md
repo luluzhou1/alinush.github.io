@@ -36,7 +36,7 @@ The problem is that the Bulletproof verifier has to "fold" the $\A$ vector by us
 
 ## (Pointless) Bulletproofs IPA for multiexp
 
-The protocol below assumes the size of the vector $\A$ and $\bb$ are both equal to $m = 2^k$ for some integer $k \ge 0$.
+The protocol below assumes thes vector $\A$ and $\bb$ are both of size $m = 2^k$ for some integer $k \ge 0$.
 
 <table style="border-collapse: collapse; border: 1px solid grey; table-layout: fixed; width: 455px;">
 <tr><td style="border: none;">
