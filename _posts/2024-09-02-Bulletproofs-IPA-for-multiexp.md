@@ -38,7 +38,7 @@ The problem is that the Bulletproof verifier has to "fold" the $\A$ vector by us
 
 The protocol below assumes thes vector $\A$ and $\bb$ are both of size $m = 2^k$ for some integer $k \ge 0$.
 
-<table style="border-collapse: collapse; border: 1px solid grey; table-layout: fixed; width: 455px;">
+<table style="border-collapse: collapse; border: 1px solid grey; table-layout: fixed; width: 450px;">
 <tr><td style="border: none;">
   $\underline{\prove(\A, \bb)}$
 </td><td style="border: none; text-align: right;">
@@ -46,7 +46,7 @@ The protocol below assumes thes vector $\A$ and $\bb$ are both of size $m = 2^k$
 </td></tr>
 
 <tr><td style="border: none; text-align: center;" colspan="2">
-  $\rule[2.5pt]{9em}{0.5pt}\fbox{If $m = 1$}\rule[2.5pt]{9em}{0.5pt}$
+  $\rule[2.5pt]{8em}{0.5pt}\fbox{$\textbf{if }m = 1$}\rule[2.5pt]{8em}{0.5pt}$
 </td></tr>
 
 <tr><td style="border: none; text-align: center;" colspan="2">
@@ -58,7 +58,7 @@ The protocol below assumes thes vector $\A$ and $\bb$ are both of size $m = 2^k$
 </td></tr>
 
 <tr><td style="border: none; text-align: center;" colspan="2">
-  $\rule[2.5pt]{7em}{0.5pt}\fbox{Else (i.e., if $m \ge 2$)}\rule[2.5pt]{7em}{0.5pt}$
+  $\rule[2.5pt]{6em}{0.5pt}\fbox{$\textbf{else}\text{ (i.e., if }m \ge 2\text{)}$}\rule[2.5pt]{6em}{0.5pt}$
 </td></tr>
 
 <tr><td style="border: none;">
@@ -81,7 +81,13 @@ The protocol below assumes thes vector $\A$ and $\bb$ are both of size $m = 2^k$
 
 <tr><td style="border: none;"></td><td style="border: none; text-align: right;">
   Computes ${\color{red}\A'},\bb'$ just like the prover<br />
-  $V' = (V_L)^x \cdot V \cdot (V_R)^{(x^{-1})}$
+  $V' = (V_L)^x \cdot V \cdot (V_R)^{(x^{-1})}$<br />
+</td></tr>
+
+<tr><td style="border: none;">
+  Recurse on $(\A',\bb')$
+</td><td style="border: none; text-align: right;">
+  Recurse on $(V', \A',\bb')$
 </td></tr>
 </table>
 
