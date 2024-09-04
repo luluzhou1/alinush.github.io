@@ -38,7 +38,7 @@ The problem is that the Bulletproof verifier has to "fold" the $\A$ vector by us
 
 The protocol below assumes thes vector $\A$ and $\bb$ are both of size $m = 2^k$ for some integer $k \ge 0$.
 
-<table style="border-collapse: collapse; border: 1px solid grey; table-layout: fixed; width: 450px;">
+<table style="border-collapse: collapse; border: 1px solid grey; table-layout: fixed; width: 453px;">
 <tr><td style="border: none;">
   $\underline{\prove(\A, \bb)}$
 </td><td style="border: none; text-align: right;">
