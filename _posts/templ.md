@@ -5,6 +5,10 @@ title: insert-title-here
 published: false
 #sidebar:
 #    nav: cryptomat
+#article_header:
+#  type: cover
+#  image:
+#    src: /pictures/.jpg
 ---
 
 {: .info}
