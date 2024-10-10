@@ -25,4 +25,9 @@ key: page-about
 
 ## Papers to read
 
- - [Verifiable Oblivious Pseudorandom Functions from Lattices: Practical-ish and Thresholdisable](https://eprint.iacr.org/2024/1459.pdf)
+ - Verifiable Oblivious Pseudorandom Functions from Lattices: Practical-ish and Thresholdisable[^AG24e]
+ - NeutronNova: Folding everything that reduces to zero-chec[^KS24e]
+
+---
+
+{% include refs.md %}
