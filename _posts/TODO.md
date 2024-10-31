@@ -15,5 +15,7 @@ Polish:
 
 Future:
 
+ - Schwartz-Zippel lemma
+   + arises in sumcheck protocol and many other blogs
  - Edrax VC
  - GIPA and inner products, including KZG trick
