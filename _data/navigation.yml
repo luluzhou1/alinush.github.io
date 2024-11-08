@@ -103,6 +103,8 @@ cryptomat:
     children:
       - title: Baird et al.'s unique threshold signature scheme
         url: /2024/05/01/baird-et-al-unique-threshold-signature-scheme.html
+      - title: BBS+ signatures
+        url: 2024/11/07/BBS-signatures.html
       - title: Schnorr signatures
         url: 2024/05/31/Schnorr-signatures.html
   - title: Vector commitments
