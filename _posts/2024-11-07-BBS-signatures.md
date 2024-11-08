@@ -28,7 +28,7 @@ The [BBS+](#the-bbs-signature-scheme) and [standalone BBS]() schemes have some r
 These properties makes BBS+ very useful for building **anonymous credential (AC)** schemes.
 (In a future post, I hope to constrast BBS+ with other schmes like CL or PS.)
 
-However, they also has some **disadvantages**:
+However, they also have some **disadvantages**:
  - Signatures are a bit larger for BBS+: 1 group element and 2 field elements
     + Standalone BBS fixes that: it has signatures of 1 group element and 1 field element
  - Signing $\ell$ messages requires a size-$(\ell+1)$ multiexp for BBS+
@@ -54,7 +54,7 @@ $\mathsf{BBS+}$.$\mathsf{Sign}((m_1,\ldots,m_\ell), \sk) \rightarrow \sigma$:
  - $(x, \mathbf{h}) \gets \sk$
  - $(e, s)\randget \Zp^2$
  - $C \gets g_1 h_1^s \prod_{i\in[\ell]} h_{i+1}^{m_i}$
-    + **Note:** This is a Pedersen-like commitment to the $m_i$'s. (Except it is not blinded, since the randomness $s$ is publicly-exposed as part of the singature.) 
+    + **Note:** This is a Pedersen-like commitment to the $m_i$'s. (Except it is not blinded, since the randomness $s$ is publicly-exposed as part of the signature.) 
  - $\sigma \stackrel{\mathsf{def}}{=} (A, e, s) \gets (C^\frac{1}{x + e}, e, s)$
 
 $\mathsf{BBS+}$.$\mathsf{Verify}((m_1,\ldots,m_\ell), \pk, \sigma) \rightarrow \\{0,1\\}$:
@@ -84,8 +84,8 @@ Recently, however, Tessaro and Zhu[^TZ23e] gave a security proof for BBS+ withou
 I guess the alternative BBS++ name would have been worse?
 On the other hand "[standalone] BBS"[^TZ23e] stands to be confused with the BBS [group] signature scheme[^BBS04].
 
-Naming issues aside, we included Tessaro and Zhu's **standalone BBS (sBBS)** scheme decription below.
-We dub it as $\mathsf{sBBS}$ to avoid confusing it with the $\mathsf{BBS}$ group signature scheme.
+Naming issues aside, Tessaro and Zhu's **standalone BBS (sBBS)** scheme's decription follows below.
+(It is denoted as $\mathsf{sBBS}$ to avoid confusing it with the $\mathsf{BBS}$ group signature scheme.)
 
 $\mathsf{sBBS}$.$\mathsf{KeyGen}(1^\lambda, \ell) \rightarrow (\sk, \pk)$:
  - (This is almost the same as in BBS+, except only $\ell$ $h_i$'s are needed.)
