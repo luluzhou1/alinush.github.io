@@ -17,6 +17,7 @@ key: page-about
 ### Math
  
  - [Winograd Fast Inner Product](https://xn--2-umb.com/24/inner-product/), Remco Bloemen
+ - [The tensor product demystified](https://www.math3ma.com/blog/the-tensor-product-demystified), Math3ma
 
 ### (Zero-knowledge) proof systems
 
