@@ -35,6 +35,10 @@ See:
 
 5. adaptive ZK
 
+6. ZK vs ZKPoK: https://crypto.stackexchange.com/questions/10595/when-would-one-prefer-a-proof-of-knowledge-instead-of-a-zero-knowledge-proof/79930#79930
+
+sure, there exists x such that h = g^x. for any h... but do you know the god damn x?
+
 -->
 
 ---
