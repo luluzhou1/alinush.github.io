@@ -1,7 +1,7 @@
 ---
 layout: article
 title: Awesome crypto
-key: page-about
+key: page-awesome-crypto
 #article_header:
 #  type: cover
 #  image:

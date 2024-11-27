@@ -1,7 +1,7 @@
 header:
   - titles:
       # @start locale config
-      en      : &EN       Posts & Tags
+      en      : &EN       Posts
       en-GB   : *EN
       en-US   : *EN
       en-CA   : *EN
@@ -73,6 +73,10 @@ header:
   - titles:
       en      : &EN       Awesome crypto!
     url: /awesome-crypto.html
+
+  - titles:
+      en      : &EN       Please solve!
+    url: /please-solve.html
 
 # NOTE: For some reason, only depth-1 nesting works here.
 # I tried using subfolderitems and subsubfolderitems with 'page' rather than 'title' but no luck
