@@ -71,7 +71,7 @@ header:
     url: /about.html
   
   - titles:
-      en      : &EN       Awesome crypto!
+      en      : &EN       Awesome crypto
     url: /awesome-crypto.html
 
   - titles:
