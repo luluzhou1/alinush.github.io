@@ -8,11 +8,9 @@ key: page-please-solve
 #    src: /pictures/pitesti.jpg
 ---
 
-## Please solve these problems!
-
 These are great research problems to solve that I wish I had time to work more on.
 
-### Efficient homomorphic Merkle trees
+## Efficient homomorphic Merkle trees
 
 A homomorphic Merkle tree has an extremely useful property: given a change $\Delta$ to one of its leaves $\ell$, every node in the tree can be updated homomorphically, knowing only the change $\Delta$ and the leaf $\ell$. In particular, the tree's root can be updated homorphically too, which can be very useful!
 
@@ -27,7 +25,7 @@ In particular, when parameterized to instantiate a depth-256 prefix tree, it is 
 
 **Open problem:** Devise a homomorphic Merkle tree construction that can support a large number of updates per second in one core (e.g., tens of thousands).
 
-### Compress AMT proofs to KZG proofs
+## Compress AMT proofs to KZG proofs
 
 In my PhD thesis[^Tome20] (and a later paper[^TCZplus20]), we presented a different, tree-based mechanism to compute KZG polynomial commitment proofs.
 It was dubbed _authenticated multipoint evaluation trees (AMTs)_.
