@@ -1,5 +1,7 @@
 ---
 layout: article
+aside:
+  toc: true
 title: Awesome crypto
 key: page-awesome-crypto
 #article_header:

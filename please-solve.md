@@ -2,6 +2,8 @@
 layout: article
 title: Please solve!
 key: page-please-solve
+aside:
+  toc: true
 #article_header:
 #  type: cover
 #  image:
