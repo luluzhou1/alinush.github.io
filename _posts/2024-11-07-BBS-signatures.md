@@ -30,7 +30,8 @@ Both [BBS+](#the-bbs-signature-scheme) and [standalone BBS](#the-standalone-bbs-
    + This way, the signer gets the commitment to sign and never sees the messages $m_i$ themselves
  - Does not rely on random oracles
    + As a result, it admits efficient protocols for proving knowledge of a signature over a (committed) message
- - It is as efficient to verify as BLS[^BLS01] signatures: a size-2 multipairing
+ - It is almost as fast to verify as BLS[^BLS01] signatures: a size-2 multipairing, a size-$(\ell+1)$ $\Gr_1$ multiexp, and one $\Gr_1$ exponentiation
+ - It admits fast batch verification of signatures under the same public key
 
 These properties makes BBS+ (and standalone BBS) very useful for building **anonymous credential (AC)** schemes.
 (In a future post, I hope to constrast BBS+ with other schemes like CL or [Pointcheval-Sanders (PS)](/2023/01/08/Pairing-based-anonymous-credentials-and-the-power-of-re-randomization.html).)
@@ -82,6 +83,42 @@ e(C, g_2) &\equals e(C, g_2)
 \end{align}
 
 **Existential unforgeability under chosen message attack (EUF-CMA):** Unfortunately, it is not so easy to see why the scheme is secure. For the curious reader, a security proof can be found in Appendix B of the original paper[^ASM08e].
+
+### How to batch verify in BBS+
+
+BBS+ admits a faster **batch verification** algorithm when verifying a batch of $b$ signatures, all under the same public key.
+This algorithm outputs 1 if **all** signatures verify or outputs 0 if one of the signatures does not.
+(To identify the bad signature(s), one typically naively re-verifies all signatures individually, or resorts to fancier techniques[^LM07].)
+
+The key observation is that given a bunch of signatures:
+
+$$(A_j, e_j, s_j)\gets \sigma_j,\forall j\in[b]$$
+
+...each over a commitment $C_j$, the verification equation for each signature can be decomposed as follows:
+\begin{align}
+e(A_j, y \cdot g_2^{e_j}) &\equals e(C_j, g_2)\Leftrightarrow\\\\\
+e(A_j, y) e(A_j, g_2^{e_j}) &\equals e(C_j, g_2)\Leftrightarrow\\\\\
+e(A_j, y) e(A_j^{e_j}, g_2) &\equals e(C_j, g_2)
+\end{align}
+
+As a result, to verify this equation holds for all $j\in[b]$, we can combine all equations into one via a linear combination with random coefficients $(\alpha_1, \alpha_2,\ldots,\alpha_b)$:
+\begin{align}
+\prod_{j\in[b]} \left(e(A\_j, y) e(A\_j^{e_j}, g\_2)\right)^{\alpha\_j} &\equals \prod_{j\in[b]} e(C\_j, g_2)^{\alpha_j}\Leftrightarrow\\\\\
+\prod_{j\in[b]} e(A\_j^{\alpha\_j}, y) e\left((A\_j^{e_j})^{\alpha\_j}, g\_2\right) &\equals \prod_{j\in[b]} e(C\_j^{\alpha_j}, g_2)\Leftrightarrow\\\\\
+e\left(\prod_{j\in[b]} A\_j^{\alpha\_j}, y\right) e\left(\prod_{j\in[b]} A\_j^{e_j \alpha\_j}, g\_2\right) &\equals e\left(\prod_{j\in[b]} C\_j^{\alpha_j}, g_2\right)\Leftrightarrow\\\\\
+e\left(\prod_{j\in[b]} A\_j^{\alpha\_j}, y\right) &\equals e\left(\prod_{j\in[b]} C\_j^{\alpha_j}, g_2\right) e\left(\prod_{j\in[b]} A\_j^{e_j \alpha\_j}, g\_2\right)^{-1}\Leftrightarrow\\\\\
+e\left(\prod_{j\in[b]} A\_j^{\alpha\_j}, y\right) &\equals e\left(\prod_{j\in[b]} A\_j^{-e_j \alpha\_j} C\_j^{\alpha_j}, g_2\right) \Leftrightarrow\\\\\
+\end{align}
+
+The full batch verification algorithms follows below:
+
+$\mathsf{BBS+}$.$\mathsf{BatchVerify}((m\_{j,1},\ldots,m\_{j,\ell})\_{j\in[b]}, \pk, (\sigma_j)\_{j\in [b]}) \rightarrow \\{0,1\\}$:
+ - $(y,\mathbf{h})\gets \pk$ 
+ - $(A_j, e_j, s_j)\gets \sigma_j,\forall j\in[b]$
+ - $(\alpha_1,\ldots,\alpha_b)\randget \Zp^b$
+ - $M \gets \prod_{j\in[b]} A_j^{-e_j \alpha_j} C_j^{\alpha_j}$, where $C_j = g_1 h_0^{s_j} \prod_{i\in[\ell]} h_i^{m_{j,i}}$
+     - Note that $M$ can be carefully-computed in a single size-$\left(b(\ell+3)\right)$ multiexp!
+ - **assert** $e\left(\prod_{j\in[b]} A\_j^{\alpha\_j}, y\right) \equals e\left(M, g_2\right)$
 
 ### How to sign blindly in BBS+
 
@@ -166,6 +203,18 @@ $\mathsf{stBBS}$.$\mathsf{Verify}((m_1,\ldots,m_\ell), \pk, \sigma) \rightarrow 
  - $C \gets g_1 \prod_{i\in[\ell]} h_i^{m_i}$
  - **assert** $e(A, y \cdot g_2^e) \equals e(C, g_2)$
 
+### How to batch verify in stBSS
+
+Much like [BBS+](#how-to-batch-verify-in-bbs), stBBS also admits a similar batch verification algorithm:
+
+$\mathsf{BBS+}$.$\mathsf{BatchVerify}((m\_{j,1},\ldots,m\_{j,\ell})\_{j\in[b]}, \pk, (\sigma_j)\_{j\in [b]}) \rightarrow \\{0,1\\}$:
+ - $(y,\mathbf{h})\gets \pk$ 
+ - $(A_j, e_j)\gets \sigma_j,\forall j\in[b]$
+ - $(\alpha_1,\ldots,\alpha_b)\randget \Zp^b$
+ - $M \gets \prod_{j\in[b]} A_j^{-e_j \alpha_j} C_j^{\alpha_j}$, where $C_j = g_1 \prod_{i\in[\ell]} h_i^{m_{j,i}}$
+     - Note that $M$ can be carefully-computed in a single size-$\left(b(\ell+2)\right)$ multiexp!
+ - **assert** $e\left(\prod_{j\in[b]} A\_j^{\alpha\_j}, y\right) \equals e\left(M, g_2\right)$
+
 ### How to sign blindly in stBBS
 
 Blind-signing in stBBS works only slightly differently than in [BBS+](#how-to-sign-blindly-in-bbs)
@@ -205,7 +254,7 @@ If one is comfortable with the AGM, then you no longer need to pick $e$ uniforml
 
 ## Conclusion
 
-BBS+ and standalone BBS are versatile signature schemes (e.g., can sign [commitments to] field element(s) without random oracles, can verify as fast as BLS[^BLS01], etc.).
+BBS+ and standalone BBS are versatile signature schemes (e.g., can sign [commitments to] field element(s) without random oracles, can verify almost as fast as BLS[^BLS01], etc.).
 
 However, like any signature scheme, they have their **disadvantages**:
  - **Larger signatures** for BBS+: 1 group element and 2 field elements.
