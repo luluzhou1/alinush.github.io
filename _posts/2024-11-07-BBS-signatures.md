@@ -3,8 +3,8 @@ tags:
 title: BBS+ signatures
 #date: 2020-11-05 20:45:59
 #published: false
-sidebar:
-    nav: cryptomat
+#sidebar:
+#    nav: cryptomat
 #article_header:
 #  type: cover
 #  image:
@@ -12,21 +12,30 @@ sidebar:
 ---
 
 {: .info}
-**tl;dr:** BBS+ is a transformation[^ASM08e] of the the _Boneh-Boyen-Shacham (BBS)_ **group** signature scheme[^BBS04] into a **standalone** signature scheme.
+**tl;dr:** 
+Do you want to sign (committed) field elements without relying on random oracles?
+Do you want to efficiently prove (in zero-knowledge) relations over your signed messages?
+BBS+ is here to help you!
+
+The **BBS+ signature scheme** is a transformation[^ASM08e] of the the _Boneh-Boyen-Shacham (BBS)_ **group** signature scheme[^BBS04] into a **standalone** signature scheme.
+
 This blog post describes BBS+ as well as a recent improvement over it dubbed **standalone BBS**[^TZ23e].
 
 ## Why BBS+?
 
-The [BBS+](#the-bbs-signature-scheme) and [standalone BBS](#the-standalone-bbs-signature-scheme) schemes have some really **nice properties**:
+Both [BBS+](#the-bbs-signature-scheme) and [standalone BBS](#the-standalone-bbs-signature-scheme) have really **nice properties**:
 
  - Can sign a vector of field elements $(m_1,m_2,\ldots,m_\ell)\in \Zp$
    + The signing [can be done blindly](#how-to-sign-blindly-in-bbs) over a Pedersen vector commitment to the elements
    + This way, the signer gets the commitment to sign and never sees the messages $m_i$ themselves
  - Does not rely on random oracles
+   + As a result, it admits efficient protocols for proving knowledge of a signature over a (committed) message
  - It is as efficient to verify as BLS[^BLS01] signatures: a size-2 multipairing
 
 These properties makes BBS+ (and standalone BBS) very useful for building **anonymous credential (AC)** schemes.
-(In a future post, I hope to constrast BBS+ with other schmes like CL or [Pointcheval-Sanders (PS)](/2023/01/08/Pairing-based-anonymous-credentials-and-the-power-of-re-randomization.html).)
+(In a future post, I hope to constrast BBS+ with other schemes like CL or [Pointcheval-Sanders (PS)](/2023/01/08/Pairing-based-anonymous-credentials-and-the-power-of-re-randomization.html).)
+
+For some of the disadvantages, see the [conclusion](#conclusion).
 
 ## Preliminaries
  
@@ -37,7 +46,7 @@ These properties makes BBS+ (and standalone BBS) very useful for building **anon
 ## The BBS+ signature scheme
 
 {: .info}
-BBS+ is slightly less efficient than [standalone BBS](#the-standalone-bbs-signature-scheme), so it should probably be dropped in favor of the latter.
+_Note:_ BBS+ is slightly less efficient than [standalone BBS](#the-standalone-bbs-signature-scheme), so it should probably be dropped in favor of the latter.
 
 $\mathsf{BBS+}$.$\mathsf{KeyGen}(1^\lambda, \ell) \rightarrow (\sk, \pk)$:
  - $\mathbf{h} \stackrel{\mathsf{def}}{=} (h_0, h_1 \ldots, h_{\ell}) \gets \Gr_1^{\ell+1}$
@@ -71,6 +80,8 @@ e\left(C^\frac{1}{x + e}, g_2^x \cdot g_2^e\right) &\equals e(C, g_2)\\\\\
 e\left(C^\frac{1}{x + e}, g_2^{x + e}\right) &\equals e(C, g_2)\\\\\
 e(C, g_2) &\equals e(C, g_2)
 \end{align}
+
+**Existential unforgeability under chosen message attack (EUF-CMA):** Unfortunately, it is not so easy to see why the scheme is secure. For the curious reader, a security proof can be found in Appendix B of the original paper[^ASM08e].
 
 ### How to sign blindly in BBS+
 
@@ -113,9 +124,16 @@ $\mathsf{BBS+}.\mathsf{Unblind}(A, e, s_1, s_2) \rightarrow \sigma$
 ## The standalone BBS signature scheme
 
 BBS+ was a transformation of the BBS group signature scheme[^BBS04] into a standalone signature scheme by Au et al.[^ASM08e].
-Unfortunately, this transformation increased the size of the signature from $(A, e)\in\Gr\times\Zp$ to $(A, e, s)\in\Gr\times\Zp^2$.
-The $s$ component had to be included only so that the security proof could pass.
-Recently, however, Tessaro and Zhu[^TZ23e] gave a security proof for BBS+ without an $s$-component, which they dubbed **standalone BBS signatures**.
+Unfortunately, BBS+ signature sizes are larger: from $(A, e)\in\Gr\times\Zp$ to $(A, e, s)\in\Gr\times\Zp^2$.
+Interestingly, the $s$ component only had to be included so that the security proof could pass.
+
+Recently, Tessaro and Zhu[^TZ23e] fixed this in a new variant dubbed **standalone BBS signatures**.
+First, they gave a (non-tight) security proof for the **strong** existential unforgeability of standalone BBS, under the $q$-SDH assumption, assuming the $e$'s are randomly picked (see Theorem 1 in [TZ23e][^TZ23e]).
+Second, they gave a tight security proof in the algebraic group model (AGM)[^FKL18], additionally allowing for unique, deterministically-generated $e$'s (see Theorem 2 in [TZ23e][^TZ23e]).
+This suggests that the loss in tightness in the original proof may be artificial.
+Third, they proved that standalone BBS signatures are secure even when directly signing Pedersen commitments (see Theorem 3 in [TZ23e][^TZ23e]).
+So one can regard them as a kind of weaker structure-preserving signatures.
+(Note that they are **not** secure for signing arbitrary group elements, since a signature $(A, e)$ on a group element $C$ can be easily mauled into a new signature $(A^2, e)$ on $C^2$.)
 
 {: .info}
 I guess the alternative BBS++ name would have been worse?
@@ -150,10 +168,11 @@ $\mathsf{stBBS}$.$\mathsf{Verify}((m_1,\ldots,m_\ell), \pk, \sigma) \rightarrow 
 
 ### How to sign blindly in stBBS
 
-This works slightly differently than in [BBS+](#how-to-sign-blindly-in-bbs) because stBBS signatures lack the $s$ component.
+Blind-signing in stBBS works only slightly differently than in [BBS+](#how-to-sign-blindly-in-bbs)
+This is because stBBS signatures lack the $s$ component.
 As a result, one of the signed messages themselves has to be used as Pedersen commitment blinder.
-The blind-signing flow remains largely the same as in [BBS+](#how-to-sign-blindly-in-bbs):
-1. The user, who is trying to get the signature, uses a new $\mathsf{stBBS}$.$\mathsf{Commit}$ algorithm to produce a blinded Pedersen commitment $C$ (with blinder $r$) to the messages $(m_1, m_2,\ldots,m_{\ell-1})$ he is trying to sign without revealing.
+Nonetheless, the blind-signing flow remains largely the same as in [BBS+](#how-to-sign-blindly-in-bbs):
+1. The user, who is trying to get the signature, uses a new $\mathsf{stBBS}$.$\mathsf{Commit}$ algorithm to produce a blinded Pedersen commitment $C$ (with blinder $r$) to the secret messages $(m_1, m_2,\ldots,m_{\ell-1})$ he is trying to.
    + Note that there are $\ell-1$ instead of $\ell$ messages because the last message $m_\ell$ will be set to the blinder $r$.
 2. The user sends the commitment $C$ together with a ZKPoK of opening $\pi$ to the signer.
 3. The signer calls a new $\mathsf{stBBS}$.$\mathsf{BlindSign}$ algorithm on this commitment $C$ and the proof $\pi$.
@@ -179,14 +198,14 @@ Note that the signature verification is done as $\mathsf{stBBS}$.$\mathsf{Verify
 
 ### How to pick $e$'s simply and securely
 
-Unlike in BBS+, the requirement on picking $e$ is simpler: $e$ does not have to be picked uniformly at random. Instead, we only need to make sure $e$'s don't collide. The simplest way is to treat $e$ as an always-increasing counter. Or, to derive it pseudo-randomly (via hashing) from the signed message (in the non-blinded variant) or the signed commitment (in the blinded variant).
+If one is comfortable with the AGM, then you no longer need to pick $e$ uniformly at random. Instead, you only need to make sure $e$'s don't collide. The simplest way is to treat $e$ as an always-increasing counter. Or, to derive it pseudo-randomly (via hashing) from the signed message (in the non-blinded variant) or the signed commitment (in the blinded variant).
 
 {: .warning}
-**Warning:** Reusing $e$ leads to a forgery attack! Given a signature $\sigma_1 = \left(C_1^\frac{1}{x+e}, e\right)$, if $e$ is reused to create another signature $\sigma_2 = \left(C_2^\frac{1}{x+e},e\right)$, then an attacker can combine these into a signature $\sigma = \left((C_1 \cdot C_2)^\frac{1}{x+e}, e\right)$. If $C_1$ commits to $(m_1,\ldots, m_\ell)$ and $C_2$ commits to $(m_1',\ldots,m_\ell')$, then  the forged signature $\sigma$ would be over a commitment to $(m_1 + m_1', \ldots, m_\ell + m_\ell')$. In many applications, such as anonymous credentials or anonymous payment systems[^TBAplus22e], this would break security.
+**Warning:** Avoiding collisions is really key: reusing $e$ leads to a forgery attack! Given a signature $\sigma_1 = \left(C_1^\frac{1}{x+e}, e\right)$, if $e$ is reused to create another signature $\sigma_2 = \left(C_2^\frac{1}{x+e},e\right)$, then an attacker can combine these into a signature $\sigma = \left((C_1 \cdot C_2)^\frac{1}{x+e}, e\right)$. If $C_1$ commits to $(m_1,\ldots, m_\ell)$ and $C_2$ commits to $(m_1',\ldots,m_\ell')$, then  the forged signature $\sigma$ would be over a commitment to $(m_1 + m_1', \ldots, m_\ell + m_\ell')$. In many applications, such as anonymous credentials or anonymous payment systems[^TBAplus22e], this would break security.
 
 ## Conclusion
 
-BBS+ (and/or standalone BBS) are versatile signature schemes (e.g., can sign [commitments to] field element(s) without random oracles, can verify as fast as BLS[^BLS01], etc.).
+BBS+ and standalone BBS are versatile signature schemes (e.g., can sign [commitments to] field element(s) without random oracles, can verify as fast as BLS[^BLS01], etc.).
 
 However, like any signature scheme, they have their **disadvantages**:
  - **Larger signatures** for BBS+: 1 group element and 2 field elements.
