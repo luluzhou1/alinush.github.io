@@ -90,6 +90,10 @@ So, the pubkey recovery algorithm is the following:
 $\mathsf{Schnorr}$.$\mathsf{PubkeyRecover}(m, \sigma) \rightarrow \pk$:
  - $\pk \gets \left(R/g^s\right)^{H(R,m)^{-1}}$
 
+{: .warning}
+Pubkey recovery does not work for the [EdDSA](#eddsa) variant of Schnorr, because the public key is hashed in together with the nonce as $H(R, \pk, m)$, to prevent _related key attacks_[^related-key-attacks].
+Put differently, the recovery algorithm would need the pubkey itself in order to recover the pubkey as $\left(R/g^s\right)^{H(R,\pk,m)^{-1}}$, which is non-sensical.
+
 ## Batch verification
 
 Schnorr signature verification is significantly faster when done **in batch**, rather than individually via $\mathsf{Schnorr.Verify}$.
@@ -283,6 +287,7 @@ Perhaps this article will grow over time.
 [^P2PKH]: [ECDSA verification, P2PKH uncompressed address](https://en.bitcoin.it/wiki/Message_signing#ECDSA_verification.2C_P2PKH_uncompressed_address)
 [^P2PKH-always]: [How did pay-to-pubkey hash come about? What is its history?](https://bitcoin.stackexchange.com/a/73568/24573)
 [^reference-needed]: Not sure what the earliest work is that uses Schnorr signatures over, say, elliptic curves.
+[^related-key-attacks]: [Related key attacks in BIP-340](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki#cite_ref-5-0)
 [^ristretto]: [https://ristretto.group](https://ristretto.group/why_ristretto.html)
 [^schnorrkel]: [Schnorrkel](https://github.com/w3f/schnorrkel)
 [^sign-only-with-the-sk]: https://github.com/jedisct1/libsodium/issues/170
