@@ -25,9 +25,8 @@ Schnorr patented his scheme in 1990.
 This was likely the biggest reason why Bitcoin, and the rest of the cryptocurrency space, (unfortunately?) chose ECDSA as its signature scheme, instead of Schnorr, which is simpler, more efficient and easier to thresholdize into a $t$-out-of-$n$ scheme.
 In 2010, once the patent expired, Schnorr became more popular.
 
-Much like ECDSA, (some variants of) Schnorr support _public key recovery_ feature, which Bitcoin leverages in P2PKH mode[^P2PKH] to keep TXN signatures smaller.
-However, vanilla 
-In fact, Bitcoin leveraged P2PKH since the beginning it seems[^P2PKH-always].
+Much like ECDSA, (some variants of) Schnorr signatures support [public key recovery](#pubkey-recovery), which Bitcoin leverages in P2PKH mode[^P2PKH] to keep TXN signatures smaller.
+(Bitcoin has leveraged P2PKH since the beginning, it seems[^P2PKH-always].)
 
 ## Preliminaries
 
@@ -72,7 +71,7 @@ g^r &\equals g^r
 
 In most use cases, the signature verifier has the public key $\pk$ of the signer and can simply call $\mathsf{Schnorr}.\mathsf{Verify}(m,\pk, \sigma)$ to check a signature $\sigma$ on a message $m$.
 However, in some settings, the verifier might actually not have the public key.
-For example, in blockchain settings, the verifier (i.e., the validators/miners) might only have a hash $h$ of the public key (i.e., the address).
+For example, in blockchain settings, the verifier (i.e., the validators/miners) might only have a hash $h$ of the public key (i.e., the address)[^P2PKH].
 
 **Q:** Is it still possbile for such verifiers to still check the signature is correct against the hash $h$ of the public key?
 
