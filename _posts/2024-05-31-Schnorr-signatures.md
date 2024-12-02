@@ -131,7 +131,7 @@ $\mathsf{Schnorr}'$.$\mathsf{Sign}(m, \sk) \rightarrow \sigma$:
  - $r\randget\Zp$
  - $R \gets g^r$
  - $e \gets H(R, m)$
- - $s \gets (r + e \cdot \sk)\bmod p$ 
+ - $s \gets (r - e \cdot \sk)\bmod p$
  - $\sigma\gets (e, s)$
 
 $\mathsf{Schnorr}'$.$\mathsf{Verify}(m, \pk, \sigma) \rightarrow \\{0,1\\}$:
