@@ -25,17 +25,17 @@ Schnorr patented his scheme in 1990.
 This was likely the biggest reason why Bitcoin, and the rest of the cryptocurrency space, (unfortunately?) chose ECDSA as its signature scheme, instead of Schnorr, which is simpler, more efficient and easier to thresholdize into a $t$-out-of-$n$ scheme.
 In 2010, once the patent expired, Schnorr became more popular.
 
-{: .info}
-One advantage of ECDSA over Schnorr I can think of is its _public key recovery_ feature, which Bitcoin leverages in P2PKH mode[^P2PKH] to keep TXN signatures smaller.
+Much like ECDSA, (some variants of) Schnorr support _public key recovery_ feature, which Bitcoin leverages in P2PKH mode[^P2PKH] to keep TXN signatures smaller.
+However, vanilla 
 In fact, Bitcoin leveraged P2PKH since the beginning it seems[^P2PKH-always].
 
-## The Schnorr signature scheme
-
-Preliminaries:
+## Preliminaries
 
  - We assume a group $\Gr$ of prime order $p$ and a finite field $\Zp$
  - Let $g$ denote the generator of $\Gr$
  - We assume a collision-resistant hash function $H : \Gr \times \\{0,1\\}^* \rightarrow \Zp$.
+
+## The Schnorr signature scheme
 
 $\mathsf{Schnorr}$.$\mathsf{KeyGen}(1^\lambda) \rightarrow (\sk, \pk)$:
  - $\sk\randget\Zp$
@@ -61,11 +61,35 @@ The scheme is correct if signatures created via $\mathsf{Schnorr.Sign}$ verify c
 
 Let's see why this holds:
 \begin{align}
-R &\equals g^s \cdot \pk^{H(R, m)}\\\\\
-g^r &\equals g^{r-H(R, m)\cdot \sk} \cdot (g^\sk)^{H(R, m)}\\\\\
-g^r &\equals g^{r-H(R, m)\cdot \sk} \cdot g^{H(R, m) \cdot \sk}\\\\\
+\label{eq:schnorr-verify}
+R &\equals g^s \cdot \pk^{H(R, m)}\Leftrightarrow\\\\\
+g^r &\equals g^{r-H(R, m)\cdot \sk} \cdot (g^\sk)^{H(R, m)}\Leftrightarrow\\\\\
+g^r &\equals g^{r-H(R, m)\cdot \sk} \cdot g^{H(R, m) \cdot \sk}\Leftrightarrow\\\\\
 g^r &\equals g^r
 \end{align}
+
+## Pubkey recovery
+
+In most use cases, the signature verifier has the public key $\pk$ of the signer and can simply call $\mathsf{Schnorr}.\mathsf{Verify}(m,\pk, \sigma)$ to check a signature $\sigma$ on a message $m$.
+However, in some settings, the verifier might actually not have the public key.
+For example, in blockchain settings, the verifier (i.e., the validators/miners) might only have a hash $h$ of the public key (i.e., the address).
+
+**Q:** Is it still possbile for such verifiers to still check the signature is correct against the hash $h$ of the public key?
+
+**A:** Yes! A **pubkey recovery algorithm** can be used! Given a signature $(\sigma,m)$, this algorithm returns the public key $\pk$ against which $\mathsf{Schnorr}.\mathsf{Verify}(m,\pk, \sigma)$ succeeds.
+Then, the verifier can simply check that the hash of $\pk$ is $h$! 
+
+By reorganizing the verification equation (see Eq. \ref{eq:schnorr-verify}), we can have it "return" the public key under which the signature verifies:
+\begin{align}
+R &\equals g^s \cdot \pk^{H(R, m)}\Leftrightarrow\\\\\
+(R/g^s) &\equals \pk^{H(R, m)}\Leftrightarrow\\\\\
+\left(R/g^s\right)^{H(R,m)^{-1}} &\equals \pk
+\end{align}
+
+So, the pubkey recovery algorithm is the following:
+
+$\mathsf{Schnorr}$.$\mathsf{PubkeyRecover}(m, \sigma) \rightarrow \pk$:
+ - $\pk \gets \left(R/g^s\right)^{H(R,m)^{-1}}$
 
 ## Batch verification
 

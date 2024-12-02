@@ -42,6 +42,15 @@ Lastly, we present an exciting new direction on batching threshold cryptosystems
 
 Overall, we highlight important research problems in both the theory and the practice of threshold cryptography.
 
+## Follow-up reading
+
+Matthieu Rambaud suggested:
+ - [Partially Non-Interactive Two-Round Lattice-Based Threshold Signatures
+](https://eprint.iacr.org/2024/467)
+ - The derived $\\{0,1\\}$-LSSS in [Threshold Fully Homomorphic Encryption](https://eprint.iacr.org/2017/257)
+ - A tradeoff with $n^2$-sized shares: [Improved Universal Thresholdizer from Iterative Shamir Secret Sharing](https://eprint.iacr.org/2023/545)
+
+
 ---
 
 {% include refs.md %}
