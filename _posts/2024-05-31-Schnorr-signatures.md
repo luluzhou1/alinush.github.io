@@ -73,26 +73,27 @@ In most use cases, the signature verifier has the public key $\pk$ of the signer
 However, in some settings, the verifier might actually not have the public key.
 For example, in blockchain settings, the verifier (i.e., the validators/miners) might only have a hash $h$ of the public key (i.e., the address)[^P2PKH].
 
-**Q:** Is it still possbile for such verifiers to still check the signature is correct against the hash $h$ of the public key?
+**Q:** Is it still possbile for such verifiers to still check the signature $\sigma$ on $m$ is correct against the hash $h$ of the public key?
 
-**A:** Yes! A **pubkey recovery algorithm** can be used! Given a signature $(\sigma,m)$, this algorithm returns the public key $\pk$ against which $\mathsf{Schnorr}.\mathsf{Verify}(m,\pk, \sigma)$ succeeds.
+**A:** Yes! There exists a **pubkey recovery algorithm** that returns the public key $\pk$ against which $\mathsf{Schnorr}.\mathsf{Verify}(m,\pk, \sigma)$ succeeds.
 Then, the verifier can simply check that the hash of $\pk$ is $h$! 
 
 By reorganizing the verification equation (see Eq. \ref{eq:schnorr-verify}), we can have it "return" the public key under which the signature verifies:
 \begin{align}
 R &\equals g^s \cdot \pk^{H(R, m)}\Leftrightarrow\\\\\
 (R/g^s) &\equals \pk^{H(R, m)}\Leftrightarrow\\\\\
-\left(R/g^s\right)^{H(R,m)^{-1}} &\equals \pk
+\left(R/g^s\right)^{\left(H(R,m)^{-1}\right)} &\equals \pk
 \end{align}
 
 So, the pubkey recovery algorithm is the following:
 
 $\mathsf{Schnorr}$.$\mathsf{PubkeyRecover}(m, \sigma) \rightarrow \pk$:
- - $\pk \gets \left(R/g^s\right)^{H(R,m)^{-1}}$
+ - $(R, s) \gets \sigma$
+ - $\pk \gets \left(R/g^s\right)^{\left(H(R,m)^{-1}\right)}$
 
 {: .warning}
 Pubkey recovery does not work for the [EdDSA](#eddsa) variant of Schnorr, because the public key is hashed in together with the nonce as $H(R, \pk, m)$, to prevent _related key attacks_[^related-key-attacks].
-Put differently, the recovery algorithm would need the pubkey itself in order to recover the pubkey as $\left(R/g^s\right)^{H(R,\pk,m)^{-1}}$, which is non-sensical.
+Put differently, the recovery algorithm would need the pubkey itself in order to recover the pubkey as $\left(R/g^s\right)^{\left(H(R,\pk,m)^{-1}\right)}$, which is non-sensical.
 
 ## Batch verification
 
