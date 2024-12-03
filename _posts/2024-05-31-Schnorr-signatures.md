@@ -205,7 +205,7 @@ Previous work explores the many subtleties in depth[^devalence]$^,$[^CGN20e]$^,$
 Instead of rehashing their explanations, I will summarize three main pitfalls to watch out for.
 (Unfortunately, Ed25519 only handles the first one.)
 
-### Pitfall #1: Securely generating the nonce $r$
+### Pitfall #1: Reusing the nonce $r$
 
 This is the most important **pitfall** to avoid in Schnorr signatures:
 
@@ -236,7 +236,18 @@ Then, an attacker can extract $\sk$ as follows:
 For this attack to work, the denominator above must be not zero, which happens with overwhelming probability when $m_1\ne m_2$ and $H$ is collision-resistant. 
 This attack works even when using the alternative $(e, s)$ formulation of Schnorr singatures, [described later](#alternative-s-e-formulation).
 
-### Pitfall #2: Non-canonical serialization
+### Pitfall #2: Biased nonces $r$
+
+{: .error}
+**Pitfall:** If an implementation produces signatures whose nonces $r$ are not uniform in $\Zp$, then **the secret key can be extracted**.
+Once again, it is **crucial** for security that $r$ be sampled randomly.
+
+{: .success}
+**Recommendation:** As we [discuss later](#eddsa-and-ed25519-formulation), picking $r$ pseudorandomly based on the message and the secret key obviates this problem.
+
+We do not showcase the attacks, which rely on solving lattice problems and are similar to attacks on [ECDSA](/2024/06/01/ECDSA-signatures.html)[^BH19e].
+
+### Pitfall #3: Non-canonical serialization
 
 {: .error}
 **Pitfall:** The description above and, in fact, most academic descriptions, do not distinguish between a group element and its **serialization** into bytes.
@@ -256,7 +267,7 @@ In the past, such attacks may have been used to drain money from (poorly-impleme
 **Recommendation:** Developers need to ensure that each group (or field) element has a single / unique / canonical serialized representation into bytes **and** that deserialization **only** accepts this canonical representation.
 Ristretto255[^ristretto] is a recently-proposed elliptic curve group that offers canonical (de)serialization. 
 
-### Pitfall #3: Using non-prime order groups
+### Pitfall #4: Using non-prime order groups
 
 {: .error}
 **Pitfall:** The description above and, in fact, most academic descriptions, make a **crucial assumption**: that $\Gr$ is a prime-order group.
