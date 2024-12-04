@@ -35,6 +35,14 @@ header:
   - titles:
       en      : &EN       Cryptomat
     url: /cryptomat.html
+  
+  - titles:
+      en      : &EN       Paraphernalia
+    url: /paraphernalia.html
+
+  - titles:
+      en      : &EN       Please solve!
+    url: /please-solve.html
 
   - titles:
       en      : &EN       CV
@@ -69,14 +77,6 @@ header:
       tr      : &TR       Hakkında
       # @end locale config
     url: /about.html
-  
-  - titles:
-      en      : &EN       Awesome crypto
-    url: /awesome-crypto.html
-
-  - titles:
-      en      : &EN       Please solve!
-    url: /please-solve.html
 
 # NOTE: For some reason, only depth-1 nesting works here.
 # I tried using subfolderitems and subsubfolderitems with 'page' rather than 'title' but no luck
