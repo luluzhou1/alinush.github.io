@@ -122,6 +122,7 @@ At the time, the main thought going through his head was:
  > _"A good death is its own reward."_
 
 Please pray for him.
+(The Rebel 1100 and R1250GS have since been sold.)
 
 <!--
 To deal with his predisposition towards death, Alin has been doing several things:
