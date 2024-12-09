@@ -17,6 +17,7 @@ This is some of the stuff I read and think others would find useful.
 ## Cryptography
 
  - [A course in cryptography](https://www.cs.cornell.edu/courses/cs4830/2010fa/lecnotes.pdf), Rafael Pass and abhi shelat
+ - [Notes on Programmable Cryptography](https://github.com/0xPARC/0xparc-intro-book), 0xPARC
 
 ## Group theory
 
@@ -36,6 +37,9 @@ This is some of the stuff I read and think others would find useful.
 ## (Zero-knowledge) proof systems
 
  - [Groth16](https://xn--2-umb.com/22/groth16/), Remco Bloemen
+ - [Groth16 Explained](https://www.rareskills.io/post/groth16]), RareSkills <small>(An excellent overview of Groth16!)</small>
+ - [The MoonMath manual](https://leastauthority.com/community-matters/moonmath-manual/), Least Authority
+ - [The RareSkills Book of Zero Knowledge](https://www.rareskills.io/zk-book), RareSkills
  - [PLONK notes (wave 1)](https://www.ret2basic.me/2024/08/21/plonk-notes-wave-1.html), ret2basic.eth
 
 
