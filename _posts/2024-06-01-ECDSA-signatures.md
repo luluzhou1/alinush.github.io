@@ -197,13 +197,13 @@ This is why, in online folklore, you will find ECDSA signatures described as a t
 There is **no** good reason to ever use ECDSA (except for legacy compatibility). 
 At least, this is my current (limited?) sense. 
 
-As far as I can tell, Schnorr should always be preferred over it:
+As far as I can tell, [Schnorr signatures](/2024/05/31/Schnorr-signatures.html) should always be preferred over it:
  - Schnorr is _slightly_ faster (no field inversions)
  - Schnorr admits a more efficient $t$-out-of-$n$ threshold signing protocol
- - Schnorr has simpler pubkey recovery (no recovery hints needed)
+ - Schnorr has a simpler pubkey recovery (no recovery hints needed)
  - Schnorr has an arguably-cleaner security reduction
 
-Other not so great features of ECDSA:
+Other disadvantages of ECDSA:
 
  1. ECDSA is **inefficient as a $t$-out-of-$n$ threshold signature** scheme
  1. ECDSA, like [Schnorr](/2024/05/31/Schnorr-signatures.html), is broken if the **nonce $k$ is reused**. Generally, they are both very **fragile** if the nonce $k$ is biased[^BH19e].
@@ -228,6 +228,7 @@ Other items I hope to address in the future:
  - Look into [Shamir trick stuff](https://crypto.stackexchange.com/questions/47627/goofs-that-could-creep-in-ecdsa-signature-verification)
  - Address implementations checking that $R$ is not the identity
  - An unecessary check that [the PK is not the identity](https://crypto.stackexchange.com/questions/74354/ecdsa-signature-verification-checks) during verification
+ - Incorporate insights from [SEC 1: Elliptic curve cryptography](https://www.secg.org/sec1-v2.pdf)
 
 ---
 
