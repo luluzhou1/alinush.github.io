@@ -3,8 +3,8 @@ tags:
 title: ECDSA signatures (and why you should avoid them)
 #date: 2020-11-05 20:45:59
 #published: false
-#sidebar:
-#    nav: cryptomat
+sidebar:
+    nav: cryptomat
 ---
 
 {: .info}
@@ -34,11 +34,61 @@ $$</p>
 
 ## History
 
-{: .todo}
-Describe sequence of events: ElGamal signatures, Schnorr patent, DSA signatures, ECDSA signatures, Daniel L. Brown's ECDSA pubkey recovery algorithm[^Brow02]$^,$[^fgrieu-pubkey-recovery]
+In 1985, nine years after Diffie-Hellman[^DH76], Taher ElGamal introduced a digital signature scheme and postulated it to be secure under the hardness of discrete logarithms[^Elga85].
+Referred to as **ElGamal signatures**, this scheme leveraged the multiplicative group of integers modulo $p$ (i.e., $\Zp^*=\\{1,2,3,\ldots,p-1\\}$), where $p$ is a prime and $g$ is a [generator](/2021/04/15/basic-number-theory.html#finding-primitive-roots-mod-p).
+ElGamal's intuition was that a signature $(r,s)$ for a message $m$ should satisfy:
+\begin{align}
+\label{eq:elgamal-intuition}
+g^m &= \pk^r r^s \bmod p,\ \text{where}\ 0 \le r, s < p-1
+\end{align}
+<!--And, specifically, that if $r\gets g^k$ for a random $k$, then:
+\begin{align}
+\end{align}-->
+So, ElGamal proposes to sign by "solving"[^elgamal-signing] for $r$ and $s$ as follows:
+\begin{align}
+k &\randget [0,p-1],\ \text{s.t.}\ \gcd(k, p-1) = 1\\\\\
+r &\gets g^k \bmod p\\\\\
+\label{eq:elgamal-sig-s}
+s &\gets k^{-1}(m - \sk\cdot r) \bmod (p-1)
+\end{align}
 
+In 1991, NIST proposed a slight alternation of ElGamal signatures called **DSA signatures** for standardization as part of the [Digital Signatures Standard (DSS)](https://archive.epic.org/crypto/dss/dss_fr_notice_1991.html).
+Unlike ElGamal, DSA assumed a prime $p = hq+1$ where $q$ is a also prime and $h$ is some other number (sometimes called a co-factor).
+The signature now became:
+\begin{align}
+k &\randget [1,q)\\\\\
+r &\gets (g^k \bmod p) \bmod q\\\\\
+s &\gets k^{-1}(m + \sk\cdot r) \bmod q
+\end{align}
+DSA was more efficient, since it worked (mostly) over smaller primes $q$, when $p$ was picked appropriately.
+It also allowed the signature $(r,s)\in[0,q)$ to be much smaller.
+
+{: .note}
+Not sure what the rationale was behind changing ElGamal's $k^{-1}(m\textcolor{green}{-}\sk\cdot r)$ into DSA's $k^{-1}(m\textcolor{red}{+}\sk\cdot r)$.
+
+In 1992, Scott Vanstone proposed **ECDSA** in response to NIST's request for comments on their DSS proposal[^JMV01].
+ECDSA is an elliptic curve variant of the DSA scheme, which [this blog post describes in depth](#the-ecdsa-signature-scheme).
+
+In 1993, a [FOIA request](https://web.archive.org/web/20200229145033/https://catless.ncl.ac.uk/Risks/14/59) reveals that the DSA algorithm was designed not by NIST but by the NSA.
+Subsequently, in 1998 and after, ANSI, IEEE and NIST all standardized ECDSA.
+
+In 2002, Daniel L. Brown introduces ECDSA's [pubkey recovery](#pubkey-recovery-algorithm) algorithm[^Brow02]$^,$[^fgrieu-pubkey-recovery].
+
+On January 3, 2009, Satoshi Nakamoto makes Bitcoin available to the public.
+Bitcoin uses ECDSA over secp256k1 curves as its scheme for signing transactions.
+Some believe Satoshi chose ECDSA because [Schnorr signatures](/2024/05/31/Schnorr-signatures.html) were, at the time, still patented.
+
+{: .info} 
+My two cents are that this choice cemented ECDSA's reign in the cryptocurrency space.
+Ethereum soon followed in Bitcoin's footsteps.
+And all other blockchains followed in Ethereum's.
 
 ## The ECDSA signature scheme
+
+In this section, we explain how key generation, signing and signature verification work in ECDSA.
+To help the reader understand how ECDSA works, we show why ECDSA is _correct_ (i.e., honestly-computed signature pass verification).
+We do not show why ECDSA is _secure_, since the security proofs can be a bit nuanced.
+Lastly, we detail ECDSA's _pubkey recovery_ feature, which is often used in cryptocurrencies like Bitcoin and Ethereum.
 
 {: .info}
 It is **important** to understand that ECDSA only works with **eliptic curve** groups $\Gr$.
@@ -122,7 +172,7 @@ r &\equals f\left(g^k\right)\Leftrightarrow\\\\\
 r &= f\left(R\right)
 \end{align}
 
-## Pubkey recovery algorithm
+### Pubkey recovery algorithm
 
 ECDSA, together with some variants of [Schnorr](/2024/05/31/Schnorr-signatures.html#pubkey-recovery), are one of the few schemes that support a **pubkey recovery** algorithm: i.e., an algorithm that, given a signature $\sigma$ on a message $m$, returns (a set of) public key(s) under which $\sigma$ verifies on $m$.
 
@@ -199,7 +249,7 @@ At least, this is my current (limited?) sense.
 
 As far as I can tell, [Schnorr signatures](/2024/05/31/Schnorr-signatures.html) should always be preferred over it:
  - Schnorr is _slightly_ faster (no field inversions)
- - Schnorr admits a more efficient $t$-out-of-$n$ threshold signing protocol
+ - Schnorr admits a reasonably-efficient $t$-out-of-$n$ threshold signing protocol
  - Schnorr has a simpler pubkey recovery (no recovery hints needed)
  - Schnorr has an arguably-cleaner security reduction
 
@@ -213,15 +263,28 @@ Other disadvantages of ECDSA:
     - Typically, ECDSA security reductions must make assumptions about the [conversion function](#the-ecdsa-conversion-problem)
     - ...or work in the generic group model (GGM)
     - ...or introduce strange assumptions like the _semi-discrete logarithm (SDLP)_ problem
+    + In fact, algebraic security reduction for ECDSA _"can only exist if the security reduction is allowed to program the conversion function"_[^HK23e]
     - For the latest security analysis, see recent works by Eike Kiltz[^FKP16]$^,$[^HK23e].
+ 1. ECDSA is often used over NIST curves. It doesn't have to be, but it is. Some folks suspect these [curves could be backdoored](https://safecurves.cr.yp.to/rigid.html).
 
 {: .note}
 Although ECDSA can be very fragile in the face of side-channels (e.g., extracting ECDSA keys from Yubikeys[^eea-side-channel], it is not clear to what extent other schemes would fare better (e.g., both [Schnorr](/2024/05/31/Schnorr-signatures.html) and BLS[^BLS01] do exponentiations with secrets).
+
+## Conclusion
+
+Despite my strong bias against ECDSA, I still find it to be a cool signature scheme:
+
+ 1. It is highly-succinct: it requires only 2 field elements.
+ 1. It is one of the few signature schemes we have in the discrete log setting (besides Schnorr[^Schn89], Chaum-Pedersen[^CP92], Okamoto[^Okam93]; what else?)
+ 1. It led to the discovery of pubkey recovery algorithms
+ 1. It does not use the Fiat-Shamir transform[^FS87]
 
 ## TODOs
 
 Other items I hope to address in the future:
 
+ - Batch verification of ECDSA signatures
+ - The necessity of random oracles in ElGamal/DSA to prevent [existential forgeries](https://en.wikipedia.org/wiki/ElGamal_signature_scheme#Existential_forgery) (also [here](https://crypto.stackexchange.com/questions/35684/el-gamal-existential-forgery-using-pointcheval-stern-signature-algorithm))
  - I hope to write down a reasonable proof of EUF-CMA security.
  - Other [summaries of why ECDSA is very feeble](https://blog.trailofbits.com/2020/06/11/ecdsa-handle-with-care/).
  - [Signing as $(R,s)$](https://crypto.stackexchange.com/questions/53025/what-is-customizable-in-ecdsa-signature-and-verification) when combining ECDSA with other algorithms.
@@ -234,6 +297,7 @@ Other items I hope to address in the future:
 
 [^bitcoin-stex]: See [this comment](https://bitcoin.stackexchange.com/questions/38351/ecdsa-v-r-s-what-is-v/38909#comment46061_38909) on Bitcoin Stack Exchange for a similar explanation.
 [^eea-side-channel]: [EUCLEAK](https://ninjalab.io/eucleak/), by NinjaLab
+[^elgamal-signing]: If $r=g^k$, then Eq. \ref{eq:elgamal-intuition} becomes $g^m = g^{\sk \cdot r} g^{k \cdot s} \bmod p$. If we look "in the exponent", we get $m \equiv \sk \cdot r + k\cdot s \pmod{p-1}$. Therefore, we can solve for $s$ as per Eq. \ref{eq:elgamal-sig-s}, since $\gcd(k, p-1) = 1$.
 [^fgrieu-pubkey-recovery]: [ECDSA public key recovery is discovered by whom?](https://crypto.stackexchange.com/questions/60958/ecdsa-public-key-recovery-is-discovered-by-whom)
 [^mtgox]: Citing from [DW14][^DW14]: _"In combination with the above mentioned success rate of malleability attacks we conclude that overall malleability attacks did not have any substantial inﬂuence in the loss of bitcoins incurred by MtGox."_
 [^P2PKH]: [ECDSA verification, P2PKH uncompressed address](https://en.bitcoin.it/wiki/Message_signing#ECDSA_verification.2C_P2PKH_uncompressed_address)

@@ -285,12 +285,13 @@ By now, you should be pretty well-versed in Schnorr signatures and a few of thei
 There is so much more to say about them.
 Perhaps this article will grow over time.
 
-### Questions for the reader
+### Questions left
 
  1. What other aspects of Schnorr signatures should this blog post address?
  1. The original Schnorr paper[^Schn89] claims $\lambda$-bit hashes (as opposed to $2\lambda$) are sufficient for $\lambda$-bit security. I believe this analysis remains true?
  1. What is a good academic reference for the *cleanest* EUF-CMA security proof for (single-signer) Schnorr?
  1. What is the the earliest work that defines Schnorr signatures over elliptic curves?
+ 1. What is the significance of [PV05][^PV05]
 
 ---
 
