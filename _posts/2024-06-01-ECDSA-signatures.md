@@ -9,7 +9,7 @@ sidebar:
 
 {: .info}
 **tl;dr:** ECDSA is one of the most widely-deployed signature schemes (for better or worse).
-ECDSA is _efficient_, offers _versatility_ via its _pubkey recovery_ feature and is widely adopted due to Bitcoin's success.
+ECDSA is _efficient_, offers _versatility_ via its [pubkey recovery](#pubkey-recovery) feature and is widely adopted due to Bitcoin's success.
 Its history is fascinating, as is its security analysis.
 Nonetheless: you should **stay away from it**, as I argue [here](#why-you-should-avoid-ecdsa).
 
@@ -30,6 +30,7 @@ $$</p>
  - Let $g$ denote the generator of $\Gr$
  - Let $\Zp$ denote the finite field of order $p$ that arises "in the exponent" of $g$
  - Let $\Zps=\\{1,2,3,\ldots,p-1\\}$ denote the multiplicative group of integers mod $p$
+ - Let $\bar{x}$ denote the integer representation of $x\in\F$ for any finite field $\F$ (e.g., $\Zp$ or $\Fq$)
  - We assume a collision-resistant hash function $H : \\{0,1\\}^\* \rightarrow \Zp$
     + As per Brown's formalization of _AbstractDSA_[^Brow02].
 
@@ -82,7 +83,8 @@ In 1998 and subsequently, ANSI, IEEE and NIST all standardized ECDSA.
 In 1995, David Nccache et al. propose a [batch verification](#batch-verification) algorithm for verifying multiple DSA signatures faster[^NMVR95].
 In 2007, Cheon and Yi introduce a batch verification algorithm for ECDSA[^CY07].
 
-In 2002, Daniel L. Brown introduces ECDSA's [pubkey recovery](#pubkey-recovery-algorithm) algorithm[^Brow02]$^,$[^fgrieu-pubkey-recovery].
+In 2002, Daniel L. Brown suggests that ECDSA supports [pubkey recovery](#pubkey-recovery) as an afterthought in an academic footnote[^Brow02]$^,$[^fgrieu-pubkey-recovery].
+Later on, the full algorithm is incorporated into a write-up by Certicom Research[^sec-1].
 
 On January 3, 2009, Satoshi Nakamoto makes Bitcoin available to the public.
 Bitcoin uses ECDSA over secp256k1 curves as its scheme for signing transactions.
@@ -98,7 +100,7 @@ And all other blockchains followed in Ethereum's.
 In this section, we explain how key generation, signing and signature verification work in ECDSA.
 To help the reader understand how ECDSA works, we show why ECDSA is _correct_ (i.e., honestly-computed signature pass verification).
 We do not show why ECDSA is _secure_, since the security proofs can be a bit nuanced.
-Lastly, we detail ECDSA's _pubkey recovery_ feature, which is often used in cryptocurrencies like Bitcoin and Ethereum.
+Lastly, we detail ECDSA's [pubkey recovery](#pubkey-recovery) feature, which is often used in cryptocurrencies like Bitcoin and Ethereum.
 
 {: .info}
 It is **important** to understand that ECDSA only works with **eliptic curve** groups $\Gr$[^Cost12].
@@ -110,8 +112,7 @@ Another important detail about ECDSA is that it assumes a **conversion function*
 
 $f(R) \rightarrow r\in \Zp$:
  1. Let $(x,y)\in\Fq^2$ denote the elliptic curve coordinates of point $R \in \Gr$
- 1. Let $\bar{x}$ denote the integer representation of $x$
- 1. $r\gets \bar{x} \bmod p$
+ 1. $r\gets \bar{x} \bmod p$ (recall that $\bar{x}$ is the integer representation of $x\in \Fq$)
 
 ### Algorithms
 
@@ -181,7 +182,7 @@ r &\equals f\left(g^k\right)\Leftrightarrow\\\\\
 r &= f\left(R\right)
 \end{align}
 
-## Pubkey recovery algorithm
+## Pubkey recovery
 
 ECDSA, together with some variants of [Schnorr](/2024/05/31/Schnorr-signatures.html#pubkey-recovery), are one of the few schemes that support a **pubkey recovery** algorithm: i.e., an algorithm that, given a signature $\sigma$ on a message $m$, returns (a set of) public key(s) under which $\sigma$ verifies on $m$.
 
@@ -228,16 +229,21 @@ $$(q + 1) - 2\sqrt{q} \le p \le (q+1) + 2\sqrt{q}$$
 
 So, it could be that $p \ge q$ or that $p < q$.
 
-**Case 1:** If $p\ge q$, then given $r$, we can recover $x$ since the $\bmod p$ operation does not truncate $x$ when computing $r$.
+**Case 1:** If $p\ge q$, then given $r$, we can recover $x$ since the $\bar{x} \bmod p$ operation does not truncate $x$ when computing $r$.
 
 **Case 2:** But, if $p < q$, it could be that $\bar{x} \in [0,q)$ was truncated when computing $r=\bar{x} \bmod p$ (i.e., it could be that $\bar{x} \ge p$).
-So, this means we have two possible x-coordinates[^bitcoin-stex]:
+By Hasse's theorem, $(q + 1) - 2\sqrt{q}\le p < q$.
+Rearranging, we have $q - p \le 2\sqrt{q} - 1$.
+Since $\bar{x} < q$, we have $\bar{x} - p < q - p$.
+Therefore, we have $\bar{x} - p < 2\sqrt{q} - 1$, which is guaranteed to be smaller than $p$, since $p > 2\sqrt{q} - 1$ (again, by Hasse's theorem).
+Therefore, the modular reduction $\bar{x} \bmod p$ can be computed as $\bar{x} - p$.
+So, we only have two possible x-coordinates[^bitcoin-stex]:
 \begin{align}
 x_1 &= \bar{r} \in [0,q)\\\\\
-x_2 &= (\bar{r} + p) \bmod q
+x_2 &= (\bar{r} + p) \in [0, 2\sqrt{q})
 \end{align}
 <!-- 
-Only need to do (\bar{r} + p) \bmod q, because |p - q| < 2\sqrt{q} 
+Only need to do (\bar{r} + p), because |p - q| < 2\sqrt{q} 
 -->
 Then, each $x_i$ will have two possible y-coordinates: $y_i=\pm\sqrt{x_i^3 + ax_i + b}$.
 And as a result, there are now four possible $R$'s to recover:
@@ -247,9 +253,58 @@ R_1' &= (x_1, -y_1)\\\\\
 R_2 &= (x_2, y_2)\\\\\
 R_2' &= (x_2, -y_2)\\\\\
 \end{align}
-To avoid the need to brute force all possible $R$ values, some systems like Ethereum, include a 2-bit **hint** or **recovery ID** $v$ next to an ECDSA signature $(r,s)$.
+To avoid the need to brute force all possible $R$ values, some systems like Ethereum, include a 2-bit **recovery ID** $v$ next to an ECDSA signature $(r,s)$.
 This $v$ indicates to a verifier which one of the 4 values above should be computed as the actual $R$, saving precious signature verification computation. 
 This is why, in online folklore, you will find ECDSA signatures described as a triple $(r,s,v)$.
+
+### Algorithms
+
+We describe the formal algorithms for pubkey recovery below.
+Note that a new _augmented_ conversion function $f'$ is needed that computes the recovery ID $v$ for pubkey recovery.
+This time, the conversion function is bijective and can be inverted, so we define both $f'$ and $f'^{-1}$ below.
+
+$f'(R) \rightarrow (r,v)\in \Zp\times\\{0,1\\}^2$:
+ 1. Let $(x,y)\in\Fq^2$ denote the elliptic curve coordinates of point $R \in \Gr$
+ 1. $\mathsf{is\\_odd} \gets \bar{y} \bmod 2\ \textcolor{grey}{\text{// 1 if $y$ is odd; 0 otherwise}}$
+ 1. $\mathsf{overflows} \gets (\bar{x} \ge \bar{p})\ \textcolor{grey}{\text{// 1 if $\bar{x}\ge\bar{p}$; 0 otherwise}}$
+ 1. $r\gets \bar{x} - p\ \textcolor{grey}{\text{// b.c., by Hasse's theorem, $(q + 1) - 2\sqrt{q}\le p < q\Rightarrow q - p \le 2\sqrt{q} - 1$}}$
+ 1. $v\gets (\mathsf{overflows}, \mathsf{is\\_odd})\ \textcolor{grey}{\text{// MSB indicates overflow and LSB oddness}}$
+
+{: .note}
+The **recovery ID** $v$ stores (1) whether the reduction modulo $p$ wrapped around (i.e., "overflowed") in its most-significant bit and (2) whether $y$ is even or odd in its least-significant bit. This "oddness" bit will be used to determine which one of $\pm\sqrt{x^3 + ax + b}$ to set $y$ to.
+
+{: .warning}
+This blog-post's recovery ID is not encoded the same as in Ethereum or Bitcoin.
+I believe Ethereum re-maps these kind of 2-bit recovery IDs as just two numbers: 27 (for $v=0$) and 28 (for $v=1$), since the case of $\mathsf{overflows} \equals 1$ occurs with negligible probability.
+Recently, EIP-155[^eip-155] changed this encoding scheme to be $\mathsf{chain\\_id} \times 2 + (35 + v)$.
+So, for mainnet with chain ID 1, the numbers are either 37 (for $v=0$) or 38 (for $v=1$).
+
+$f'^{-1}(r,v) \rightarrow R \in \Gr$:
+ 1. $(\mathsf{overflows}, \mathsf{is\\_odd}) \gets v\ \textcolor{grey}{\text{// parse recovery ID}}$
+ 1. **if** $\mathsf{overflows} \equals 0$, **then** $x\gets r$, **else** $x \gets (\bar{r} + p)$
+	+ **Note:** The result $x$ is in $\Fq$
+ 1. $y\gets \sqrt{x^3 + ax + b}\ \textcolor{grey}{\text{// $a$ and $b$ depend on the choice of elliptic curve $\Gr$}}$
+ 1. $b\gets \bar{y} \bmod 2$
+ 1. **if** $\mathsf{is\\_odd} \ne b$, **then** $y \gets (-y)\ \textcolor{grey}{\text{// i.e., $q-y$}}$ 
+	+ **Note:** The result $y$ is in $\Fq$
+ 1. $R\gets (x,y)$
+
+$\mathsf{ECDSA}$.$\mathsf{RecoverableSign}(m, \sk) \rightarrow \sigma\in\Zp^2 \times \\{0,1\\}^2$:
+ 1. $k \randget \Zp\setminus\\{0\\}\ \textcolor{grey}{\text{// 0 is excluded as a valid nonce}}$
+ 1. $R\gets g^k$ 
+ 1. $(r,v)\gets f'(R)$ (see the _augmented_ conversion function above)
+     - **if** $r\equals 0$, go back to **step 1**
+ 1. $s \gets k^{-1}(H(m) + \sk\cdot r) \bmod p$ 
+     - **if** $s\equals 0$, go back to **step 1**
+ 1. $\sigma\gets (r,s,v)$
+
+$\mathsf{ECDSA}$.$\mathsf{PubkeyRecover}(m, \sigma) \rightarrow \pk$:
+ - $(r,s,v)\gets \sigma$
+ - **assert** $r \in \Zp\setminus\\{0\\}$
+ - **assert** $s \in \Zp\setminus\\{0\\}$
+ - **assert** $v \in \\{0,1\\}^2$
+ - $R \gets f'^{-1}(r, v)$
+ - $\pk\gets \left(R^s / g^{H(m)}\right)^{(r^{-1})}$
 
 ## Batch verification
 
@@ -281,7 +336,7 @@ Changes from normal ECDSA are highlighted in $\textcolor{red}{\text{red}}$.
 $\mathsf{ECDSA^\*}$.$\mathsf{Sign}(m, \sk) \rightarrow \sigma\in(\textcolor{red}{\Gr},\textcolor{red}{\Zp})$:
  1. $k \randget \Zp\setminus\\{0\\}\ \textcolor{grey}{\text{// 0 is excluded as a valid nonce}}$
  1. $R\gets g^k$ 
- 1. $r\gets f(R)$ 
+ 1. $r\gets f(R)$ (see the [conversion function](#the-ecdsa-conversion-function) above)
      - **if** $r\equals 0$, go back to **step 1**
  1. $s \gets k^{-1}(H(m) + \sk\cdot r) \bmod p$ 
      - **if** $s\equals 0$, go back to **step 1**
@@ -327,7 +382,7 @@ Implementing ECDSA securely and efficiently can be tricky:
 As far as I can tell, [Schnorr signatures](/2024/05/31/Schnorr-signatures.html) should always be preferred over it:
  - Schnorr is _slightly_ faster, especially in the batched setting (no field inversions)
  - Schnorr admits a reasonably-efficient $t$-out-of-$n$ threshold signing protocol
- - Schnorr has a simpler pubkey recovery (no recovery hints needed)
+ - Schnorr has a simpler pubkey recovery (no recovery IDs needed)
  - Schnorr has an arguably-cleaner security reduction
  - Schnorr (not EdDSA nor Ed25519) supports batch verification out-of-the-box
 
@@ -354,7 +409,7 @@ Despite my strong bias against ECDSA, I still find it to be a cool signature sch
  1. ECDSA does not use the Fiat-Shamir transform[^FS87]
  1. ElGamal signatures (and thus [EC]DSA) are one of the few paradigms for signature schemes in the prime-order group setting without pairings
      + Besides Fiat-Shamir-style signatures from $\Sigma$-protocols (e.g., Schnorr[^Schn89], Chaum-Pedersen[^CP92], Okamoto[^Okam93]), what else is there?
- 1. ECDSA showcased the utility of pubkey recovery algorithms in cryptocurrencies like Bitcoin and Ethereum
+ 1. ECDSA showcased the utility of [pubkey recovery](#pubkey-recovery) algorithms in cryptocurrencies like Bitcoin and Ethereum
 
 ### Future work
 
@@ -366,8 +421,132 @@ Other items I hope to address in the future:
  - Look into [Shamir trick stuff](https://crypto.stackexchange.com/questions/47627/goofs-that-could-creep-in-ecdsa-signature-verification)
  - Address implementations checking that $R$ is not the identity
  - An unecessary check that [the PK is not the identity](https://crypto.stackexchange.com/questions/74354/ecdsa-signature-verification-checks) during verification
- - Incorporate insights from [SEC 1: Elliptic curve cryptography](https://www.secg.org/sec1-v2.pdf)
+ - Incorporate more insights from SEC 1: Elliptic curve cryptography[^sec-1]
+    - "Self-signed signatures"
+    - ECDSA signatures can be verified faster agains the SK
  - [Batched ECDSA verification inside circom for zkSNARKs](https://0xparc.org/blog/batch-ecdsa)
+
+## Appendix: libsecp256k1's ECDSA pubkey recovery code (Rust)
+
+For my own benefit (and hopefully yours too), I am including `libsecp256k1`'s[^libsecp256k1] Rust code to showcase how (recoverable) signing and pubkey recovery are typically implemented.
+
+Note that I've added some instructional comments to the code.
+
+{: .note}
+In this blog post, I use $\Fq$ for the base field of the elliptic curve and $p$ for its order.
+However, the `libsecp256k1` code has these flipped.
+Nonetheless, my comments assume my terminology where $(x,y)\in\Fq^2$ and the order of the curve is $p$. 
+
+### Recoverable signing
+
+```rust
+pub fn sign_raw(
+	&self,
+	seckey: &Scalar,
+	message: &Scalar,
+	nonce: &Scalar,
+) -> Result<(Scalar, Scalar, u8), Error> {
+	let mut rp = Jacobian::default();
+	self.ecmult_gen(&mut rp, nonce);
+	let mut r = Affine::default();
+	r.set_gej(&rp);
+	r.x.normalize();
+	r.y.normalize();
+	// This is the x coordinate of R, in F_q, but viewed as a big-endian integer
+	let b = r.x.b32();
+	let mut sigr = Scalar::default();
+	// This does the R.x mod p reduction (p = the order of the curve)
+	let overflow = bool::from(sigr.set_b32(&b));
+	debug_assert!(!sigr.is_zero());
+	// This debug-only asserts that R.x was less than < p and so there was no modular reduction
+	// that actually happened. I guess the developers left this here because they know that,
+	// while this can happen, it only happens with negligible probability due to uniformity of
+	// the nonce and the fact that p < (q+1) + 2\sqrt{q}, so the probability that it overflows
+	// goes to zero as q gets larger. Specifically, the probability is 1 - \frac{q}{(q+1) + 2\sqrt{q}}
+	//
+	debug_assert!(!overflow);
+
+	// This sets the recid = (overflow << 1) | R.y.is_odd())
+	// i.e., the MSB is the overflow bit and the LSB is the oddness bit
+	let mut recid = (if overflow { 2 } else { 0 }) | (if r.y.is_odd() { 1 } else { 0 });
+	let mut n = &sigr * seckey;
+	n += message;
+	let mut sigs = nonce.inv();
+	sigs *= &n;
+	n.clear();
+	rp.clear();
+	r.clear();
+	if sigs.is_zero() {
+		return Err(Error::InvalidMessage);
+	}
+	if sigs.is_high() {
+		sigs = -sigs;
+		recid ^= 1;
+	}
+	Ok((sigr, sigs, recid))
+}
+```
+
+### Pubkey recovery code
+
+```rust
+pub fn recover_raw(
+	&self,
+	sigr: &Scalar,
+	sigs: &Scalar,
+	rec_id: u8,
+	message: &Scalar,
+) -> Result<Affine, Error> {
+	debug_assert!(rec_id < 4);
+
+	if sigr.is_zero() || sigs.is_zero() {
+		return Err(Error::InvalidSignature);
+	}
+
+	// Parse the signature's r as an integer
+	let brx = sigr.b32();
+	// Create an F_q element for storing the x-coordiante of R recovered from r
+	let mut fx = Field::default();
+	let overflow = fx.set_b32(&brx);
+	// This would indicate that an r >= q was used, which would be an error.
+	debug_assert!(overflow);
+
+	// If there was an "overflow" during the reduction mod p, then account for it.
+	if rec_id & 2 > 0 {
+		// P_MINUS_ORDER, in our terminology, is (q - p), where:
+ 		//  - q is the order of the base field
+		//  - p is the order of the curve
+		if fx >= P_MINUS_ORDER {
+			return Err(Error::InvalidSignature);
+		}
+		// Accounts for the overflow by setting fx = (\bar{r} + p) and (eventually) reducing mod q
+		fx += ORDER_AS_FE;
+	}
+
+	// Recovers the elliptic curve point R = (x, y) from the x-coordinate x and the oddness bit
+	let mut x = Affine::default();
+	if !x.set_xo_var(&fx, rec_id & 1 > 0) {
+		return Err(Error::InvalidSignature);
+	}
+	let mut xj = Jacobian::default();
+	xj.set_ge(&x);
+	let rn = sigr.inv();
+	let mut u1 = &rn * message;
+	u1 = -u1;
+	let u2 = &rn * sigs;
+	let mut qj = Jacobian::default();
+	self.ecmult(&mut qj, &xj, &u2, &u1);
+
+	let mut pubkey = Affine::default();
+	pubkey.set_gej_var(&qj);
+
+	if pubkey.is_infinity() {
+		Err(Error::InvalidSignature)
+	} else {
+		Ok(pubkey)
+	}
+}
+```
 
 ## References
 
@@ -378,16 +557,19 @@ For cited works, see below 👇👇
 [^dss]: NIST's [call for digital signature schemes to be standardized](https://archive.epic.org/crypto/dss/dss_fr_notice_1991.html)
 [^ec-drbg]: [Dual_EC_DRBG](https://en.wikipedia.org/wiki/Dual_EC_DRBG), Wikipedia
 [^eea-side-channel]: [EUCLEAK](https://ninjalab.io/eucleak/), by NinjaLab
+[^eip-155]: [EIP-155: Simple replay attack protection](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md), Vitalik Buterin, 2016
 [^elgamal-signing]: If $r=g^k$, then Eq. \ref{eq:elgamal-intuition} becomes $g^m = g^{\sk \cdot r} g^{k \cdot s} \bmod p$. If we look "in the exponent", we get $m \equiv \sk \cdot r + k\cdot s \pmod{p-1}$. Therefore, we can solve for $s$ as per Eq. \ref{eq:elgamal-sig-s}, since $\gcd(k, p-1) = 1$.
 [^fgrieu-pubkey-recovery]: [ECDSA public key recovery is discovered by whom?](https://crypto.stackexchange.com/questions/60958/ecdsa-public-key-recovery-is-discovered-by-whom)
 [^foia]: [New NIST/NSA relevelations](https://web.archive.org/web/20200229145033/https://catless.ncl.ac.uk/Risks/14/59#subj7), Dave Banisar, 1993
 [^hasse]: [Hasse's theorem on elliptic curves](https://en.wikipedia.org/wiki/Hasse%27s_theorem_on_elliptic_curves), Wikipedia
 [^i-confirmed]: See my [StackExchange post](https://crypto.stackexchange.com/questions/113745/ecdsa-without-field-inversion-during-verification/113749#113749) double-checking the sanity of avoiding the field inversion and asking why it hasn't been done before.
 [^inv-tweet]: [Today, I f***** around and \[re\]found out how slow inverting a field elements is](https://x.com/alinush407/status/1836912804902682625), Alin Tomescu, 2024
+[^libsecp256k1]: [Crate libsecp256k1 0.7.1](https://docs.rs/libsecp256k1/0.7.1/libsecp256k1/)
 [^modified-ecda]: [This](https://crypto.stackexchange.com/questions/53025/what-is-customizable-in-ecdsa-signature-and-verification) StackExchange post suggests that signing as $(g^k, k^{-1}(H(m)+\sk\cdot r))$ can be useful when combining ECDSA with other algorithms.
 [^mtgox]: Citing from [DW14][^DW14]: _"In combination with the above mentioned success rate of malleability attacks we conclude that overall malleability attacks did not have any substantial inﬂuence in the loss of bitcoins incurred by MtGox."_
 [^P2PKH]: [ECDSA verification, P2PKH uncompressed address](https://en.bitcoin.it/wiki/Message_signing#ECDSA_verification.2C_P2PKH_uncompressed_address)
 [^safe-curves]: [SafeCurves: choosing safe curves for elliptic-curve cryptography](https://safecurves.cr.yp.to/rigid.html), Daniel J. Bernstein, 2013
+[^sec-1]: [SEC 1: Elliptic Curve Cryptography](https://www.secg.org/sec1-v2.pdf), Certicom Research, 2009, Version 2.0
 [^vanstone]: [Scott Vanstone](https://en.wikipedia.org/wiki/Scott_Vanstone), Wikipedia
 
 {% include refs.md %}
