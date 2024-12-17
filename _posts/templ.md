@@ -18,8 +18,10 @@ published: false
 
 <!-- Here you can define LaTeX macros -->
 <div style="display: none;">$
-$</div>
+$</div> <!-- $ -->
 
----
+## References
+
+For cited works, see below 👇👇
 
 {% include refs.md %}

@@ -29,13 +29,14 @@ $$</p>
     - In this case, we let $\Fq$ denote the base field of the elliptic curve group $\Gr$
  - Let $g$ denote the generator of $\Gr$
  - Let $\Zp$ denote the finite field of order $p$ that arises "in the exponent" of $g$
+ - Let $\Zps=\\{1,2,3,\ldots,p-1\\}$ denote the multiplicative group of integers mod $p$
  - We assume a collision-resistant hash function $H : \\{0,1\\}^\* \rightarrow \Zp$
     + As per Brown's formalization of _AbstractDSA_[^Brow02].
 
 ## History
 
 In 1985, nine years after Diffie-Hellman[^DH76], Taher ElGamal introduced a digital signature scheme and postulated it to be secure under the hardness of discrete logarithms[^Elga85].
-Referred to as **ElGamal signatures**, this scheme leveraged the multiplicative group of integers modulo $p$ (i.e., $\Zp^*=\\{1,2,3,\ldots,p-1\\}$), where $p$ is a prime and $g$ is a [generator](/2021/04/15/basic-number-theory.html#finding-primitive-roots-mod-p).
+Referred to as **ElGamal signatures**, this scheme leveraged the multiplicative group $\Zps$, where $p$ is a prime and $g$ is a [generator](/2021/04/15/basic-number-theory.html#finding-primitive-roots-mod-p).
 ElGamal's intuition was that a signature $(r,s)$ for a message $m$ should satisfy:
 \begin{align}
 \label{eq:elgamal-intuition}
@@ -52,7 +53,7 @@ r &\gets g^k \bmod p\\\\\
 s &\gets k^{-1}(m - \sk\cdot r) \bmod (p-1)
 \end{align}
 
-In 1991, NIST proposed a slight alternation of ElGamal signatures called **DSA signatures** for standardization as part of the [Digital Signatures Standard (DSS)](https://archive.epic.org/crypto/dss/dss_fr_notice_1991.html).
+In 1991, NIST proposed a slight alternation of ElGamal signatures called **DSA signatures** for standardization as part of the _Digital Signatures Standard (DSS)_[^dss].
 Unlike ElGamal, DSA assumed a prime $p = hq+1$ where $q$ is a also prime and $h$ is some other number (sometimes called a co-factor).
 The signature now became:
 \begin{align}
@@ -61,16 +62,25 @@ r &\gets (g^k \bmod p) \bmod q\\\\\
 s &\gets k^{-1}(m + \sk\cdot r) \bmod q
 \end{align}
 DSA was more efficient, since it worked (mostly) over smaller primes $q$, when $p$ was picked appropriately.
-It also allowed the signature $(r,s)\in[0,q)$ to be much smaller.
+It also allowed the signature $(r,s)\in[1,q)$ to be much smaller.
 
 {: .note}
-Not sure what the rationale was behind changing ElGamal's $k^{-1}(m\textcolor{green}{-}\sk\cdot r)$ into DSA's $k^{-1}(m\textcolor{red}{+}\sk\cdot r)$.
+Not sure what the rationale was for changing ElGamal's $k^{-1}(m\textcolor{green}{-}\sk\cdot r)$ into DSA's $k^{-1}(m\textcolor{red}{+}\sk\cdot r)$.
 
-In 1992, Scott Vanstone proposed **ECDSA** in response to NIST's request for comments on their DSS proposal[^JMV01].
-ECDSA is an elliptic curve variant of the DSA scheme, which [this blog post describes in depth](#the-ecdsa-signature-scheme).
+In 1992, Scott Vanstone[^vanstone] proposed **ECDSA** in response to NIST's request for comments on their DSS proposal[^JMV01].
+ECDSA is an elliptic curve variant of the DSA scheme, which [this blog post focuses on](#the-ecdsa-signature-scheme).
 
-In 1993, a [FOIA request](https://web.archive.org/web/20200229145033/https://catless.ncl.ac.uk/Risks/14/59) reveals that the DSA algorithm was designed not by NIST but by the NSA.
-Subsequently, in 1998 and after, ANSI, IEEE and NIST all standardized ECDSA.
+In 1993, a FOIA request[^foia] revealed that the DSA algorithm was designed not by NIST but by the NSA.
+
+{: .info}
+**Some speculation:** Some folks find the NSA's involvement in the DSA standard (and elliptic curve standards) suspicious. 
+Perhaps for good reason, given the 2013 EC_DRBG fiasco[^ec-drbg]. 
+Others find it reaffirms the security of these schemes[^certicom-ecc].
+
+In 1998 and subsequently, ANSI, IEEE and NIST all standardized ECDSA.
+
+In 1995, David Nccache et al. propose a [batch verification](#batch-verification) algorithm for verifying multiple DSA signatures faster[^NMVR95].
+In 2007, Cheon and Yi introduce a batch verification algorithm for ECDSA[^CY07].
 
 In 2002, Daniel L. Brown introduces ECDSA's [pubkey recovery](#pubkey-recovery-algorithm) algorithm[^Brow02]$^,$[^fgrieu-pubkey-recovery].
 
@@ -79,7 +89,7 @@ Bitcoin uses ECDSA over secp256k1 curves as its scheme for signing transactions.
 Some believe Satoshi chose ECDSA because [Schnorr signatures](/2024/05/31/Schnorr-signatures.html) were, at the time, still patented.
 
 {: .info} 
-My two cents are that this choice cemented ECDSA's reign in the cryptocurrency space.
+**Some more speculation**: My two cents are that this choice cemented ECDSA's reign in the cryptocurrency space.
 Ethereum soon followed in Bitcoin's footsteps.
 And all other blockchains followed in Ethereum's.
 
@@ -91,7 +101,7 @@ We do not show why ECDSA is _secure_, since the security proofs can be a bit nua
 Lastly, we detail ECDSA's _pubkey recovery_ feature, which is often used in cryptocurrencies like Bitcoin and Ethereum.
 
 {: .info}
-It is **important** to understand that ECDSA only works with **eliptic curve** groups $\Gr$.
+It is **important** to understand that ECDSA only works with **eliptic curve** groups $\Gr$[^Cost12].
 Such curves are "built" over a **base field** $\Fq$ such that each group element, or **point**, $P\in\Gr$ is represented by its $x$ and $y$ coordinates: i.e., $P=(x,y)\in\Fq^2$.
 
 ### The ECDSA "conversion function"
@@ -116,8 +126,7 @@ $\mathsf{ECDSA}$.$\mathsf{Sign}(m, \sk) \rightarrow \sigma\in\Zp^2$:
  1. $R\gets g^k$ 
  1. $r\gets f(R)$ (see the [conversion function](#the-ecdsa-conversion-function) above)
      - **if** $r\equals 0$, go back to **step 1**
- 1. $e\gets H(m)\in\Zp$
- 1. $s \gets k^{-1}(e + \sk\cdot r) \bmod p$ 
+ 1. $s \gets k^{-1}(H(m) + \sk\cdot r) \bmod p$ 
      - **if** $s\equals 0$, go back to **step 1**
  1. $\sigma\gets (r,s)$
 
@@ -132,6 +141,7 @@ Otherwise, an attacker who sees enough ECDSA signatures can ultimately recover t
 _Historical aside:_ Such attacks may have played a small role in the MtGox attacks[^DW14], where \$620 million worth of Bitcoin disappeared.
 However, the predominant theory is that there is other funny business that accounts for most of the stolen funds[^mtgox].
 
+$\textcolor{grey}{\text{// assumes}\ \pk\in \Gr}\ \textcolor{grey}{\text{of prime order}}$\
 $\mathsf{ECDSA}$.$\mathsf{Verify}(m, \pk, \sigma) \rightarrow \\{0,1\\}$:
  - $(r,s)\gets \sigma$
  - **assert** $r \in \Zp\setminus\\{0\\}$
@@ -141,20 +151,20 @@ $\mathsf{ECDSA}$.$\mathsf{Verify}(m, \pk, \sigma) \rightarrow \\{0,1\\}$:
 {: .note}
 In practice, computing this as a size-2 multiexp $g^{s^{-1}H(m)}\pk^{s^{-1} r}$ will be faster!
 
-#### Avoiding a field inversion during verification
+#### Saving a field inversion during verification
 
 Verification computes a field inversion $s^{-1} \bmod p$, which can be expensive.
-However, observe that if we changed signing to output $s\gets k(e+\sk\cdot r)^{-1}$, then verification would just be $r\equals f((g^{H(m)} \pk^r)^s)$.
+However, observe that if we changed signing to output $s\gets k(H(m)+\sk\cdot r)^{-1}$, then verification would just be $r\equals f((g^{H(m)} \pk^r)^s)$.
 
-This [remains secure](https://crypto.stackexchange.com/questions/113745/ecdsa-without-field-inversion-during-verification/113749#113749), gives slightly faster verification, but precludes precomputing many $(k,k^{-1},R)$ tuples so as to make signing faster. 
-Instead, a field inversion $(e+\sk\cdot r)^{-1}$ must be computed during signing. 
-Because it depends on the message, precomputation is not possible. 
+This remains secure[^i-confirmed], gives slightly faster verification, but precludes precomputing many $(k,k^{-1},R)$ tuples so as to make signing faster. 
+Instead, a field inversion $(H(m)+\sk\cdot r)^{-1}$ must be computed during signing. 
+And, since this inversion now depends on the message $m$, precomputation is no longer possible. 
 
 Nonetheless, this is a great trade-off in applications where fast verification time is crucial, such as blockchain TXN signature verification.
 (Unfortunately, this modification is no longer standard ECDSA, so it will never see wide adoption...)
 
 {: .note}
-Interestingly, avoiding this modular inversion during signing could have avoided a recent side-channel attack on ECDSA signing[^eea-side-channel]\: "This vulnerability lies in the ECDSA ephemeral key (or nonce) modular inversion. [...] More precisely, in the Infineon implementation of the Extended Euclidean Algorithm (EEA for short). To our knowledge, this is the first time an implementation of the EEA is shown to be vulnerable to side-channel analysis"
+Interestingly, avoiding this modular inversion during signing could have obviated a recent side-channel attack on ECDSA signing[^eea-side-channel]\: _"This vulnerability lies in the ECDSA ephemeral key (or nonce) modular inversion. [...] More precisely, in the Infineon implementation of the Extended Euclidean Algorithm (EEA for short). To our knowledge, this is the first time an implementation of the EEA is shown to be vulnerable to side-channel analysis."_
 
 ### Correctness
 
@@ -165,14 +175,13 @@ r &\equals f\left(\left(g^{H(m)} \pk^r\right)^{s^{-1}}\right)\Leftrightarrow\\\\
 r &\equals f\left(\left(g^{H(m)} g^{\sk \cdot r}\right)^{s^{-1}}\right)\Leftrightarrow\\\\\
 r &\equals f\left(\left(g^{H(m) + \sk \cdot r}\right)^{s^{-1}}\right)\Leftrightarrow\\\\\
 r &\equals f\left(g^{s^{-1}(H(m) + \sk \cdot r)}\right)\Leftrightarrow\\\\\
-r &\equals f\left(g^{\left(k^{-1}(e + \sk\cdot r)\right)^{-1}(H(m) + \sk \cdot r)}\right)\Leftrightarrow\\\\\
-r &\equals f\left(g^{k(e + \sk\cdot r)^{-1}(H(m) + \sk \cdot r)}\right)\Leftrightarrow\\\\\
+r &\equals f\left(g^{\left(k^{-1}(H(m) + \sk\cdot r)\right)^{-1}(H(m) + \sk \cdot r)}\right)\Leftrightarrow\\\\\
 r &\equals f\left(g^{k(H(m) + \sk\cdot r)^{-1}(H(m) + \sk \cdot r)}\right)\Leftrightarrow\\\\\
 r &\equals f\left(g^k\right)\Leftrightarrow\\\\\
 r &= f\left(R\right)
 \end{align}
 
-### Pubkey recovery algorithm
+## Pubkey recovery algorithm
 
 ECDSA, together with some variants of [Schnorr](/2024/05/31/Schnorr-signatures.html#pubkey-recovery), are one of the few schemes that support a **pubkey recovery** algorithm: i.e., an algorithm that, given a signature $\sigma$ on a message $m$, returns (a set of) public key(s) under which $\sigma$ verifies on $m$.
 
@@ -213,7 +222,7 @@ This is fine: it just means the signature verifies against either one.
 **Challenge 2:** Above, we assumed we have the $x$-coordinate $x$ of $R$.
 But the ECDSA signature does not include $x \in \Fq$; it only includes $\bar{x} \bmod p = r\in \Zp$, where $\bar{x}$ is the representation $x$ as an integer $\in [0,q)$. 
 (Recall that $p$ is the order of the elliptic curve with base field $\Fq$.)
-By [Hasse's theorem](https://en.wikipedia.org/wiki/Hasse%27s_theorem_on_elliptic_curves), we know that:
+By Hasse's theorem[^hasse], we know that:
 
 $$(q + 1) - 2\sqrt{q} \le p \le (q+1) + 2\sqrt{q}$$
 
@@ -242,64 +251,143 @@ To avoid the need to brute force all possible $R$ values, some systems like Ethe
 This $v$ indicates to a verifier which one of the 4 values above should be computed as the actual $R$, saving precious signature verification computation. 
 This is why, in online folklore, you will find ECDSA signatures described as a triple $(r,s,v)$.
 
+## Batch verification
+
+Recall from how ECDSA verification works in Eq. \ref{eq:ecdsa-verify} that a verifier must apply the conversion function $f$ over some computation and match against $r$:
+\begin{align}
+r &\equals f\left(\left(g^{H(m)} \pk^r\right)^{s^{-1}}\right)\Leftrightarrow
+\end{align}
+Unfortunately, the conversion function is not amenable to batching.
+(Feel free to try!)
+To address this, Cheon and Yi[^CY07] introduced **modified ECDSA**, a.k.a., **ECDSA$^\*$**.
+
+The only difference is that, instead of including $r=f(R)$, modified ECDSA includes $R$ as part of the signature.
+Therefore, signature verification no longer goes through the conversion function:
+\begin{align}
+\label{eq:modified-ecdsa-verify}
+R \equals \left(g^{H(m)} \pk^r\right)^{s^{-1}}
+\end{align}
+As a result, a batch of signatures $$(R_i, s_i)_{i\in[n]}$$ for messages $$m_i$$ and PKs $$\pk_i$$ can be batch-verified using random coefficients $$\alpha_i\randget\Zp$$:
+\begin{align}
+\prod_{i\in[n]} R_i^{\alpha_i} \equals \prod_{i\in[n]} \left(g^{H(m_i)} \pk_i^{r_i}\right)^{s_i^{-1}\alpha_i}\Leftrightarrow\\\\\
+1 \equals \prod_{i\in[n]} \left\[R_i^{-\alpha_i} \left(g^{H(m_i)} \pk_i^{r_i}\right)^{s_i^{-1}\alpha_i}\right\]\Leftrightarrow\\\\\
+\label{eq:batch-verification}
+1 \equals \prod_{i\in[n]} \left(R_i^{-\alpha_i} g^{H(m_i)\cdot s_i^{-1}\cdot \alpha_i} \pk^{r_i \cdot s_i^{-1}\cdot \alpha_i}\right)
+\end{align}
+
+We describe the modified ECDSA scheme that supports batch verification below. 
+Changes from normal ECDSA are highlighted in $\textcolor{red}{\text{red}}$.
+
+$\mathsf{ECDSA^\*}$.$\mathsf{Sign}(m, \sk) \rightarrow \sigma\in(\textcolor{red}{\Gr},\textcolor{red}{\Zp})$:
+ 1. $k \randget \Zp\setminus\\{0\\}\ \textcolor{grey}{\text{// 0 is excluded as a valid nonce}}$
+ 1. $R\gets g^k$ 
+ 1. $r\gets f(R)$ 
+     - **if** $r\equals 0$, go back to **step 1**
+ 1. $s \gets k^{-1}(H(m) + \sk\cdot r) \bmod p$ 
+     - **if** $s\equals 0$, go back to **step 1**
+ 1. $\sigma\gets (\textcolor{red}{R},s)\ \textcolor{grey}{\text{// no longer returns}}\ r$
+
+$\textcolor{grey}{\text{// assumes}\ \pk\in \Gr}\ \textcolor{grey}{\text{of prime order}}$\
+$\mathsf{ECDSA^\*}$.$\mathsf{Verify}(m, \pk, \sigma) \rightarrow \\{0,1\\}$:
+ - $(\textcolor{red}{R},s)\gets \sigma$
+ - assert $R$ is in the prime-order subgroup $\Gr$
+ - **assert** $s \in \Zp\setminus\\{0\\}$
+ - **assert** $\textcolor{red}{R \equals \left(g^{H(m)} \pk^r\right)^{s^{-1}}}\ \textcolor{grey}{\text{// no longer using the conversion function}}\ f$
+
+
+$\textcolor{grey}{\text{// assumes}\ \pk_i\in \Gr}\ \textcolor{grey}{\text{of prime order}}$\
+$\mathsf{ECDSA^\*}$.$\mathsf{BatchVerify}((m_i, \pk_i, \sigma_i)_{i\in [n]}) \rightarrow \\{0,1\\}$:
+ - $(R_i,s_i)\gets \sigma_i,\forall i\in [n]\ \textcolor{grey}{\text{// implicitly asserts}\ R_i \in\Gr\ \text{of prime order}}$
+ - **assert** $s_i \in \Zp\setminus\\{0\\},\forall i \in S$
+ - $\alpha_i \randget \Zp,\forall i\in [n]$
+ - assert $1 \equals \prod_{i\in[n]} \left(R_i^{-\alpha_i} g^{H(m_i)\cdot s_i^{-1}\cdot \alpha_i} \pk^{r_i \cdot s_i^{-1}\cdot \alpha_i}\right)$
+
+{: .note}
+The most efficient implementation would use **batch inversion**[^inv-tweet] to compute all the $s_i^{-1}$'s.
+Then, it would compute all the exponents in the right-hand side in Eq. \ref{eq:batch-verification}.
+Finally, it would compute this right-hand side via a size-$3n$ multi-exponentiation.
+
+## Implementation caveats
+
+Implementing ECDSA securely and efficiently can be tricky:
+
+ 1. Must remember to verify that $r$ and $s$ are not $0$
+ 2. If not using prime-order groups, prime-order subgroup membership checks must be performed on...
+     - ...the PKs passed into the verification equation
+     - ...the $R$-component of [modified ECDSA](#batch-verification) signatures
+ 3. Should aim to use efficient inversion algorithms[^inv-tweet] for $s^{-1}$ (e.g., EEA-based, Lehmer) 
+ 1. ECDSA, like [Schnorr](/2024/05/31/Schnorr-signatures.html), is broken if the **nonce $k$ is reused**. Generally, they are both very **fragile** if the nonce $k$ is biased[^BH19e].
+    + Even small amounts of bias in the nonce $k$ can be used to recover the SK given enough signatures.
+    - Deterministic signing can mitigate this in both schemes.
+
 ## Why you should avoid ECDSA
 
-There is **no** good reason to ever use ECDSA (except for legacy compatibility). 
-At least, this is my current (limited?) sense. 
+**Hot take 🌶️:** There is **no** good reason to ever use ECDSA (except for legacy compatibility). 
 
 As far as I can tell, [Schnorr signatures](/2024/05/31/Schnorr-signatures.html) should always be preferred over it:
- - Schnorr is _slightly_ faster (no field inversions)
+ - Schnorr is _slightly_ faster, especially in the batched setting (no field inversions)
  - Schnorr admits a reasonably-efficient $t$-out-of-$n$ threshold signing protocol
  - Schnorr has a simpler pubkey recovery (no recovery hints needed)
  - Schnorr has an arguably-cleaner security reduction
+ - Schnorr (not EdDSA nor Ed25519) supports batch verification out-of-the-box
 
 Other disadvantages of ECDSA:
 
  1. ECDSA is **inefficient as a $t$-out-of-$n$ threshold signature** scheme
- 1. ECDSA, like [Schnorr](/2024/05/31/Schnorr-signatures.html), is broken if the **nonce $k$ is reused**. Generally, they are both very **fragile** if the nonce $k$ is biased[^BH19e].
-    + Even small amounts of bias in the nonce $k$ can be used to recover the SK given enough signatures.
-    - Deterministic signing can mitigate this in both schemes.
+ 1. (Standardized) ECDSA does not support batched verification (although [it can be modified to](#batch-verification))
  1. ECDSA does **not** have a **"clean" security reduction** to a standard assumption
     - Typically, ECDSA security reductions must make assumptions about the [conversion function](#the-ecdsa-conversion-problem)
     - ...or work in the generic group model (GGM)
     - ...or introduce strange assumptions like the _semi-discrete logarithm (SDLP)_ problem
     + In fact, algebraic security reduction for ECDSA _"can only exist if the security reduction is allowed to program the conversion function"_[^HK23e]
     - For the latest security analysis, see recent works by Eike Kiltz[^FKP16]$^,$[^HK23e].
- 1. ECDSA is often used over NIST curves. It doesn't have to be, but it is. Some folks suspect these [curves could be backdoored](https://safecurves.cr.yp.to/rigid.html).
+ 1. ECDSA is often used over NIST curves. It doesn't have to be, but it is. Some folks suspect these curves could be backdoored[^safe-curves].
 
 {: .note}
-Although ECDSA can be very fragile in the face of side-channels (e.g., extracting ECDSA keys from Yubikeys[^eea-side-channel], it is not clear to what extent other schemes would fare better (e.g., both [Schnorr](/2024/05/31/Schnorr-signatures.html) and BLS[^BLS01] do exponentiations with secrets).
+Although ECDSA can be very fragile in the face of side-channels (e.g., see extracting ECDSA keys from Yubikeys[^eea-side-channel]), it is not clear to what extent other schemes would fare better. For example, both [Schnorr](/2024/05/31/Schnorr-signatures.html) and BLS[^BLS01] do exponentiations with secrets.
 
 ## Conclusion
 
 Despite my strong bias against ECDSA, I still find it to be a cool signature scheme:
 
- 1. It is highly-succinct: it requires only 2 field elements.
- 1. It is one of the few signature schemes we have in the discrete log setting (besides Schnorr[^Schn89], Chaum-Pedersen[^CP92], Okamoto[^Okam93]; what else?)
- 1. It led to the discovery of pubkey recovery algorithms
- 1. It does not use the Fiat-Shamir transform[^FS87]
+ 1. (I believe?) ECDSA was the first **wide-deployment** of elliptic-curve cryptography
+ 1. ECDSA does not use the Fiat-Shamir transform[^FS87]
+ 1. ElGamal signatures (and thus [EC]DSA) are one of the few paradigms for signature schemes in the prime-order group setting without pairings
+     + Besides Fiat-Shamir-style signatures from $\Sigma$-protocols (e.g., Schnorr[^Schn89], Chaum-Pedersen[^CP92], Okamoto[^Okam93]), what else is there?
+ 1. ECDSA showcased the utility of pubkey recovery algorithms in cryptocurrencies like Bitcoin and Ethereum
 
-## TODOs
+### Future work
 
 Other items I hope to address in the future:
 
- - Batch verification of ECDSA signatures
  - The necessity of random oracles in ElGamal/DSA to prevent [existential forgeries](https://en.wikipedia.org/wiki/ElGamal_signature_scheme#Existential_forgery) (also [here](https://crypto.stackexchange.com/questions/35684/el-gamal-existential-forgery-using-pointcheval-stern-signature-algorithm))
- - I hope to write down a reasonable proof of EUF-CMA security.
+ - I hope to write down a reasonable proof of ECDSA's EUF-CMA security.
  - Other [summaries of why ECDSA is very feeble](https://blog.trailofbits.com/2020/06/11/ecdsa-handle-with-care/).
- - [Signing as $(R,s)$](https://crypto.stackexchange.com/questions/53025/what-is-customizable-in-ecdsa-signature-and-verification) when combining ECDSA with other algorithms.
  - Look into [Shamir trick stuff](https://crypto.stackexchange.com/questions/47627/goofs-that-could-creep-in-ecdsa-signature-verification)
  - Address implementations checking that $R$ is not the identity
  - An unecessary check that [the PK is not the identity](https://crypto.stackexchange.com/questions/74354/ecdsa-signature-verification-checks) during verification
  - Incorporate insights from [SEC 1: Elliptic curve cryptography](https://www.secg.org/sec1-v2.pdf)
+ - [Batched ECDSA verification inside circom for zkSNARKs](https://0xparc.org/blog/batch-ecdsa)
 
----
+## References
+
+For cited works, see below 👇👇
 
 [^bitcoin-stex]: See [this comment](https://bitcoin.stackexchange.com/questions/38351/ecdsa-v-r-s-what-is-v/38909#comment46061_38909) on Bitcoin Stack Exchange for a similar explanation.
+[^certicom-ecc]: [Elliptic Curve Cryptography (ECC)](https://www.certicom.com/content/certicom/en/ecc.html), Certicom
+[^dss]: NIST's [call for digital signature schemes to be standardized](https://archive.epic.org/crypto/dss/dss_fr_notice_1991.html)
+[^ec-drbg]: [Dual_EC_DRBG](https://en.wikipedia.org/wiki/Dual_EC_DRBG), Wikipedia
 [^eea-side-channel]: [EUCLEAK](https://ninjalab.io/eucleak/), by NinjaLab
 [^elgamal-signing]: If $r=g^k$, then Eq. \ref{eq:elgamal-intuition} becomes $g^m = g^{\sk \cdot r} g^{k \cdot s} \bmod p$. If we look "in the exponent", we get $m \equiv \sk \cdot r + k\cdot s \pmod{p-1}$. Therefore, we can solve for $s$ as per Eq. \ref{eq:elgamal-sig-s}, since $\gcd(k, p-1) = 1$.
 [^fgrieu-pubkey-recovery]: [ECDSA public key recovery is discovered by whom?](https://crypto.stackexchange.com/questions/60958/ecdsa-public-key-recovery-is-discovered-by-whom)
+[^foia]: [New NIST/NSA relevelations](https://web.archive.org/web/20200229145033/https://catless.ncl.ac.uk/Risks/14/59#subj7), Dave Banisar, 1993
+[^hasse]: [Hasse's theorem on elliptic curves](https://en.wikipedia.org/wiki/Hasse%27s_theorem_on_elliptic_curves), Wikipedia
+[^i-confirmed]: See my [StackExchange post](https://crypto.stackexchange.com/questions/113745/ecdsa-without-field-inversion-during-verification/113749#113749) double-checking the sanity of avoiding the field inversion and asking why it hasn't been done before.
+[^inv-tweet]: [Today, I f***** around and \[re\]found out how slow inverting a field elements is](https://x.com/alinush407/status/1836912804902682625), Alin Tomescu, 2024
+[^modified-ecda]: [This](https://crypto.stackexchange.com/questions/53025/what-is-customizable-in-ecdsa-signature-and-verification) StackExchange post suggests that signing as $(g^k, k^{-1}(H(m)+\sk\cdot r))$ can be useful when combining ECDSA with other algorithms.
 [^mtgox]: Citing from [DW14][^DW14]: _"In combination with the above mentioned success rate of malleability attacks we conclude that overall malleability attacks did not have any substantial inﬂuence in the loss of bitcoins incurred by MtGox."_
 [^P2PKH]: [ECDSA verification, P2PKH uncompressed address](https://en.bitcoin.it/wiki/Message_signing#ECDSA_verification.2C_P2PKH_uncompressed_address)
+[^safe-curves]: [SafeCurves: choosing safe curves for elliptic-curve cryptography](https://safecurves.cr.yp.to/rigid.html), Daniel J. Bernstein, 2013
+[^vanstone]: [Scott Vanstone](https://en.wikipedia.org/wiki/Scott_Vanstone), Wikipedia
 
 {% include refs.md %}

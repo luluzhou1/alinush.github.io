@@ -718,6 +718,8 @@
 
 [^BV93]: **Quantum Complexity Theory**, by Bernstein, Ethan and Vazirani, Umesh, *in Proceedings of the Twenty-fifth Annual ACM Symposium on Theory of Computing*, 1993, [[URL]](http://doi.acm.org/10.1145/167088.167097)
 
+[^BV96]: **Hardness of Computing the Most Significant Bits of Secret Keys in Diffie-Hellman and Related Schemes**, by Boneh, Dan and Venkatesan, Ramarathnam, *in Advances in Cryptology --- CRYPTO '96*, 1996
+
 [^BV98]: **Breaking RSA may not be equivalent to factoring**, by Boneh, Dan and Venkatesan, Ramarathnam, *in Advances in Cryptology --- EUROCRYPT'98*, 1998
 
 [^BW06]: **Monotone circuits for monotone weighted threshold functions**, by Beimel, Amos and Weinreb, Enav, *in Information Processing Letters*, 2006, [[URL]](https://www.cs.bgu.ac.il/~beimel/Papers/monoIPL.pdf)
@@ -1127,6 +1129,8 @@
 [^CX19e]: **Blackbox Secret Sharing Revisited: A Coding-Theoretic Approach with Application to  Expansionless Near-Threshold Schemes**, by Ronald Cramer and Chaoping Xing, *in Cryptology ePrint Archive, Paper 2019/1134*, 2019, [[URL]](https://eprint.iacr.org/2019/1134)
 
 [^CXZ21e]: **Manta: a Plug and Play Private DeFi Stack**, by Shumo Chu and Yu Xia and Zhenfei Zhang, *in Cryptology ePrint Archive, Paper 2021/743*, 2021, [[URL]](https://eprint.iacr.org/2021/743)
+
+[^CY07]: **Fast Batch Verification of Multiple Signatures**, by Cheon, Jung Hee and Yi, Jeong Hyun, *in Public Key Cryptography -- PKC 2007*, 2007
 
 [^CY20]: **Barriers for Succinct Arguments in the Random Oracle Model**, by Alessandro Chiesa and Eylon Yogev, *in Cryptology ePrint Archive, Report 2020/1427*, 2020, [[URL]](https://eprint.iacr.org/2020/1427)
 
@@ -2152,6 +2156,8 @@
 
 [^KST21]: **Nova: Recursive Zero-Knowledge Arguments from Folding Schemes**, by Abhiram Kothapalli and Srinath Setty and Ioanna Tzialla, *in Cryptology ePrint Archive, Report 2021/370*, 2021, [[URL]](https://eprint.iacr.org/2021/370)
 
+[^KST21e]: **Nova: Recursive Zero-Knowledge Arguments from Folding Schemes**, by Abhiram Kothapalli and Srinath Setty and Ioanna Tzialla, *in Cryptology {ePrint} Archive, Paper 2021/370*, 2021, [[URL]](https://eprint.iacr.org/2021/370)
+
 [^KT23e]: **Zeromorph: Zero-Knowledge Multilinear-Evaluation Proofs from Homomorphic Univariate Commitments**, by Tohru Kohrita and Patrick Towa, *in Cryptology ePrint Archive, Paper 2023/917*, 2023, [[URL]](https://eprint.iacr.org/2023/917)
 
 [^KTY07]: **Group Encryption**, by Kiayias, Aggelos and Tsiounis, Yiannis and Yung, Moti, *in Proceedings of the Advances in Crypotology 13th International Conference on Theory and Application of Cryptology and Information Security*, 2007
@@ -2287,6 +2293,8 @@
 [^LSJ23]: **Performance of EdDSA and BLS Signatures in Committee-Based Consensus**, by Zhuolun Li and Alberto Sonnino and Philipp Jovanovic, 2023
 
 [^LSTW21]: **Linear-time zero-knowledge SNARKs for R1CS**, by Jonathan Lee and Srinath Setty and Justin Thaler and Riad Wahby, *in Cryptology ePrint Archive, Report 2021/030*, 2021, [[URL]](https://eprint.iacr.org/2021/030)
+
+[^LSTW21e]: **Linear-time and post-quantum zero-knowledge {SNARKs} for {R1CS**, by Jonathan Lee and Srinath Setty and Justin Thaler and Riad Wahby, *in Cryptology {ePrint} Archive, Paper 2021/030*, 2021, [[URL]](https://eprint.iacr.org/2021/030)
 
 [^LSZ22e]: **Counting Vampires: From Univariate Sumcheck to Updatable ZK-SNARK**, by Helger Lipmaa and Janno Siim and Michal Zajac, *in Cryptology ePrint Archive, Report 2022/406*, 2022, [[URL]](https://ia.cr/2022/406)
 
@@ -2503,6 +2511,8 @@
 [^NE24e]: **On Proving Pairings**, by Andrija Novakovic and Liam Eagen, *in Cryptology {ePrint} Archive, Paper 2024/640*, 2024, [[URL]](https://eprint.iacr.org/2024/640)
 
 [^NMT22]: **Sigstore: Software Signing for Everybody**, by Newman, Zachary and Meyers, John Speed and Torres-Arias, Santiago, *in Proceedings of the 2022 ACM SIGSAC Conference on Computer and Communications Security*, 2022, [[URL]](http://dx.doi.org/10.1145/3548606.3560596)
+
+[^NMVR95]: **Can D.S.A. be improved? --- Complexity trade-offs with the digital signature standard ---**, by Naccache, David and M'RaÏhi, David and Vaudenay, Serge and Raphaeli, Dan, *in Advances in Cryptology --- EUROCRYPT'94*, 1995
 
 [^NN98]: **Certificate Revocation and Certificate Update**, by Moni Naor and Kobbi Nissim, *in 7th USENIX Security Symposium (USENIX Security 98)*, 1998, [[URL]](https://www.usenix.org/conference/7th-usenix-security-symposium/certificate-revocation-and-certificate-update)
 
