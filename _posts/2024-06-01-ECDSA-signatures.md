@@ -381,7 +381,7 @@ r &\equals f\left(g^{-k}\right)\Leftrightarrow\\\\\
 r &\equals f(R^{-1})\\\\\
 r &\equals f(R)
 \end{align}
-Note that this attack applies to the [modified ECDSA](#batch-verification) scheme above, since a valid signature $(R,s)$ can be mauled as $(\red{R^{-1}}, \red{-s})$.
+Note that this attack applies to the [modified ECDSA](#batch-verification) scheme above too, since a valid signature $(R,s)$ can be mauled as $(\red{R^{-1}}, \red{-s})$.
 
 {: .info}
 _Historical aside:_
