@@ -74,6 +74,9 @@ ECDSA is an elliptic curve variant of the DSA scheme, which [this blog post focu
 
 In 1993, a FOIA request[^foia] revealed that the DSA algorithm was designed not by NIST but by the NSA.
 
+NIST DSA's proposal was not without controversy.
+Leading academics like Ron Rivest and Martin Hellman responded to NIST's proposal[^nist-response], pointing to issues such as the use of shared moduli's $p$, small key sizes, the NSA's involvment, the lack of a key-exchange mechanism, DSA's novelty, potential conflicts with Schnorr's patent of his scheme[^Schn89], and the secrecy of the proposal process.
+
 {: .info}
 **Some speculation:** Some folks find the NSA's involvement in the DSA standard (and elliptic curve standards) suspicious. 
 Perhaps for good reason, given the 2013 EC_DRBG fiasco[^ec-drbg]. 
@@ -136,6 +139,7 @@ $\mathsf{ECDSA}$.$\mathsf{Sign}(m, \sk) \rightarrow \sigma\in(0,p)^2$:
 **Security:** It is _crucial_ that there be absolutely no bias when picking $k$.
 It must pe picked uniformly at random in $\Zp\setminus\\{0\\}$.
 Otherwise, an attacker who sees enough ECDSA signatures can ultimately recover the SK[^BH19e].
+The easiest way to ensure this is to use a **deterministic** variant of ECDSA[^deterministic-ecdsa].
 
 {: .info}
 Signatures are [malleable](#signature-malleability).
@@ -435,7 +439,7 @@ Implementing ECDSA securely and efficiently can be tricky:
  1. Should aim to use efficient inversion algorithms[^inv-tweet] for $s^{-1}$ (e.g., EEA-based, Lehmer) 
  1. ECDSA, like [Schnorr](/2024/05/31/Schnorr-signatures.html), is broken if the **nonce $k$ is reused**. Generally, they are both very **fragile** if the nonce $k$ is biased[^BH19e].
     + Even small amounts of bias in the nonce $k$ can be used to recover the SK given enough signatures.
-    - Deterministic signing can mitigate this in both schemes.
+    - Deterministic signing can mitigate this in both schemes[^deterministic-ecdsa].
 
 ## Why you should avoid ECDSA
 
@@ -482,6 +486,10 @@ Other items I hope to address in the future:
     - "Self-signed signatures"
     - ECDSA signatures can be verified faster agains the SK
  - [Batched ECDSA verification inside circom for zkSNARKs](https://0xparc.org/blog/batch-ecdsa)
+
+### Acknowledgments
+
+Thanks to Dan Boneh for pointing out the deterministic ECDSA RFC[^deterministic-ecdsa] and the cryptographic community's initial responses to the DSA proposal[^nist-response].
 
 ## Appendix: libsecp256k1's ECDSA pubkey recovery code (Rust)
 
@@ -611,6 +619,7 @@ For cited works, see below 👇👇
 
 [^bitcoin-stex]: See [this comment](https://bitcoin.stackexchange.com/questions/38351/ecdsa-v-r-s-what-is-v/38909#comment46061_38909) on Bitcoin Stack Exchange for a similar explanation.
 [^certicom-ecc]: [Elliptic Curve Cryptography (ECC)](https://www.certicom.com/content/certicom/en/ecc.html), Certicom
+[^deterministic-ecdsa]: [Deterministic Usage of the Digital Signature Algorithm (DSA) and Elliptic Curve Digital Signature Algorithm (ECDSA)](https://datatracker.ietf.org/doc/html/rfc6979), RFC 6979, T. Pornin, 2013
 [^dss]: NIST's [call for digital signature schemes to be standardized](https://archive.epic.org/crypto/dss/dss_fr_notice_1991.html)
 [^ec-drbg]: [Dual_EC_DRBG](https://en.wikipedia.org/wiki/Dual_EC_DRBG), Wikipedia
 [^eea-side-channel]: [EUCLEAK](https://ninjalab.io/eucleak/), by NinjaLab
@@ -624,6 +633,7 @@ For cited works, see below 👇👇
 [^libsecp256k1]: [Crate libsecp256k1 0.7.1](https://docs.rs/libsecp256k1/0.7.1/libsecp256k1/)
 [^modified-ecda]: [This](https://crypto.stackexchange.com/questions/53025/what-is-customizable-in-ecdsa-signature-and-verification) StackExchange post suggests that signing as $(g^k, k^{-1}(H(m)+\sk\cdot r))$ can be useful when combining ECDSA with other algorithms.
 [^mtgox]: Citing from [DW14][^DW14]: _"In combination with the above mentioned success rate of malleability attacks we conclude that overall malleability attacks did not have any substantial inﬂuence in the loss of bitcoins incurred by MtGox."_
+[^nist-response]: [Responses to NIST's proposal](https://people.csail.mit.edu/rivest/pubs/RHAL92.pdf), Communications of the ACM, July 1992, Vol. 35, No. 7
 [^P2PKH]: [ECDSA verification, P2PKH uncompressed address](https://en.bitcoin.it/wiki/Message_signing#ECDSA_verification.2C_P2PKH_uncompressed_address)
 [^safe-curves]: [SafeCurves: choosing safe curves for elliptic-curve cryptography](https://safecurves.cr.yp.to/rigid.html), Daniel J. Bernstein, 2013
 [^sec-1]: [SEC 1: Elliptic Curve Cryptography](https://www.secg.org/sec1-v2.pdf), Certicom Research, 2009, Version 2.0
