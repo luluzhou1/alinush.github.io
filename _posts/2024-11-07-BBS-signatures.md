@@ -257,7 +257,7 @@ However, like any signature scheme, they have their **disadvantages**:
  - **Larger signatures** for BBS+: 1 group element and 2 field elements.
     + Standalone BBS has _smaller_ signatures: 1 group element and 1 field element.
  - They **do not "thresholdize" very well**: $t$-out-of-$n$ threshold protocols for BBS+ (and standalone BBS) either require offline preprocessing or multiple rounds of interaction between signers.
- - Signing **requires randomness**.
+ - Signing **requires picking randomness $e$** (although [stBBS's AGM proof](#how-to-pick-es-simply-and-securely) relaxes this to picking unique $e$'s).
  - Signatures are **not re-randomizable**[^PS16]. (It may be sufficient to expose $h_0^\frac{1}{x+e}$ next to each signature $(A,e)$ to allow for re-randomizability?)
 <!--more-->
 
