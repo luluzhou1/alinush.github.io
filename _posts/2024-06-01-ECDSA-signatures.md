@@ -171,7 +171,7 @@ Interestingly, avoiding this modular inversion during signing could have obviate
 
 ### Correctness
 
-We show that correctly-computed signatures verify (i.e., "correctness") by expanding the verification equation:
+We show that correctly-computed signatures verify by expanding the verification equation:
 \begin{align}
 \label{eq:ecdsa-verify}
 r &\equals f\left(\left(g^{H(m)} \pk^r\right)^{s^{-1}}\right)\Leftrightarrow\\\\\
@@ -190,9 +190,9 @@ r &= f\left(R\right)
 ECDSA, together with some variants of [Schnorr](/2024/05/31/Schnorr-signatures.html#pubkey-recovery), are one of the few schemes that support a **pubkey recovery** algorithm: i.e., an algorithm that, given a signature $\sigma$ on a message $m$, returns (a set of) public key(s) under which $\sigma$ verifies on $m$.
 
 Pubkey recovery is actually used in cryptocurrencies like Ethereum and Bitcoin, where the verifiers (i.e., the miners/validators) do not have the PK of the account, but only its hash $h$.
-Specifically, the verifiers:
+In these settings, what the verifiers do is:
 1. Receive only $(\sigma,m)$
-2. Use the pubkey recovery algorithm to recover a set of PKs $S=\\{\pk_1,\ldots,\pk_\ell\\}$ under which $(\sigma,m)$ verify 
+2. Use the pubkey recovery algorithm to recover a set of PKs $S=\\{\pk_1,\ldots,\pk_\ell\\}$ under which $(\sigma,m)$ verifies
 3. Check whether there exists a $\pk_i \in S$ such that $h=H(\pk_i)$. (This step is crucial.)
 4. If so, they can consider the message $m$ (typically a TXN hash) as validly-signed under the PK $\pk_i$ hashed inside the address $h$[^P2PKH].
 
@@ -552,7 +552,7 @@ pub fn sign_raw(
 }
 ```
 
-### Pubkey recovery code
+### Pubkey recovery
 
 ```rust
 pub fn recover_raw(
