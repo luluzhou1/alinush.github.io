@@ -438,18 +438,13 @@ Implementing ECDSA securely and efficiently can be tricky:
 ## Why you should avoid ECDSA
 
 **Hot take 🌶️:** There is **no** good reason to ever use ECDSA (except for legacy compatibility). 
-
 As far as I can tell, [Schnorr signatures](/2024/05/31/Schnorr-signatures.html) should always be preferred over it:
- - Schnorr is _slightly_ faster, especially in the batched setting (no field inversions)
- - Schnorr admits a reasonably-efficient $t$-out-of-$n$ threshold signing protocol
- - Schnorr has a simpler pubkey recovery (no recovery IDs needed)
- - Schnorr has an arguably-cleaner security reduction
- - Schnorr (not EdDSA nor Ed25519) supports batch verification out-of-the-box
-
-Other disadvantages of ECDSA:
 
  1. ECDSA is **inefficient as a $t$-out-of-$n$ threshold signature** scheme
  1. (Standardized) ECDSA does not support batched verification (although [it can be modified to](#batch-verification))
+ 1. ECDSA's pubkey recovery requires hints, unlike Schnorr's which doesn't
+    + I must stress: I really mean _Schnorr_'s, since EdDSA and Ed25519 do not support pubkey recovery.
+ 1. ECDSA is _slightly_ slower than Schnorr, especially in the batched setting, due to its use of field inversions
  1. ECDSA does **not** have a **"clean" security reduction** to a standard assumption
     - Typically, ECDSA security reductions must make assumptions about the [conversion function](#the-ecdsa-conversion-problem)
     - ...or work in the generic group model (GGM)
