@@ -19,6 +19,7 @@ Nonetheless: you should **stay away from it**, as I argue [here](#why-you-should
 \def\Adv{\mathcal{A}}
 \def\Badv{\mathcal{B}}
 \def\vect#1{\mathbf{#1}}
+\def\red#1{\textcolor{red}{#1}}
 $$</p>
 
 ## Preliminaries
@@ -66,7 +67,7 @@ DSA was more efficient, since it worked (mostly) over smaller primes $q$, when $
 It also allowed the signature $(r,s)\in[1,q)$ to be much smaller.
 
 {: .note}
-Not sure what the rationale was for changing ElGamal's $k^{-1}(m\textcolor{green}{-}\sk\cdot r)$ into DSA's $k^{-1}(m\textcolor{red}{+}\sk\cdot r)$.
+Not sure what the rationale was for changing ElGamal's $k^{-1}(m\textcolor{green}{-}\sk\cdot r)$ into DSA's $k^{-1}(m\red{+}\sk\cdot r)$.
 
 In 1992, Scott Vanstone[^vanstone] proposed **ECDSA** in response to NIST's request for comments on their DSS proposal[^JMV01].
 ECDSA is an elliptic curve variant of the DSA scheme, which [this blog post focuses on](#the-ecdsa-signature-scheme).
@@ -122,7 +123,7 @@ $\mathsf{ECDSA}$.$\mathsf{KeyGen}(1^\lambda) \rightarrow (\sk, \pk)\in\Gr^2$:
  - $\sk \randget \Zp\setminus\\{0\\}\ \textcolor{grey}{\text{// 0 is excluded as a valid SK}}$
  - $\pk \gets g^\sk$
 
-$\mathsf{ECDSA}$.$\mathsf{Sign}(m, \sk) \rightarrow \sigma\in\Zp^2$:
+$\mathsf{ECDSA}$.$\mathsf{Sign}(m, \sk) \rightarrow \sigma\in(0,p)^2$:
  1. $k \randget \Zp\setminus\\{0\\}\ \textcolor{grey}{\text{// 0 is excluded as a valid nonce}}$
  1. $R\gets g^k$ 
  1. $r\gets f(R)$ (see the [conversion function](#the-ecdsa-conversion-function) above)
@@ -137,16 +138,13 @@ It must pe picked uniformly at random in $\Zp\setminus\\{0\\}$.
 Otherwise, an attacker who sees enough ECDSA signatures can ultimately recover the SK[^BH19e].
 
 {: .info}
-**Security:** Not only is $(r,s)$ a valid signature but so is $(r,-s)$ which introduces _malleability attacks_.
-\
-_Historical aside:_ Such attacks may have played a small role in the MtGox attacks[^DW14], where \$620 million worth of Bitcoin disappeared.
-However, the predominant theory is that there is other funny business that accounts for most of the stolen funds[^mtgox].
+Signatures are [malleable](#signature-malleability).
 
 $\textcolor{grey}{\text{// assumes}\ \pk\in \Gr}\ \textcolor{grey}{\text{of prime order}}$\
 $\mathsf{ECDSA}$.$\mathsf{Verify}(m, \pk, \sigma) \rightarrow \\{0,1\\}$:
  - $(r,s)\gets \sigma$
- - **assert** $r \in \Zp\setminus\\{0\\}$
- - **assert** $s \in \Zp\setminus\\{0\\}$
+ - **assert** $r \in (0,p)$
+ - **assert** $s \in (0,p)$
  - **assert** $r \equals f\left(\left(g^{H(m)} \pk^r\right)^{s^{-1}}\right)$
 
 {: .note}
@@ -175,6 +173,7 @@ We show that correctly-computed signatures verify (i.e., "correctness") by expan
 r &\equals f\left(\left(g^{H(m)} \pk^r\right)^{s^{-1}}\right)\Leftrightarrow\\\\\
 r &\equals f\left(\left(g^{H(m)} g^{\sk \cdot r}\right)^{s^{-1}}\right)\Leftrightarrow\\\\\
 r &\equals f\left(\left(g^{H(m) + \sk \cdot r}\right)^{s^{-1}}\right)\Leftrightarrow\\\\\
+\label{eq:ecdsa-verify-2}
 r &\equals f\left(g^{s^{-1}(H(m) + \sk \cdot r)}\right)\Leftrightarrow\\\\\
 r &\equals f\left(g^{\left(k^{-1}(H(m) + \sk\cdot r)\right)^{-1}(H(m) + \sk \cdot r)}\right)\Leftrightarrow\\\\\
 r &\equals f\left(g^{k(H(m) + \sk\cdot r)^{-1}(H(m) + \sk \cdot r)}\right)\Leftrightarrow\\\\\
@@ -257,7 +256,7 @@ To avoid the need to brute force all possible $R$ values, some systems like Ethe
 This $v$ indicates to a verifier which one of the 4 values above should be computed as the actual $R$, saving precious signature verification computation. 
 This is why, in online folklore, you will find ECDSA signatures described as a triple $(r,s,v)$.
 
-### Algorithms
+### Recoverable algorithms
 
 We describe the formal algorithms for pubkey recovery below.
 Note that a new _augmented_ conversion function $f'$ is needed that computes the recovery ID $v$ for pubkey recovery.
@@ -289,7 +288,7 @@ $f'^{-1}(r,v) \rightarrow R \in \Gr$:
 	+ **Note:** The result $y$ is in $\Fq$
  1. $R\gets (x,y)$
 
-$\mathsf{ECDSA}$.$\mathsf{RecoverableSign}(m, \sk) \rightarrow \sigma\in\Zp^2 \times \\{0,1\\}^2$:
+$\mathsf{ECDSA}$.$\mathsf{RecoverableSign}(m, \sk) \rightarrow \sigma\in(0,p)^2 \times \\{0,1\\}^2$:
  1. $k \randget \Zp\setminus\\{0\\}\ \textcolor{grey}{\text{// 0 is excluded as a valid nonce}}$
  1. $R\gets g^k$ 
  1. $(r,v)\gets f'(R)$ (see the _augmented_ conversion function above)
@@ -300,8 +299,8 @@ $\mathsf{ECDSA}$.$\mathsf{RecoverableSign}(m, \sk) \rightarrow \sigma\in\Zp^2 \t
 
 $\mathsf{ECDSA}$.$\mathsf{PubkeyRecover}(m, \sigma) \rightarrow \pk$:
  - $(r,s,v)\gets \sigma$
- - **assert** $r \in \Zp\setminus\\{0\\}$
- - **assert** $s \in \Zp\setminus\\{0\\}$
+ - **assert** $r \in (0,p)$
+ - **assert** $s \in (0,p)$
  - **assert** $v \in \\{0,1\\}^2$
  - $R \gets f'^{-1}(r, v)$
  - $\pk\gets \left(R^s / g^{H(m)}\right)^{(r^{-1})}$
@@ -331,29 +330,29 @@ As a result, a batch of signatures $$(R_i, s_i)_{i\in[n]}$$ for messages $$m_i$$
 \end{align}
 
 We describe the modified ECDSA scheme that supports batch verification below. 
-Changes from normal ECDSA are highlighted in $\textcolor{red}{\text{red}}$.
+Changes from normal ECDSA are highlighted in $\red{\text{red}}$.
 
-$\mathsf{ECDSA^\*}$.$\mathsf{Sign}(m, \sk) \rightarrow \sigma\in(\textcolor{red}{\Gr},\textcolor{red}{\Zp})$:
+$\mathsf{ECDSA^\*}$.$\mathsf{Sign}(m, \sk) \rightarrow \sigma\in(\red{\Gr},\red{(0,p)})$:
  1. $k \randget \Zp\setminus\\{0\\}\ \textcolor{grey}{\text{// 0 is excluded as a valid nonce}}$
  1. $R\gets g^k$ 
- 1. $r\gets f(R)$ (see the [conversion function](#the-ecdsa-conversion-function) above)
+ 1. $r\gets f(R)$ (again, see the [conversion function](#the-ecdsa-conversion-function) above)
      - **if** $r\equals 0$, go back to **step 1**
  1. $s \gets k^{-1}(H(m) + \sk\cdot r) \bmod p$ 
      - **if** $s\equals 0$, go back to **step 1**
- 1. $\sigma\gets (\textcolor{red}{R},s)\ \textcolor{grey}{\text{// no longer returns}}\ r$
+ 1. $\sigma\gets (\red{R},s)\ \textcolor{grey}{\text{// no longer returns}}\ r$
 
 $\textcolor{grey}{\text{// assumes}\ \pk\in \Gr}\ \textcolor{grey}{\text{of prime order}}$\
 $\mathsf{ECDSA^\*}$.$\mathsf{Verify}(m, \pk, \sigma) \rightarrow \\{0,1\\}$:
- - $(\textcolor{red}{R},s)\gets \sigma$
+ - $(\red{R},s)\gets \sigma$
  - assert $R$ is in the prime-order subgroup $\Gr$
- - **assert** $s \in \Zp\setminus\\{0\\}$
- - **assert** $\textcolor{red}{R \equals \left(g^{H(m)} \pk^r\right)^{s^{-1}}}\ \textcolor{grey}{\text{// no longer using the conversion function}}\ f$
+ - **assert** $s \in (0,p)$
+ - **assert** $\red{R \equals \left(g^{H(m)} \pk^r\right)^{s^{-1}}}\ \textcolor{grey}{\text{// no longer using the conversion function}}\ f$
 
 
 $\textcolor{grey}{\text{// assumes}\ \pk_i\in \Gr}\ \textcolor{grey}{\text{of prime order}}$\
 $\mathsf{ECDSA^\*}$.$\mathsf{BatchVerify}((m_i, \pk_i, \sigma_i)_{i\in [n]}) \rightarrow \\{0,1\\}$:
  - $(R_i,s_i)\gets \sigma_i,\forall i\in [n]\ \textcolor{grey}{\text{// implicitly asserts}\ R_i \in\Gr\ \text{of prime order}}$
- - **assert** $s_i \in \Zp\setminus\\{0\\},\forall i \in S$
+ - **assert** $s_i \in (0,p),\forall i \in S$
  - $\alpha_i \randget \Zp,\forall i\in [n]$
  - assert $1 \equals \prod_{i\in[n]} \left(R_i^{-\alpha_i} g^{H(m_i)\cdot s_i^{-1}\cdot \alpha_i} \pk^{r_i \cdot s_i^{-1}\cdot \alpha_i}\right)$
 
@@ -362,15 +361,76 @@ The most efficient implementation would use **batch inversion**[^inv-tweet] to c
 Then, it would compute all the exponents in the right-hand side in Eq. \ref{eq:batch-verification}.
 Finally, it would compute this right-hand side via a size-$3n$ multi-exponentiation.
 
+## Signature malleability 
+
+In elliptic curves, the inverse of a point $R=(x,y)\in\Fq^2$ is computed as $R^{-1} = (x,-y)\in\Fq^2$.
+Unfortunately, [the ECDSA conversion function](#the-ecdsa-conversion-function) only computes on the $x$-coordinate and ignores the $y$-coordinate!
+This means that:
+\begin{align}
+f(R) = f(R^{-1})
+\end{align}
+As a result, the ECDSA verification in Eq. \ref{eq:ecdsa-verify} will pass both for $(r,s)\in (0,p)$ as well as for $(r,\red{p-s})\in(0,p)$!
+To see this, just substitute $\red{-s}$ for $s$ in Eq. \ref{eq:ecdsa-verify-2}:
+\begin{align}
+r &\equals f\left(g^{(\red{-s})^{-1}(H(m) + \sk \cdot r)}\right)\Leftrightarrow\\\\\
+r &\equals f\left(g^{(-1)^{-1}s^{-1}(H(m) + \sk \cdot r)}\right)\Leftrightarrow\\\\\
+r &\equals f\left(g^{-s^{-1}(H(m) + \sk \cdot r)}\right)\Leftrightarrow\\\\\
+r &\equals f\left(g^{-\left(k^{-1}(H(m)+\sk\cdot r)\right)^{-1}(H(m) + \sk \cdot r)}\right)\Leftrightarrow\\\\\
+r &\equals f\left(g^{-\left(k^{-1}\right)^{-1}}\right)\Leftrightarrow\\\\\
+r &\equals f\left(g^{-k}\right)\Leftrightarrow\\\\\
+r &\equals f(R^{-1})\\\\\
+r &\equals f(R)
+\end{align}
+Note that this attack applies to the [modified ECDSA](#batch-verification) scheme above, since a valid signature $(R,s)$ can be mauled as $(\red{R^{-1}}, \red{-s})$.
+
+{: .info}
+_Historical aside:_
+Malleability attacks may have played a small role in the MtGox attacks[^DW14], where \$620 million worth of Bitcoin disappeared.
+However, the predominant theory is that there is other funny business that accounts for most of the stolen funds[^mtgox].
+
+{: .note}
+There can be other sources of malleability too: e.g., perhaps implementations forget to check that $r\in(0,q)$.
+Or, implementations may allow multiple serializations for the same $r$.
+
+### Non-malleable algorithms
+
+There are two ways to fix non-malleability.
+ 1. **Approach 1:** Observe that for any $s\in(0,p)$ if $s$ is even, then $p-s$ is odd. (And if $s$ is odd, then $p-s$ is even.)
+    Therefore, by convention, only allow even $s$ and enforce this in the signature verification algorithm.
+ 1. **Approach 2:** Observe that for any $s\in(0,(p-1)/2]$, we have $p-s \in ((p-1)/2, p)$.
+    Therefore, by convention, only allow $s\in(0,(p-1)/2]$ and enforce this in the signature verification algorithm.
+     + e.g., when $p=5$, if $s\in(0,2]=\\{1,2\\}$, then $p-s \in (2,5)=\\{3,4\\}$
+
+We give algorithms for **approach 2** below.
+Everything remains mostly the same, except for the $\red{\text{red}}$ parts:
+
+$\mathsf{ECDSA}$.$\mathsf{Sign^\red{\*}}(m, \sk) \rightarrow \sigma\in(0,p)\times\red{(0,(p-1)/2]}$:
+ 1. $k \randget \Zp\setminus\\{0\\}\ \textcolor{grey}{\text{// 0 is excluded as a valid nonce}}$
+ 1. $R\gets g^k$ 
+ 1. $r\gets f(R)$ (again, see the [conversion function](#the-ecdsa-conversion-function) above)
+     - **if** $r\equals 0$, go back to **step 1**
+ 1. $s \gets k^{-1}(H(m) + \sk\cdot r) \bmod p$ 
+     - **if** $s\equals 0$, go back to **step 1**
+     - **if** $\red{s > (p - 1)/2}$, go back to **step 1**
+ 1. $\sigma\gets (r,s)$
+
+$\textcolor{grey}{\text{// assumes}\ \pk\in \Gr}\ \textcolor{grey}{\text{of prime order}}$\
+$\mathsf{ECDSA}$.$\mathsf{\red{NonMalleable}Verify}(m, \pk, \sigma) \rightarrow \\{0,1\\}$:
+ - $(r,s)\gets \sigma$
+ - **assert** $r \in (0,p)$
+ - **assert** $\red{s \in (0,(p-1)/2]}$
+ - **assert** $r \equals f\left(\left(g^{H(m)} \pk^r\right)^{s^{-1}}\right)$
+
 ## Implementation caveats
 
 Implementing ECDSA securely and efficiently can be tricky:
 
  1. Must remember to verify that $r$ and $s$ are not $0$
- 2. If not using prime-order groups, prime-order subgroup membership checks must be performed on...
+ 1. Must be wary of [signature malleability attacks](#signature-malleability)
+ 1. If not using prime-order groups, prime-order subgroup membership checks must be performed on...
      - ...the PKs passed into the verification equation
      - ...the $R$-component of [modified ECDSA](#batch-verification) signatures
- 3. Should aim to use efficient inversion algorithms[^inv-tweet] for $s^{-1}$ (e.g., EEA-based, Lehmer) 
+ 1. Should aim to use efficient inversion algorithms[^inv-tweet] for $s^{-1}$ (e.g., EEA-based, Lehmer) 
  1. ECDSA, like [Schnorr](/2024/05/31/Schnorr-signatures.html), is broken if the **nonce $k$ is reused**. Generally, they are both very **fragile** if the nonce $k$ is biased[^BH19e].
     + Even small amounts of bias in the nonce $k$ can be used to recover the SK given enough signatures.
     - Deterministic signing can mitigate this in both schemes.
