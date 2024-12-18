@@ -329,6 +329,8 @@ As a result, a batch of signatures $$(R_i, s_i)_{i\in[n]}$$ for messages $$m_i$$
 1 \equals \prod_{i\in[n]} \left(R_i^{-\alpha_i} g^{H(m_i)\cdot s_i^{-1}\cdot \alpha_i} \pk^{r_i \cdot s_i^{-1}\cdot \alpha_i}\right)
 \end{align}
 
+### Batchable algorithms
+
 We describe the modified ECDSA scheme that supports batch verification below. 
 Changes from normal ECDSA are highlighted in $\red{\text{red}}$.
 
