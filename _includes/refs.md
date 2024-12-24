@@ -782,6 +782,8 @@
 
 [^Brow05]: **Breaking RSA May Be As Difficult As Factoring**, by Daniel R. L. Brown, *in Cryptology ePrint Archive, Report 2005/380*, 2005, [[URL]](https://eprint.iacr.org/2005/380)
 
+[^Brow15e]: **Short Schnorr signatures require a hash function with more than just random-prefix resistance**, by Daniel R.  L.  Brown, *in Cryptology {ePrint} Archive, Paper 2015/169*, 2015, [[URL]](https://eprint.iacr.org/2015/169)
+
 [^Buff48]: **Human Freedom Rests on Gold Redeemable Money**, by Howard Buffett, 1948, [[URL]](https://www.fgmr.com/wp-content/uploads/2017/02/Howard-Buffett-explains-sound-money-4-May-1948.pdf)
 
 [^Buterin20UsingPoly]: **Using polynomial commitments to replace state roots**, by Vitalik Buterin, 2020, [[URL]](https://ethresear.ch/t/using-polynomial-commitments-to-replace-state-roots/7095)
