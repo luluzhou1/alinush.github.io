@@ -289,13 +289,14 @@ Perhaps this article will grow over time.
 
  1. What other aspects of Schnorr signatures should this blog post address?
  1. The original Schnorr paper[^Schn89] claims $\lambda$-bit hashes (as opposed to $2\lambda$) are sufficient for $\lambda$-bit security. I believe this analysis remains true?
+    + A 2015 paper suggests that such "short" Schnorr signatures could still be secure, but not under the weak "random prefix resistance" property of the hash function[^Brow15e]
  1. What is a good academic reference for the *cleanest* EUF-CMA security proof for (single-signer) Schnorr?
  1. What is the the earliest work that defines Schnorr signatures over elliptic curves?
  1. What is the significance of [PV05][^PV05]
 
 ## Acknowledgements
 
-Thanks to [Michael Straka](https://x.com/mstrakastrak) for pointing me to the journal version of Schnorr's paper which described potential class group or elliptic curve variants of the scheme.
+Thanks to [Michael Straka](https://x.com/mstrakastrak) for pointing me to (1) the journal version of Schnorr's paper which described potential class group or elliptic curve variants of the scheme and (2) the analysis of "short" Schnorr signatures by Brown[^Brow15e].
 
 ---
 
