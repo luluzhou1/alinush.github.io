@@ -20,6 +20,8 @@
 
 [^ABCP23e]: **VSS from Distributed ZK Proofs and Applications**, by Shahla Atapoor and Karim Baghery and Daniele Cozzo and Robi Pedersen, *in Cryptology ePrint Archive, Paper 2023/992*, 2023, [[URL]](https://eprint.iacr.org/2023/992)
 
+[^ABGplus06]: **Accelerated Verification of ECDSA Signatures**, by Antipa, Adrian and Brown, Daniel and Gallant, Robert and Lambert, Rob and Struik, René and Vanstone, Scott, *in Selected Areas in Cryptography*, 2006
+
 [^ABKplus21]: **Algebraic Adversaries in the Universal Composability Framework**, by Michel Abdalla and Manuel Barbosa and Jonathan Katz and Julian Loss and Jiayu Xu, *in Cryptology ePrint Archive, Report 2021/1218*, 2021, [[URL]](https://ia.cr/2021/1218)
 
 [^ABLplus19]: **DL-Extractable UC-Commitment Schemes**, by Behzad Abdolmaleki and Karim Baghery and Helger Lipmaa and Janno Siim and Michał Zając, *in Cryptology ePrint Archive, Report 2019/201*, 2019, [[URL]](https://eprint.iacr.org/2019/201)
@@ -638,6 +640,8 @@
 
 [^BO22e]: **Ferveo: Threshold Decryption for Mempool Privacy in {BFT} networks**, by Joseph Bebel and Dev Ojha, *in Cryptology {ePrint} Archive, Paper 2022/898*, 2022, [[URL]](https://eprint.iacr.org/2022/898)
 
+[^BP00]: **Attacking and Repairing Batch Verification Schemes**, by Boyd, Colin and Pavlovski, Chris, *in Advances in Cryptology --- ASIACRYPT 2000*, 2000
+
 [^BP02e]: **GQ and Schnorr Identification Schemes: Proofs of Security against Impersonation under Active and Concurrent Attacks**, by Bellare, Mihir and Palacio, Adriana, 2002, [[URL]](https://cseweb.ucsd.edu/~mihir/papers/gq.pdf)
 
 [^BP04]: **The Knowledge-of-Exponent Assumptions and 3-Round Zero-Knowledge Protocols**, by Bellare, Mihir and Palacio, Adriana, *in Advances in Cryptology -- CRYPTO 2004*, 2004
@@ -743,6 +747,8 @@
 [^Berk82]: **Factoring via Superencryption**, by SHIMSHON   BERKOVITS, *in Cryptologia*, 1982, [[URL]](https://doi.org/10.1080/0161-118291857028)
 
 [^Bern02]: **Pippenger's Exponentiation Algorithm**, by Daniel J. Bernstein, 2002
+
+[^Beth88]: **Efficient Zero-Knowledge Identification Scheme for Smart Cards**, by Beth, Thomas, *in Advances in Cryptology --- EUROCRYPT '88*, 1988
 
 [^Blac20]: **Move: A Language With Programmable Resources**, by Sam Blackshear and Evan Cheng and David L. Dill and Victor Gao and Ben Maurer and Todd Nowacki and Alistair Pott, Shaz Qadeer and Rain and Dario Russi and Stephane Sezer and Tim Zakian and Runtian Zhou, 2020, [[URL]](https://diem-developers-components.netlify.app/papers/diem-move-a-language-with-programmable-resources/2020-05-26.pdf)
 
@@ -1144,6 +1150,8 @@
 
 [^Canetti00]: **Universally Composable Security: A New Paradigm for Cryptographic Protocols**, by Ran Canetti, *in Cryptology ePrint Archive, Report 2000/067*, 2000, [[URL]](https://eprint.iacr.org/2000/067)
 
+[^Cert09]: **SEC 1: Elliptic Curve Cryptography**, by Certicom Research, 2009, [[URL]](https://www.secg.org/sec1-v2.pdf#page=53)
+
 [^Cert10]: **SEC 2: Recommended Elliptic Curve Domain Parameters**, by Certicom Research, 2010, [[URL]](https://www.secg.org/sec2-v2.pdf)
 
 [^Chai04]: **How real are real numbers?**, by G. J. Chaitin, 2004
@@ -1245,6 +1253,8 @@
 [^DKIR21]: **SPURT: Scalable Distributed Randomness Beacon with Transparent Setup**, by Sourav Das and Vinith  Krishnan and Irene Miriam Isaac and Ling Ren, *in Cryptology ePrint Archive, Report 2021/100*, 2021, [[URL]](https://eprint.iacr.org/2021/100)
 
 [^DKLplus23e]: **Threshold {BBS}+ Signatures for Distributed Anonymous Credential Issuance**, by Jack Doerner and Yashvanth Kondi and Eysa Lee and abhi shelat and LaKyah Tyner, *in Cryptology {ePrint} Archive, Paper 2023/602*, 2023, [[URL]](https://eprint.iacr.org/2023/602)
+
+[^DKLS23e]: **Threshold {ECDSA} in Three Rounds**, by Jack Doerner and Yashvanth Kondi and Eysa Lee and abhi shelat, *in Cryptology {ePrint} Archive, Paper 2023/765*, 2023, [[URL]](https://eprint.iacr.org/2023/765)
 
 [^DKNS04]: **Anonymous Identification in Ad Hoc Groups**, by Dodis, Yevgeniy and Kiayias, Aggelos and Nicolosi, Antonio and Shoup, Victor, *in Advances in Cryptology - EUROCRYPT 2004*, 2004
 
@@ -1920,7 +1930,7 @@
 
 [^HZY09]: **Practical Distributed Key Generation Scheme**, by Chen Huiyan and  Li Zichen and Fang Yong, *in Cryptology ePrint Archive, Report 2009/432*, 2009, [[URL]](https://eprint.iacr.org/2009/432)
 
-[^Habc22e]: **Multivariate lookups based on logarithmic derivatives**, by Ulrich Haböck, *in Cryptology ePrint Archive, Paper 2022/1530*, 2022, [[URL]](https://eprint.iacr.org/2022/1530)
+[^Habo22e]: **Multivariate lookups based on logarithmic derivatives**, by Ulrich Haböck, *in Cryptology ePrint Archive, Paper 2022/1530*, 2022, [[URL]](https://eprint.iacr.org/2022/1530)
 
 [^Hagh21]: **A lattice-based vector commitment and key-value commitment with homomorphic properties**, by Haghighi Arman, 2021, [[URL]](https://repository.ust.hk/ir/Record/1783.1-115228)
 
@@ -2147,6 +2157,8 @@
 [^KS23eCycleFold]: **CycleFold: Folding-scheme-based recursive arguments over a cycle of elliptic curves**, by Abhiram Kothapalli and Srinath Setty, *in Cryptology ePrint Archive, Paper 2023/1192*, 2023, [[URL]](https://eprint.iacr.org/2023/1192)
 
 [^KS24e]: **NeutronNova}: Folding everything that reduces to zero-check**, by Abhiram Kothapalli and Srinath Setty, *in Cryptology {ePrint} Archive, Paper 2024/1606*, 2024, [[URL]](https://eprint.iacr.org/2024/1606)
+
+[^KS24eMSMse]: **Endomorphisms for Faster Cryptography on Elliptic Curves of Moderate {CM} Discriminants**, by Dimitri Koshelev and Antonio Sanso, *in Cryptology {ePrint} Archive, Paper 2024/1985*, 2024, [[URL]](https://eprint.iacr.org/2024/1985)
 
 [^KSAP21]: **Practical Dynamic Group Signatures Without Knowledge Extractors**, by Hyoseung Kim and Olivier Sanders and Michel Abdalla and Jong Hwan Park, *in Cryptology ePrint Archive, Report 2021/351*, 2021, [[URL]](https://eprint.iacr.org/2021/351)
 
@@ -2520,6 +2532,8 @@
 
 [^NR04]: **Number-theoretic constructions of efficient pseudo-random functions**, by Naor, Moni and Reingold, Omer, *in Journal of the ACM*, 2004, [[URL]](http://dx.doi.org/10.1145/972639.972643)
 
+[^NR95]: **Message recovery for signature schemes based on the discrete logarithm problem**, by Nyberg, Kaisa and Rueppel, Rainer A., *in Advances in Cryptology --- EUROCRYPT'94*, 1995
+
 [^NRBB22e]: **Powers-of-Tau to the People: Decentralizing Setup Ceremonies**, by Valeria Nikolaenko and Sam Ragsdale and Joseph Bonneau and Dan Boneh, *in Cryptology ePrint Archive, Paper 2022/1592*, 2022, [[URL]](https://eprint.iacr.org/2022/1592)
 
 [^NRO22e]: **Public Randomness Extraction with Ephemeral Roles and Worst-Case Corruptions**, by Jesper Buus Nielsen and João Ribeiro and Maciej Obremski, *in Cryptology ePrint Archive, Paper 2022/237*, 2022, [[URL]](https://eprint.iacr.org/2022/237)
@@ -2609,6 +2623,8 @@
 [^PP15e]: **Balloon: A Forward-Secure Append-Only Persistent Authenticated Data Structure**, by Tobias Pulls and Roel Peeters, *in Cryptology ePrint Archive, Report 2015/007*, 2015, [[URL]](https://ia.cr/2015/007)
 
 [^PPS21e]: **Vector and Functional Commitments from Lattices**, by Chris Peikert and Zachary Pepin and Chad Sharp, *in Cryptology ePrint Archive, Report 2021/1254*, 2021, [[URL]](https://ia.cr/2021/1254)
+
+[^PPZ24e]: **Crescent: Stronger Privacy for Existing Credentials**, by Christian Paquin and Guru-Vamsi Policharla and Greg Zaverucha, *in Cryptology {ePrint} Archive, Paper 2024/2013*, 2024, [[URL]](https://eprint.iacr.org/2024/2013)
 
 [^PRTY19]: **SpOT-Light: Lightweight Private Set Intersection from Sparse OT Extension**, by Benny Pinkas and Mike Rosulek and Ni Trieu and Avishay Yanai, *in Cryptology ePrint Archive, Report 2019/634*, 2019, [[URL]](https://eprint.iacr.org/2019/634)
 
@@ -2929,6 +2945,8 @@
 [^Sanders20]: **Improving Revocation for Group Signature with Redactable Signature**, by Olivier Sanders, *in Cryptology ePrint Archive, Report 2020/856*, 2020, [[URL]](https://eprint.iacr.org/2020/856)
 
 [^Schn89]: **Efficient Identification and Signatures for Smart Cards**, by Schnorr, C. P., *in Advances in Cryptology --- CRYPTO' 89 Proceedings*, 1990
+
+[^Schn91]: **Efficient signature generation by smart cards**, by Schnorr, C. P., *in Journal of Cryptology*, 1991, [[URL]](https://doi.org/10.1007/BF00196725)
 
 [^Scho21]: **Lecture Notes: Cryptographic Protocols**, by Berry Schoenmakers, 2021, [[URL]](https://www.win.tue.nl/~berry/CryptographicProtocols/LectureNotes.pdf)
 
@@ -3271,6 +3289,8 @@
 [^Zah18]: **Chimeric Ledgers: Translating and Unifying UTXO-based and Account-based Cryptocurrencies**, by Joachim Zahnentferner, *in Cryptology ePrint Archive, Report 2018/262*, 2018, [[URL]](https://eprint.iacr.org/2018/262)
 
 [^Zha15]: **Concentration Bounds**, by Cyril Zhang, 2015, [[URL]](https://sachdevasushant.github.io/courses/15s-cpsc665/notes/concentration.pdf)
+
+[^Zhan22e]: **To Label, or Not To Label (in Generic Groups)**, by Mark Zhandry, *in Cryptology {ePrint} Archive, Paper 2022/226*, 2022, [[URL]](https://eprint.iacr.org/2022/226)
 
 [^deVa20]: **It’s 255:19AM. Do you know what your validation criteria are?**, by Henry de Valence, 2020, [[URL]](https://hdevalence.ca/blog/2020-10-04-its-25519am)
 

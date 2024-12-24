@@ -18,11 +18,11 @@ sidebar:
 
 The Schnorr signature scheme was originally introduced by Claus-Peter Schnorr, a German mathematician, in a CRYPTO'89 paper[^Schn89].
 In the paper, Schnorr first proposes an _identification scheme_ which he then turns into a signature scheme using the well-known _Fiat-Shamir transform_[^FS87].
-The original paper describes the signature scheme assuming a specific choice of Abelian group: a prime-order $q$ subgroup of $\Zps$, where $p$ is a prime.
-Later work naturally observed that any prime-order group suffices (e.g., elliptic curve groups)[^reference-needed].
+The original paper describes the signature scheme assuming a specific choice of Abelian group: a prime-order $q$ subgroup of $\Zps$, where $p$ is a prime. 
+Later, in a journal version of the paper[^Schn91], Schnorr suggests any groups where computing discrete logs is hard should suffice, interestingly pointing to class groups and elliptic curve groups[^reference-needed].
 
 Schnorr patented his scheme in 1990.
-This was likely the biggest reason why Bitcoin, and the rest of the cryptocurrency space, (unfortunately?) chose ECDSA as its signature scheme, instead of Schnorr, which is simpler, more efficient and easier to thresholdize into a $t$-out-of-$n$ scheme.
+This was likely the biggest reason why Bitcoin, and the rest of the cryptocurrency space, (unfortunately?) chose ECDSA as its signature scheme, instead of Schnorr, which would have been simpler, slightly more efficient and easier to thresholdize into a $t$-out-of-$n$ scheme.
 In 2010, once the patent expired, Schnorr became more popular.
 
 Much like ECDSA, (some variants of) Schnorr signatures support [public key recovery](#pubkey-recovery), which Bitcoin leverages in P2PKH mode[^P2PKH] to keep TXN signatures smaller.
@@ -293,13 +293,17 @@ Perhaps this article will grow over time.
  1. What is the the earliest work that defines Schnorr signatures over elliptic curves?
  1. What is the significance of [PV05][^PV05]
 
+## Acknowledgements
+
+Thanks to [Michael Straka](https://x.com/mstrakastrak) for pointing me to the journal version of Schnorr's paper which described potential class group or elliptic curve variants of the scheme.
+
 ---
 
 [^clamping]: [An Explainer On Ed25519 Clamping](https://www.jcraige.com/an-explainer-on-ed25519-clamping), Jake Craige
 [^devalence]: [It's 255:19AM. Do you know what your validation criteria are?](https://hdevalence.ca/blog/2020-10-04-its-25519am), Henry de Valence
 [^P2PKH]: [ECDSA verification, P2PKH uncompressed address](https://en.bitcoin.it/wiki/Message_signing#ECDSA_verification.2C_P2PKH_uncompressed_address)
 [^P2PKH-always]: [How did pay-to-pubkey hash come about? What is its history?](https://bitcoin.stackexchange.com/a/73568/24573)
-[^reference-needed]: Not sure what the earliest work is that uses Schnorr signatures over, say, elliptic curves.
+[^reference-needed]: Not sure what the earliest work is that **actually** uses Schnorr signatures over, say, elliptic curves.
 [^related-key-attacks]: [Related key attacks in BIP-340](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki#cite_ref-5-0)
 [^ristretto]: [https://ristretto.group](https://ristretto.group/why_ristretto.html)
 [^schnorrkel]: [Schnorrkel](https://github.com/w3f/schnorrkel)
