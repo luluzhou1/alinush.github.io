@@ -59,8 +59,7 @@ I like to read and write.
 In fact, you can see some of my writing on [this website](/archive.html) and on [Decentralized Thoughts](https://decentralizedthoughts.github.io/about-alin).
 
 I am currently the _Head of Cryptography_ at [Aptos Labs](https://aptoslabs.com).
-My broad [research interests](/papers.html) are in cryptography and its practical applications.
-My current interests are around:
+My current [research interests](/papers.html) are in cryptography and its practical applications:
  1. general-purpose and/or appliction-specific zero-knowledge proofs
  1. authenticated data structures, especially if based on more exotic primitives, such as [constant-sized polynomial commitments](/2020/05/06/kzg-polynomial-commitments.html).
  1. anonymous payments
@@ -84,23 +83,25 @@ I've also helped with, but not led, research on
  - [scalable Byzantine Fault Tolerance (BFT) protocols](https://ieeexplore.ieee.org/document/8809541)
  - [oblivious file systems](https://dl.acm.org/doi/10.1145/2382196.2382299)
 
-Before joining Aptos Labs, I was a Postdoctoral Researcher and then a Research Scientist at VMware Research.
-Before VMware, I was a PhD student at MIT, becoming an applied cryptography researcher with [Srini Devadas](https://people.csail.mit.edu/devadas/), my advisor.
-Before joining MIT, I was building tamper-proof clouds and end-to-end encrypted outsourced file storage at [Private Machines](https://privatemachines.com/).
+Before Aptos Labs, I was a Postdoctoral Researcher and then a Research Scientist at VMware Research.
+
+Before VMware, I was a cryptography PhD student at MIT, advised by [Srini Devadas](https://people.csail.mit.edu/devadas/).
+
+Before MIT, I was building tamper-proof clouds and end-to-end encrypted outsourced file storage at [Private Machines](https://privatemachines.com/).
 
 ### The _truth_
 
 Alin is a prolific slav-squatter.
-In his free time, he likes to play piano, ride motorcycles to coffee shops, and lift things up and put them back down again.
+In his free time, he likes to play piano, ride motorcycles, and lift things up and put them back down again.
 Slowly.
 He also enjoys travelling, but only to destinations with total solar eclipses.
 Naturally, he dislikes clouds.
-(Please join him <strike>in Antarctica, in 2021; or, in Winnemucca, Nevada on October 14th, 2023</strike> in Austin, Texas, on April 8th, 2024.)
+(Please join him <strike>in Antarctica, in 2021; or, in Winnemucca, Nevada on October 14th, 2023; or, in Austin, Texas, on April 8th, 2024</strike> in Spain, on August 12th, 2026.)
 
 ### The motorcycle(s)
 
-<strike><b>Alin might buy a motorcycle and risk the few, still-functioning limbs in his body.
-Someone should convince him not to do this.</b></strike>
+<strike>Alin might buy a motorcycle and risk the few, still-functioning limbs in his body.
+Someone should convince him not to do this.</strike>
 
 In July 2020, Alin purchased a [2017 Honda Rebel 500](/pictures/rebel-500.jpg).
 He has never been more happy and frightened at the same time.
@@ -115,10 +116,7 @@ Someone please help him.
 
 _Update (March 2022 - December 2024):_ Since March 2022, Alin remains in one piece.
 Inspired by this turn of events, Alin has bought a [2024 Ducati Panigale V4S](/pictures/panigale-v4s.jpg).
-At the time, the main thought going through his head was:
-
- > _"A good death is its own reward."_
-
+At the time, the main thought going through his head was: _"A good death is its own reward."_
 Please pray for him.
 (The Rebel 1100 and R1250GS have since been sold.)
 
