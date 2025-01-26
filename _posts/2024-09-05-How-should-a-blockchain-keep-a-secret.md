@@ -1,5 +1,6 @@
 ---
-tags: secret-sharing
+tags:
+ - secret sharing
 title: How should a blockchain keep a secret?
 #date: 2020-11-05 20:45:59
 #published: false

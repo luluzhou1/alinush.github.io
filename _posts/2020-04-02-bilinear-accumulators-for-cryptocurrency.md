@@ -4,7 +4,7 @@ date: 2020-04-02 01:10:00 -07:00
 tags:
 - accumulators
 - bilinear accumulators
-- bilinear maps
+- bilinear maps (pairings)
 - polynomials
 author: Alin Tomescu
 ---

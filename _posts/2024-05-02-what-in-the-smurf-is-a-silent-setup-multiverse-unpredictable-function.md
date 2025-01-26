@@ -1,8 +1,7 @@
 ---
 tags:
- - signatures
- - dkg
- - distributed key generation
+ - digital signatures
+ - distributed key generation (DKG)
  - bls
  - aggregation
  - multilinear maps

@@ -1,9 +1,8 @@
 ---
 tags:
-- bilinear maps
-- cryptography
+- bilinear maps (pairings)
 - encryption
-- group theory
+- math
 title: Pairings or bilinear maps
 date: 2022-12-31 20:45:59
 #published: false

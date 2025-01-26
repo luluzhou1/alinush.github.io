@@ -1,5 +1,8 @@
 ---
 tags:
+ - quadratic arithmetic programs (QAPs)
+ - rank-1 constraint systems (R1CS)
+ - zero-knowledge proofs (ZKPs)
 title: Quadratic Arithmetic Programs (QAPs) and Rank-1 Constraint Systems (R1CS)
 #date: 2020-11-05 20:45:59
 #published: false

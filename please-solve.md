@@ -65,6 +65,18 @@ In contrast, KZG proofs were efficiently aggregatable[^TABplus20]$^,$[^GRWZ20] b
 
 **Open problem:** Can we achieve more efficient constructions than Groth'21[^Grot21e] and class group ones[^CD23e]$^,$[^KMMplus23e]? In order of importance: faster verification, faster dealing and smaller transcript size.
 
+## Append-only authenticated dictionaries (AADs)
+
+AADs are a key primitive for building transparency logs, which are very useful for public-key distribution in secure messaging and trustworthy software updates.
+The main difficulty in creating an AAD is authenticating a dictionary data structure such that it provides both (1) membership and non-membership proofs and (2) append-only proofs.
+Typically, constructions are able to provide only one type of proof efficiently. 
+For the other proof, they usually rely on an external, trusted party to audit the data structure and maintain various security invariants that keep the proof efficient (e.g., CONIKS[^MBBplus15]).
+
+**Previous work:** 
+See our previous bilinear-based construction[^TBPplus19] or previous SNARK-based constructions[^TFBT21]$^,$[^TKPS22].
+
+**Open problem:** AADs with faster append times, smaller proof sizes and faster proof verification times. 
+
 ---
 
 {% include refs.md %}

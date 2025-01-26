@@ -1,6 +1,6 @@
 ---
 tags: 
- - signatures
+ - digital signatures
  - schnorr
 title: "Schnorr signatures: everything you wanted to know, but were afraid to ask!"
 #date: 2020-11-05 20:45:59

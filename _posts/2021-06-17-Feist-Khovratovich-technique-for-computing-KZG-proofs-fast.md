@@ -4,7 +4,7 @@ tags:
 - vc
 - vector commitments
 - kzg
-- bilinear maps
+- bilinear maps (pairings)
 - toeplitz
 - fft
 - fast fourier transform

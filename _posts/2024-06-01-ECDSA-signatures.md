@@ -1,5 +1,6 @@
 ---
 tags:
+ - digital signatures
 title: ECDSA signatures (and why you should avoid them)
 #date: 2020-11-05 20:45:59
 #published: false
@@ -470,6 +471,7 @@ Despite my strong bias against ECDSA, I still find it to be a cool signature sch
  1. ECDSA does not use the Fiat-Shamir transform[^FS87]
  1. ElGamal signatures (and thus [EC]DSA) are one of the few paradigms for signature schemes in the prime-order group setting without pairings
      + Besides Fiat-Shamir-style signatures from $\Sigma$-protocols (e.g., Schnorr[^Schn89], Chaum-Pedersen[^CP92], Okamoto[^Okam93]), what else is there?
+        * Oh! Dan Boneh pointed me to **Nyberg-Rueppel** signatures[^NR95].
  1. ECDSA showcased the utility of [pubkey recovery](#pubkey-recovery) algorithms in cryptocurrencies like Bitcoin and Ethereum
 
 ### Future work
@@ -489,7 +491,7 @@ Other items I hope to address in the future:
 
 ### Acknowledgments
 
-Thanks to Dan Boneh for pointing out the deterministic ECDSA RFC[^deterministic-ecdsa] and the cryptographic community's initial responses to the DSA proposal[^nist-response].
+Thanks to Dan Boneh for pointing out the deterministic ECDSA RFC[^deterministic-ecdsa], the cryptographic community's initial responses to the DSA proposal[^nist-response] and Nyberg-Rueppel signatures[^NR95].
 
 ## Appendix: libsecp256k1's ECDSA pubkey recovery code (Rust)
 

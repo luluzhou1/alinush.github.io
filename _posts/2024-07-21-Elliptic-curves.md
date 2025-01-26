@@ -1,5 +1,7 @@
 ---
-tags: "elliptic curves"
+tags: 
+ - elliptic curves
+ - math
 title: Elliptic curves
 article_header:
   type: cover
