@@ -37,6 +37,15 @@ In April 2024, I gave a **20-minute presentation** at zkSummit11, with [slides h
 A tweetstorm summarizing Aptos Keyless can be found below:
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">What is an <a href="https://twitter.com/Aptos?ref_src=twsrc%5Etfw">@aptos</a> keyless account? 🧵<br><br>It&#39;s a blockchain account derived from (say) your Google account and an application (wallet, dapp, etc).<br><br>It&#39;s bound not just to you (e.g., you@gmail.com) but also to the application (e.g., <a href="https://twitter.com/PetraWallet?ref_src=twsrc%5Etfw">@PetraWallet</a>, or <a href="https://twitter.com/ThalaLabs?ref_src=twsrc%5Etfw">@ThalaLabs</a>, or <a href="https://twitter.com/VibrantXFinance?ref_src=twsrc%5Etfw">@VibrantXFinance</a>) <a href="https://t.co/L3qgRf1WoS">pic.twitter.com/L3qgRf1WoS</a></p>&mdash; Alin Tomescu (@alinush407) <a href="https://twitter.com/alinush407/status/1800949436371304955?ref_src=twsrc%5Etfw">June 12, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
+## Code
+
+ - **Example:** Sending a keyless TXN to the Aptos `mainnet` via the SDK [here](https://github.com/aptos-labs/aptos-ts-sdk/blob/2386c07361f9a80f994f8b3ea22991549958402a/examples/typescript/keyless_mainnet.ts#L27)
+ - **Example:** Simple Keyless dapp on Aptos [here](https://github.com/aptos-labs/aptos-keyless-example/) with guide [here](https://aptos.dev/en/build/guides/aptos-keyless/simple-example)
+ - Keyless blockchain validator logic [here](https://github.com/aptos-labs/aptos-core/blob/2c96107ddf0e48b7b3a3e6c67ff6cce3844d1abc/aptos-move/aptos-vm/src/keyless_validation.rs#L158)
+ - Keyless governance logic [here](https://github.com/aptos-labs/aptos-core/blob/2c96107ddf0e48b7b3a3e6c67ff6cce3844d1abc/aptos-move/framework/aptos-framework/sources/keyless_account.move#L3)
+ - Keyless SDK [here](https://github.com/aptos-labs/aptos-ts-sdk/tree/main/src/core/crypto)
+ - Keyless example
+
 ## Aptos Improvement Proposals (AIPs)
 
 AIPs for auxiliary keyless services:
