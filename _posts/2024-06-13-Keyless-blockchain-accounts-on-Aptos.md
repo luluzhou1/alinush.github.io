@@ -31,8 +31,9 @@ One day, I hope to edit this into a full blog post but, until then, see a **one-
 
 ## Slides
 
- - [zkSummit'11](https://docs.google.com/presentation/d/1nmDYfTiFKgAmPvsodkyrniV4USNdGUIGuWYRYaAxKgI/edit?usp=sharing)
+ - [GKR bootcamp, January 2025](https://docs.google.com/presentation/d/1XpkB0t-Ns4SuCosyin83ED4RLoSvFMGjH5746DCshow/) 
  - [How Keyless works](https://docs.google.com/presentation/d/1gew0fD0QFNqV9snmoYnhRtLsHBoMX0wykouVn1CJbXc)
+ - [zkSummit'11, April 2024](https://docs.google.com/presentation/d/1nmDYfTiFKgAmPvsodkyrniV4USNdGUIGuWYRYaAxKgI/edit?usp=sharing)
 
 
 ## Code
