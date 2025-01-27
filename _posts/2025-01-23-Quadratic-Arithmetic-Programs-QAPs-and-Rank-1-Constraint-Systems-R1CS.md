@@ -12,6 +12,8 @@ sidebar:
 #  type: cover
 #  image:
 #    src: /pictures/.jpg
+permalink:
+    qap-r1cs
 ---
 
 {: .info}
