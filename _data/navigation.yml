@@ -157,9 +157,9 @@ cryptomat:
       - title: Definitions
         url: /2025/01/22/Defining-zero-knowledge-proofs.html
       - title: QAPs & R1CS
-        url: /2025/01/23/Quadratic-Arithmetic-Programs-QAPs-and-Rank-1-Constraint-Systems-R1CS.html
+        url: /qap-r1cs
       - title: Groth16
-        url: /2025/01/25/Groth16.html
+        url: /groth16
   - title: Prize-winning stuff
     children:
       - title: Bulletproofs IPA for multiexp
