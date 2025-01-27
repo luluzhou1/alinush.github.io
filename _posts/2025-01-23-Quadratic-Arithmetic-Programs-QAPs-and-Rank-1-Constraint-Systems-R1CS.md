@@ -214,7 +214,7 @@ This, in turn, is equivalent to saying that $\exists$ a degree $\le (n-2)$ **"qu
 (Because $X^n-1$ has degree $n$ and the polynomial it divides has degree $\le (n-1)+(n-1) = 2n-2$.)
 
 {: .note}
-The main technique behind ZKP schemes such as [Groth16](/2025/01/25/Groth16.html) is (succintly) proving knowledge of such a quotient polynomial $\green{h(X)}$. 
+The main technique behind ZKP schemes such as [Groth16](/groth16) is (succintly) proving knowledge of such a quotient polynomial $\green{h(X)}$. 
 
 {: .info}
 **tl;dr:** QAP satisfiability (Eq. \ref{eq:qap-quotient}) $\Leftrightarrow$ R1CS satisfiability (Eq. \ref{eq:r1cs-sum-eq}) $\Leftrightarrow$ $R(\stmt;\witn)$ satisfiability. 

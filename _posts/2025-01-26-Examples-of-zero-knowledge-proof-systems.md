@@ -99,6 +99,6 @@ R1CS, PLONK(ish) constraint systems, AIR, CCS.
 
 For cited works, see below 👇👇
 
-[^groth16]: [Groth16](/2025/01/25/Groth16.html#prover-time), Alin Tomescu, 2024
+[^groth16]: [Groth16](/groth16#prover-time), Alin Tomescu, 2024
 
 {% include refs.md %}

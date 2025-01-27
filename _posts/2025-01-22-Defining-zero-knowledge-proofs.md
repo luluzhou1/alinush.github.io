@@ -56,7 +56,7 @@ The set of all possible binary relations it can output (i.e., its _image_) is de
 A recent impossibility result[^BCPR14]$^,$[^BP15] requires that the relation generator be **benign**. Otherwise, [knowledge-soundness](#knowledge-soundness) cannot be achieved.
 
 {: .note}
-Groth points out[^Grot16] that for ZKPs built from bilinear groups (e.g., [Groth16](/2025/01/25/Groth16.html)), it is natural to let the bilinear group be returned via $\mathsf{aux}$.
+Groth points out[^Grot16] that for ZKPs built from bilinear groups (e.g., [Groth16](/groth16)), it is natural to let the bilinear group be returned via $\mathsf{aux}$.
 
 ### $\mathsf{ZKP}.\mathsf{Setup}(1^\lambda, R) \Rightarrow (\mathsf{prk},\mathsf{vk},\mathsf{td})$  
 Derives a **proving key** $\prk$ and its associated **verifying key** $\vk$ from the NP relation $R$.

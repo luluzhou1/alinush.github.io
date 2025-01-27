@@ -8,6 +8,7 @@ title: Keyless blockchain accounts on Aptos
 #published: false
 #sidebar:
 #    nav: cryptomat
+permalink: keyless
 ---
 
 {: .info}
@@ -17,6 +18,7 @@ In other words, this keyless approach allows you to derive a blockchain account 
 There are no long-term secret keys you need to manage.
 There is also no multi-party computation (MPC) system managing your account for you.
 As a result, the risk of account loss is (more or less), the risk of losing your Google account.
+Keyless is built using a [Groth16](/groth16) zero-knowledge proof to maintain privacy in both directions: prevent the blockchain from learning anything about your Google account & prevent Google from learning anything about your blockchain account and transaction activity.
 
 One day, I hope to edit this into a full blog post but, until then check out the resources below:
 

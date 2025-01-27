@@ -37,7 +37,7 @@ g(\omega^i) &= 0,\forall i\in[0,n)
 ...which would give $h(\omega^i) = f(\omega^i) / g(\omega^i) = f(\omega^i)/0$, which is undefined.
 
 {: .note}
-This situation arises in Groth16's computation of its [quotient polynomial $h(X)$](/2025/01/25/Groth16.html#computing-hx). There, even the denominator $f$ is zero at all $\omega^i$'s.
+This situation arises in Groth16's computation of its [quotient polynomial $h(X)$](/groth16#computing-hx). There, even the denominator $f$ is zero at all $\omega^i$'s.
 
 The following theorem can (sometimes) be applied to compute $h(\omega^i) = f'(\omega^i)/g'(\omega^i)$, where $f'$ and $g'$ are the derivatives:
 
