@@ -1,5 +1,6 @@
 ---
-tags: tutorials
+tags: 
+ - tutorials
 layout: article
 title: How to give (and make) a presentation
 ---

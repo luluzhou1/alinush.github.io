@@ -1,10 +1,8 @@
 ---
 tags:
- - vector commitments
- - vc
+ - vector commitments (VCs)
  - polynomials 
- - fast fourier transform
- - fft
+ - fast fourier transform (FFT)
  - lagrange 
  - aggregation 
  - kzg
@@ -56,7 +54,7 @@ In this post, beyond basic group theory for cryptographers[^KL15] and basic poly
  - **Bilinear maps**[^GPS08]. Specifically, $\exists$ a bilinear map $e : \Gr_1 \times \Gr_2 \rightarrow \Gr_T$ such that:
     - $\forall u\in \Gr_1,v\in \Gr_2, a\in \Zp, b\in \Zp, e(u^a, v^b) = e(u,v)^{ab}$
     - $e(g_1,g_2)\ne 1_T$ where $g_1,g_2$ are the generators of $\Gr_1$ and $\Gr_2$ respectively and $1_T$ is the identity of $\Gr_T$
- - **KZG**[^KZG10] **polynomial commitments** (see [here](kzg)),
+ - **KZG**[^KZG10] **polynomial commitments** (see [here](/kzg)),
  - The **Fast Fourier Transform (FFT)**[^CLRS09] applied to polynomials. Specifically,
     - Suppose $\Zp$ admits a primitive _root of unity_ $\omega$ of order $n$ (i.e., $n \mid p-1$)
     - Let $$H=\{1, \omega, \omega^2, \omega^3, \dots, \omega^{n-1}\}$$ denote the set of all $n$ $n$th roots of unity
@@ -75,7 +73,7 @@ Recall that given a vector $\vect{v} = [v_0, v_1, \dots, v_{n-1}]$, we can inter
 <!-- TODO: add this to polynomial basics -->
 
 It is well-known that this Lagrange representation of $\vect{v}$ naturally gives rise to a **vector commitment (VC)** scheme[^CF13].
-The key idea is to commit to $\vect{v}$ by committing to $\phi(X)$ using KZG polynomial commitments (see [here](kzg)).
+The key idea is to commit to $\vect{v}$ by committing to $\phi(X)$ using KZG polynomial commitments (see [here](/kzg)).
 Then, proving $\phi(i) = v_i$ proves that $v_i$ is the $i$th element in the vector.
 Next, we describe how this scheme works in more detail and what features it has.
 

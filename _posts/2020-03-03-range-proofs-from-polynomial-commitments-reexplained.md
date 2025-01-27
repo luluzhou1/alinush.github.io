@@ -4,7 +4,7 @@ tags:
  - polynomial commitments
  - kzg
  - range proofs
- - zero knowledge
+ - zero-knowledge proofs (ZKPs)
 title: Range Proofs from Polynomial Commitments, Re-explained
 ---
 

@@ -4,8 +4,7 @@ tags:
  - polynomials 
  - bls
  - interpolation
- - fast fourier transform
- - fft
+ - fast fourier transform (FFT)
 title: Fast and Scalable BLS Threshold Signatures
 article_header:
   type: cover
