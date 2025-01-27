@@ -2754,6 +2754,8 @@
 
 [^RMCI17e]: **Improving Authenticated Dynamic Dictionaries, with Applications to Cryptocurrencies**, by Leonid Reyzin and Dmitry Meshkov and Alexander Chepurnoy and Sasha Ivanov, *in Cryptology ePrint Archive, Report 2016/994*, 2016, [[URL]](https://eprint.iacr.org/2016/994)
 
+[^RMHplus24e]: **Hekaton: Horizontally-Scalable {zkSNARKs} via Proof Aggregation**, by Michael Rosenberg and Tushar Mopuri and Hossein Hafezi and Ian Miers and Pratyush Mishra, *in Cryptology {ePrint} Archive, Paper 2024/1208*, 2024, [[URL]](https://eprint.iacr.org/2024/1208)
+
 [^RMM21e]: **SNARKBlock: Federated  Anonymous Blocklisting  from  Hidden Common Input Aggregate Proofs**, by Michael Rosenberg and Mary Maller and Ian Miers, *in Cryptology ePrint Archive, Report 2021/1577*, 2021, [[URL]](https://ia.cr/2021/1577)
 
 [^RO92]: **The design and implementation of a log-structured file system**, by Mendel Rosenblum and John K. Ousterhout, *in {ACM} Transactions on Computer Systems*, 1992, [[URL]](https://doi.org/10.1145%2F146941.146943)
