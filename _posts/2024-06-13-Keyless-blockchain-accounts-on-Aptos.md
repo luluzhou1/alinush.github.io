@@ -44,7 +44,6 @@ A tweetstorm summarizing Aptos Keyless can be found below:
  - Keyless blockchain validator logic [here](https://github.com/aptos-labs/aptos-core/blob/2c96107ddf0e48b7b3a3e6c67ff6cce3844d1abc/aptos-move/aptos-vm/src/keyless_validation.rs#L158)
  - Keyless governance logic [here](https://github.com/aptos-labs/aptos-core/blob/2c96107ddf0e48b7b3a3e6c67ff6cce3844d1abc/aptos-move/framework/aptos-framework/sources/keyless_account.move#L3)
  - Keyless SDK [here](https://github.com/aptos-labs/aptos-ts-sdk/tree/main/src/core/crypto)
- - Keyless example
 
 ## Aptos Improvement Proposals (AIPs)
 
