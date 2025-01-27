@@ -2,8 +2,7 @@
 tags: 
  - accumulators
  - aggregation
- - vector commitments
- - vc 
+ - vector commitments (VCs)
  - rsa
  - hidden-order groups
 title: Catalano-Fiore Vector Commitments

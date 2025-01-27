@@ -77,4 +77,4 @@ Should have its own article.
 
 {% include refs.md %}
 
-[^kzg-eval-proofs]: Evaluation proofs in [KZG polynomial commitments](/2020/05/06/kzg-polynomial-commitments.html#evaluation-proofs) leverage the polynomial remainder theorem.
+[^kzg-eval-proofs]: Evaluation proofs in [KZG polynomial commitments](kzg#evaluation-proofs) leverage the polynomial remainder theorem.

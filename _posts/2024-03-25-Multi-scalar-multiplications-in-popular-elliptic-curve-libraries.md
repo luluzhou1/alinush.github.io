@@ -1,9 +1,7 @@
 ---
 tags: 
- - multiexp
- - multiexponentiation
- - msm
- - multi-scalar multiplication
+ - multi-exponentiations (multiexps)
+ - multi-scalar multiplication (MSMs)
 title: Multi scalar multiplications (MSMs) in popular elliptic curve libraries
 #date: 2020-11-05 20:45:59
 published: false

@@ -1,10 +1,8 @@
 ---
 title: What is a Merkle tree?
 tags:
-- cryptography
 - merkle
-- vc
-- vector commitments
+- vector commitments (VCs)
 - security proofs
 author: Alin Tomescu
 ---

@@ -1,7 +1,7 @@
 ---
 tags:
+ - math
  - number theory
- - group theory
 title: Basic number theory
 #published: false
 sidebar:

@@ -1,13 +1,10 @@
 ---
 #layout: article
 tags:
-- vc
-- vector commitments
+- vector commitments (VCs)
 - kzg
 - bilinear maps (pairings)
-- toeplitz
-- fft
-- fast fourier transform
+- fast fourier transform (FFT)
 title: Feist-Khovratovich technique for computing KZG proofs fast
 #published: false
 sidebar:
@@ -15,7 +12,7 @@ sidebar:
 ---
 
 {: .info}
-**tl;dr:** Given a polynomial $f(X)$ of degree $m$, can we compute all $n$ [KZG](/2020/05/06/kzg-polynomial-commitments.html) proofs for $f(\omega^k), k\in[0,n-1]$ in $O(n\log{n})$ time, where $\omega$ is a primitive $n$th root of unity?
+**tl;dr:** Given a polynomial $f(X)$ of degree $m$, can we compute all $n$ [KZG](kzg) proofs for $f(\omega^k), k\in[0,n-1]$ in $O(n\log{n})$ time, where $\omega$ is a primitive $n$th root of unity?
 Dankrad Feist and Dmitry Khovratovich[^FK20] give a resounding 'yes!'
 
 <!--more-->
@@ -39,7 +36,7 @@ First, read:
 
  - [Basics of polynomials](/2020/03/16/polynomials-for-crypto.html)
  - The [Discrete Fourier Transform (DFT)](https://en.wikipedia.org/wiki/Discrete_Fourier_transform_(general)) for $n$th roots of unity
- - [KZG polynomial commitments](/2020/05/06/kzg-polynomial-commitments.html)
+ - [KZG polynomial commitments](kzg)
 
 Notation:
 
@@ -65,7 +62,7 @@ Let $f(X)$ be a polynomial with coefficients $f_i$:
          &= \sum_{i\in[0,m]} f_i X^i
 \end{align\*}
 
-[Recall that](/2020/05/06/kzg-polynomial-commitments.html) a KZG **evaluation proof** $\pi_i$ for $f(\omega^i)$ is a KZG commitment to a **quotient polynomial** $Q_i(X) = \frac{f(X) - f(\omega^i)}{X-\omega^i}$:
+[Recall that](kzg) a KZG **evaluation proof** $\pi_i$ for $f(\omega^i)$ is a KZG commitment to a **quotient polynomial** $Q_i(X) = \frac{f(X) - f(\omega^i)}{X-\omega^i}$:
 \begin{align\*}
     \pi_i = g^{Q_i(\tau)} = g^{\frac{f(\tau) - f(\omega^i)}{\tau-\omega^i}}
 \end{align\*}

@@ -1,7 +1,6 @@
 ---
 tags:
 - merkle
-- non-membership
 title: Why you should probably never sort your Merkle tree's leaves
 #date: 2020-11-05 20:45:59
 published: true 
@@ -149,7 +148,7 @@ In fact, such a **stronger** notion simply requires that the adversary output th
 An authenticated set scheme has **strong (non)membership soundness** if for all (polynomial-time) adversaries $A$, the probability that $A$ outputs a digest $d$, an element $e$, and two proofs $\pi$ & $\pi'$ such that $\pi$ verifies as a valid membership proof for $e$ (w.r.t. $d$) while $\pi'$ also verifies as a valid **non**-membership proof for $e$ (w.r.t. $d$), is negligible in the security parameter of the scheme.
 
 The moral of the story is to pick a Merkle construction that has this stronger notion of security, unless you are sure that your setting allows for the weaker notion _and_ you stand to benefit from relaxing the security (e.g., perhaps because you get a faster construction).
-A good example of this is the [KZG](/2020/05/06/kzg-polynomial-commitments.html)-based authenticated dictionary from Ethereum Research[^Feis20Multi] which has **weak soundness** (as would be defined for dictionaries), but that's okay since their consensus setting can accommodate it.
+A good example of this is the [KZG](kzg)-based authenticated dictionary from Ethereum Research[^Feis20Multi] which has **weak soundness** (as would be defined for dictionaries), but that's okay since their consensus setting can accommodate it.
 
 ## Problem 2: Insertions and deletions
 

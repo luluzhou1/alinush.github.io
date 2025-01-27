@@ -1,5 +1,7 @@
 ---
-tags: polynomials lagrange
+tags: 
+ - polynomials 
+ - lagrange
 title: Lagrange interpolation
 date: 2022-07-28 10:38:00
 sidebar:

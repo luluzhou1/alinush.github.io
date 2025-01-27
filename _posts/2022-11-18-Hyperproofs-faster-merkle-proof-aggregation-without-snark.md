@@ -1,7 +1,7 @@
 ---
 tags: 
-- vc
-- vector commitments
+- vector commitments (VCs)
+- inner product arguments (IPAs)
 title: "Hyperproofs: Faster Merkle proof aggregation without SNARKs"
 #date: 2020-11-05 20:45:59
 #published: false

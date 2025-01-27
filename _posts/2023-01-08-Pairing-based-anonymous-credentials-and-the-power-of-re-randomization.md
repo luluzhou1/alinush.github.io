@@ -1,5 +1,6 @@
 ---
 tags:
+ - digital signatures
  - bilinear maps (pairings)
 title: Pairing-based anonymous credentials and the power of re-randomization
 #sidebar:

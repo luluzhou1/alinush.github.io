@@ -1,8 +1,7 @@
 ---
 tags:
  - digital signatures
- - dkg
- - distributed key generation
+ - distributed key generation (DKG)
  - aggregation
  - bilinear maps (pairings)
 title: Baird et al.'s unique threshold signature scheme

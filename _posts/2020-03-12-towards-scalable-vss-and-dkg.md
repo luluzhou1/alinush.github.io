@@ -2,14 +2,12 @@
 tags:
  - papers
  - polynomials
- - verifiable secret sharing
- - vss
- - distributed key generation
- - dkg
+ - verifiable secret sharing (VSS)
+ - distributed key generation (DKG)
  - kzg
  - polynomial commitments
- - fast fourier transform
- - fft
+ - stateless validation
+ - fast fourier transform (FFT)
 title: Towards Scalable Verifiable Secret Sharing and Distributed Key Generation
 date: 2020-03-12 14:00:00
 article_header:
@@ -63,7 +61,7 @@ In this post, beyond basic group theory for cryptographers[^KL15] and basic poly
  - The **polynomial remainder theorem (PRT)** which says that $\forall z$: $\phi(z) = \phi(X) \bmod (X-z)$,
     - Or, equivalently, $\exists q, \phi(X) = q(X)(X-z) + \phi(z)$.
         - We'll refer to this as the _PRT equation_
- - **KZG**[^KZG10] **polynomial commitments** (see [here](/2020/05/06/kzg-polynomial-commitments.html)). Specifically,
+ - **KZG**[^KZG10] **polynomial commitments** (see [here](kzg)). Specifically,
     - To commit to degree $\le \ell$ polynomials, need $\ell$-SDH public parameters $(g,g^\tau,g^{\tau^2},\dots,g^{\tau^\ell}) = (g^{\tau^i})_{i\in[0,\ell]}$,
     - Commitment to $\phi(X)=\prod_{i\in[0,d]} \phi_i X^i$ is $c=g^{\phi(\tau)}$ computed as $c=\prod_{i\in[0,\deg{\phi}]} \left(g^{\tau^i}\right)^{\phi_i}$,
     - To prove an evaluation $\phi(a) = b$, a _quotient_ $q(X) = \frac{\phi(X) - b}{X - a}$ is computed and the _evaluation proof_ is $g^{q(\tau)}$.

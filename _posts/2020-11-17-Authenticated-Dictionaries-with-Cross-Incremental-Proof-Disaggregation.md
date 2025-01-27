@@ -1,14 +1,12 @@
 ---
 tags: 
  - rsa
- - vector commitments
- - vc
+ - vector commitment (VCs)
  - authenticated dictionaries
  - accumulators 
  - aggregation 
  - papers
  - stateless validation
- - transparency logs
  - hidden-order groups
 title: Authenticated Dictionaries with Cross-Incremental Proof (Dis)aggregation
 date: 2020-11-26 00:00:00

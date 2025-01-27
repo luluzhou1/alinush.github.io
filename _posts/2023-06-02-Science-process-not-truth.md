@@ -1,5 +1,6 @@
 ---
-tags: science feynman falsifiable
+tags: 
+ - science 
 title: "Science: Process, not Truth"
 article_header:
   type: cover
