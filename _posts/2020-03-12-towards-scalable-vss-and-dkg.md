@@ -14,6 +14,7 @@ article_header:
   type: cover
   image:
     src: /pictures/baam-thanos-does-a-chinup.gif
+permalink: amt
 ---
 
 {: .info}
@@ -25,7 +26,7 @@ Nonetheless, we use our faster proofs to scale _Verifiable Secret Sharing (VSS)_
 \
 We also obtain a new _Vector Commitment (VC)_ scheme, which can be used for stateless cryptocurrencies[^CPZ18].
 
-In a [previous post](/2020/03/12/scalable-bls-threshold-signatures.html), I described our new techniques for scaling BLS threshold signatures to millions of signers.
+In a [previous post](/threshold-bls), I described our new techniques for scaling BLS threshold signatures to millions of signers.
 However, as pointed out by my friend [Albert Kwon](http://albertkwon.com), once we have such a scalable threshold signature scheme (TSS), a new question arises:
 
 _<center>"Can we efficiently bootstrap a $(t,n)$ threshold signature scheme when $t$ and $n$ are very large?"</center>_

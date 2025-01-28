@@ -19,7 +19,7 @@ These improvements carry over to _distributed key generation (DKG)_ protocols to
 Furthermore, these improvements are concrete too, not just asymptotic.
 
 <!--more-->
-This post is a _continuation to our [previous post](https://alinush.github.io/2020/03/12/towards-scalable-vss-and-dkg.html)_ on scaling VSS and DKG protocols using _AMT proofs_.
+This post is a _continuation to our [previous post](/amt)_ on scaling VSS and DKG protocols using _AMT proofs_.
 Throughout this post, we'll refer to proofs computed using the Feist and Khovratovich[^FK20] technique as _FK proofs_.
 Similarly, we'll refer to the resulting VSS and DKG protocols as _FK VSS_ and _FK DKG_, respectively.
 
@@ -84,4 +84,4 @@ We hope to address this in future work.
 [^Tome20]: **How to Keep a Secret and Share a Public Key (Using Polynomial Commitments)**, by Tomescu, Alin, 2020
 [^vG13ModernCh10]: **Fast polynomial evaluation and interpolation**, by von zur Gathen, Joachim and Gerhard, Jurgen, *in Modern Computer Algebra*, 2013
 
-[prevpost]: https://alinush.github.io/2020/03/12/towards-scalable-vss-and-dkg.html
+[prevpost]: /amt

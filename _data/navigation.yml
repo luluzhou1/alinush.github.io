@@ -115,6 +115,8 @@ cryptomat:
         url: 2024/06/01/ECDSA-signatures.html
       - title: Schnorr signatures
         url: 2024/05/31/Schnorr-signatures.html
+      - title: Threshold BLS
+        url: /threshold-bls
   - title: Vector commitments
     children:
     #  - title: Libert-Yung

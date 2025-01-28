@@ -82,6 +82,6 @@ To see this, take a simple example, with $n=3$:
 If done naively, interpolating $\phi(X)$ using the Lagrange formula in Equation \ref{eq:lagrange-formula} will take $O(n^2)$ time.
 
 However, there are known techniques for computing $\phi(X)$ in $O(n\log^2{n})$ time.
-We described **part of** these techniques in a [previous blog post](/2020/03/12/scalable-bls-threshold-signatures.html#our-quasilinear-time-bls-threshold-signature-aggregation), but for the full techniques please refer to the _"Modern Computer Algebra"_ book[^vG13ModernCh10].
+We described **part of** these techniques in a [previous blog post](/threshold-bls#our-quasilinear-time-bls-threshold-signature-aggregation), but for the full techniques please refer to the _"Modern Computer Algebra"_ book[^vG13ModernCh10].
 
 {% include refs.md %}

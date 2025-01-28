@@ -5,21 +5,26 @@ tags:
  - bls
  - interpolation
  - fast fourier transform (FFT)
-title: Fast and Scalable BLS Threshold Signatures
+title: How to do threshold BLS the right way
 article_header:
   type: cover
   image:
     src: /pictures/nobody-spills-the-secrets.gif
+permalink: threshold-bls
+sidebar:
+    nav: cryptomat
 ---
 {: .info}
-**tl;dr:** We use $O(t\log^2{t})$-time algorithms to interpolate secrets "in the exponent."
+**tl;dr:** 
+Most people implement threshold BLS naively, using a $O(t^2)$ algorithm to compute Lagrange coefficients.
+We show how to use a faster $O(t\log^2{t})$-time algorithm for this.
 This makes aggregating $(t,n)$ BLS threshold signatures much faster, both at small and large scales.
 
 The question of scaling threshold signatures came to us at [VMware Research](https://research.vmware.com) after we finished working on SBFT[^GAGplus19], a scalable Byzantine Fault Tolerance (BFT) protocol that uses BLS threshold signatures[^BLS04].
 
 We recently published our work[^TCZplus20] in [IEEE S&P'20](https://www.ieee-security.org/TC/SP2020/).
 Our work also address how to scale the necessary _distributed key generation (DKG)_ protocol needed to bootstrap a BLS threshold signature scheme.
-We present these results in [another post](/2020/03/12/towards-scalable-vss-and-dkg.html).
+We present these results in [another post](/amt).
 
 A **prototype implementation** is available on GitHub [here](https://github.com/alinush/libpolycrypto/).
 
@@ -42,19 +47,26 @@ In this post, beyond basic group theory for cryptographers[^KL15], I will assume
     + The _secret key_ is $s\in_R \Zp$ and the _public key_ is $g_2^s\in \Gr_2$
     + $\sigma = H(m)^s \in \Gr_1$ is a signature on $m$ under secret key $s$
     - To verify a signature, one checks if $e(H(m), g_2^s) = e(\sigma, g_2)$
- - $(t,n)$ **BLS threshold signatures**[^Bold03]. Specifically,
-    - _Shamir secret sharing_[^Shamir79] of secret key $s$
-    - i.e., $s = \phi(0)$ where $\phi(X)\in \Zp[X]$ is random, degree $t-1$ polynomial
-    - _Signer_ $i\in\\{1,2,\dots, n\\}$ gets his _secret key share_ $s_i = \phi(i)$ and _verification key_ $g^{s_i}$
-    - Nobody knows $s$, so cannot _directly_ produce a signature $H(m)^s$ on $m$
-    - Instead, $t$ or more signers have to co-operate to produce a signature
-    - Each signer $i$ computes a _signature share_ or _sigshare_ $\sigma_i = H(m)^{s_i}$
-    - Then, an _aggregator_:
-        + Collects as many $\sigma_i$'s as possible
-        - Verifies each $\sigma_i$ under its signer's verification key: Is $e(H(m),g_2^{s_i}) = e(\sigma_i, g_2)$?
-        - ...and thus identifies $t$ valid sigshares
-        - Aggregates the signature $\sigma = H(m)^s$ via "interpolation in the exponent" from the $t$ valid sigshares (see next section).
 
+### $t$-out-of-$n$ threshold BLS signatures
+
+Recall the well-known scheme by Boldyreva[^Bold03].
+This scheme assumes a DKG has already been run such that:
+
+ - A _Shamir secret sharing_[^Shamir79] of a secret key $s$ has been established
+     + i.e., $s = \phi(0)$ where $\phi(X)\in \Zp[X]$ is random, degree $t-1$ polynomial
+ - _Signer_ $i\in\\{1,2,\dots, n\\}$ has his _secret key share_ $s_i = \phi(i)$ and _verification key_ $g^{s_i}$
+ - Nobody knows $s$, so nobody can _directly_ produce a signature $H(m)^s$ on $m$
+
+
+To sign, $t$ or more signers have to co-operate:
+ - Each signer $i$ computes a _signature share_ or _sigshare_ $\sigma_i = H(m)^{s_i}$
+ - Then, an _aggregator_:
+     + Collects as many $\sigma_i$'s as possible
+     - Verifies each $\sigma_i$ under its signer's verification key: Is $e(H(m),g_2^{s_i}) = e(\sigma_i, g_2)$?
+     - ...and thus identifies $t$ valid sigshares
+     - Aggregates the signature $\sigma = H(m)^s$ via "interpolation in the exponent" from the $t$ valid sigshares (see next section).
+ 
 ### Basics of polynomial interpolation
 
 A good source for this is Berrut and Trefethen[^BT04]. 

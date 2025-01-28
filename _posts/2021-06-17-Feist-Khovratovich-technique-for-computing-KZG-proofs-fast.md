@@ -345,4 +345,4 @@ General formula for $H_j$'s:
 
 [poly-division]: https://en.wikipedia.org/wiki/Polynomial_long_division#Pseudocode
 [toeplitz]: /2020/03/19/multiplying-a-vector-by-a-toeplitz-matrix.html 
-[amt]: /2020/03/12/towards-scalable-vss-and-dkg.html
+[amt]: /amt

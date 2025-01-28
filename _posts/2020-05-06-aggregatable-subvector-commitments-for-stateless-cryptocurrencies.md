@@ -212,7 +212,7 @@ Surprisingly, the answer is given by a slightly tweaked Lagrange interpolation f
 \end{align}
 
 Here, $A_I'(X)$ is the derivative of $A_I(X)$ and has the (non-obvious) property that $A_I'(i)=\prod_{j\in I,j\ne i} (i-j)$.
-(Check out [this post](/2020/03/12/scalable-bls-threshold-signatures.html#our-quasilinear-time-bls-threshold-signature-aggregation) for some intuition on why this tweaked Lagrange formula works.)
+(Check out [this post](/threshold-bls#our-quasilinear-time-bls-threshold-signature-aggregation) for some intuition on why this tweaked Lagrange formula works.)
 
 Now, let us interpolate the polynomial $\phi(X)=1$ using this new Lagrange formula from a set of $|I|$ points $(v_i, \phi(v_i)=1)\_{i\in I}$.
 \begin{align}
@@ -455,4 +455,4 @@ Special thanks goes to [Madars Virza](https://madars.org/) who first introduced 
 [^vG13ModernCh10]: **Fast polynomial evaluation and interpolation**, by von zur Gathen, Joachim and Gerhard, Jurgen, *in Modern Computer Algebra*, 2013
 [^Virza17]: **On Deploying Succinct Zero-Knowledge Proofs**, by Virza, Madars, 2017
 
-[prevpost]: https://alinush.github.io/2020/03/12/towards-scalable-vss-and-dkg.html
+[prevpost]: /amt

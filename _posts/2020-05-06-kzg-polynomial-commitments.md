@@ -146,7 +146,7 @@ There are many cryptographic tools one can build using polynomial commitment sch
 Here's a few we've blogged about in the past:
 
  * [Cryptographic accumulators](/2020/04/02/bilinear-accumulators-for-cryptocurrency.html)
- - Vector Commitments (VC) schemes [with $O(\log{n})$-sized proofs](/2020/03/12/towards-scalable-vss-and-dkg.html) or [with $O(1)$-sized proofs](/2020/05/06/aggregatable-subvector-commitments-for-stateless-cryptocurrencies.html)
+ - Vector Commitments (VC) schemes [with $O(\log{n})$-sized proofs](/amt) or [with $O(1)$-sized proofs](/2020/05/06/aggregatable-subvector-commitments-for-stateless-cryptocurrencies.html)
  - [Range proofs](/2020/03/03/range-proofs-from-polynomial-commitments-reexplained.html)
 
 ## Appendix

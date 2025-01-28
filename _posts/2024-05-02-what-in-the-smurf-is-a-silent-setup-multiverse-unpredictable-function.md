@@ -13,7 +13,7 @@ published: true
 ---
 
 {: .info}
-**tl;dr:** This blog post investigates whether _threshold_ **verifiable unpredictable functions (VUFs)** can be efficiently instantiated in the **silent setup** setting, which avoids the need for an interactive, expensive and often complex [distributed key generation (DKG)](/2020/03/12/towards-scalable-vss-and-dkg.html) phase.
+**tl;dr:** This blog post investigates whether _threshold_ **verifiable unpredictable functions (VUFs)** can be efficiently instantiated in the **silent setup** setting, which avoids the need for an interactive, expensive and often complex [distributed key generation (DKG)](/amt) phase.
 We show that (1) silent setup threshold VUFs are possible from multilinear maps and (2) efficient constructions are as hard to obtain as $n$-party non-interactive key exchange; so **very hard**.
 Lastly, we focus on a more general **multiverse** setting, which captures the threshold setting.
 
