@@ -32,7 +32,7 @@ Depicts what the blockchain validators need to do to verify a keyless TXN submit
 <div align="center"><img style="width:85%" src="/pictures/keyless-on-chain-verification.png" /></div>
 
 
-### End-to-end keyless flow (with zero-knowledge)
+### End-to-end keyless ZK flow
 
 Depicts the full keyless flow: the user generating an ESK and EPK, the user signing into the dapp with the EPK as the OIDC `nonce`, the dapp getting a JWT, exchanging it for a pepper, getting a ZKP from the prover service, the user signing a TXN with their ESK, the dapp sending the TXN containing the ZKP and ephemeral signature, and finally the blockchain verifying everything.
 
@@ -50,9 +50,10 @@ The ZK relation needed to implement an [oblivious pepper service][oblivious-pepp
 
 <div align="center"><img style="width:65%" src="/pictures/keyless-oblivious-pepper-relation.png" /></div>
 
-### End-to-end-keyless flow (without zero-knowledge)
+### End-to-end-keyless ZKless flow (disabled)
 
-In case of emergency, keyless supports a **ZKless** mode that is **not** privacy preserving.
+In case of emergency (e.g., a serious soundness issue in the ZK circuit), keyless supports a **ZKless** mode that is **not** privacy preserving.
+This, of course, is currently **disabled** on Aptos mainnet.
 
 We depicts this (simpler) ZKless flow: the user generating an ESK and EPK, the user signing into the dapp with the EPK as the OIDC `nonce`, the dapp getting a JWT, the user signing a TXN with their ESK, the dapp sending the TXN containing the ephemeral signature, and finally the blockchain verifying everything.
 
