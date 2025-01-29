@@ -20,9 +20,44 @@ There is also no multi-party computation (MPC) system managing your account for 
 As a result, the risk of account loss is (more or less), the risk of losing your Google account.
 Keyless is built using a [Groth16](/groth16) zero-knowledge proof to maintain privacy in both directions: prevent the blockchain from learning anything about your Google account & prevent Google from learning anything about your blockchain account and transaction activity.
 
-One day, I hope to edit this into a full blog post but, until then, see a **one-slide summary** below and check out the resources below:
+One day, I hope to edit this into a full blog post but, until then, here's a bunch of resources.
+
+
+## Drawings
+
+### Keyless on-chain verification
+
+Depicts what the blockchain validators need to do to verify a keyless TXN submitted by a user, Alice.
+
+<div align="center"><img style="width:85%" src="/pictures/keyless-on-chain-verification.png" /></div>
+
+
+### End-to-end keyless flow (with zero-knowledge)
+
+Depicts the full keyless flow: the user generating an ESK and EPK, the user signing into the dapp with the EPK as the OIDC `nonce`, the dapp getting a JWT, exchanging it for a pepper, getting a ZKP from the prover service, the user signing a TXN with their ESK, the dapp sending the TXN containing the ZKP and ephemeral signature, and finally the blockchain verifying everything.
 
 <div align="center"><img style="width:95%" src="/pictures/keyless-overview.png" /></div>
+
+### Keyless ZK relation
+
+The ZK relation needed for keyless:
+
+<div align="center"><img style="width:65%" src="/pictures/keyless-zk-relation.png" /></div>
+
+### Oblivious pepper service ZK relation
+
+The ZK relation needed to implement an [oblivious pepper service][oblivious-pepper]:
+
+<div align="center"><img style="width:65%" src="/pictures/keyless-oblivious-pepper-relation.png" /></div>
+
+### End-to-end-keyless flow (without zero-knowledge)
+
+In case of emergency, keyless supports a **ZKless** mode that is **not** privacy preserving.
+
+We depicts this (simpler) ZKless flow: the user generating an ESK and EPK, the user signing into the dapp with the EPK as the OIDC `nonce`, the dapp getting a JWT, the user signing a TXN with their ESK, the dapp sending the TXN containing the ephemeral signature, and finally the blockchain verifying everything.
+
+
+<div align="center"><img style="width:65%" src="/pictures/keyless-zkless-overview.png" /></div>
 
 ## Write-ups
 
@@ -57,7 +92,7 @@ AIPs for recent extensions to keyless:
  - [AIP-96: Federated Keyless](https://github.com/aptos-foundation/AIPs/blob/main/aips/aip-96.md)
     + Adds decentralized support for "federated" OIDC providers like Auth0, which have tenant-specific `iss`'s and JWKs and could not be scalably integrated into our [JWK consensus](https://github.com/aptos-foundation/AIPs/blob/main/aips/aip-67.md) mechanism
  - [AIP-108: "Audless" Federated Keyless](https://github.com/aptos-foundation/AIPs/blob/main/aips/aip-108.md)
- - Draft [AIP: Privacy-preserving pepper service](https://github.com/aptos-foundation/AIPs/pull/544)
+ - Draft [AIP: Oblivious pepper service][oblivious-pepper]
 
 ## Tweets
 
@@ -77,6 +112,8 @@ In April 2024, I gave a **20-minute presentation** at zkSummit11:
 \def\Badv{\mathcal{B}}
 \def\vect#1{\mathbf{#1}}
 $$</p>
+
+[oblivious-pepper]: https://github.com/aptos-foundation/AIPs/pull/544
 
 ---
 
