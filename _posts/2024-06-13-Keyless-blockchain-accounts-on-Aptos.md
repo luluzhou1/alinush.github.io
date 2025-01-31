@@ -111,8 +111,16 @@ A tweetstorm summarizing Aptos Keyless can be found below:
 
 ## Presentations
 
+### zkSummit'11
+
 In April 2024, I gave a **20-minute presentation** at zkSummit11:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/sKqeGR4BoI0?si=GJDBwVoTHdS-pML6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+### GKR bootcamp
+
+In January 2025, I gave a 1 hour bootcamp on keyless accounts: 
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Z83ct5BG05s?si=gJr5Tvoz6szcdk06" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 
 ## Miscellaneous
 
