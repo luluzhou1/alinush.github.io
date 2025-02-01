@@ -1,7 +1,7 @@
 ---
 tags: 
  - rsa
- - vector commitment (VCs)
+ - vector commitments (VCs)
  - authenticated dictionaries
  - accumulators 
  - aggregation 
