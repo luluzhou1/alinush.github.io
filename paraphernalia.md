@@ -38,15 +38,14 @@ This is some of the stuff I (plan to) read and think others could find useful.
  - [Groth16 Explained](https://www.rareskills.io/post/groth16]), RareSkills <small>(An excellent overview of Groth16!)</small>
  - [The MoonMath manual](https://leastauthority.com/community-matters/moonmath-manual/), Least Authority `toread`{:.warning}
  - [The RareSkills Book of Zero Knowledge](https://www.rareskills.io/zk-book), RareSkills `toread`{:.warning}
+ - [Notes on programmable cryptography](https://github.com/0xPARC/0xparc-intro-book/releases), 0xPARC `toread`{:.warning}
  - [PLONK notes (wave 1)](https://www.ret2basic.me/2024/08/21/plonk-notes-wave-1.html), ret2basic.eth `toread`{:.warning}
 
 
 ## Academic papers
 
- - On the Size of Pairing-Based Non-interactive Arguments[^Grot16]
- - Scalable Multi-party Computation for zk-SNARK Parameters in the Random Beacon Model[^BGM17]
- - Verifiable Oblivious Pseudorandom Functions from Lattices: Practical-ish and Thresholdisable[^AG24e] `toread`{:.warning}
- - NeutronNova: Folding everything that reduces to zero-check[^KS24e] `toread`{:.warning}
+ - [Groth16][^Grot16]
+ - [BGM17][^BGM17]
 
 ---
 
