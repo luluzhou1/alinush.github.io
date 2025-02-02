@@ -125,6 +125,7 @@ In January 2025, I gave a 1 hour bootcamp on keyless accounts:
 ## Miscellaneous
 
  - Tutorial: [Aptos Keyless Auth](https://jamiescript.hashnode.dev/aptos-keyless-auth), by Osikhena Oshomah
+ - Code: [AnonAdhar](https://github.com/anon-aadhaar/anon-aadhaar/blob/main/packages/circuits/src/helpers/signature.circom), by PSE, does RSA2048-SHA2-256 signature verification in `circom` within ~900K R1CS constraints
 
 <!--more-->
 
