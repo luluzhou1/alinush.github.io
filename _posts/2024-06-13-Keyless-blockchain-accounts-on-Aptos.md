@@ -25,40 +25,44 @@ One day, I hope to edit this into a full blog post but, until then, here's a bun
 
 ## Drawings
 
-### Keyless on-chain verification
+### Flow: Keyless on-chain verification
 
 Depicts what the blockchain validators need to do to verify a keyless TXN submitted by a user, Alice.
 
 <div align="center"><img style="width:85%" src="/pictures/keyless-on-chain-verification.png" /></div>
 
-
-### End-to-end keyless ZK flow
-
-Depicts the full keyless flow: the user generating an ESK and EPK, the user signing into the dapp with the EPK as the OIDC `nonce`, the dapp getting a JWT, exchanging it for a pepper, getting a ZKP from the prover service, the user signing a TXN with their ESK, the dapp sending the TXN containing the ZKP and ephemeral signature, and finally the blockchain verifying everything.
-
-<div align="center"><img style="width:95%" src="/pictures/keyless-overview.png" /></div>
-
-### Keyless ZK relation
+### ZK relation: Keyless authentication
 
 The ZK relation needed for keyless:
 
 <div align="center"><img style="width:65%" src="/pictures/keyless-zk-relation.png" /></div>
 
-### Oblivious pepper service ZK relation
+### Flow: End-to-end keyless transacting 
 
-The ZK relation needed to implement an [oblivious pepper service][oblivious-pepper]:
+Depicts the full keyless flow: the user generating an ESK and EPK, the user signing into the dapp with the EPK as the OIDC `nonce`, the dapp getting a JWT, exchanging it for a pepper, getting a ZKP from the prover service, the user signing a TXN with their ESK, the dapp sending the TXN containing the ZKP and ephemeral signature, and finally the blockchain verifying everything.
 
-<div align="center"><img style="width:65%" src="/pictures/keyless-oblivious-pepper-relation.png" /></div>
+<div align="center"><img style="width:95%" src="/pictures/keyless-overview.png" /></div>
 
-### End-to-end-keyless ZKless flow (disabled)
+### Flow: End-to-end keyless ZKless-transacting (currently, disabled)
 
 In case of emergency (e.g., a serious soundness issue in the ZK circuit), keyless supports a **ZKless** mode that is **not** privacy preserving.
 This, of course, is currently **disabled** on Aptos mainnet.
 
 We depicts this (simpler) ZKless flow: the user generating an ESK and EPK, the user signing into the dapp with the EPK as the OIDC `nonce`, the dapp getting a JWT, the user signing a TXN with their ESK, the dapp sending the TXN containing the ephemeral signature, and finally the blockchain verifying everything.
 
-
 <div align="center"><img style="width:65%" src="/pictures/keyless-zkless-overview.png" /></div>
+
+### ZK relation: Oblivious pepper service
+
+The ZK relation needed to implement an [oblivious pepper service][oblivious-pepper]:
+
+<div align="center"><img style="width:65%" src="/pictures/keyless-oblivious-pepper-relation.png" /></div>
+
+### Flow: Fetching your pepper obliviously 
+
+We depict the flow for a dapp to fetch its user's pepper _obliviously_ from the pepper service, without leaking the user's ID nor the application's ID to the service.
+
+<div align="center"><img src="/pictures/keyless-oblivious-pepper-flow.png" /></div>
 
 ## Write-ups
 

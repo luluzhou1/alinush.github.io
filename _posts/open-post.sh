@@ -18,6 +18,7 @@ cd "$postdir/"
   
 files=`find . -name "*.md"`
 
+files=`echo "$files" | grep -v "/_drafts/"`
 files=`echo "$files" | grep -v "/files/"`
 files=`echo "$files" | grep -v "/templ.md"`
 files=`echo "$files" | grep -v "/TODO.md"`
