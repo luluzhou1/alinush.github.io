@@ -89,7 +89,8 @@ We depict the flow for a dapp to fetch its user's pepper _obliviously_ from the 
 ## Example (d)apps and code
 
  - **Example:** Sending a keyless TXN to the Aptos `mainnet` via the SDK [here](https://github.com/aptos-labs/aptos-ts-sdk/blob/2386c07361f9a80f994f8b3ea22991549958402a/examples/typescript/keyless_mainnet.ts#L27)
- - **Example:** Simple Keyless dapp on Aptos [here](https://github.com/aptos-labs/aptos-keyless-example/) with guide [here](https://aptos.dev/en/build/guides/aptos-keyless/simple-example)
+ - **Example:** Simple Keyless dapp on Aptos [here](https://github.com/aptos-labs/aptos-keyless-example/tree/main/examples/keyless-example) with guide [here](https://aptos.dev/en/build/guides/aptos-keyless/simple-example)
+ - **Example:** Federated keyless dapp on Aptos [here](https://github.com/aptos-labs/aptos-keyless-example/tree/main/examples/federated-keyless-example)
  - **Example:** End-to-end dapp with Keyless [here](https://github.com/aptos-labs/aptogotchi-keyless) with guide [here](https://learn.aptoslabs.com/en/code-examples/keyless)
 
 ## Aptos Improvement Proposals (AIPs)
