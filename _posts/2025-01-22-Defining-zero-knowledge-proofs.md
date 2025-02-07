@@ -36,7 +36,7 @@ For a more mild, high-level introduction to ZKPs via a Sudoku puzzle example, se
 
 ### Preliminaries
 
- - We assume familiarity with the NP computational class and its [NP relation](/2025/01/21/NP-relations.html) characterization
+ - We assume familiarity with the NP computational class and its [NP relation](/np-relations) characterization
  - Let $\negl(\cdot)$ denote a [negligible function](https://en.wikipedia.org/wiki/Negligible_function)
  - We denote NP relations by $R$
  - We denote an NP statement by $\stmt$ and a witness by $\witn$

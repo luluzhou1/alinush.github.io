@@ -17,7 +17,7 @@ permalink:
 ---
 
 {: .info}
-**tl;dr:** A **quadratic arithmetic program (QAP)**, a **Rank-1 Constraint System (R1CS)**, and an [NP relation](/2025/01/21/NP-relations.html) are equivalent ways of representing a hard problem (or computation) whose solution can be verified in polynomial-time.
+**tl;dr:** A **quadratic arithmetic program (QAP)**, a **Rank-1 Constraint System (R1CS)**, and an [NP relation](/np-relations) are equivalent ways of representing a hard problem (or computation) whose solution can be verified in polynomial-time.
 In particular, R1CS is just a reformulation of QAPs as linear equations and, these days, it is used widely when formalizing computations that can be "proved in zero-knowledge."
 
 <!--more-->
@@ -37,7 +37,7 @@ $</div> <!-- $ -->
 
 This blog post explains two different characterizations of NP, which are useful when building [zero-knowledge proof systems](/2025/01/22/Defining-zero-knowledge-proofs.html): 
 
- - a **Rank-1 constraint system (R1CS)**: i.e., a set of three R1CS matrices $\mat{U},\mat{V},\mat{W}$ encoding an [NP relation](/2025/01/21/NP-relations.html) $R$
+ - a **Rank-1 constraint system (R1CS)**: i.e., a set of three R1CS matrices $\mat{U},\mat{V},\mat{W}$ encoding an [NP relation](/np-relations) $R$
  - an equivalent **quadratic arithmetic program (QAP)**: a set of polynomials $(\gu_j(X),\rv_j(X),\bw_j(X))_{i\in[0,m]}$ encoding an NP relation $R$
 
 ## Notation
@@ -150,7 +150,7 @@ When "compiling" an NP relation to an R1CS of $n$ equations and $m$ variables, i
 
 ## Quadratic Arithmetic Programs (QAPs)
 
-From our [R1CS discussion](#rank-1-constraint-systems-r1cs), we know that any [NP relation](/2025/01/21/NP-relations.html) $R$ can be turned into an R1CS constraint system defined by matrices $(\mat{U},\mat{V},\mat{W})$ from Eq. \ref{eq:r1cs-mat}.
+From our [R1CS discussion](#rank-1-constraint-systems-r1cs), we know that any [NP relation](/np-relations) $R$ can be turned into an R1CS constraint system defined by matrices $(\mat{U},\mat{V},\mat{W})$ from Eq. \ref{eq:r1cs-mat}.
 
 In this section, we explain how an NP relation $R$ can be represented (or viewed) as a **QAP**[^GGPR13]\: a set of $m+1$ polynomials of degree $n-1$ each:
 

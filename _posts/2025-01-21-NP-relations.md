@@ -6,6 +6,7 @@ title: NP relations
 #published: false
 sidebar:
     nav: cryptomat
+permalink: np-relations
 #article_header:
 #  type: cover
 #  image:

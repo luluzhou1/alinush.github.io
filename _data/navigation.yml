@@ -155,7 +155,7 @@ cryptomat:
   - title: (Zero knowledge) proofs
     children:
       - title: NP relations
-        url: /2025/01/21/NP-relations.html
+        url: /np-relations 
       - title: Definitions
         url: /2025/01/22/Defining-zero-knowledge-proofs.html
       - title: QAPs & R1CS
