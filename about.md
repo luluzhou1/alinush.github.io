@@ -70,7 +70,7 @@ Before MIT, I was building tamper-proof clouds and end-to-end encrypted outsourc
 
 ### Research
 
-My cryptography research interests are best reflected in my [papers](/papers.html), some of [posts](/archive.html) and [talks](/talks.html), my ["cryptomat"](/cryptomat.html) and this [Call for Research](/please-solve).
+My cryptography research interests are best reflected in my [papers](/papers.html), some of my [posts](/archive.html) and [talks](/talks.html), my ["cryptomat"](/cryptomat.html) and this [Call for Research](/please-solve).
 
 I've led and thoroughly enjoyed research on:
  1. [keyless blockchain accounts](/2024/06/13/Keyless-blockchain-accounts-on-Aptos.html)
