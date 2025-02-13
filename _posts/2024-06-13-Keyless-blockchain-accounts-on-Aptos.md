@@ -132,6 +132,30 @@ In January 2025, I gave a 1 hour bootcamp on keyless accounts:
  - Tutorial: [Aptos Keyless Auth](https://jamiescript.hashnode.dev/aptos-keyless-auth), by Osikhena Oshomah
  - Code: [AnonAdhar](https://github.com/anon-aadhaar/anon-aadhaar/blob/main/packages/circuits/src/helpers/signature.circom), by PSE, does RSA2048-SHA2-256 signature verification in `circom` within ~900K R1CS constraints
 
+## Technical reference
+
+{% include keyless-defs.md %}
+
+{: .note}
+The notation below will not be explicitly defined; just exercise intuition! 
+e.g., $\maxaudval$ is clearly the maximum number of bytes in $\audval$.
+
+### Hashing the identity commitment (IDC) in the address
+
+\begin{align}
+\addridc \bydef \poseidon^\F_4\left(
+    \begin{array}{l}
+        \pepper[0..30],\\\\\
+        \poseidon^\mathbb{S}\_{\maxaudval}(\audval),\\\\\
+        \poseidon^\mathbb{S}\_{\maxuidval}(\uidval),\\\\\
+        \poseidon^\mathbb{S}\_{\maxuidkey}(\uidkey)\\\\\
+    \end{array}
+\right)
+\end{align}
+
+{: .todo}
+Define $\poseidon^\mathbb{S}_\ell(s)$.
+
 <!--more-->
 
 <p hidden>$$
