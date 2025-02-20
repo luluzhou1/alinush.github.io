@@ -245,7 +245,7 @@ Once again, it is **crucial** for security that $r$ be sampled randomly.
 {: .success}
 **Recommendation:** As we [discuss later](#eddsa-and-ed25519-formulation), picking $r$ pseudorandomly based on the message and the secret key obviates this problem.
 
-We do not showcase the attacks, which rely on solving lattice problems and are similar to attacks on [ECDSA](/2024/06/01/ECDSA-signatures.html)[^BH19e].
+We do not showcase the attacks, which rely on solving lattice problems and are similar to attacks on [ECDSA](/ecdsa)[^BH19e].
 
 ### Pitfall #3: Non-canonical serialization
 

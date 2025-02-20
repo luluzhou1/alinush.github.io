@@ -112,7 +112,7 @@ cryptomat:
       - title: BBS+ signatures
         url: 2024/11/07/BBS-signatures.html
       - title: ECDSA signatures
-        url: 2024/06/01/ECDSA-signatures.html
+        url: ecdsa
       - title: Schnorr signatures
         url: 2024/05/31/Schnorr-signatures.html
       - title: Threshold BLS
