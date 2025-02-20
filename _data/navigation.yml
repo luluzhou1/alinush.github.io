@@ -114,7 +114,7 @@ cryptomat:
       - title: ECDSA signatures
         url: ecdsa
       - title: Schnorr signatures
-        url: 2024/05/31/Schnorr-signatures.html
+        url: schnorr-signatures
       - title: Threshold BLS
         url: /threshold-bls
   - title: Vector commitments
