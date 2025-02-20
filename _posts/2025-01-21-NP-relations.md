@@ -68,7 +68,7 @@ $\mathsf{AreMembers}\left(r, \\{v\_j\\}\_{j \in [n]}; (i\_j, \pi\_j)\_{j\in [n]}
 
 {: .note}
 A succinct (not necessarily zero-knowledge) proof for this relation would allow the prover to "compress" the $n$ proofs $\pi_j$ for the $n$ values.
-For an example of such a succinct proof when the Merkle tree is algebraic, see our [Hyperproofs](/2022/11/18/Hyperproofs-faster-merkle-proof-aggregation-without-snark.html) paper.
+For an example of such a succinct proof when the Merkle tree is algebraic, see our [Hyperproofs](/hyperproofs) paper.
 
 ---
 

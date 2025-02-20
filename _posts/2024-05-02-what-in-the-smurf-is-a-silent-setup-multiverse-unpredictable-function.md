@@ -7,6 +7,7 @@ tags:
  - multilinear maps
 title: "What in the Smurf is a silent-setup multiverse unpredictable function?"
 #date: 2020-11-05 20:45:59
+permalink: smurf
 published: true
 #sidebar:
 #    nav: cryptomat
