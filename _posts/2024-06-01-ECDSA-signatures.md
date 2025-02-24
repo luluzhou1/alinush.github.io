@@ -280,7 +280,9 @@ The **recovery ID** $v$ stores (1) whether the reduction modulo $p$ wrapped arou
 
 {: .warning}
 This blog-post's recovery ID is not encoded the same as in Ethereum or Bitcoin.
-I believe Ethereum re-maps these kind of 2-bit recovery IDs as just two numbers: 27 (for $v=0$) and 28 (for $v=1$), since the case of $\mathsf{overflows} \equals 1$ occurs with negligible probability.
+Recall that Ethereum's ECDSA signatures use the secp256k1 ellptic curve, which has $q > p$.
+So, in theory, the recovery ID can be either 0, 1, 2, or 3.
+In practice, though, Ethereum re-maps these 2-bit recovery IDs as just two numbers: 27 (for $v=0$) and 28 (for $v=1$), since the case of $\mathsf{overflows} \equals 1$ occurs with negligible probability when $R\randget g^k$ is picked randomly.
 Recently, EIP-155[^eip-155] changed this encoding scheme to be $\mathsf{chain\\_id} \times 2 + (35 + v)$.
 So, for mainnet with chain ID 1, the numbers are either 37 (for $v=0$) or 38 (for $v=1$).
 
@@ -496,7 +498,7 @@ Thanks to Dan Boneh for pointing out the deterministic ECDSA RFC[^deterministic-
 
 ## Appendix: libsecp256k1's ECDSA pubkey recovery code (Rust)
 
-For my own benefit (and hopefully yours too), I am including `libsecp256k1`'s[^libsecp256k1] Rust code to showcase how (recoverable) signing and pubkey recovery are typically implemented.
+For my own benefit (and hopefully yours too, especially if you are an Ethereum developer), I am including `libsecp256k1`'s[^libsecp256k1] Rust code (used in [Aptos](https://x.com/aptos)) to showcase how (recoverable) signing and pubkey recovery are typically implemented.
 
 Note that I've added some instructional comments to the code.
 

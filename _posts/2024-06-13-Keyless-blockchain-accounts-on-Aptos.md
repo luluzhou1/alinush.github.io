@@ -71,6 +71,7 @@ We depict the flow for a dapp to fetch its user's pepper _obliviously_ from the 
 
 ## Slides
 
+ - [Keyless blockchain accounts from ZKPs](https://docs.google.com/presentation/d/1LNX4RAx0d34WRl57OLCdBKgxXyDGht4ROJ15jRkDALg/edit?usp=sharing), NoirCon 1, February 2025
  - [Keyless blockchain accounts from ZKPs](https://docs.google.com/presentation/d/1XpkB0t-Ns4SuCosyin83ED4RLoSvFMGjH5746DCshow/), GKR bootcamp, January 2025
  - [How Keyless works](https://docs.google.com/presentation/d/1gew0fD0QFNqV9snmoYnhRtLsHBoMX0wykouVn1CJbXc), 2024-2025
  - [Aptos Keyless accounts](https://docs.google.com/presentation/d/1nmDYfTiFKgAmPvsodkyrniV4USNdGUIGuWYRYaAxKgI/edit?usp=sharing), zkSummit'11, April 2024
@@ -86,12 +87,17 @@ We depict the flow for a dapp to fetch its user's pepper _obliviously_ from the 
  - Keyless **pepper service** [here](https://github.com/aptos-labs/aptos-core/tree/main/keyless/pepper)
  - Keyless TypeScript **SDK** [here](https://github.com/aptos-labs/aptos-ts-sdk/tree/main/src/core/crypto)
  
-## Example (d)apps and code
+## Educational (d)apps and code
 
  - **Example:** Sending a keyless TXN to the Aptos `mainnet` via the SDK [here](https://github.com/aptos-labs/aptos-ts-sdk/blob/2386c07361f9a80f994f8b3ea22991549958402a/examples/typescript/keyless_mainnet.ts#L27)
  - **Example:** Simple Keyless dapp on Aptos [here](https://github.com/aptos-labs/aptos-keyless-example/tree/main/examples/keyless-example) with guide [here](https://aptos.dev/en/build/guides/aptos-keyless/simple-example)
  - **Example:** Federated keyless dapp on Aptos [here](https://github.com/aptos-labs/aptos-keyless-example/tree/main/examples/federated-keyless-example)
  - **Example:** End-to-end dapp with Keyless [here](https://github.com/aptos-labs/aptogotchi-keyless) with guide [here](https://learn.aptoslabs.com/en/code-examples/keyless)
+
+## Deployed applications
+
+ 1. [Aptos Connect](https://aptosconnect.app)
+ 1. [Merkle Trade](https://merkle.trade)
 
 ## Aptos Improvement Proposals (AIPs)
 
