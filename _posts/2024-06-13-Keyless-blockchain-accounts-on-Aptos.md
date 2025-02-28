@@ -71,6 +71,7 @@ We depict the flow for a dapp to fetch its user's pepper _obliviously_ from the 
 
 ## Slides
 
+ - [Keyless blockchain accounts from ZKPs](https://docs.google.com/presentation/d/1wMFBRe7WZpKRbcjuLaIzv4MlUtC9yf7tnvntnv4AiTQ/edit?usp=sharing), MIT and Northeastern University, February 2025
  - [Keyless blockchain accounts from ZKPs](https://docs.google.com/presentation/d/1LNX4RAx0d34WRl57OLCdBKgxXyDGht4ROJ15jRkDALg/edit?usp=sharing), NoirCon 1, February 2025
  - [Keyless blockchain accounts from ZKPs](https://docs.google.com/presentation/d/1XpkB0t-Ns4SuCosyin83ED4RLoSvFMGjH5746DCshow/), GKR bootcamp, January 2025
  - [How Keyless works](https://docs.google.com/presentation/d/1gew0fD0QFNqV9snmoYnhRtLsHBoMX0wykouVn1CJbXc), 2024-2025
