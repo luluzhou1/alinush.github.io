@@ -444,6 +444,7 @@ Implementing ECDSA securely and efficiently can be tricky:
  1. ECDSA, like [Schnorr](/schnorr-signatures), is broken if the **nonce $k$ is reused**. Generally, they are both very **fragile** if the nonce $k$ is biased[^BH19e].
     + Even small amounts of bias in the nonce $k$ can be used to recover the SK given enough signatures.
     - Deterministic signing can mitigate this in both schemes[^deterministic-ecdsa].
+ 1. ECDSA is more vulnerable to timing attacks[^minerva]
 
 ## Why you should avoid ECDSA
 
@@ -636,6 +637,7 @@ For cited works, see below 👇👇
 [^i-confirmed]: See my [StackExchange post](https://crypto.stackexchange.com/questions/113745/ecdsa-without-field-inversion-during-verification/113749#113749) double-checking the sanity of avoiding the field inversion and asking why it hasn't been done before.
 [^inv-tweet]: [Today, I f***** around and \[re\]found out how slow inverting a field elements is](https://x.com/alinush407/status/1836912804902682625), Alin Tomescu, 2024
 [^libsecp256k1]: [Crate libsecp256k1 0.7.1](https://docs.rs/libsecp256k1/0.7.1/libsecp256k1/)
+[^minerva]: [Minerva attack](https://minerva.crocs.fi.muni.cz/), 2020
 [^modified-ecda]: [This](https://crypto.stackexchange.com/questions/53025/what-is-customizable-in-ecdsa-signature-and-verification) StackExchange post suggests that signing as $(g^k, k^{-1}(H(m)+\sk\cdot r))$ can be useful when combining ECDSA with other algorithms.
 [^mtgox]: Citing from [DW14][^DW14]: _"In combination with the above mentioned success rate of malleability attacks we conclude that overall malleability attacks did not have any substantial inﬂuence in the loss of bitcoins incurred by MtGox."_
 [^nist-response]: [Responses to NIST's proposal](https://people.csail.mit.edu/rivest/pubs/RHAL92.pdf), Communications of the ACM, July 1992, Vol. 35, No. 7
