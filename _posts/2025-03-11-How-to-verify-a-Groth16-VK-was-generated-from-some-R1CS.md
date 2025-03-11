@@ -20,9 +20,9 @@ permalink: groth16-vk-verify-from-r1cs
 
 {: .info}
 **tl;dr:**
-We show that, given (1) an R1CS and (2) some "powers-of-$\tau$", one can construct a cryptographic proof that a Groth16 VK was derived from them.
-This makes it easier (and more efficient) for folks to ensure that an on-chain VK corresponds to some published ZK circuit code (e.g., circom).
-(It is not sufficient, since one should also verify that the VK was generated from several independent contributions in an MPC ceremony.)
+We show that, given (1) an R1CS and (2) some "powers-of-$\tau$", one may be able to construct a cryptographic proof that a Groth16 VK was derived from them.
+This should make it more efficient for folks to ensure that an on-chain VK corresponds to some published ZK circuit code (e.g., circom).
+Nonetheless, this is **not sufficient**: one should also verify that the VK was generated from several independent contributions in an MPC ceremony and that there exists a corresponding proving key that is _consistent_ (e.g., has the same $\delta$ component, same QAP, etc.).
 
 <!--more-->
 
