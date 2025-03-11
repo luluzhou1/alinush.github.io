@@ -226,8 +226,11 @@ Also, let's for now assume that the $\ptau(\tau,\alpha,\beta)$ powers-of-$\tau$ 
 
 Next, looking at the VK in Eq. $\ref{eq:bgm17-vk}$ observe that the $(\alphaOne,\betaTwo)$ components are trivial to prove correctness of, since they are part of $\ptau(\tau,\alpha,\beta)$. 
 
-For the $\deltaTwo$ component, there is nothing we want to prove.
-Although, it may be desirable to additionally argue knowledge of a proving key as per Eq. $\ref{eq:bgm17-prk}$ that matches the VK and R1CS.
+For the $\deltaTwo$ component, for now, there is nothing we want to prove.
+
+{: .error}
+Again, not saying this protocol is sufficient to ensure security of a deployed VK.
+For example, as pointed out by [levochka.eth](https://x.com/levs57/status/1899511053383254019), a trapdoored $\delta$ in the VK would allow an attacker to forge proofs.
 
 Thus, the difficult component we must prove correctness of is the last one:
 \begin{align}
