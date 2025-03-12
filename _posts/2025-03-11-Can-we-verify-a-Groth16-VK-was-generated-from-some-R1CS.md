@@ -20,7 +20,7 @@ permalink: groth16-vk-verify-from-r1cs
 
 {: .info}
 **tl;dr:**
-We show that, given (1) an R1CS and (2) some "powers-of-$\tau$", one may be able to construct a cryptographic proof that a Groth16 VK was derived from them.
+We explore whether, given (1) an R1CS and (2) some "powers-of-$\tau$", we could construct a cryptographic proof that a Groth16 VK was derived from them.
 This should make it more efficient for folks to ensure that an on-chain VK corresponds to some published ZK circuit code (e.g., circom).
 Nonetheless, this is **not sufficient**: one should also verify that the VK was generated from several independent contributions in an MPC ceremony and that there exists a corresponding proving key that is _consistent_ (e.g., has the same $\delta$ component, same QAP, etc.).
 
@@ -247,7 +247,7 @@ First, observe that the verifier, who has the QAP polynomials and the powers-of-
 Here, $\gu_{j,i}$ denotes the $i$th coefficient of the $\gu_j(X)$ polynomial (same for $\rv_j(X)$ and $\bw_j(X)$).
 
 {: .note}
-In practice, the QAP polynomials are interpolated in Lagrange basis, so the equation above will look slightly differently, but glancing over that for now.
+In practice, the QAP polynomials are interpolated in Lagrange basis, so the equation above will look slightly different. But, for now, glancing over that.
 
 **Problem:** The verification work above involves a size-$3n$ (or so) multi-scalar multiplication (MSM).
 Although it should work quite fast in practice, can we help the verifier do it asymptotically faster?
