@@ -43,6 +43,10 @@ Depicts the full keyless flow: the user generating an ESK and EPK, the user sign
 
 <div align="center"><img style="width:95%" src="/pictures/keyless-overview.png" /></div>
 
+### Flow: Paying an email address via [https://aptosconnect.app](https://aptosconnect.app)
+
+<div align="center"><img style="width:95%" src="/pictures/keyless-pay-to-email.png" /></div>
+
 ### Flow: End-to-end keyless ZKless-transacting (currently, disabled)
 
 In case of emergency (e.g., a serious soundness issue in the ZK circuit), keyless supports a **ZKless** mode that is **not** privacy preserving.
