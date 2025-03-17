@@ -28,6 +28,105 @@ A quick 20 minute presentation on what this & how it works:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/sKqeGR4BoI0?si=GJDBwVoTHdS-pML6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
+## FAQ
+
+### Who is this for?
+
+So far, cryptocurrencies have been designed for power users who understand public-key cryptography.
+
+In constrast, Keyless accounts are for any Web 2 user who has used the "Sign in with Google[^not-just-google]" flow before. (Basically, for everyone.)
+
+Keyless accounts are primarily designed **for the bottom 90% of users**; _novice users_ who are not yet ready to manager their own 12-word seed phrase, mnemonic or secret key.
+
+Such users often tend to:
+ - lose their key, or
+ - get phished for their key, or
+ - accidentally-paste their key somewhere they shouldn't
+
+But, keyless accounts were designed also **for first-time users**, who deserve and expect a smooth on-boarding experience when interacting with a dapp.
+
+{: .warning}
+**Newsflash:** Downloading a _new_ wallet for every _new_ chain and writing down a _new_ (extremely-sensitive) 12-word seed phrase is **not** smooth.
+(It's not even sane.)
+Reusing an existing 12-word seed phrase is not smooth either. Plus, would you want to? Do you trust this _new_ wallet on this _new_ chain?[^hardware-wallet]
+
+### Can Google steal my keyless account?
+
+_In principle_, keyless accounts can be set up so that, **if a malicious Google tries to steal your account, you have the power to stop it** by sending a cancellation TXN within a timeout period (e.g., 1 day)[^cancellation-txns].
+
+*In practice* though, this **higher-security mode** of operation will not lead to the best user experience (e.g., across different devices[^esk-across-devices] or when a user's browser session is lost[^esk-not-in-local-storage]).
+As a result, this is not the recommended mode on the [Aptos network](https://x.com/aptos), nor the most-widely supported one.
+
+Instead, Aptos defaults to a **user-friendly mode** where users can access their account easily from different devices (even if the browser's history has been cleaned).
+For this to work, Google must be allowed to sign TXNs on the user's behalf without a timeout period (see [flow](#flow-end-to-end-keyless-transacting)).
+As a result, a malicious (or compromised) Google could abuse this power and steal a user's account. 
+
+Is this okay?
+Well, you have to [remember who keyless accounts are for](#who-is-this-for).
+
+_First_, they are for **first-time users** who are not interested in (or know much about) 12-word mnemonics; they just want to easily sign up for your your dapp!
+_Second_, they are for **novice users** who understand very little about the responsibility of custodying a 12-word seed phrase or mnemonic.
+
+So, yes, this **is** okay, because the biggest threat for this user base is **key loss (or theft) caused by the user themselves.**
+It's not Google.
+
+Then, as a developer, if you want to (1) on-board users smoothly and (2) prevent them from shooting themselves in the foot, then **you should use keyless**[^optionality].
+
+Put differently, Google can **protect** these users' keyless accounts much, **much** better than the users are able to secure a 12-word seed phrases.
+
+{: .note}
+Google's own bottom line depends on their ability to protect their OpenID Connect (OIDC) secret keys which secure your keyless account because **those same keys secure the widely-used "Sign in with Google" flow** all across the web!
+
+<!--
+#### But what if I am really important and Google steals my keyless account?
+
+Yes, if you are important Google, or the NSA, or Lazarus, or God knows who will steal your account.
+
+But you are likely not.
+
+### Can Google lock me out of my keyless account? 
+
+{: .todo}
+Yes.
+How likely is this to happen?
+Is it more likely for you to lock yourself out if you manage your 12-word seed phrase. Yes!
+
+{: .todo}
+Also, it depends how determined Google is to do this. (e.g., maybe you still have your email)
+
+{: .todo}
+Use a cold backup key?
+zkEmail reset.
+
+### Can Google ban my keyless dapp?
+
+{: .todo}
+Yes.
+How likely is this to happen?
+Unclear, but you can prepare for it: add a 2nd factor (e.g., add Apple or an SK or a zkEmail).
+Or, recovery service.
+
+### Can Google passively monitor TXNs?
+
+{: .todo}
+Passively-malicious Google vs. actively-malicious.
+
+#### My TXNs
+
+#### All TXNs
+
+### What if my Google is hacked?
+
+{: .todo}
+2FA.
+"You've done well so far."
+
+### What if I lose my pepper?
+
+{: .todo}
+Designed to preclude that problem: pepper service has got your back.
+-->
+
 ## Drawings
 
 ### Flow: Keyless on-chain verification
@@ -189,5 +288,12 @@ $$</p>
 [oblivious-pepper]: https://github.com/aptos-foundation/AIPs/pull/544
 
 ---
+
+[^cancellation-txns]: This mode can be implemented via account abstraction or via smart contract wallets and would be most effective if your wallet (or some other trusted 3rd party) monitors the chain for key-rotation activities. If so, your wallet would submit the cancellation TXN. (This TXN can be pre-signed too.)
+[^esk-across-devices]: Why? AFAICT, this flow will require transmitting an ephemeral secret key (ESK) across different devices in order to quickly get access to the same keyless account on all your devices.
+[^esk-not-in-local-storage]: In this case, since the ESK is typically stored in the browser's _local storage_, it will be long gone and the user would have rely on Google's digital signatures to install a new ESK. But this installation would be subject to the timeout period.
+[^hardware-wallet]: ...and very few new users can be assumed to have a hardware wallet so as to side-step the 12-word seed phrase problem (assuming the hardware wallet even supports the new chain that the new user is trying to experiment with).
+[^not-just-google]: I use "Google" as a canonical example of an OIDC provider. I stress that keyless accounts are **not** restricted with Google and are designed to work with any OIDC provider (e.g., Apple, GitHub, Facebook, etc.)
+[^optionality]: Plus, you can anyway later give optionality to your users and allow them to rotate their account to self-custody. Or, to have a backup secret key. Or, to only rely on Google as a recovery method with a timeout, as per the "highly-secure mode" [here](#can-google-steal-my-account). It's just like in the Web 2 world, users can add a 2nd authentication factor to their accounts.
 
 {% include refs.md %}
