@@ -22,6 +22,11 @@ Keyless is built using a [Groth16](/groth16) zero-knowledge proof to maintain pr
 
 One day, I hope to edit this into a full blog post but, until then, here's a bunch of resources.
 
+## tl;dr
+
+A quick 20 minute presentation on what this & how it works:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/sKqeGR4BoI0?si=GJDBwVoTHdS-pML6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Drawings
 
@@ -127,16 +132,22 @@ A tweetstorm summarizing Aptos Keyless can be found below:
 
 ## Presentations
 
-### zkSummit'11
+### zkSummit'11 (2024)
 
-In April 2024, I gave a **20-minute presentation** at zkSummit11:
-<iframe width="560" height="315" src="https://www.youtube.com/embed/sKqeGR4BoI0?si=GJDBwVoTHdS-pML6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-### GKR bootcamp
+In April 2024, I gave a **20-minute presentation** at zkSummit11.
+
+[Go back up](#tldr-talk) to see it!
+
+### GKR bootcamp (2025)
 
 In January 2025, I gave a 1 hour bootcamp on keyless accounts: 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Z83ct5BG05s?si=gJr5Tvoz6szcdk06" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
+### NoirCon 1 (2025)
+
+In February 2025, I gave a 25 minute workshop on keyless accounts at AZTEC's [NoirCoin 1](https://lu.ma/38g79n99?tk=Ek10r8):
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/NX0EZBKpgrg?si=O8Ltq8hMtUzXfeRZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Miscellaneous
 
