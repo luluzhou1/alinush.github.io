@@ -8,6 +8,7 @@ title: RSA Accumulators
 #published: false
 sidebar:
     nav: cryptomat
+permalink: rsa-accumulators
 ---
 
 An **RSA accumulator** is an _authenticated set_ built from cryptographic assumptions in hidden-order groups such as $\mathbb{Z}_N^*$.

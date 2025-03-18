@@ -125,6 +125,9 @@ Passively-malicious Google vs. actively-malicious.
 
 {: .todo}
 Designed to preclude that problem: pepper service has got your back.
+
+### What if this takes off? Won't Google own us all?
+
 -->
 
 ## Drawings

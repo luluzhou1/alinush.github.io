@@ -7,6 +7,7 @@ tags:
 - bilinear maps (pairings)
 - polynomials
 author: Alin Tomescu
+permalink: bilinear-accumulators
 ---
 
 {: .info}

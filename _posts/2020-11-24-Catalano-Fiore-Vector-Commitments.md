@@ -39,8 +39,8 @@ We also make one new, small observation: [proof disaggregation](#disaggregating-
 
 Let $[n] = \\{1,2,\dots, n\\}$ and $[a,b] = \\{a, a+1,\dots, b-1, b\\}$.
 
-We assume the reader is familiar with [RSA accumulators](/2020/11/24/RSA-accumulators.html), which Catalano-Fiore (CF) VCs rely heavily upon.
-Also, we assume familiarity with the [$\rootfactor$ algorithm](/2020/11/24/RSA-accumulators.html#precomputing-all-membership-witnesses-fast) for computing **all** $e_j$th roots of $g^{\prod_{i\in[n]} e_i}, j\in [n]$.
+We assume the reader is familiar with [RSA accumulators](rsa-accumulators), which Catalano-Fiore (CF) VCs rely heavily upon.
+Also, we assume familiarity with the [$\rootfactor$ algorithm](rsa-accumulators#precomputing-all-membership-witnesses-fast) for computing **all** $e_j$th roots of $g^{\prod_{i\in[n]} e_i}, j\in [n]$.
 
 ### Shamir's trick
 
@@ -71,12 +71,12 @@ We often use $e_K = \prod_{k\in K} e_k$ to denote a product of a subset of such 
 Instead of commitments, we'll stick to the _digest_ terminology.
 
 The digest of a vector $\vect{v} = [ v_1, \dots, v_n ]$ consists of two parts.
-First, an [RSA accumulator](/2020/11/24/RSA-accumulators.html) over all positions in the vector:
+First, an [RSA accumulator](rsa-accumulators) over all positions in the vector:
 \begin{align}
     S &= g^{\prod_{i\in[n]} e_i}
 \end{align}
 
-Second, a multi-exponentiation of each [RSA membership witness](/2020/11/24/RSA-accumulators.html#membership-witnesses) (w.r.t. $S$) for position $i$ to the value $v_i$:
+Second, a multi-exponentiation of each [RSA membership witness](rsa-accumulators#membership-witnesses) (w.r.t. $S$) for position $i$ to the value $v_i$:
 \begin{align}
     \Lambda &= \prod_{i\in [n]} (S^{1/e_i})^{v_i} 
 \end{align}
@@ -85,7 +85,7 @@ We often use $d(\vect{v}) = (S, \Lambda)$ to denote the digest of a vector.
 
 {: .info}
 Computing the digest requires computing all $S^{1/e_i}, \forall i\in[n]$.
-As described [before](/2020/11/24/RSA-accumulators.html#precomputing-all-membership-witnesses-fast), this can be done in $O(n\log{n})$ group exponentiations via $$(S^{1/e_i})_{i\in[n]} \leftarrow \rootfactor(g, (e_i)_{i\in[n]})$$.
+As described [before](rsa-accumulators#precomputing-all-membership-witnesses-fast), this can be done in $O(n\log{n})$ group exponentiations via $$(S^{1/e_i})_{i\in[n]} \leftarrow \rootfactor(g, (e_i)_{i\in[n]})$$.
 Since each exponentiation is by an $(\ell+1)$-bit prime $e_i$, this takes $O(\ell n\log{n})\ \Gho$ operations.
 Then, $\Lambda$ can be computed with an additional $O(\ell n)\ \Gho$ operations.
 
@@ -331,7 +331,7 @@ Looked at it differently, clearly one can compute this tree via proof aggregatio
 The key observation is that one can also compute this tree by starting with the root, which stores the proof for the full vector (i.e., the empty digest), _disaggregating_ this proof into two halves, and recursing on these two halves.
 
 {: .info}
-This very much resembles the recursion tree used to implement $\rootfactor$ efficiently (see [here](/2020/11/24/RSA-accumulators.html#precomputing-all-membership-witnesses-fast)).
+This very much resembles the recursion tree used to implement $\rootfactor$ efficiently (see [here](rsa-accumulators#precomputing-all-membership-witnesses-fast)).
 Indeed, if you think about it, this tree implicitly computes the $\rootfactor$ tree too, since each CF proof for $v_i$ has an RSA membership witness for $i$ in it.
 
 Note that Campanelli et al.[^CFGplus20e] claim $O(\ell n\log^2{n})\ \Gho$ operations for this algorithm, but the faster disaggregation explained above actually gives $O(\ell n\log{n})$.

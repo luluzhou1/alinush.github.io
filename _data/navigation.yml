@@ -102,9 +102,6 @@ cryptomat:
     children:
       - title: Cryptographic assumptions
         url: /2020/11/05/cryptographic-assumptions-in-hidden-order-groups.html
-
-      - title: RSA accumulators
-        url: /2020/11/24/RSA-accumulators.html
   - title: Digital signatures
     children:
       - title: Baird et al.'s unique threshold signature scheme
@@ -117,6 +114,12 @@ cryptomat:
         url: schnorr-signatures
       - title: Threshold BLS
         url: /threshold-bls
+  - title: Accumulators
+    children:
+      - title: RSA accumulators
+        url: /rsa-accumulators
+      - title: Bilinear accumulators
+        url: /bilinear-accumulators
   - title: Vector commitments
     children:
     #  - title: Libert-Yung
