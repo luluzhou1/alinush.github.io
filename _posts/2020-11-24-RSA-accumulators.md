@@ -122,6 +122,9 @@ Hopefully, we will update this post over time with:
     + Aggregation
  - Disjointness witnesses[^Tome20]
  - Subset witnesses[^Tome20]
+ - Leveraging the trapdoor (RSA factorization) to compute witnesses and accumulators faster
+    + And when it should _not_ be used
+ - Instantiating RSA accumulators over class groups
 
 [^Bd93]: **One-Way Accumulators: A Decentralized Alternative to Digital Signatures**, by Benaloh, Josh and de Mare, Michael, *in EUROCRYPT '93*, 1994
 [^BBF18]: **Batching Techniques for Accumulators with Applications to IOPs and Stateless Blockchains**, by Dan Boneh and Benedikt Bünz and Ben Fisch, *in Cryptology ePrint Archive, Report 2018/1188*, 2018, [[URL]](https://eprint.iacr.org/2018/1188)
