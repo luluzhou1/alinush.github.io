@@ -24,7 +24,7 @@ One day, I hope to edit this into a full blog post but, until then, here's a bun
 
 ## tl;dr
 
-A quick 20 minute presentation on what this & how it works:
+A quick 20 minute presentation on what this is & how it works:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/sKqeGR4BoI0?si=GJDBwVoTHdS-pML6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
