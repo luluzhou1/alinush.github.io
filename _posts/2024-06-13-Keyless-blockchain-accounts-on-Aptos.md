@@ -126,7 +126,23 @@ Passively-malicious Google vs. actively-malicious.
 {: .todo}
 Designed to preclude that problem: pepper service has got your back.
 
+### But this is not decentralized, right?
+
+{: todo}
+The design **is** decentralized: prover service can be de-centralized, so can pepper-service.
+The current deployment is not there yet, but will be.
+
+### But this is not privacy preserving, right?
+
+{: todo}
+Same: design **is**, but prover & pepper services are not yet privacy-preserving.
+
 ### What if this takes off? Won't Google own us all?
+
+### TODO
+2 out of 3 across same email but different providers
+2 out of 3 across same provider but your friends' emails
+securing $1,000 dollars vs. $1,000,000 dollars -- kind of like adding mfa in Web2
 
 -->
 
@@ -179,6 +195,7 @@ We depict the flow for a dapp to fetch its user's pepper _obliviously_ from the 
 
 1. I wrote a [high-level overview](https://aptos.dev/en/build/guides/aptos-keyless/how-keyless-works) of how keyless accounts work on the [Aptos](https://twitter.com/aptos) blockchain 
 2. I wrote an [in-depth explanation](https://github.com/aptos-foundation/AIPs/blob/main/aips/aip-61.md) of how keyless accounts work (and their many caveats) in the 61st Aptos Improvement Proposal. 
+3. _Osikhena Oshomah_ wrote a keyless tutorial for devs called [Aptos Keyless Auth](https://jamiescript.hashnode.dev/aptos-keyless-auth)
 
 ## Slides
 
@@ -251,11 +268,6 @@ In January 2025, I gave a 1 hour bootcamp on keyless accounts:
 In February 2025, I gave a 25 minute workshop on keyless accounts at AZTEC's [NoirCoin 1](https://lu.ma/38g79n99?tk=Ek10r8):
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/NX0EZBKpgrg?si=O8Ltq8hMtUzXfeRZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-## Miscellaneous
-
- - Tutorial: [Aptos Keyless Auth](https://jamiescript.hashnode.dev/aptos-keyless-auth), by Osikhena Oshomah
- - Code: [AnonAdhar](https://github.com/anon-aadhaar/anon-aadhaar/blob/main/packages/circuits/src/helpers/signature.circom), by PSE, does RSA2048-SHA2-256 signature verification in `circom` within ~900K R1CS constraints
-
 ## Technical reference
 
 {% include keyless-defs.md %}
@@ -279,6 +291,18 @@ e.g., $\maxaudval$ is clearly the maximum number of bytes in $\audval$.
 
 {: .todo}
 Define $\poseidon^\mathbb{S}_\ell(s)$.
+
+## Future work
+
+### Noir
+
+ - [Groth16 experimental `gnark` backend](https://github.com/lambdaclass/noir_backend_using_gnark)
+ - [Noir-to-R1CS experimental](https://github.com/worldfnd/ProveKit/tree/main/noir-r1cs)
+
+### Miscellaneous
+
+ - Code: [AnonAdhar](https://github.com/anon-aadhaar/anon-aadhaar/blob/main/packages/circuits/src/helpers/signature.circom), by PSE, does RSA2048-SHA2-256 signature verification in `circom` within ~900K R1CS constraints
+
 
 <!--more-->
 
