@@ -225,7 +225,8 @@ We depict the flow for a dapp to fetch its user's pepper _obliviously_ from the 
 
 ## Deployed applications
 
- 1. [Aptos Connect](https://aptosconnect.app)
+ 1. [Aptos Connect](https://aptosconnect.app) web-wallet
+ 1. $\Rightarrow$ every Aptos dapp that can connect a wallet!
  1. [Merkle Trade](https://merkle.trade)
 
 ## Aptos Improvement Proposals (AIPs)
