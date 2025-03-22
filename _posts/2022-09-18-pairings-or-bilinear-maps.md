@@ -5,7 +5,7 @@ tags:
 - math
 title: Pairings or bilinear maps
 date: 2022-12-31 20:45:59
-#permalink: pairings
+permalink: pairings
 #published: false
 sidebar:
     nav: cryptomat

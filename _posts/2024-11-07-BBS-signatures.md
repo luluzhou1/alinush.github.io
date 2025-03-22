@@ -42,7 +42,7 @@ For some of the disadvantages, see the [conclusion](#conclusion).
 
 ## Preliminaries
  
- - There is a [bilinear map](/2022/12/31/pairings-or-bilinear-maps.html) $e : \Gr_1 \times \Gr_2 \rightarrow \Gr_T$, where $\Gr_1 = \langle g_1 \rangle, \Gr_2 = \langle g_2 \rangle$ and $\Gr_T$ are of prime order $p$
+ - There is a [bilinear map](/pairings) $e : \Gr_1 \times \Gr_2 \rightarrow \Gr_T$, where $\Gr_1 = \langle g_1 \rangle, \Gr_2 = \langle g_2 \rangle$ and $\Gr_T$ are of prime order $p$
  - Let $\Zp = \\{0,1,2,\ldots,p-1\\}$ denote the finite field of order $p$. 
  - A Pedersen commitment to a vector $(m_1,\ldots,m_\ell) \in \Zp^\ell$ is $C = h_0^r \prod_{i\in[\ell]} h_i^{m_i}$, where $r \randget \Zp$ is a uniformly-picked blinding factor and $(h_0,\ldots,h_\ell)$ are fixed generators in a group $\Gr$ of order $p$ whose pairwise discrete logs are unknown.
  - The [blind signing](#how-to-sign-blindly-in-bbs) subsection(s) assume familiarity with ZKPoKs of Pedersen commitment openings.

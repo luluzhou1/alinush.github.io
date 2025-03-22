@@ -35,7 +35,7 @@ Understanding the details is crucial for cryptography, since today's most effici
  - digital signature schemes, such as Schnorr[^Schn89] or BLS[^BLS01],
  - polynomial commitment schemes, such as [KZG](2020/05/06/kzg-polynomial-commitments.html)[^KZG10]
 
-(Well some of these cryptosystems, additionally rely on [pairings](http://localhost:4000/2022/12/31/pairings-or-bilinear-maps.html) across Abelian groups.)
+(Well some of these cryptosystems, additionally rely on [pairings](/pairings) across Abelian groups.)
 
 ### Motivation
 

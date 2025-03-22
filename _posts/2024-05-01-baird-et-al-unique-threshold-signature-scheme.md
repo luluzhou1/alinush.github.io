@@ -20,7 +20,7 @@ In their paper, Baird et al. modify this construction into a (non-unique) **mult
 ## Preliminaries
 
 We assume familiarity with:
- - [Bilinear maps](/2022/12/31/pairings-or-bilinear-maps.html)
+ - [Bilinear maps](/pairings)
  - [Lagrange polynomials](/2022/07/28/lagrange-interpolation.html)
 
 ## The idea
