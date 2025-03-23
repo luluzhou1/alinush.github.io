@@ -107,11 +107,11 @@ cryptomat:
       - title: Baird et al.'s unique threshold signature scheme
         url: /2024/05/01/baird-et-al-unique-threshold-signature-scheme.html
       - title: BBS+ signatures
-        url: 2024/11/07/BBS-signatures.html
+        url: /bbs-plus-signatures
       - title: ECDSA signatures
-        url: ecdsa
+        url: /ecdsa
       - title: Schnorr signatures
-        url: schnorr-signatures
+        url: /schnorr-signatures
       - title: Threshold BLS
         url: /threshold-bls
   - title: Accumulators
@@ -125,13 +125,10 @@ cryptomat:
     #  - title: Libert-Yung
     #    url: 
     #
-    #  - title: Kate-Zaverucha-Goldberg
-    #    url: 
-    #
     #  - title: aSVC
     #    url: 
       - title: Feist-Khovratovich (FK) precomputation
-        url: /2021/06/17/Feist-Khovratovich-technique-for-computing-KZG-proofs-fast.html 
+        url: /feist-khovratovich 
 
       - title: Pointproofs
         url: /drafts/2021-09-10-Pointproofs-Vector-Commitments.html # TODO: finalize and rename
@@ -147,7 +144,7 @@ cryptomat:
         url: /2022/07/28/lagrange-interpolation.html
 
       - title: KZG polynomial commitments
-        url: kzg
+        url: /kzg
 
       - title: Differentiation tricks
         url: /2025/01/24/Polynomial-differentiation-tricks.html
@@ -165,10 +162,10 @@ cryptomat:
         url: /qap-r1cs
       - title: Groth16
         url: /groth16
-  - title: Prize-winning stuff
-    children:
-      - title: Bulletproofs IPA for multiexp
-        url: /2024/09/02/Bulletproofs-IPA-for-multiexp.html 
+  #- title: Prize-winning stuff
+  #  children:
+  #    - title: Bulletproofs IPA for multiexp
+  #      url: /2024/09/02/Bulletproofs-IPA-for-multiexp.html 
 
   #- title: (Zero-Knowledge) Proof Systems
   #  children:

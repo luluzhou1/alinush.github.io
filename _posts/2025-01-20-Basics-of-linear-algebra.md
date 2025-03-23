@@ -23,7 +23,7 @@ sidebar:
 $</div> <!-- $ -->
 
 We typically assume all vector and matrix elements are from a finite field $\F$, but these definitions can be generalized.
-(For example, in [this blogpost](/2021/06/17/Feist-Khovratovich-technique-for-computing-KZG-proofs-fast.html), we multiply a matrix made of field elements with a vector made up of indeterminate variables $X^0, X, X^2, \ldots, X^m$.)
+(For example, in [this blogpost](/feist-khovratovich), we multiply a matrix made of field elements with a vector made up of indeterminate variables $X^0, X, X^2, \ldots, X^m$.)
 
 ## Row vectors vs. column vectors
 
