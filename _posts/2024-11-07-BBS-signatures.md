@@ -7,6 +7,7 @@ title: BBS+ signatures
 #published: false
 sidebar:
     nav: cryptomat
+permalink: bbs-plus-signatures
 #article_header:
 #  type: cover
 #  image:
