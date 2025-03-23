@@ -44,7 +44,7 @@ Recall that a secret ${\color{green}s}\in \Zp$ is $t$-out-of-$n$ secret-shared a
  3. The shares $[s_1, s_2, \ldots, s_n]$ define the $t$-out-of-$n$ **sharing** of $s$.
 
 ### Lagrange polynomials
-Recall the definition of a [Lagrange polynomial](/2022/07/28/lagrange-interpolation.html) w.r.t. to a set of evaluation points $T$.
+Recall the definition of a [Lagrange polynomial](/lagrange-interpolation) w.r.t. to a set of evaluation points $T$.
 \begin{align}
     \forall i\in[n],
     \color{green}{\lagr_i(X)} &= \prod_{k\in T, k\ne i} \frac{X - k}{i - k}

@@ -21,7 +21,7 @@ In their paper, Baird et al. modify this construction into a (non-unique) **mult
 
 We assume familiarity with:
  - [Bilinear maps](/pairings)
- - [Lagrange polynomials](/2022/07/28/lagrange-interpolation.html)
+ - [Lagrange polynomials](/lagrange-interpolation)
 
 ## The idea
 

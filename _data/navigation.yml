@@ -141,7 +141,7 @@ cryptomat:
         url: /2020/03/16/polynomials-for-crypto.html
 
       - title: Lagrange interpolation
-        url: /2022/07/28/lagrange-interpolation.html
+        url: /lagrange-interpolation
 
       - title: KZG polynomial commitments
         url: /kzg
