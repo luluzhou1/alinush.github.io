@@ -288,6 +288,36 @@ In February 2025, I gave a 25 minute workshop on keyless accounts at AZTEC's [No
 The notation below will not be explicitly defined; just exercise intuition! 
 e.g., $\maxaudval$ is clearly the maximum number of bytes in $\audval$.
 
+### BN254
+
+Currently, the Aptos keyless relation is implemented using [circom](/circom) with a Groth16 backend over the BN254 elliptic curve[^bn254] of order $r$, where $2^{253} < r < 2^{254}$:
+
+\begin{align}
+& 2^{253} + 2^{252} + 2^{246} + 2^{245} + 2^{242} + 2^{238} + 2^{235} + 2^{234} + 2^{233} + 2^{230} + 2^{229} + 2^{228} + 2^{225} +\\\\\
+& 2^{223} + 2^{222} + 2^{221} + 2^{216} + 2^{213} + 2^{212} + 2^{208} + 2^{207} + 2^{205} + 2^{197} + 2^{195} + 2^{192} + 2^{191} +\\\\\
+& 2^{189} + 2^{188} + 2^{187} + 2^{182} + 2^{180} + 2^{174} + 2^{170} + 2^{168} + 2^{167} + 2^{165} + 2^{164} + 2^{162} + 2^{161} +\\\\\
+& 2^{159} + 2^{152} + 2^{151} + 2^{144} + 2^{142} + 2^{140} + 2^{139} + 2^{134} + 2^{132} + 2^{131} + 2^{130} + 2^{128} + 2^{125} +\\\\\
+& 2^{123} + 2^{117} + 2^{116} + 2^{113} + 2^{112} + 2^{111} + 2^{110} + 2^{109} + 2^{107} + 2^{102} + 2^{99 } + 2^{94 } + 2^{93} + \\\\\
+& 2^{92 } + 2^{91 } + 2^{88 } + 2^{87 } + 2^{85 } + 2^{84 } + 2^{83 } + 2^{80 } + 2^{78 } + 2^{77 } + 2^{76 } + 2^{71 } + 2^{68} + 2^{64} + 2^{62} +\\\\\
+& 2^{57 } + 2^{56 } + 2^{55 } + 2^{54 } + 2^{53 } + 2^{48 } + 2^{47 } + 2^{46 } + 2^{45 } + 2^{44 } + 2^{42 } + 2^{40 } + 2^{39} + 2^{36} + 2^{33} +\\\\\
+& 2^{32 } + 2^{31 } + 2^{30 } + 2^{29 } + 2^{28 } + 2^0
+\end{align}
+
+In decimal, $r$ is `21888242871839275222246405745257275088548364400416034343698204186575808495617`.
+In hexadecimal, $r$ is `0x30644e72e131a029b85045b68181585d2833e84879b9709143e1f593f0000001`.
+
+<!-- 
+In plaintext, $r$ is:
+```
+2^253 + 2^252 + 2^246 + 2^245 + 2^242 + 2^238 + 2^235 + 2^234 + 2^233 + 2^230 + 2^229 + 2^228 + 2^225 + 2^223 + 2^222 + 2^221 + 2^216 + 2^213 + 2^212 + 2^208 + 2^207 + 2^205 + 2^197 + 2^195 + 2^192 + 2^191 + 2^189 + 2^188 + 2^187 + 2^182 + 2^180 + 2^174 + 2^170 + 2^168 + 2^167 + 2^165 + 2^164 + 2^162 + 2^161 + 2^159 + 2^152 + 2^151 + 2^144 + 2^142 + 2^140 + 2^139 + 2^134 + 2^132 + 2^131 + 2^130 + 2^128 + 2^125 + 2^123 + 2^117 + 2^116 + 2^113 + 2^112 + 2^111 + 2^110 + 2^109 + 2^107 + 2^102 + 2^99 + 2^94 + 2^93 + 2^92 + 2^91 + 2^88 + 2^87 + 2^85 + 2^84 + 2^83 + 2^80 + 2^78 + 2^77 + 2^76 + 2^71 + 2^68 + 2^64 + 2^62 + 2^57 + 2^56 + 2^55 + 2^54 + 2^53 + 2^48 + 2^47 + 2^46 + 2^45 + 2^44 + 2^42 + 2^40 + 2^39 + 2^36 + 2^33 + 2^32 + 2^31 + 2^30 + 2^29 + 2^28 + 2^0
+```
+-->
+
+{: .note}
+The base field where the elliptic curve point coordinates $(x,y)$ lie in is $\Zp$ with $p = $ `21888242871839275222246405745257275088696311157297823662689037894645226208583`.
+Note that $p$ is slightly larger than the elliptic curve's order $r$.
+
+
 ### base64url
 
 Recall that **base64** is a way to convert an **input** of $\ell$ bytes into an output of $m=\lceil 4\ell / 3\rceil$ **base64 characters** from an alphabet of size 64.
@@ -353,6 +383,7 @@ $$</p>
 
 ---
 
+[^bn254]: [BN254 for the rest of us](https://hackmd.io/@jpw/bn254), by Jonathan Wang
 [^cancellation-txns]: This mode can be implemented via account abstraction or via smart contract wallets and would be most effective if your wallet (or some other trusted 3rd party) monitors the chain for key-rotation activities. If so, your wallet would submit the cancellation TXN. (This TXN can be pre-signed too.)
 [^esk-across-devices]: Why? AFAICT, this flow will require transmitting an ephemeral secret key (ESK) across different devices in order to quickly get access to the same keyless account on all your devices.
 [^esk-not-in-local-storage]: In this case, since the ESK is typically stored in the browser's _local storage_, it will be long gone and the user would have rely on Google's digital signatures to install a new ESK. But this installation would be subject to the timeout period.
