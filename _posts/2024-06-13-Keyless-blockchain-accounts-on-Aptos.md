@@ -269,13 +269,60 @@ In January 2025, I gave a 1 hour bootcamp on keyless accounts:
 In February 2025, I gave a 25 minute workshop on keyless accounts at AZTEC's [NoirCoin 1](https://lu.ma/38g79n99?tk=Ek10r8):
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/NX0EZBKpgrg?si=O8Ltq8hMtUzXfeRZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-## Technical reference
+## Future work
+
+### Noir
+
+ - [Groth16 experimental `gnark` backend](https://github.com/lambdaclass/noir_backend_using_gnark)
+ - [Noir-to-R1CS experimental](https://github.com/worldfnd/ProveKit/tree/main/noir-r1cs)
+
+### Miscellaneous
+
+ - Code: [AnonAdhar](https://github.com/anon-aadhaar/anon-aadhaar/blob/main/packages/circuits/src/helpers/signature.circom), by PSE, does RSA2048-SHA2-256 signature verification in `circom` within ~900K R1CS constraints
+
+## Technical reference appendix
 
 {% include keyless-defs.md %}
 
 {: .note}
 The notation below will not be explicitly defined; just exercise intuition! 
 e.g., $\maxaudval$ is clearly the maximum number of bytes in $\audval$.
+
+### base64url
+
+Recall that **base64** is a way to convert an **input** of $\ell$ bytes into an output of $m=\lceil 4\ell / 3\rceil$ **base64 characters** from an alphabet of size 64.
+
+Base64 works by sequentially converting each group of 6 bits (so $2^6 = 64$ possibilities) to an 8-bit letter in this **base64 alphabet**.
+Note that this blows up the **encoded length** by around $8/6 = 4/3 = 1.25\times$.
+
+{: .note}
+Why base64-encode stuff?
+Because it is sometimes useful to take arbitrary bytes and convert them to a displayable string format.
+(For example, hexadecimal is another such format, albeit the conversion.
+
+The base64 algorithm encodes every 24-bit **input chunk** (i.e., every 3 bytes) into a 32-bit **output chunk** (i.e., 4 base64 characters), properly handling things when $\ell \bmod 3 \ne 0$ (see [this Wikipedia article](https://en.wikipedia.org/wiki/Base64#Examples)):
+
+Specifically, the last input chunk could be of either length:
+ - $\ell \bmod 3 = 2$ bytes
+    + then, the algorithm **pads** this last 2-byte input chunk (16 bits) with 2 zero bits
+        - the **padded** chunk's length is now 18 bits and thus divisible by 6
+    - encode this 18-bit padded input chunk as 3-character output chunk
+    - append an `=` **padding character** to the output chunk
+        + to indicate that the last 2 zero bits in the padded input chunk are padding bits and should be removed
+ - $\ell \bmod 3 = 1$ bytes
+    - same, except pad this last 1-byte chunk (8 bits) to 12 bits using 4 zero bits
+    - as a result, append two `=` padding characters to the resulting 2-character output chunk.
+
+{: .note}
+Padding is actually not necessary since it can be inferred from the output length: i.e., the output length $m \bmod 4$ can be either $0, 2$ or $3$, in which case we can show that $\ell \bmod 3$ must have been either $0, 1$ or $2$, respectively[^omit-padding].
+Indeed, some implementations do omit it (e.g., base64**url**-encoded JWTs and JWSs).
+
+Now, **base64url** is a slight varation on **base64**: as explained in the [JWS RFC](https://datatracker.ietf.org/doc/html/rfc7515#appendix-C)[^jwt-rfc].
+Specifically, `base64url(m)` is implemented by:
+
+ 1. Doing a vanilla `output = base64(input)` Base64 encoding
+ 2. Stripping the padding (`=`) characters at the end of `output`, if any
+ 3. Replacing `+` with `-` and replacing `/` with `_` in `output`
 
 ### Hashing the identity commitment (IDC) in the address
 
@@ -292,17 +339,6 @@ e.g., $\maxaudval$ is clearly the maximum number of bytes in $\audval$.
 
 {: .todo}
 Define $\poseidon^\mathbb{S}_\ell(s)$.
-
-## Future work
-
-### Noir
-
- - [Groth16 experimental `gnark` backend](https://github.com/lambdaclass/noir_backend_using_gnark)
- - [Noir-to-R1CS experimental](https://github.com/worldfnd/ProveKit/tree/main/noir-r1cs)
-
-### Miscellaneous
-
- - Code: [AnonAdhar](https://github.com/anon-aadhaar/anon-aadhaar/blob/main/packages/circuits/src/helpers/signature.circom), by PSE, does RSA2048-SHA2-256 signature verification in `circom` within ~900K R1CS constraints
 
 
 <!--more-->
@@ -321,7 +357,9 @@ $$</p>
 [^esk-across-devices]: Why? AFAICT, this flow will require transmitting an ephemeral secret key (ESK) across different devices in order to quickly get access to the same keyless account on all your devices.
 [^esk-not-in-local-storage]: In this case, since the ESK is typically stored in the browser's _local storage_, it will be long gone and the user would have rely on Google's digital signatures to install a new ESK. But this installation would be subject to the timeout period.
 [^hardware-wallet]: ...and very few new users can be assumed to have a hardware wallet so as to side-step the 12-word seed phrase problem (assuming the hardware wallet even supports the new chain that the new user is trying to experiment with).
+[^jwt-rfc]: The JWT RFC merely defers to the [JW**S** RFC](https://datatracker.ietf.org/doc/html/rfc7515#section-2) as to what "base64url encoding" means
 [^not-just-google]: I use "Google" as a canonical example of an OIDC provider. I stress that keyless accounts are **not** restricted with Google and are designed to work with any OIDC provider (e.g., Apple, GitHub, Facebook, etc.)
+[^omit-padding]: First, observe that there is no possible last input chunk size that has a 1-character output chunk: the smallest input chunk size is 1 byte, which requires 2 base64 characters (after padding input chunk to 12 bits). The other cases are when the last output chunk is either 2 or 3 characters. But those correspond to exactly the edge cases when $\ell \bmod 3 = 1$ and $\ell \bmod 3 = 2$.
 [^optionality]: Plus, you can anyway later give optionality to your users and allow them to rotate their account to self-custody. Or, to have a backup secret key. Or, to only rely on Google as a recovery method with a timeout, as per the "highly-secure mode" [here](#can-google-steal-my-account). It's just like in the Web 2 world, users can add a 2nd authentication factor to their accounts.
 
 {% include refs.md %}
