@@ -90,6 +90,9 @@ As a result, Schnorr is **slightly faster** than ECDSA, especially in the batche
 
 Schnorr is also arguably **slightly safer** to implement, since ECDSA's use of inversion has actually been exploited in practice (see [here](/ecdsa#fn:eea-side-channel)).
 
+{: .note}
+The EdDSA RFC[^eddsa-rfc] also argues, albeit without any justification, that EdDSA (slightly different than vanilla Schnorr) is less susceptible to side-channel attacks.
+
 ### Cleaner security proof
 
 This is a nuanced topic, but the cryptographic analysis of Schnorr signatures is much more straightforward than ECDSA's.
@@ -127,7 +130,7 @@ Both are fixable via deterministic signing though (e.g., EdDSA and Ed25519 are n
 
 ## Disadvantages
 
-I can't think of anything besides the fact that Ed25519, the most popular Schnorr variant these days, does **not** actually support public key recovery, due to its hashing of the public key as part of the Fiat-Shamir transform.
+I can't think of anything else besides the fact that Ed25519, the most popular Schnorr variant these days, does **not** actually support public key recovery, due to its hashing of the public key as part of the Fiat-Shamir transform.
 
 Can you think of any disadvantages of **vanilla** Schnorr over **vanilla** ECDSA?
 
@@ -146,6 +149,7 @@ For cited works, see below 👇👇
 
 {% include refs.md %}
 
+[^eddsa-rfc]: [Edwards-Curve Digital Signature Algorithm (EdDSA)](https://www.rfc-editor.org/rfc/rfc8032#section-1), RFC 8032, by S. Josefsson, January 2017 
 [^kiltz]: "[How provably-secure are (EC)DSA signatures?](https://www.youtube.com/watch?v=96I2wHr8uKE)", by Eike Kiltz, invited talk at PKC 2021
 [^safe-curves]: [SafeCurves: choosing safe curves for elliptic-curve cryptography](https://safecurves.cr.yp.to/rigid.html), Daniel J. Bernstein, 2013
 [^trust-me]: One of the most frequent cryptography questions I got in my work at Aptos Labs was around using ECDSA's pubkey recovery feature.
