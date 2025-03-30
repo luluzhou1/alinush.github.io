@@ -14,8 +14,6 @@ This is my perpetual effort aimed at summarizing various concepts in cryptograph
 
 You can start with some basic things:
  - [Pairings](pairings): elliptic curve magic behind a lot of interesting crypto
- schnorr-signatures
- ecdsa
  - [KZG polynomial commitments](/kzg)
  - [RSA accumulators](/rsa-accumulators), or: _"Who needs Merkle trees anyway?"_
 
