@@ -126,7 +126,12 @@ In this formulation, the signature includes the hash $e = H(R, m)$ instead of $R
 This may have **advantages** if the hash can be made smaller.
 The original Schnorr paper[^Schn89] claims $\lambda$-bit hashes (as opposed to $2\lambda$) are sufficient for $\lambda$-bit security, but not sure if that has changed.
 
-On the other hand, a **disadvantage** is that this formulation does **not** allow for more efficient [batch verification](#batch-verification).
+On the other hand, a **disadvantage** is that this formulation:
+
+1. Does **not** allow for more efficient [batch verification](#batch-verification).
+2. Does not support [pubkey recovery](#pubkey-recovery) because it lacks the $R$ component.
+
+The scheme follows below:
 
 $\mathsf{Schnorr}'$.$\mathsf{Sign}(m, \sk) \rightarrow \sigma$:
  - $r\randget\Zp$
@@ -283,7 +288,7 @@ This actually creates subtle issues when batch-verifying Schnorr signatures, for
 ## Conclusion
 
 By now, you should be pretty well-versed in Schnorr signatures and a few of their properties: nonce reuse attacks, batch verification, alternative forms, etc.
-There is so much more to say about them.
+Nonethless, there is so much more to say about them (e.g., [why you should prefer Schnorr over ECDSA](/schnorr-vs-ecdsa)).
 Perhaps this article will grow over time.
 
 ### Questions left
@@ -294,6 +299,11 @@ Perhaps this article will grow over time.
  1. What is a good academic reference for the *cleanest* EUF-CMA security proof for (single-signer) Schnorr?
  1. What is the the earliest work that defines Schnorr signatures over elliptic curves?
  1. What is the significance of [PV05][^PV05]
+
+### TODOs
+
+{: .todo}
+Give algorithns for non-malleable Schnorr signatures.
 
 ## Acknowledgements
 

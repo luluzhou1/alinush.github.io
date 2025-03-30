@@ -449,20 +449,7 @@ Implementing ECDSA securely and efficiently can be tricky:
 ## Why you should avoid ECDSA
 
 **Hot take 🌶️:** There is **no** good reason to ever use ECDSA (except for legacy compatibility). 
-As far as I can tell, [Schnorr signatures](/schnorr-signatures) should always be preferred over it:
-
- 1. ECDSA is **inefficient as a $t$-out-of-$n$ threshold signature** scheme
- 1. (Standardized) ECDSA does not support batched verification (although [it can be modified to](#batch-verification))
- 1. ECDSA's pubkey recovery requires hints, unlike Schnorr's which doesn't
-    + I must stress: I really mean _Schnorr_'s, since EdDSA and Ed25519 do not support pubkey recovery.
- 1. ECDSA is _slightly_ slower than Schnorr, especially in the batched setting, due to its use of field inversions
- 1. ECDSA does **not** have a **"clean" security reduction** to a standard assumption
-    - Typically, ECDSA security reductions must make assumptions about the [conversion function](#the-ecdsa-conversion-problem)
-    - ...or work in the generic group model (GGM)
-    - ...or introduce strange assumptions like the _semi-discrete logarithm (SDLP)_ problem
-    + In fact, algebraic security reduction for ECDSA _"can only exist if the security reduction is allowed to program the conversion function"_[^HK23e]
-    - For the latest security analysis, see recent works by Eike Kiltz[^FKP16]$^,$[^HK23e].
- 1. ECDSA is often used over NIST curves. It doesn't have to be, but it is. Some folks suspect these curves could be backdoored[^safe-curves].
+As far as I can tell, [Schnorr signatures should always be preferred over it!](/schnorr-vs-ecdsa)
 
 {: .note}
 Although ECDSA can be very fragile in the face of side-channels (e.g., see extracting ECDSA keys from Yubikeys[^eea-side-channel]), it is not clear to what extent other schemes would fare better. For example, both [Schnorr](/schnorr-signatures) and BLS[^BLS01] do exponentiations with secrets.
@@ -642,7 +629,6 @@ For cited works, see below 👇👇
 [^mtgox]: Citing from [DW14][^DW14]: _"In combination with the above mentioned success rate of malleability attacks we conclude that overall malleability attacks did not have any substantial inﬂuence in the loss of bitcoins incurred by MtGox."_
 [^nist-response]: [Responses to NIST's proposal](https://people.csail.mit.edu/rivest/pubs/RHAL92.pdf), Communications of the ACM, July 1992, Vol. 35, No. 7
 [^P2PKH]: [ECDSA verification, P2PKH uncompressed address](https://en.bitcoin.it/wiki/Message_signing#ECDSA_verification.2C_P2PKH_uncompressed_address)
-[^safe-curves]: [SafeCurves: choosing safe curves for elliptic-curve cryptography](https://safecurves.cr.yp.to/rigid.html), Daniel J. Bernstein, 2013
 [^sec-1]: [SEC 1: Elliptic Curve Cryptography](https://www.secg.org/sec1-v2.pdf), Certicom Research, 2009, Version 2.0
 [^vanstone]: [Scott Vanstone](https://en.wikipedia.org/wiki/Scott_Vanstone), Wikipedia
 

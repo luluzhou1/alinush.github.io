@@ -20,11 +20,8 @@ else
     date="$2"
 fi
 
-# Turn first character to uppercase
-title="$(tr '[:lower:]' '[:upper:]' <<< ${title:0:1})${title:1}"
-
-# Convert spaces to dashes
-title_dashes=`echo -n "$title" | tr '[:space:]' '-' | tr -dc '[:alnum:]-'`
+# Convert spaces to dashes and convert title to lowercase
+title_dashes=`echo -n "$title" | tr '[:upper:]' '[:lower:]' | tr '[:space:]' '-' | tr -dc '[:alnum:]-'`
 
 filename="$date-${title_dashes}"    # file name w/o extension
 mdfile="${filename}.md"             # file name w/ extension
