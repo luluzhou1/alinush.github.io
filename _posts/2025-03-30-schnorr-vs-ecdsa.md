@@ -46,9 +46,9 @@ As a result, our discussion below focuses on **vanilla Schnorr** versus **vanill
 Vanilla Schnorr admits a much more efficient protocol for $t$-out-of-$n$ threshold signatures, compared to ECDSA.
 
 Example of threshold protocols:
- - The well-known robust Schnorr[^SS01] (less efficient, very simple to implement)
- + Yehuda's threshold Schnorr with identifiable abort[^Lind22e] (more efficient, less robust)
- + FROST[^KG20] (even more efficient, as robust as [^Lind22e]?)
+ - The well-known 4-round robust Schnorr[^SS01] (less efficient)
+ + Yehuda's 3-round threshold Schnorr with identifiable abort[^Lind22e] (more efficient)
+ + 2-round FROST[^KG20] (even more efficient)
 
 {: .note}
 Of course, if you're looking for the the fastest threshold protocol, you should go for our [threshold BLS](/threshold-bls)!
