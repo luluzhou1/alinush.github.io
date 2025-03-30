@@ -34,7 +34,7 @@ header:
  
   - titles:
       en      : &EN       Cryptomat
-    url: /cryptomat.html
+    url: /cryptomat
   
   - titles:
       en      : &EN       Paraphernalia
