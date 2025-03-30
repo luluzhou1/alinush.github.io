@@ -110,6 +110,8 @@ cryptomat:
         url: /bbs-plus-signatures
       - title: ECDSA signatures
         url: /ecdsa
+      - title: Pointcheval-Sanders (PS)
+        url: /pointcheval-sanders
       - title: Schnorr signatures
         url: /schnorr-signatures
       - title: Threshold BLS
