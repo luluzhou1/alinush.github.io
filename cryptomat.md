@@ -27,6 +27,6 @@ Or, some esoteric ones:
  - [BBS+ signatures](/bbs-plus-signatures), or: _"Did you know you can sign Pedersen commitments?"_
 
 Or, you can read some of my favorite things:
+ - [Groth16](/groth16), or: _"Fastest-to-verify, most-succinct zkSNARK scheme"_
  - [Authenticated Multipoint evaluation Trees (AMT)s](/amt#authenticated-multipoint-evaluation-trees-amts), or _"Homomorphic Merkle trees from KZG"_
  - [Feist-Khovratovich (FK)](/feist-khovratovich), or: _"Why you may not need [AMTs](/amt) after all."_
- - [Groth16](/groth16), or: _"Fastest-to-verify, most-succinct zkSNARK scheme"_
