@@ -275,6 +275,7 @@ In February 2025, I gave a 25 minute workshop on keyless accounts at AZTEC's [No
 
  - [Groth16 experimental `gnark` backend](https://github.com/lambdaclass/noir_backend_using_gnark)
  - [Noir-to-R1CS experimental](https://github.com/worldfnd/ProveKit/tree/main/noir-r1cs)
+ - [Benchmarking individual Noir functions](https://x.com/Zac_Aztec/status/1906788898283376836)
 
 ### Miscellaneous
 
