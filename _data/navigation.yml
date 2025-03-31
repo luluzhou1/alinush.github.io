@@ -155,21 +155,19 @@ cryptomat:
       - title: How to reshare a secret
         url: /2024/04/26/How-to-reshare-a-secret.html
   - title: (Zero knowledge) proofs
+    url: /2025/01/22/Defining-zero-knowledge-proofs.html
     children:
       - title: NP relations
         url: /np-relations 
-      - title: Definitions
-        url: /2025/01/22/Defining-zero-knowledge-proofs.html
       - title: QAPs & R1CS
         url: /qap-r1cs
       - title: Groth16
         url: /groth16
+  #    - title: Simulation
+  #      url: /2020/05/07/zero-knowledge-simulation.html
+
   #- title: Prize-winning stuff
   #  children:
   #    - title: Bulletproofs IPA for multiexp
   #      url: /2024/09/02/Bulletproofs-IPA-for-multiexp.html 
 
-  #- title: (Zero-Knowledge) Proof Systems
-  #  children:
-  #    - title: Simulation
-  #      url: /2020/05/07/zero-knowledge-simulation.html

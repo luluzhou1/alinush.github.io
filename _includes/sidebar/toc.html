@@ -4,7 +4,18 @@
     {%- if _sidebar_nav -%}
     <ul class="toc toc--navigator">
       {%- for _item in _sidebar_nav -%}
-        <li class="toc-h1">{{ _item.title }}</li>
+        {%- include snippets/get-nav-url.html path=_item.url -%}
+        {%- assign _nav_url = __return -%}
+        {%- include snippets/get-nav-url.html path=page.url -%}
+        {%- assign _page_url = __return -%}
+        {%- if _nav_url == _page_url -%}
+          {%- assign _activeClass = "active" -%}
+        {%- endif -%}
+        {%- if _item.url -%}
+          <li class="toc-h1 {{_activeClass}}"><a style="margin: 0px; margin-left: -6px;" href="{{ _item.url }}">{{ _item.title }}</a></li>
+        {%- else -%}
+          <li class="toc-h1 {{_activeClass}}">{{ _item.title }}</li>
+        {%- endif -%}
         {%- if _item.children -%}
           {%- for _child in _item.children -%}
             {%- include snippets/get-nav-url.html path=_child.url -%}
