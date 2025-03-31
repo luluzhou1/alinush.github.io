@@ -46,7 +46,15 @@ For a more mild, high-level introduction to ZKPs via a Sudoku puzzle example, se
 
 ## Algorithms
 
-A zero-knowledge proof (ZKP) system is a tuple of 3 algorithms:
+A zero-knowledge proof (ZKP) system is a tuple of algorithms:
+
+ - a **relation generator**, used to formalize the fact that the ZKP works for all NP relations
+ - a setup algorithm, used to generate the **proving key** and **verifying key** for an NP relation
+ - a proving algorithm
+ - a proof verification algorithm
+ - a proof simulation algorithm
+
+We describe each algorithm in detail below.
 
 ### $\mathcal{R}(1^\lambda) \rightarrow (R,\mathsf{aux})$
 A **relation generator** that, given a security parameter $\lambda$ returns a binary relation $R(\stmt; \witn)$ decidable in polynomial time, together with some **auxiliary information** $\mathsf{aux}$[^aux].
