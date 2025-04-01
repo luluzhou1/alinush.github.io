@@ -20,6 +20,8 @@ There is also no multi-party computation (MPC) system managing your account for 
 As a result, the risk of account loss is (more or less), the risk of losing your Google account.
 Keyless is built using a [Groth16](/groth16) zero-knowledge proof to maintain privacy in both directions: prevent the blockchain from learning anything about your Google account & prevent Google from learning anything about your blockchain account and transaction activity.
 
+<!--more-->
+
 One day, I hope to edit this into a full blog post but, until then, here's a bunch of resources.
 
 ## tl;dr
@@ -281,9 +283,11 @@ In February 2025, I gave a 25 minute workshop on keyless accounts at AZTEC's [No
 
  - Code: [AnonAdhar](https://github.com/anon-aadhaar/anon-aadhaar/blob/main/packages/circuits/src/helpers/signature.circom), by PSE, does RSA2048-SHA2-256 signature verification in `circom` within ~900K R1CS constraints
 
-## Technical reference appendix
+## Apendix
 
 {% include keyless-defs.md %}
+
+This will serve as an appendix of technical information, useful when communicationg about keyless accounts internally and externally.
 
 {: .note}
 The notation below will not be explicitly defined; just exercise intuition! 
@@ -371,8 +375,36 @@ Specifically, `base64url(m)` is implemented by:
 {: .todo}
 Define $\poseidon^\mathbb{S}_\ell(s)$.
 
+### Strings inside ZK circuits
 
-<!--more-->
+ - String indices start at 0:
+    + $s[0]$ is the first character of $s$
+    + $s[\len(s) - 1] \bydef s[-1]$ is the last character of $s$.
+ - $s[i : j] \bydef \left[ s[0], s[i+1], \ldots, s[j] \right]$ denotes a substring starting at $i$ and ending at $j$ (inclusive).
+ - No characters in $s[0:\len(s)-1]$ can be 0 (or null).
+ - A string is **zero-padded** up to its **max length**, denoted by $\maxlen(s)$: i.e., $s[\len(s):\maxlen(s) - 1] = [0,\ldots,0]$
+
+### Substring checks from polynomial checks
+
+The **inputs** are:
+ - a string $s$ of max length $N$ and actual length $\len(s) = n\le N$
+ - a _substring_ $t[0\ldots L]$ of max length $L$ and actual length $\len(t)=\ell\le L$
+ - a starting index $i\in [0,n)$ of $t$ in $s$
+
+The **output** is a bit indicating that the following are all true:
+ 1. $0 < \ell \le n$[^empty-substring]
+ 1. $i < n - (\len(t) - 1)$ (we need to "leave room" for $t$ in $s$)
+ 1. $s[i:i+\len(t)-1] = t$ (i.e., $t$ is a substring of $s$ starting at index $i$)
+
+#### Interactive protocol
+
+{: .todo}
+Can we avoid bitmasks here?
+
+#### Non-interactive via Fiat-Shamir (FS)
+
+{: .todo}
+Interactive + FS.
 
 <p hidden>$$
 \def\Adv{\mathcal{A}}
@@ -382,10 +414,13 @@ $$</p>
 
 [oblivious-pepper]: https://github.com/aptos-foundation/AIPs/pull/544
 
----
+## References
+
+For cited works, see below 👇👇
 
 [^bn254]: [BN254 for the rest of us](https://hackmd.io/@jpw/bn254), by Jonathan Wang
 [^cancellation-txns]: This mode can be implemented via account abstraction or via smart contract wallets and would be most effective if your wallet (or some other trusted 3rd party) monitors the chain for key-rotation activities. If so, your wallet would submit the cancellation TXN. (This TXN can be pre-signed too.)
+[^empty-substring]: We are not interested in trivially checking that the empty string is a sub-string. In fact, we may even get into trouble if we accidentally check that in the keyless relation.
 [^esk-across-devices]: Why? AFAICT, this flow will require transmitting an ephemeral secret key (ESK) across different devices in order to quickly get access to the same keyless account on all your devices.
 [^esk-not-in-local-storage]: In this case, since the ESK is typically stored in the browser's _local storage_, it will be long gone and the user would have rely on Google's digital signatures to install a new ESK. But this installation would be subject to the timeout period.
 [^hardware-wallet]: ...and very few new users can be assumed to have a hardware wallet so as to side-step the 12-word seed phrase problem (assuming the hardware wallet even supports the new chain that the new user is trying to experiment with).

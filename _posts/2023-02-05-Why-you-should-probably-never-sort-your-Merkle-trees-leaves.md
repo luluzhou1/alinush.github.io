@@ -23,7 +23,7 @@ $$</p>
 
 ## Problem statement
 
-Non-membership proofs in [Merkle trees](/2021/02/25/what-is-a-merkle-tree.html) are surprisingly elusive to many people.
+Non-membership proofs in [Merkle trees](/merkle) are surprisingly elusive to many people.
 The problem statement is very simple:
 
 <p markdown="1" style="margin-left: .3em; border-left: .25em solid black; padding-left: .5em;">
@@ -45,7 +45,7 @@ In this blog post, I hope to dispel the myth of the effectiveness of this _sorte
 
 ## Warm-up: proving membership in Merkle trees
 
-Recall that it, if we only need to prove membership, it is very easy to solve the problem by building [a Merkle tree](/2021/02/25/what-is-a-merkle-tree.html) over all elements in the set and letting the digest be the Merkle root.
+Recall that it, if we only need to prove membership, it is very easy to solve the problem by building [a Merkle tree](/merkle) over all elements in the set and letting the digest be the Merkle root.
 
 For example, here's how this would look for a particular choice of set $S$. (Original slides [here](https://docs.google.com/presentation/d/1pbQLuXcI6WjyuNd787ty3U6Qbon41f91e_ixDmgpUgw/edit?usp=sharing).)
 

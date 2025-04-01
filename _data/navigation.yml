@@ -123,20 +123,22 @@ cryptomat:
       - title: Bilinear accumulators
         url: /bilinear-accumulators
   - title: Vector commitments
+    url: /vc
     children:
-    #  - title: Libert-Yung
-    #    url: 
-    #
-    #  - title: aSVC
-    #    url: 
+      - title: Merkle trees
+        url: /merkle
       - title: Feist-Khovratovich (FK) precomputation
         url: /feist-khovratovich 
-
-    #  - title: Pointproofs
-    #    url: /drafts/2021-09-10-Pointproofs-Vector-Commitments.html # TODO: finalize and rename
-  
       - title: Catalano-Fiore VCs
         url: /2020/11/24/Catalano-Fiore-Vector-Commitments.html
+      - title: Hyperproofs
+        url: hyperproofs
+    #  - title: Libert-Yung
+    #  - title: aSVC
+    #  - title: Pointproofs
+    #    url: /drafts/2021-09-10-Pointproofs-Vector-Commitments.html # TODO: finalize and rename
+    #  - title: AMTs
+  
   - title: Polynomials
     children:
       - title: Basics of polynomials

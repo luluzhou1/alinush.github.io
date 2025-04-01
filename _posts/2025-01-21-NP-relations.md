@@ -55,7 +55,7 @@ In this sense, factoring perfectly illustrates the "hard-to-solve-but-easy-to-ve
 
 ### Merkle tree membership
 
-$\mathsf{IsMember}(r, v_i; i, \pi)$ is an NP relation that outputs 1 if the Merkle proof $\pi$ correctly attests that $v_i$ is the value of the $i$th leaf in the [Merkle tree](/2021/02/25/what-is-a-merkle-tree.html) with root hash $r$. Otherwise, it outputs 0.
+$\mathsf{IsMember}(r, v_i; i, \pi)$ is an NP relation that outputs 1 if the Merkle proof $\pi$ correctly attests that $v_i$ is the value of the $i$th leaf in the [Merkle tree](/merkle) with root hash $r$. Otherwise, it outputs 0.
 
 {: .note}
 Note that a zero-knowledge proof for this relation would allow the prover to hide the position $i$ of the leaf and its Merkle proof $\pi$, while convincing the verifier that the value $v_i$ is (somewhere) in the tree.
@@ -64,7 +64,7 @@ For example, anonymous payment schemes like Zcash are built on top of such a rel
 
 ### Merkle proof aggregation
 
-$\mathsf{AreMembers}\left(r, \\{v\_j\\}\_{j \in [n]}; (i\_j, \pi\_j)\_{j\in [n]}\right)$ is an NP relation that outputs 1 if, for all $j\in[n]$, the Merkle proof $\pi_j$ correctly attests that $v_j$ is the value of the $i_j$th leaf in the [Merkle tree](/2021/02/25/what-is-a-merkle-tree.html) with root hash $r$. Otherwise, it outputs 0.
+$\mathsf{AreMembers}\left(r, \\{v\_j\\}\_{j \in [n]}; (i\_j, \pi\_j)\_{j\in [n]}\right)$ is an NP relation that outputs 1 if, for all $j\in[n]$, the Merkle proof $\pi_j$ correctly attests that $v_j$ is the value of the $i_j$th leaf in the [Merkle tree](/merkle) with root hash $r$. Otherwise, it outputs 0.
 
 {: .note}
 A succinct (not necessarily zero-knowledge) proof for this relation would allow the prover to "compress" the $n$ proofs $\pi_j$ for the $n$ values.

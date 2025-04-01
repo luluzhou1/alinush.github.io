@@ -1,5 +1,8 @@
 ---
 title: What is a Merkle tree?
+permalink: /merkle
+sidebar:
+    nav: cryptomat
 tags:
 - merkle
 - vector commitments (VCs)

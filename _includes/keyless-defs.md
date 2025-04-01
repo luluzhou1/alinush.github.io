@@ -1,5 +1,9 @@
 <!-- Here you can define LaTeX macros -->
 <div style="display: none;">$
+%
+\def\len{\mathsf{len}}
+\def\maxlen{\mathsf{max\_len}}
+%
 \def\poseidon{\mathsf{Poseidon}}
 %
 \def\addridc{\mathsf{addr\_idc}}
