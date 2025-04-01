@@ -303,7 +303,10 @@ Perhaps this article will grow over time.
 ### TODOs
 
 {: .todo}
-Give algorithns for non-malleable Schnorr signatures.
+Give algorithms for non-malleable Schnorr signatures.
+
+{: .todo}
+Discuss some state-of-the-art threshold Schnorr protocols (e.g., Yehuda's[^Lind22e], FROST[^KG20], Sprint[^BHKplus23e], Harts[^BLSW24e]).
 
 ## Acknowledgements
 
