@@ -69,12 +69,16 @@ $$a(X) = q(X) b(X) + r(X)$$
 Importantly, $\deg{r} < \deg{b}$ and, if $\deg{a} \ge \deg{b}$, then $\deg{q} = \deg{a} - \deg{b}$.
 Otherwise, $q(X) = 0$.
 
-<!-- TODO: 
-# The Discrete Fourier Transform (DFT) 
-Should have its own article.
+## TODOs
 
-# Multipoint evaluations
--->
+{: .todo}
+Discrete Fourier Transform (DFT), maybe in its own post?
+
+{: .todo}
+Multipoint evaluations, reuse from [AMT post](/amt#polynomial-multipoint-evaluations)?
+
+{: .todo}
+Reed-Solomon error-correction algorithm(s?).
 
 {% include refs.md %}
 
