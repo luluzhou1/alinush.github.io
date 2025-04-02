@@ -111,10 +111,11 @@ cryptomat:
   #    - title: Poseidon
   #      url: /poseidon
 
-  - title: Hidden-order groups
+  - title: Assumptions
     children:
-      - title: Cryptographic assumptions
+      - title: Hidden-order group assumptions
         url: /2020/11/05/cryptographic-assumptions-in-hidden-order-groups.html
+    #  - title: DL, CDH, DDH, SXDH, KEA, q-SDH, q-BSDH, q-PKE
 
   - title: Digital signatures
     children:
@@ -180,8 +181,21 @@ cryptomat:
         url: /qap-r1cs
       - title: Groth16
         url: /groth16
-  #    - title: Simulation
-  #      url: /2020/05/07/zero-knowledge-simulation.html
+    #  - title: Spartan
+    #    url: /spartan
+    #  - title: PLONK
+    #    url: /plonk
+      - title: Sumcheck
+        url: /sumcheck
+      - title: Simulation
+        url: /2020/05/07/zero-knowledge-simulation.html
+
+  #- title: Error-correcting codes
+  #  children:
+  #    - title: Reed-Solomon (RS)
+  #      url: /reed-solomon
+  #    - title: Reed-Muller (RM)
+  #      url: /reed-muller
 
   #- title: Miscellanea 
   #  children:
@@ -191,6 +205,10 @@ cryptomat:
   #      url: /garbled-circuits
   #    - title: <some-PIR>
   #      url: /<some-pir>
+  #    - title: Univariate sumcheck
+  #      url: /univariate-sumcheck
+  #    - title: <some-iO>
+  #      url: /<some-io>
 
   #- title: Prize-winning stuff
   #  children:
