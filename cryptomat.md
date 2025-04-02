@@ -29,4 +29,5 @@ Or, some esoteric ones:
 Or, you can read some of my favorite things:
  - [Groth16](/groth16), or: _"Fastest-to-verify, most-succinct zkSNARK scheme"_
  - [Authenticated Multipoint evaluation Trees (AMT)s](/amt#authenticated-multipoint-evaluation-trees-amts), or _"Homomorphic Merkle trees from KZG"_
+ - [SMURFs](/smurf), or: _"Did you know know unique silent-setup signatures are possible?"_
  - [Feist-Khovratovich (FK)](/feist-khovratovich), or: _"Why you may not need [AMTs](/amt) after all."_

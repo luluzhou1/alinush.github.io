@@ -119,8 +119,6 @@ cryptomat:
 
   - title: Digital signatures
     children:
-      - title: Baird et al.'s unique threshold signature scheme
-        url: /2024/05/01/baird-et-al-unique-threshold-signature-scheme.html
       - title: BBS+ signatures
         url: /bbs-plus-signatures
       - title: ECDSA signatures
@@ -131,6 +129,13 @@ cryptomat:
         url: /schnorr-signatures
       - title: Threshold BLS
         url: /threshold-bls
+
+  - title: Verifiable randomn functions (VRFs)
+    children:
+      - title: Baird et al.'s unique threshold signature scheme
+        url: /2024/05/01/baird-et-al-unique-threshold-signature-scheme.html
+      - title: SMURFs
+        url: /smurf
 
   - title: Accumulators
     children:

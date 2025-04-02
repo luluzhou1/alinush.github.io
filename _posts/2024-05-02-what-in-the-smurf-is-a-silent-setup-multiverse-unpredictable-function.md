@@ -5,12 +5,12 @@ tags:
  - bls
  - aggregation
  - multilinear maps
-title: "What in the Smurf is a silent-setup multiverse unpredictable function?"
+title: "What the Smurf? Silent-setup & unique threshold signatures!"
 #date: 2020-11-05 20:45:59
 permalink: smurf
 published: true
-#sidebar:
-#    nav: cryptomat
+sidebar:
+    nav: cryptomat
 ---
 
 {: .info}
@@ -63,7 +63,7 @@ First, validate each signature share using the multilinear map (or via a DLEQ $\
 \end{align}
 Second, **re**-aggregate the signature shares and check they yield the same signature $\sigma$ from Equation \ref{eq:example-agg}.
 
-We fully describe this strawman scheme [below](#non-succinct-construction-from-multilinear-maps) and improve it with succinctness [later](#succinct-construction-from-multilinear-maps-and-aoks) via an **argument of knowledge** (AoK) of signature shares that satisfy Equation \ref{eq:example-ver} and, when aggregated via Equation \ref{eq:example-agg}, yield the threshold VUF.
+We fully describe this strawman scheme [below](#non-succinct-smurf) and improve it with succinctness [later](#succinct-smurfs) via an **argument of knowledge** (AoK) of signature shares that satisfy Equation \ref{eq:example-ver} and, when aggregated via Equation \ref{eq:example-agg}, yield the threshold VUF.
 
 {: .warning}
 **Note:** We assume symmetric multilinear maps. 
@@ -138,9 +138,10 @@ The proof $\pi$ is succinct (i.e., much smaller than $w$), but might still leak 
 $\mathsf{AoK.Verify}\_\mathcal{R}(x; \pi)\rightarrow \\{0,1\\}$.
 Verifies the proof $\pi$ that the prover knows a witness $w$ such that $R(x; w) = 1$.
 
-## Silent-setup Multiverse (Verifiable) UnpRedictable Functions (SMURFs)
+## SMURFs definition
 
-To avoid mistakes, we formally define a SMURF as a tuple of algorithms (with correctness and security definitions [in the appendix](#appendix-formalizing-smurfs)):
+To avoid mistakes, we formally define a _Silent-setup Multiverse (Verifiable) UnpRedictable Functions_, or a
+**SMURF**, as a tuple of algorithms (with correctness and security definitions [in the appendix](#appendix-formalizing-smurfs)):
 
 $\mathsf{SMURF.KeyGen}(1^\lambda) \rightarrow (\sk_i, \vk_i)$. 
 **Locally** generates a player's **key pair**: their **secret key** and corresponding **verification key**.
@@ -157,7 +158,7 @@ Aggregates them into:
 {: .info}
 The necessity of an aggregation key AK $\ak$ in the definition is _artificial_.
 An ideal definition would not require this.
-However, because our [succinct SMURF construction](#succinct-construction-from-multilinear-maps-and-aoks) requires the VKs of all players during aggregation, we rely on an AK to pass in this information.
+However, because our [succinct SMURF construction](#succinct-smurfs) requires the VKs of all players during aggregation, we rely on an AK to pass in this information.
 
 $\mathsf{SMURF.ShareSign}(\sk_i, m) \rightarrow \sigma_i$. 
 Computes a **signature share** $\sigma_i$ over $m$ under $\sk_i$.
@@ -182,9 +183,9 @@ Returns the unique output $y$ on message $m$ given a threshold $t$ and the VKs o
 This allows us to define unpredictability in the silent setup setting, where it will not be possible to extract the SKs under which the adversary's prediction was made (unlike in the DKG setting), since VKs can be adversarial.
 Lastly, even though $\mathsf{SMURF.Eval}$ is not a polynomial-time algorithm, this is not a problem since it is only used for the security definition.
 
-## Non-succinct SMURF from multilinear maps
+## Non-succinct SMURF 
 
-Here, we describe the [scheme from above](#idea-bls-with-multilinear-maps) in more detail.
+We construct a non-succinct SMURF from multilinear maps, as [intuited above](#idea-bls-with-multilinear-maps).
 
 Let $g$ be the generator for $\Gr$, which admits an $n$-multilinear map[^higher-than-n] $e$, as defined [above](#preliminaries).
 We construct a **non-succinct** SMURF as follows:
@@ -207,7 +208,7 @@ $\mathsf{SMURF\_1.AggSig}(\ak, m, (\sigma\_i)\_{i\in T}) \rightarrow \sigma$:
  - $\pi \gets (\sigma_i)_{i\in T}$
 
 {: .warning}
-Just a naive aggregation here. Will fix this in the [succinct construction below](#succinct-construction-from-multilinear-maps-and-aoks).
+Just a naive aggregation here. Will fix this in the [succinct construction below](#succinct-smurfs).
 
 $\mathsf{SMURF\_1.Verify}(\pk, m, \sigma) \rightarrow \\{0,1\\}$:
  - Parse $(\sigma_i)_{i \in T} \gets \pi$
@@ -216,7 +217,7 @@ $\mathsf{SMURF\_1.Verify}(\pk, m, \sigma) \rightarrow \\{0,1\\}$:
  - $\forall i\in T$, assert $\mathsf{SMURF\_1.ShareVer}(\vk_i, m, \sigma_i) \equals 1$
 
 {: .warning}
-Also a naive verification here, which we fix in the [succinct construction below](#succinct-construction-from-multilinear-maps-and-aoks).
+Also a naive verification here, which we fix in the [succinct construction below](#succinct-smurfs).
 
 $\mathsf{SMURF\_1.Derive}(\pk, m, \sigma) \rightarrow y$. 
  - Parse $(\sigma_i)_{i \in T} \gets \pi$
@@ -234,9 +235,9 @@ $\mathsf{SMURF\_1.Eval}(t, (\vk_j)_{j\in[n]}, m) \rightarrow y$.
 {: .warning}
 Recall that a polynomial time $\mathsf{SMURF.Eval}$ is not necessary, since we only use this algorithm to define security.
 
-## Succinct construction from multilinear maps and AoKs
+## Succinct SMURF
 
-From a **theoretical standpoint**, the [$\mathsf{SMURF\_1}$ construction](#non-succinct-construction-from-multilinear-maps) above is not **succinct**:
+From a **theoretical standpoint**, the [$\mathsf{SMURF\_1}$ construction](#non-succinct-smurf) above is not **succinct**:
 
 1. The public key $\pk$ is $O(n)$-sized
 1. The aggregated $\sigma$ is $O(t)$-sized 
