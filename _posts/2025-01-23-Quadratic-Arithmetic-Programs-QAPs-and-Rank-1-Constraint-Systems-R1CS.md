@@ -34,7 +34,7 @@ $</div> <!-- $ -->
 
 {% include zkp.md %}
 
-This blog post explains two different characterizations of NP, which are useful when building [zero-knowledge proof systems](/2025/01/22/Defining-zero-knowledge-proofs.html): 
+This blog post explains two different characterizations of NP, which are useful when building [zero-knowledge proof systems](/zkps): 
 
  - a **Rank-1 constraint system (R1CS)**: i.e., a set of three R1CS matrices $\mat{U},\mat{V},\mat{W}$ encoding an [NP relation](/np-relations) $R$
  - an equivalent **quadratic arithmetic program (QAP)**: a set of polynomials $(\gu_j(X),\rv_j(X),\bw_j(X))_{i\in[0,m]}$ encoding an NP relation $R$

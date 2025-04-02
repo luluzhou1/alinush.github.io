@@ -2,6 +2,7 @@
 tags:
  - zero-knowledge proofs (ZKPs)
 title: (Defining) zero-knowledge proofs
+permalink: zkps
 #date: 2020-11-05 20:45:59
 #published: false
 sidebar:

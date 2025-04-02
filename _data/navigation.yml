@@ -157,7 +157,7 @@ cryptomat:
       - title: How to reshare a secret
         url: /2024/04/26/How-to-reshare-a-secret.html
   - title: (Zero knowledge) proofs
-    url: /2025/01/22/Defining-zero-knowledge-proofs.html
+    url: /zkps
     children:
       - title: NP relations
         url: /np-relations 
