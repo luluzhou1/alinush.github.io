@@ -129,6 +129,8 @@ cryptomat:
         url: /schnorr-signatures
       - title: Threshold BLS
         url: /threshold-bls
+      #- title: Wendy signatures
+      #  url: /wendy
 
   - title: Verifiable randomn functions (VRFs)
     children:
@@ -190,10 +192,12 @@ cryptomat:
     #    url: /spartan
     #  - title: PLONK
     #    url: /plonk
-      - title: Sumcheck
-        url: /sumcheck
-      - title: Simulation
-        url: /2020/05/07/zero-knowledge-simulation.html
+    #  - title: $\Sigma$-protocols
+    #    url: /sigma-protocols
+    #  - title: Sumcheck
+    #    url: /sumcheck
+    #  - title: Simulation
+    #    url: /2020/05/07/zero-knowledge-simulation.html
 
   #- title: Error-correcting codes
   #  children:
