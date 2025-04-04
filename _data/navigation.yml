@@ -85,6 +85,8 @@ cryptomat:
     children:
       - title: Number theory
         url: /2021/04/15/basic-number-theory.html
+      #- title: Chinese remainder theorem (CRT)
+      #  url: /chinese-remainder-theorem
       - title: Linear algebra
         url: /2025/01/20/Basics-of-linear-algebra.html
       - title: Linear Diophantine equations
@@ -173,6 +175,12 @@ cryptomat:
         url: /kzg
       - title: Differentiation tricks
         url: /2025/01/24/Polynomial-differentiation-tricks.html
+      #- title: FRI
+      #  url: /fri
+      #-title: STIR
+      #  url: /stir
+      #-title: WHIR
+      #  url: /whir
 
   - title: Secret sharing
     children:
