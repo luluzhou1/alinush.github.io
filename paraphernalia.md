@@ -21,6 +21,7 @@ This is some of the stuff I (plan to) read and think others could find useful.
  - [The RareSkills Book of Zero Knowledge](https://www.rareskills.io/zk-book), RareSkills `toread`{:.warning}
  - [Notes on programmable cryptography](https://github.com/0xPARC/0xparc-intro-book/releases), 0xPARC `toread`{:.warning}
  - [PLONK notes (wave 1)](https://www.ret2basic.me/2024/08/21/plonk-notes-wave-1.html), ret2basic.eth `toread`{:.warning}
+ - [A brief history of lookup arguments](https://github.com/ingonyama-zk/papers/blob/main/lookups.pdf), Tomer Solberg, Ingonyama, 2023
 
 ## Group theory
 
