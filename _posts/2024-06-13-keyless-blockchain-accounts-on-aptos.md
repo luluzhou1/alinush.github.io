@@ -24,6 +24,14 @@ Keyless is built using a [Groth16](/groth16) zero-knowledge proof to maintain pr
 
 One day, I hope to edit this into a full blog post but, until then, here's a bunch of resources.
 
+<p hidden>$$
+\def\prover{\mathcal{P}}
+\def\verifier{\mathcal{V}}
+\def\Adv{\mathcal{A}}
+\def\Badv{\mathcal{B}}
+\def\vect#1{\mathbf{#1}}
+$$</p>
+
 ## tl;dr
 
 A quick 20 minute presentation on what this is & how it works:
@@ -285,9 +293,12 @@ In February 2025, I gave a 25 minute workshop on keyless accounts at AZTEC's [No
  - [Noir-to-R1CS experimental](https://github.com/worldfnd/ProveKit/tree/main/noir-r1cs)
  - [Benchmarking individual Noir functions](https://x.com/Zac_Aztec/status/1906788898283376836)
 
-### Miscellaneous
+## Resources
 
- - Code: [AnonAdhar](https://github.com/anon-aadhaar/anon-aadhaar/blob/main/packages/circuits/src/helpers/signature.circom), by PSE, does RSA2048-SHA2-256 signature verification in `circom` within ~900K R1CS constraints
+ - [AnonAdhar code](https://github.com/anon-aadhaar/anon-aadhaar/blob/main/packages/circuits/src/helpers/signature.circom), by PSE, does RSA2048-SHA2-256 signature verification in `circom` within ~900K R1CS constraints
+ - [TheFrozenFire/snark-jwt-verify](https://github.com/TheFrozenFire/snark-jwt-verify/tree/master)
+ - [emmaguo13/nozee](https://github.com/emmaguo13/nozee)
+ - [emmaguo13/zk-blind](https://github.com/emmaguo13/zk-blind)
 
 ## Apendix
 
@@ -329,6 +340,13 @@ The base field where the elliptic curve point coordinates $(x,y)$ lie in is $\Zp
 Note that $p$ is slightly larger than the elliptic curve's order $r$.
 
 
+### BLS12-381
+
+Curve order $r$ is:
+ - `0x73eda753299d7d483339d80809a1d80553bda402fffe5bfeffffffff00000001` (hex)
+ - `52435875175126190479447740508185965837690552500527637822603658699938581184513` (decimal)
+ - `0111001111101101101001110101001100101001100111010111110101001000001100110011100111011000000010000000100110100001110110000000010101010011101111011010010000000010111111111111111001011011111111101111111111111111111111111111111100000000000000000000000000000001` (binary)
+
 ### base64url
 
 Recall that **base64** is a way to convert an **input** of $\ell$ bytes into an output of $m=\lceil 4\ell / 3\rceil$ **base64 characters** from an alphabet of size 64.
@@ -355,8 +373,8 @@ Specifically, the last input chunk could be of either length:
     - as a result, append two `=` padding characters to the resulting 2-character output chunk.
 
 {: .note}
-Padding is actually not necessary since it can be inferred from the output length: i.e., the output length $m \bmod 4$ can be either $0, 2$ or $3$, in which case we can show that $\ell \bmod 3$ must have been either $0, 1$ or $2$, respectively[^omit-padding].
-Indeed, some implementations do omit it (e.g., base64**url**-encoded JWTs and JWSs).
+Padding is actually not necessary since it can be inferred from the output length: i.e., the output length $m \bmod 4$ can be either $0, 2$ or $3$[^omit-padding], in which case we can show that $\ell \bmod 3$ must have been either $0, 1$ or $2$, respectively.
+Indeed, some implementations do omit padding (e.g., base64**url**-encoded JWTs and JWSs).
 
 Now, **base64url** is a slight varation on **base64**: as explained in the [JWS RFC](https://datatracker.ietf.org/doc/html/rfc7515#appendix-C)[^jwt-rfc].
 Specifically, `base64url(m)` is implemented by:
@@ -393,30 +411,105 @@ Define $\poseidon^\mathbb{S}_\ell(s)$.
 ### Substring checks from polynomial checks
 
 The **inputs** are:
- - a string $s$ of max length $N$ and actual length $\len(s) = n\le N$
- - a _substring_ $t[0\ldots L]$ of max length $L$ and actual length $\len(t)=\ell\le L$
- - a starting index $i\in [0,n)$ of $t$ in $s$
+ - a string $a$ of max length $N$
+ - its actual length $\len(a) = n\le N$
+ - a _substring_ $b[0\ldots L]$ of max length $L$
+ - its actual length $\len(b)=\ell\le L$
+ - a starting index $i\in [0,n)$ of $b$ in $a$
+
+Pre-conditions:
+ - $a$ is array of bytes
+ - $a$ is zero-padded (i.e, $a[n : -1] = \vec{0}$)
+ - $b$ is an array of bytes
+ - $b$ is zero-paded (i.e, $b[\ell : -1] = \vec{0}$)
 
 The **output** is a bit indicating that the following are all true:
- 1. $0 < \ell \le n$[^empty-substring]
- 1. $i < n - (\len(t) - 1)$ (we need to "leave room" for $t$ in $s$)
- 1. $s[i:i+\len(t)-1] = t$ (i.e., $t$ is a substring of $s$ starting at index $i$)
+ 1. $0 < \ell < n$[^triviality]
+ 1. $0 \le i + (\ell - 1) < n$ (i.e., we need to "leave room" for $b$ in $a$)
+ 1. $a[i : i + (\ell - 1)] = b$ (i.e., $b$ is a substring of $a$ starting at index $i$)
 
-#### Interactive protocol
+Below, we will describe solutions to this problem as initially-interactive **protocols** between a **prover** $\prover$ and a **verifier** $\verifier$.
+In the keyless relation, the prover $\prover$ is the user/dapp (or proving service) computing the zkSNARK proof and the verifier $\verifier$ is the relation logic itself.
+Then, we convert the protocol to be non-interactive.
+
+#### Monomial-based protocol
 
 {: .todo}
-Can we avoid bitmasks here?
+Describe.
 
-#### Non-interactive via Fiat-Shamir (FS)
+#### Lagrange-based protocol
 
-{: .todo}
-Interactive + FS.
+The key idea is that we can represent the strings $a$ and $b$ as univariate polynomials $A(X)$ and $B(X)$, respectively, such that
+\begin{align}
+A(\omega^j) = a_j,\forall j\in[0,n)\\\\\
+B(\omega^j) = b_j,\forall j\in[0,\ell)
+\end{align}
+where $\omega$ is a primitive $N$th root of unity (assume $N$ is a power of two).
+Note that the degrees will be $n-1$ and $\ell-1$, respectively.
 
-<p hidden>$$
-\def\Adv{\mathcal{A}}
-\def\Badv{\mathcal{B}}
-\def\vect#1{\mathbf{#1}}
-$$</p>
+The key observation is that $b$ is a substring of $a$ starting at index $i$ if, and only if, $\exists Q(X)$ of degree $(n-1) - \ell$ such that:
+\begin{align}
+A(X) = Q(X) \underbrace{(X-\omega^i)\ldots(X-\omega^{i+(\ell-1)})}_{\bydef Z(X)} + B(X\omega^{-i})
+\end{align}
+
+<!--
+    R(i) = B(0)
+    R(i+1) = B(1)
+    ...
+    R(i+\ell - 1) = B(\ell-1)
+    =>
+    B(X) = R(X + i)
+    =>
+    B(X - i) = R(X)
+-->
+
+**Step 1:** $\prover$ sends $a, n, N, b, \ell, L, i, Q(X)$ to the $\verifier$. 
+
+**Step 2:** $\verifier$ first checks:
+
+ 1. Is $0 < \ell < n$?
+ 2. Is $0 \le i + (\ell - 1) < n$?
+ 3. $\deg Q(X) \equals (n -  1) - \ell$
+
+**Step 3:** $\verifier$ picks a random challenge $\alpha\in\F$ and checks.
+\begin{align}
+A(\alpha) = Q(\alpha) Z(\alpha) + B(\alpha \omega^{-i})
+\end{align}
+where:
+\begin{align}
+Z(X) &= \prod_{j = i}^{i + (\ell - 1)} (X - \omega^i)\\\\\
+A(X) &= \sum_{j=0}^{n-1} a_i \ell_{i,N}(X)\\\\\
+B(X) &= \sum_{j=0}^{\ell-1} b_i \ell_{i,N}(X)\\\\
+\end{align}
+Recall that the Lagrange polynomials for interpolating a vector of max size $N$ are:
+\begin{align}
+\ell_{i,N}(X) &= \frac{\omega^i (X^N - 1)}{N (X - \omega^i)}
+\end{align}
+
+Computing $Q(\alpha)$ is easy because we will have its coefficients.
+But, to quickly compute $A(\alpha)$ and $B(\alpha)$, we use Lagrange interpolation: e.g.,:
+\begin{align}
+A(\alpha) &\bydef \sum_{j=0}^{n-1} a_i \ell_{i,N}(\alpha)\\\\\
+    &= \sum_{j=0}^{n-1} a_i \frac{\omega^i (\alpha^N - 1)}{N (\alpha - \omega^i)}
+\end{align}
+
+{: .note}
+In a circuit, we can hopefully have the $\omega^i$'s and $1/N$ as constants in the R1CS matrices.
+(Cheaply? Without repeating them?)
+
+#### Non-interactive 
+
+To make the protocol above **non-interactive**, the verifier can pick the random challenge $\alpha$ via the Fiat-Shamir (FS) transform:
+\begin{align}
+\alpha \gets H(a, n, N, i, b, \ell, L, i, Q(X))
+\end{align}
+
+{: .warning}
+This will involve more hashing work than the naive, non-Lagrange protocol.
+It will also involve a degree-check on $Q(X)$ (is it cheaper than the mask in the current protocol?).
+It will involve additionally interpolating $Z(\alpha)$ and $Q(\alpha)$.
+And I think it may be more expensive to do the interpolation of $A(\alpha), B(\alpha)$.
+So the mask-based protocol should be cheaper.
 
 [oblivious-pepper]: https://github.com/aptos-foundation/AIPs/pull/544
 
@@ -426,13 +519,13 @@ For cited works, see below 👇👇
 
 [^bn254]: [BN254 for the rest of us](https://hackmd.io/@jpw/bn254), by Jonathan Wang
 [^cancellation-txns]: This mode can be implemented via account abstraction or via smart contract wallets and would be most effective if your wallet (or some other trusted 3rd party) monitors the chain for key-rotation activities. If so, your wallet would submit the cancellation TXN. (This TXN can be pre-signed too.)
-[^empty-substring]: We are not interested in trivially checking that the empty string is a sub-string. In fact, we may even get into trouble if we accidentally check that in the keyless relation.
 [^esk-across-devices]: Why? AFAICT, this flow will require transmitting an ephemeral secret key (ESK) across different devices in order to quickly get access to the same keyless account on all your devices.
 [^esk-not-in-local-storage]: In this case, since the ESK is typically stored in the browser's _local storage_, it will be long gone and the user would have rely on Google's digital signatures to install a new ESK. But this installation would be subject to the timeout period.
 [^hardware-wallet]: ...and very few new users can be assumed to have a hardware wallet so as to side-step the 12-word seed phrase problem (assuming the hardware wallet even supports the new chain that the new user is trying to experiment with).
 [^jwt-rfc]: The JWT RFC merely defers to the [JW**S** RFC](https://datatracker.ietf.org/doc/html/rfc7515#section-2) as to what "base64url encoding" means
 [^not-just-google]: I use "Google" as a canonical example of an OIDC provider. I stress that keyless accounts are **not** restricted with Google and are designed to work with any OIDC provider (e.g., Apple, GitHub, Facebook, etc.)
-[^omit-padding]: First, observe that there is no possible last input chunk size that has a 1-character output chunk: the smallest input chunk size is 1 byte, which requires 2 base64 characters (after padding input chunk to 12 bits). The other cases are when the last output chunk is either 2 or 3 characters. But those correspond to exactly the edge cases when $\ell \bmod 3 = 1$ and $\ell \bmod 3 = 2$.
+[^omit-padding]: First, observe that there is no possible last input chunk size that has a 1-character output chunk: the smallest input chunk size is 1 byte, which requires 2 base64 characters (after padding this input chunk to 12 bits). The other cases are when the last output chunk is either 2 or 3 characters. But those correspond to exactly the edge cases when $\ell \bmod 3 = 1$ and $\ell \bmod 3 = 2$.
 [^optionality]: Plus, you can anyway later give optionality to your users and allow them to rotate their account to self-custody. Or, to have a backup secret key. Or, to only rely on Google as a recovery method with a timeout, as per the "highly-secure mode" [here](#can-google-steal-my-account). It's just like in the Web 2 world, users can add a 2nd authentication factor to their accounts.
+[^triviality]: We are not interested in trivially checking that the empty string is a sub-string, nor that $b$ is a substring of itself. In fact, we may even get into trouble if we accidentally check that in the keyless relation.
 
 {% include refs.md %}
