@@ -133,6 +133,8 @@ cryptomat:
         url: /threshold-bls
       #- title: Wendy signatures
       #  url: /wendy
+      #- title: Guillou-Quisquater (GQ)
+      #  url: /gq
 
   - title: Verifiable randomn functions (VRFs)
     children:

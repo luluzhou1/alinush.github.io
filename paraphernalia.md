@@ -39,6 +39,7 @@ This is some of the stuff I (plan to) read and think others could find useful.
  - [Bitcoin Is Worse Is Better](https://gwern.net/bitcoin-is-worse-is-better), gwern.net
  - [Bullsh*t jobs](https://mcrawford.substack.com/p/bullsht-jobs), Matthew B. Crawford
  - [Do artifacts have politics?](/files/articles/2024-11-01 Langdon Winner - Do Artifacts Have Politics.pdf), Langdon Winner
+ - [Quantum punks](https://quantumpunks.org/)
 
 ## Academic papers
 
