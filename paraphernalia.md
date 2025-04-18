@@ -33,6 +33,16 @@ This is some of the stuff I (plan to) read and think others could find useful.
  - [The tensor product demystified](https://www.math3ma.com/blog/the-tensor-product-demystified), Math3ma
  - [A course in discrete structures](https://www.cs.cornell.edu/~rafael/discmath.pdf), Rafael Pass and Wei-Lung Dustin Tseng `toread`{:.warning}
 
+## Formal verification
+
+ - [The Natural Numbers Game](https://adam.math.hhu.de/#/g/leanprover-community/nng4)
+ - [ImperialCollegeLondon/formalising-mathematics-2024](https://github.com/ImperialCollegeLondon/formalising-mathematics-2024)
+ - [Formalising mathematics 2024](https://www.ma.imperial.ac.uk/~buzzard/xena/formalising-mathematics-2024/)
+ - [Xena Project useful links](https://xenaproject.wordpress.com/useful-links/)
+ - [Learning Lean 4](https://leanprover-community.github.io/learn.html)
+ - [Mathematics in Lean](https://leanprover-community.github.io/mathematics_in_lean/)
+ - [PatrickMassot/GlimpseOfLean](https://github.com/PatrickMassot/GlimpseOfLean?tab=readme-ov-file)
+
 ## Others
 
  - [The moral character of cryptographic work](https://eprint.iacr.org/2015/1162), Phillip Rogaway
