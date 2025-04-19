@@ -304,6 +304,8 @@
 
 [^BCG20e]: **Linear-Time Arguments with Sublinear Verification from Tensor Codes**, by Jonathan Bootle and Alessandro Chiesa and Jens Groth, *in Cryptology ePrint Archive, Paper 2020/1426*, 2020, [[URL]](https://eprint.iacr.org/2020/1426)
 
+[^BCG93]: **Asynchronous secure computation**, by Ben-Or, Michael and Canetti, Ran and Goldreich, Oded, *in Proceedings of the Twenty-Fifth Annual ACM Symposium on Theory of Computing*, 1993, [[URL]](https://doi.org/10.1145/167088.167109)
+
 [^BCHO22e]: **Gemini: Elastic SNARKs for Diverse Environments**, by Jonathan Bootle and Alessandro Chiesa and Yuncong Hu and Michele Orrù, *in Cryptology ePrint Archive, Report 2022/420*, 2022, [[URL]](https://ia.cr/2022/420)
 
 [^BCIplus12e]: **Succinct Non-Interactive Arguments via Linear Interactive Proofs**, by Nir Bitansky and Alessandro Chiesa and Yuval Ishai and Rafail Ostrovsky and Omer Paneth, *in Cryptology {ePrint} Archive, Paper 2012/718*, 2012, [[URL]](https://eprint.iacr.org/2012/718)
@@ -525,6 +527,8 @@
 [^BGZ23e]: **A Lower Bound on the Length of Signatures Based on Group Actions and Generic Isogenies**, by Dan Boneh and Jiaxin Guan and Mark Zhandry, *in Cryptology ePrint Archive, Paper 2023/250*, 2023, [[URL]](https://eprint.iacr.org/2023/250)
 
 [^BH01]: **A Survey on IQ Cryptography**, by Johannes Buchmann and Safuat Hamdy, *in In Proceedings of Public Key Cryptography and Computational Number Theory*, 2001
+
+[^BH08]: **Perfectly-Secure MPC with Linear Communication Complexity**, by Beerliová-Trubíniová, Zuzana and Hirt, Martin, *in Theory of Cryptography*, 2008
 
 [^BH19e]: **Biased Nonce Sense: Lattice Attacks against Weak ECDSA Signatures in Cryptocurrencies**, by Joachim Breitner and Nadia Heninger, *in Cryptology ePrint Archive, Paper 2019/023*, 2019, [[URL]](https://eprint.iacr.org/2019/023)
 
@@ -1112,6 +1116,8 @@
 
 [^CNRplus22e]: **Linear-map Vector Commitments and their Practical Applications**, by Matteo Campanelli and Anca Nitulescu and Carla Rafols and Alexandros Zacharakis and Arantxa Zapico, *in Cryptology ePrint Archive, Paper 2022/705*, 2022, [[URL]](https://eprint.iacr.org/2022/705)
 
+[^CO25e]: **A Fiat-Shamir Transformation From Duplex Sponges**, by Alessandro Chiesa and Michele Orrù, *in Cryptology {ePrint} Archive, Paper 2025/536*, 2025, [[URL]](https://eprint.iacr.org/2025/536)
+
 [^COPZ22e]: **Proofs of discrete logarithm equality across groups**, by Melissa Chase and Michele Orrù and Trevor Perrin and Greg Zaverucha, *in Cryptology ePrint Archive, Paper 2022/1593*, 2022, [[URL]](https://eprint.iacr.org/2022/1593)
 
 [^COS19]: **Fractal: Post-Quantum and Transparent Recursive Proofs from Holography**, by Alessandro Chiesa and Dev Ojha and Nicholas Spooner, *in Cryptology ePrint Archive, Report 2019/1076*, 2019, [[URL]](https://eprint.iacr.org/2019/1076)
@@ -1207,6 +1213,8 @@
 [^Chev05]: **An Efficient CDH-Based Signature Scheme with a Tight Security Reduction**, by Chevallier-Mames, Benoît, *in Advances in Cryptology -- CRYPTO 2005*, 2005
 
 [^Cohe07]: **Number Theory: Volume I: Tools and Diophantine Equations**, by Cohen, H., 2007, [[URL]](https://books.google.com/books?id=8zC8VPQV8psC)
+
+[^Cohe10]: **A Course in Computational Algebraic Number Theory**, by Cohen, Henri, 2010
 
 [^Conr]: **Orders of Units in Modular Arithmetic**, by Keith Conrad, [[URL]](https://kconrad.math.uconn.edu/blurbs/ugradnumthy/ordersmodm.pdf)
 
@@ -1586,6 +1594,8 @@
 
 [^GAGplus19]: **SBFT: A Scalable and Decentralized Trust Infrastructure**, by G. Golan Gueta and I. Abraham and S. Grossman and D. Malkhi and B. Pinkas and M. Reiter and D. Seredinschi and O. Tamir and A. Tomescu, *in 2019 49th Annual IEEE/IFIP International Conference on Dependable Systems and Networks (DSN)*, 2019
 
+[^GBF25e]: **Breaking {ECDSA} with Two Affinely Related Nonces**, by Jamie Gilchrist and William J Buchanan and Keir Finlow-Bates, *in Cryptology {ePrint} Archive, Paper 2025/705*, 2025, [[URL]](https://eprint.iacr.org/2025/705)
+
 [^GCBM23]: **Double Public Key Signing Function Oracle Attack on EdDSA Software Implementations**, by Sam Grierson and Konstantinos Chalkias and William J Buchanan and Leandros Maglaras, 2023
 
 [^GCD20]: **A Generalization of Paillier's Public-Key System With Fast Decryption**, by Ying Guo and Zhenfu Cao and Xiaolei Dong, *in Cryptology ePrint Archive, Report 2020/796*, 2020, [[URL]](https://eprint.iacr.org/2020/796)
@@ -1956,6 +1966,8 @@
 
 [^HPL23]: **The OAuth 2.1 Authorization Framework**, by Dick Hardt and Aaron Parecki and Torsten Lodderstedt, 2023, [[URL]](https://datatracker.ietf.org/doc/draft-ietf-oauth-v2-1/08/)
 
+[^HPZ25]: **Non-Interactive Blind Signatures from RSA Assumption and More**, by Lucjan Hanzlik and Eugenio Paracucchi and Riccardo Zanotto, 2025
+
 [^HR22e]: **Faster Sounder Succinct Arguments and IOPs**, by Justin Holmgren and Ron Rothblum, *in Cryptology ePrint Archive, Paper 2022/994*, 2022, [[URL]](https://eprint.iacr.org/2022/994)
 
 [^HS21]: **With a Little Help from My Friends: Constructing Practical Anonymous Credentials**, by Lucjan Hanzlik and Daniel Slamanig, *in Cryptology ePrint Archive, Report 2021/1419*, 2021, [[URL]](https://ia.cr/2021/1419)
@@ -1995,6 +2007,8 @@
 [^Hamb15]: **Decaf: Eliminating Cofactors Through Point Compression**, by Hamburg, Mike, *in Advances in Cryptology -- CRYPTO 2015*, 2015
 
 [^Hans13]: **Shall We Vote on Values, But Bet on Beliefs?**, by Robin Hanson, 2013, [[URL]](http://mason.gmu.edu/~rhanson/futarchy2013.pdf)
+
+[^Hanz23e]: **Non-Interactive Blind Signatures for Random Messages**, by Lucjan Hanzlik, *in Cryptology {ePrint} Archive, Paper 2023/388*, 2023, [[URL]](https://eprint.iacr.org/2023/388)
 
 [^Hard12]: **The OAuth 2.0 Authorization Framework**, by Dick Hardt, *in RFC 6749*, 2012, [[URL]](https://www.rfc-editor.org/info/rfc6749)
 
@@ -2509,6 +2523,8 @@
 [^MS77]: **Finding the general solution of a linear diophantine equation**, by Morito, S. and Salkin, H. M., 1977
 
 [^MS80]: **Using the Blankinship algorithm to find the general solution of a linear diophantine equation**, by Morito, Susumu and Salkin, Harvey M., *in Acta Informatica*, 1980, [[URL]](https://doi.org/10.1007/BF00288771)
+
+[^MS80Ecc]: **The Theory of Error-Correcting Codes**, by F.J. MacWilliams and N.J.A. Sloane, *in SIAM Review*, 1980, [[URL]](https://doi.org/10.1137/1022103)
 
 [^MSAplus22e]: **Preserving Buyer-Privacy in Decentralized Supply Chain Marketplaces**, by Varun Madathil and Alessandra Scafuro and Kemafor Anyanwu and Sen Qiao and Akash Pateria and Binil Starly, *in Cryptology ePrint Archive, Report 2022/105*, 2022, [[URL]](https://ia.cr/2022/105)
 

@@ -444,6 +444,7 @@ Implementing ECDSA securely and efficiently can be tricky:
  1. ECDSA, like [Schnorr](/schnorr-signatures), is broken if the **nonce $k$ is reused**. Generally, they are both very **fragile** if the nonce $k$ is biased[^BH19e].
     + Even small amounts of bias in the nonce $k$ can be used to recover the SK given enough signatures.
     - Deterministic signing can mitigate this in both schemes[^deterministic-ecdsa].
+ 1. Unlike Schnorr, a recent paper shows that ECDSA is vulnerable to _related nonce attacks_[^GBF25e]
  1. ECDSA is more vulnerable to timing attacks[^minerva]
 
 ## Why you should avoid ECDSA
