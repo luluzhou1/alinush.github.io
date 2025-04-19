@@ -111,16 +111,17 @@ A good summary of ECDSA's (lack of?) provable security (under a realistic model)
 ### Signature size
 
 For most choices of underlying elliptic curves $\mathbb{G}\bydef E(\F_q)$ where $p\bydef \|E(\F_q)\|$ is the order of $\Gr$, both schemes have the same signature sizes, since $p\approx q$:
- - Vanilla Schnorr has two group elements in $\Gr$
- - ECDSA has a $\Zp$ element and a $\Gr$ element
+ - ECDSA has two field elements in $\Zp$: $r$ and $s$
+ - Vanilla Schnorr has a $\Gr$ element $R$ and a $\Zp$ element $s$
 
 {: .note}
-Perhaps if one were to do ECDSA over curves like BLS12-381, where $q \approx 2^{381}$ but $p \approx 2^{256}$, the signature size of ECDSA would be slightly smaller (i.e., $48 + 32$ bytes for ECDSA, compared to $2\times 48$ bytes for vanilla Schnorr).
-But, on the other hand, the $(e,s)$-Schnorr variant would have only $2\times 32$ bytes even over BLS12-381.
+Perhaps if one were to do ECDSA over curves like BLS12-381, where $q \approx 2^{381}$ but $p \approx 2^{256}$, the signature size of ECDSA would be slightly smaller (i.e., $32 + 32$ bytes for ECDSA, compared to $48 + 32$ bytes for vanilla Schnorr).
+But, on the other hand, the $(e,s)$-Schnorr variant would have only $32 + 32$ bytes, even over BLS12-381.
 
 ### Malleability
 
 Both schemes can be tricky to implement such that they are non-malleable.
+(See [this dicussion](/ecdsa#non-malleable-algorithms) for non-malleable ECDSA.)
 
 ### Feeble against nonce bias
 
