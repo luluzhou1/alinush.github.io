@@ -82,7 +82,7 @@ Variations like $(e,s)$-Schnorr or Ed25519 do **not** support pubkey recovery!
 
 Vanilla Schnorr is arguably **slighyly simpler** to implement, since ECDSA requires:
 
- - efficient modular inversion to compute $s^{-1}$ and $s^{-1}$
+ - efficient modular inversion to compute $k^{-1}$ (see $\mathsf{ECDSA.Sign}$ [here](http://localhost:4000/ecdsa#algorithms)) and $s^{-1}$ (see $\mathsf{ECDSA.Verify}$ [here](http://localhost:4000/ecdsa#algorithms))
  - ensuring that $k,r$ and $s$ are not zero during signing
  - ensuring that $r$ and $s$ are not zero during verification
 
@@ -98,7 +98,7 @@ The EdDSA RFC[^eddsa-rfc] also argues, albeit without any justification, that Ed
 This is a nuanced topic, but the cryptographic analysis of Schnorr signatures is much more straightforward than ECDSA's.
 
 A few reasons why:
- - EECDSA security reductions typically make non-standard assumptions about the [conversion function](#the-ecdsa-conversion-problem)
+ - ECDSA security reductions typically make non-standard assumptions about the [conversion function](#the-ecdsa-conversion-problem)
  - ...or: work in the generic group model (GGM)
  - ...or: introduce strange assumptions like the _semi-discrete logarithm (SDLP)_ problem
  + In fact, algebraic security reduction for ECDSA _"can only exist if the security reduction is allowed to program the conversion function"_[^HK23e]
