@@ -158,9 +158,11 @@ Depicts what the blockchain validators need to do to verify a keyless TXN submit
 
 ### ZK relation: Keyless authentication
 
-The ZK relation needed for keyless:
+10,000-feet view of the ZK relation needed for keyless:
 
 <div align="center"><img style="width:65%" src="/pictures/keyless-zk-relation.png" /></div>
+
+For a 100-feet view of it, see [this AIP-61 sub-section](https://github.com/aptos-foundation/AIPs/blob/main/aips/aip-61.md#the-keyless-zk-relation-mathcalr).
 
 ### Flow: End-to-end keyless transacting 
 
@@ -232,6 +234,10 @@ We depict the flow for a dapp to fetch its user's pepper _obliviously_ from the 
  1. [Merkle Trade](https://merkle.trade)
 
 ## Aptos Improvement Proposals (AIPs)
+
+AIP for the whole keyless design:
+
+ - [AIP-61: Keyless accounts](https://github.com/aptos-foundation/AIPs/blob/main/aips/aip-61.md)
 
 AIPs for auxiliary keyless services:
 
