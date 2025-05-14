@@ -184,7 +184,7 @@ Baptising the polynomials above as $H_j(X)$, we can rewrite as:
 More succinctly, the quotient polynomial is:
 \begin{align}
     \label{eq:Qi-poly}
-    Q_i(X) &= \sum_{k=0}^{m-1} H_{j+1}(X) \cdot (\omega^i)^k
+    Q_i(X) &= \sum_{j=0}^{m-1} H_{j+1}(X) \cdot (\omega^i)^j
 \end{align}
 
 {: .error}
