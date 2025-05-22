@@ -1,6 +1,6 @@
 ---
 tags:
-title: How to easily make Aptos PQ-secure
+title: How to easily make Aptos post-quantum secure
 #date: 2020-11-05 20:45:59
 #published: false
 permalink: post-quantum-aptos
@@ -21,7 +21,7 @@ permalink: post-quantum-aptos
 <div style="display: none;">$
 $</div> <!-- $ -->
 
-I tend to get the _"Is Aptos PQ-secure?"_ or _"Can Aptos be made PQ-secure?"_ questions very often.
+I tend to get the _"Is Aptos post-quantum (PQ) secure?"_ or _"Can Aptos be made PQ-secure?"_ questions very often.
 
 This post should serve as a good, initial answer. (I will evolve it in time.)
 
