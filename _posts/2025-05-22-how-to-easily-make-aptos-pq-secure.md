@@ -25,7 +25,6 @@ I tend to get the _"Is Aptos post-quantum (PQ) secure?"_ or _"Can Aptos be made 
 
 This post should serve as a good, initial answer. (I will evolve it in time.)
 
-
 ## Post-quantum (PQ) Aptos
 
 Like all other blockchains that I know of, Aptos is currently **not** PQ-secure: it simply does not make sense to pay the cost of doing PQ crypto given what we know about scalable quantum computing. 
@@ -40,7 +39,7 @@ How?
  1. [Ed25519 signatures](/schnorr#eddsa-and-ed25519-formulation) can be easily transformed into PQ-secure ones: the Ed25519 SK $\sk$ is derived from some secret bits $b$ via a hash function as $\sk = H(b)$. So even if a quantum computer obtains $\sk$ by computing a discrete log on the public key, we can nonetheless rely on the secrecy of the bits $b$ induced by the one-way hash function $H$. Then, we can do a PQ signature using $b$ as the secret key and $H(b)$ as the public key[^CLYC21e].
  1. Key rotation in Aptos requires a ZKPoK of the new secret key being rotated to. This can also be done using a post-quantum zkSNARK.
  1. [Keyless ZKPs](/keyless) can be transitioned to a PQ-secure zkSNARK (lattices, hash-based, code-based, etc.)
- 1. [Aptos randomnes](https://aptoslabs.medium.com/roll-with-move-secure-instant-randomness-on-aptos-c0e219df3fb1) will require a  post-quantum DKG and VRF. PQ-DKGs are an emerging area of research[^DDLplus24e]$^,$[^SS23e]. And there are lattice-based key-homomorphic PRFs[^BLMR15e] that could be very useful for obtaining a PQ-VRF[^MK22e].
+ 1. [Aptos randomnes](https://aptoslabs.medium.com/roll-with-move-secure-instant-randomness-on-aptos-c0e219df3fb1) will require a  post-quantum DKG and VRF. PQ-DKGs are an emerging area of research[^CLLplus24e]$^,$[^DDLplus24e]$^,$[^SS23e]. And there are lattice-based key-homomorphic PRFs[^BLMR15e] that could be very useful for obtaining a PQ-VRF[^MK22e].
 
 {: .warning}
 I may have missed stuff. Please let me know!

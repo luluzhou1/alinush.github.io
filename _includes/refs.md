@@ -1086,6 +1086,8 @@
 
 [^CL99]: **Practical byzantine fault tolerance**, by Castro, Miguel and Liskov, Barbara and others, *in OSDI*, 1999
 
+[^CLLplus24e]: **Resilience-Optimal Lightweight High-threshold Asynchronous Verifiable Secret Sharing**, by Hao Cheng and Jiliang Li and Yizhong Liu and Yuan Lu and Weizhi Meng and Zhenfeng Zhang, *in Cryptology {ePrint} Archive, Paper 2024/1761*, 2024, [[URL]](https://eprint.iacr.org/2024/1761)
+
 [^CLMQ20]: **Does Fiat-Shamir Require a Cryptographic Hash Function?**, by Yilei Chen and Alex Lombardi and Fermi Ma and Willy Quach, *in Cryptology ePrint Archive, Report 2020/915*, 2020, [[URL]](https://eprint.iacr.org/2020/915)
 
 [^CLMZ23]: **EOS: Efficient Private Delegation of zkSNARK Provers**, by Chiesa, Alessandro and Lehmkuhl, Ryan and Mishra, Pratyush and Zhang, Yinuo, 2023, [[URL]](https://www.usenix.org/system/files/sec23fall-prepub-492-chiesa.pdf)
@@ -1793,6 +1795,8 @@
 [^GP90]: **Linear Diophantine Equations**, by William J. Gilbert and Anu Pathria, 1990, [[URL]](https://www.math.uwaterloo.ca/~wgilbert/Research/GilbertPathria.pdf)
 
 [^GPPplus16e]: **ECDSA Key Extraction from Mobile Devices via Nonintrusive Physical Side Channels**, by Daniel Genkin and Lev Pachmanov and Itamar Pipman and Eran Tromer and Yuval Yarom, *in Cryptology ePrint Archive, Paper 2016/230*, 2016, [[URL]](https://eprint.iacr.org/2016/230)
+
+[^GPPS24e]: **GAPP}: Generic Aggregation of Polynomial Protocols**, by Chaya Ganesh and Sikhar Patranabis and Shubh Prakash and Nitin Singh, *in Cryptology {ePrint} Archive, Paper 2024/1685*, 2024, [[URL]](https://eprint.iacr.org/2024/1685)
 
 [^GPS08]: **Pairings for cryptographers**, by Steven D. Galbraith and Kenneth G. Paterson and Nigel P. Smart, *in Discrete Applied Mathematics*, 2008, [[URL]](http://www.sciencedirect.com/science/article/pii/S0166218X08000449)
 
@@ -2669,6 +2673,8 @@
 [^NRO22e]: **Public Randomness Extraction with Ephemeral Roles and Worst-Case Corruptions**, by Jesper Buus Nielsen and João Ribeiro and Maciej Obremski, *in Cryptology ePrint Archive, Paper 2022/237*, 2022, [[URL]](https://eprint.iacr.org/2022/237)
 
 [^NRS20]: **MuSig2: Simple Two-Round Schnorr Multi-Signatures**, by Jonas Nick and Tim Ruffing and Yannick Seurin, *in Cryptology ePrint Archive, Report 2020/1261*, 2020, [[URL]](https://eprint.iacr.org/2020/1261)
+
+[^NRS25e]: **DahLIAS}: Discrete Logarithm-Based Interactive Aggregate Signatures**, by Jonas Nick and Tim Ruffing and Yannick Seurin, *in Cryptology {ePrint} Archive, Paper 2025/692*, 2025, [[URL]](https://eprint.iacr.org/2025/692)
 
 [^NRSW20]: **MuSig-DN: Schnorr Multi-Signatures with Verifiably Deterministic Nonces**, by Jonas Nick and Tim Ruffing and Yannick Seurin and Pieter Wuille, *in Cryptology ePrint Archive, Report 2020/1057*, 2020, [[URL]](https://eprint.iacr.org/2020/1057)
 
