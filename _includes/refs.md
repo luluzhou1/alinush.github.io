@@ -1250,6 +1250,8 @@
 
 [^DDKL24e]: **MUSEN}: Aggregatable Key-Evolving Verifiable Random Functions and Applications**, by Bernardo David and Rafael Dowsley and Anders Konring and Mario Larangeira, *in Cryptology {ePrint} Archive, Paper 2024/628*, 2024, [[URL]](https://eprint.iacr.org/2024/628)
 
+[^DDLplus24e]: **Asynchronous Consensus without Trusted Setup or Public-Key Cryptography**, by Sourav Das and Sisi Duan and Shengqi Liu and Atsuki Momose and Ling Ren and Victor Shoup, *in Cryptology {ePrint} Archive, Paper 2024/677*, 2024, [[URL]](https://eprint.iacr.org/2024/677)
+
 [^DDN03]: **Nonmalleable Cryptography**, by Dolev, Danny and Dwork, Cynthia and Naor, Moni, *in SIAM Review*, 2003, [[URL]](https://doi.org/10.1137/S0036144503429856)
 
 [^DDN91e]: **Non-malleable cryptography**, by Danny Dolev and Cynthia Dwork and Moni Naor, *in Proceedings of the twenty-third annual {ACM} symposium on Theory of computing  - {STOC} {\textquotesingle}91*, 1991, [[URL]](https://doi.org/10.1145%2F103418.103474)
