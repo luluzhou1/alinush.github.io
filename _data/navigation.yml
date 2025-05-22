@@ -128,7 +128,7 @@ cryptomat:
       - title: Pointcheval-Sanders (PS)
         url: /pointcheval-sanders
       - title: Schnorr signatures
-        url: /schnorr-signatures
+        url: /schnorr
       - title: Threshold BLS
         url: /threshold-bls
       #- title: Wendy signatures

@@ -12,7 +12,7 @@ permalink: schnorr-vs-ecdsa
 ---
 
 {: .info}
-**tl;dr:** It's 2025. Do you know why [Schnorr signatures](/schnorr-signatures) are always better than [ECDSA](/ecdsa)?
+**tl;dr:** It's 2025. Do you know why [Schnorr signatures](/schnorr) are always better than [ECDSA](/ecdsa)?
 
 <!--more-->
 
@@ -27,9 +27,9 @@ Feel free to suggest other (dis)advantages and similarities!
 ## Preliminaries
 
 There are a few commonly-ocurring variants of Schnorr signatures:
- - [$(R,s)$-Schnorr](/schnorr-signatures#the-schnorr-signature-scheme), henceforth **"vanilla Schnorr"**
- - [$(e,s)$-Schnorr](/schnorr-signatures#alternative-e-s-formulation)
- - [EdDSA](/schnorr-signatures#eddsa), with its popular [Ed25519](/schnorr-signatures#ed25519) instantiation
+ - [$(R,s)$-Schnorr](/schnorr#the-schnorr-signature-scheme), henceforth **"vanilla Schnorr"**
+ - [$(e,s)$-Schnorr](/schnorr#alternative-e-s-formulation)
+ - [EdDSA](/schnorr#eddsa), with its popular [Ed25519](/schnorr#ed25519) instantiation
 
 There are also variants of ECDSA:
  - [Vanilla ECDSA](/ecdsa#the-ecdsa-signature-scheme), the most common one
@@ -73,7 +73,7 @@ Some folks suspect these curves could be backdoored[^safe-curves].
 
 ### Hintless pubkey recovery
 
-Like ECDSA, vanilla Schnorr also supports [pubkey recovery](/schnorr-signatures#pubkey-recovery) but **without** any hints, which are required in ECDSA (and complicate development[^trust-me])!
+Like ECDSA, vanilla Schnorr also supports [pubkey recovery](/schnorr#pubkey-recovery) but **without** any hints, which are required in ECDSA (and complicate development[^trust-me])!
 
 {: .warning}
 Variations like $(e,s)$-Schnorr or Ed25519 do **not** support pubkey recovery!
@@ -125,7 +125,7 @@ Both schemes can be tricky to implement such that they are non-malleable.
 
 ### Feeble against nonce bias
 
-Both are vulnerable to attacks if their "nonces" are biased (see [here](/schnorr-signatures#pitfall-2-biased-nonces-r) and [here](/ecdsa#implementation-caveats)).
+Both are vulnerable to attacks if their "nonces" are biased (see [here](/schnorr#pitfall-2-biased-nonces-r) and [here](/ecdsa#implementation-caveats)).
 
 Both are fixable via deterministic signing though (e.g., EdDSA and Ed25519 are not vulnerable).
 

@@ -21,7 +21,7 @@ You can start with some basic things:
 Or, you can learn about the most popular digital signature schemes:
  - [Threshold BLS](/threshold-bls), faster than most people know how to do it.
  - [ECDSA](/ecdsa), or: _"What most cryptocurrencies use for signing TXNs"_
- - [Schnorr](/schnorr-signatures), and [why you should prefer it over ECDSA](/schnorr-vs-ecdsa).
+ - [Schnorr](/schnorr), and [why you should prefer it over ECDSA](/schnorr-vs-ecdsa).
 
 Or, some esoteric ones:
  - [BBS+ signatures](/bbs-plus-signatures), or: _"Did you know you can sign Pedersen commitments?"_

@@ -94,7 +94,7 @@ Later on, the full algorithm is incorporated into a write-up by Certicom Researc
 
 On January 3, 2009, Satoshi Nakamoto makes Bitcoin available to the public.
 Bitcoin uses ECDSA over secp256k1 curves as its scheme for signing transactions.
-Some believe Satoshi chose ECDSA because [Schnorr signatures](/schnorr-signatures) were, at the time, still patented.
+Some believe Satoshi chose ECDSA because [Schnorr signatures](/schnorr) were, at the time, still patented.
 
 {: .info} 
 **Some more speculation**: My two cents are that this choice cemented ECDSA's reign in the cryptocurrency space.
@@ -189,7 +189,7 @@ r &= f\left(R\right)
 
 ## Pubkey recovery
 
-ECDSA, together with some variants of [Schnorr](/schnorr-signatures), are one of the few schemes that support a **pubkey recovery** algorithm: i.e., an algorithm that, given a signature $\sigma$ on a message $m$, returns (a set of) public key(s) under which $\sigma$ verifies on $m$.
+ECDSA, together with some variants of [Schnorr](/schnorr), are one of the few schemes that support a **pubkey recovery** algorithm: i.e., an algorithm that, given a signature $\sigma$ on a message $m$, returns (a set of) public key(s) under which $\sigma$ verifies on $m$.
 
 Pubkey recovery is actually used in cryptocurrencies like Ethereum and Bitcoin, where the verifiers (i.e., the miners/validators) do not have the PK of the account, but only its hash $h$.
 In these settings, what the verifiers do is:
@@ -441,7 +441,7 @@ Implementing ECDSA securely and efficiently can be tricky:
      - ...the PKs passed into the verification equation
      - ...the $R$-component of [modified ECDSA](#batch-verification) signatures
  1. Should aim to use efficient inversion algorithms[^inv-tweet] for $s^{-1}$ (e.g., EEA-based, Lehmer) 
- 1. ECDSA, like [Schnorr](/schnorr-signatures), is broken if the **nonce $k$ is reused**. Generally, they are both very **fragile** if the nonce $k$ is biased[^BH19e].
+ 1. ECDSA, like [Schnorr](/schnorr), is broken if the **nonce $k$ is reused**. Generally, they are both very **fragile** if the nonce $k$ is biased[^BH19e].
     + Even small amounts of bias in the nonce $k$ can be used to recover the SK given enough signatures.
     - Deterministic signing can mitigate this in both schemes[^deterministic-ecdsa].
  1. Unlike Schnorr, a recent paper shows that ECDSA is vulnerable to _related nonce attacks_[^GBF25e]
@@ -453,7 +453,7 @@ Implementing ECDSA securely and efficiently can be tricky:
 As far as I can tell, [Schnorr signatures should always be preferred over it!](/schnorr-vs-ecdsa)
 
 {: .note}
-Although ECDSA can be very fragile in the face of side-channels (e.g., see extracting ECDSA keys from Yubikeys[^eea-side-channel]), it is not clear to what extent other schemes would fare better. For example, both [Schnorr](/schnorr-signatures) and BLS[^BLS01] do exponentiations with secrets.
+Although ECDSA can be very fragile in the face of side-channels (e.g., see extracting ECDSA keys from Yubikeys[^eea-side-channel]), it is not clear to what extent other schemes would fare better. For example, both [Schnorr](/schnorr) and BLS[^BLS01] do exponentiations with secrets.
 
 ## Conclusion
 
