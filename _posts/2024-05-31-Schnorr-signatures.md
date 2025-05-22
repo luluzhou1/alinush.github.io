@@ -306,6 +306,9 @@ Perhaps this article will grow over time.
 Give algorithms for non-malleable Schnorr signatures.
 
 {: .todo}
+Give algorithms for post-quantum-switching of Ed25519 signatures.
+
+{: .todo}
 Discuss some state-of-the-art threshold Schnorr protocols (e.g., Yehuda's[^Lind22e], FROST[^KG20], Sprint[^BHKplus23e], Harts[^BLSW24e]).
 
 {: .todo}
