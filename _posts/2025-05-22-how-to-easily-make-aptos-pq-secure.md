@@ -29,7 +29,7 @@ This post should serve as a good, initial answer. (I will evolve it in time.)
 
 Like all other blockchains that I know of, Aptos is currently **not** PQ-secure: it simply does not make sense to pay the cost of doing PQ crypto given what we know about scalable quantum computing. 
 
-Nonetheless, upgradeable chains like Aptos blockchain (and other similar, upgradeable chains) can be easily made _almost-fully_ PQ-secure.
+Nonetheless, upgradeable chains like Aptos can be easily made _almost-fully_ PQ-secure.
 
 How?
 
