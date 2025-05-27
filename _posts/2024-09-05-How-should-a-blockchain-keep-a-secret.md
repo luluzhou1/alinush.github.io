@@ -80,6 +80,9 @@ We also had many other ideas and thoughts around this:
     + May need “re-sealing” functionality inside the TEE, to allow it to re-encrypt its share for a new enclave hash that is stored on-chain
     + Interestingly, we get tamper-evidence because the enclave hashes are posted on the chain, should the validators post malicious enclaves.
 
+{: .note}
+A similar TEE approach may have been sketched out by Shutter Network [here](https://shutternetwork.discourse.group/t/rfp-shuttertee-fortified-shutter-keypers-via-sgx/447?ref=blog.shutter.network) and overviewed [here](https://blog.shutter.network/shuttertee-layered-security-via-meshing-threshold-cryptography-and-state-of-the-art-tee-2/).
+
 ## Secret sharing in the proof-of-stake (PoS) setting
 
 {: .note}
