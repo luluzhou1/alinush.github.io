@@ -9,7 +9,7 @@ sidebar:
     nav: cryptomat
 ---
 
-Recall from [our basics discussion](/2020/03/16/polynomials-for-crypto.html) that a **polynomial** $\phi$ of **degree** $d$ is a vector of $d+1$ **coefficients**:
+Recall from [our basics discussion](polynomials) that a **polynomial** $\phi$ of **degree** $d$ is a vector of $d+1$ **coefficients**:
 
 \begin{align}
     \phi &= [\phi_0, \phi_1, \phi_2, \dots, \phi_d]

@@ -170,13 +170,15 @@ cryptomat:
   - title: Polynomials
     children:
       - title: Basics of polynomials
-        url: /2020/03/16/polynomials-for-crypto.html
+        url: /polynomials
       - title: Lagrange interpolation
         url: /lagrange-interpolation
       - title: KZG polynomial commitments
         url: /kzg
       - title: Differentiation tricks
         url: /2025/01/24/Polynomial-differentiation-tricks.html
+      - title: Univariate sumcheck
+        url: /univariate-sumcheck
       #- title: FRI
       #  url: /fri
       #-title: STIR
@@ -195,7 +197,7 @@ cryptomat:
       - title: NP relations
         url: /np-relations 
       - title: QAPs & R1CS
-        url: /qap-r1cs
+        url: /r1cs
       - title: Groth16
         url: /groth16
     #  - title: Spartan

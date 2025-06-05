@@ -78,7 +78,7 @@ What can <b>we</b> do, <b>in practice</b>, to <em>mitigate</em> against such ZK 
 
 _One answer_ is to make the ZK DSL code that implements your relation private, as opposed to public.
 This will prevent hackers from finding bugs.
-But if the arithmetization of your relation is still available (e.g., the compiled [R1CS](/qap-r1cs)), attacks may still be possible via reverse engineering.
+But if the arithmetization of your relation is still available (e.g., the compiled [R1CS](/r1cs)), attacks may still be possible via reverse engineering.
 (For example, not sure if some kind of SMT solver over finite fields could be used to exploit bugs in the wild.)
 
 **A better answer**, I think, is to rely on **training wheels** (or safety wheels)[^tw-keyless].

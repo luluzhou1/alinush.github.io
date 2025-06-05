@@ -135,7 +135,7 @@ To verify the proof, we can check with a pairing that:
 e(c/g^{v_i}, g)=e(\pi_i, g^{\tau}/g^i)
 \end{align}
 
-This is equivalent to checking that the [polynomial remainder theorem](/2020/03/16/polynomials-for-crypto.html#the-polynomial-remainder-theorem) holds for $\phi(i)$ at $X=\tau$. 
+This is equivalent to checking that the [polynomial remainder theorem](polynomials#the-polynomial-remainder-theorem) holds for $\phi(i)$ at $X=\tau$. 
 
 ## Constant-sized $I$-subvector proofs
 

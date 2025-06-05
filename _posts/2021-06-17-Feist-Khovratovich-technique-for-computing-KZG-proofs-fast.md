@@ -35,7 +35,7 @@ $$</p>
 
 First, read:
 
- - [Basics of polynomials](/2020/03/16/polynomials-for-crypto.html)
+ - [Basics of polynomials](polynomials)
  - The [Discrete Fourier Transform (DFT)](https://en.wikipedia.org/wiki/Discrete_Fourier_transform_(general)) for $n$th roots of unity
  - [KZG polynomial commitments](/kzg)
 

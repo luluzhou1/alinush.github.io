@@ -17,7 +17,7 @@ We refer to this scheme as **KZG** and quickly introduce it below.
 
  - Cyclic groups of prime order and finite fields $\Zp$
  - Pairings (or bilinear maps)
- - [Polynomials](/2020/03/16/polynomials-for-crypto.html)
+ - [Polynomials](polynomials)
 
 ## Trusted setup
 
@@ -50,7 +50,7 @@ Then, the _constant-sized_ **evaluation proof** is:
 
 $$\pi = g^{q(\tau)}$$
 
-Note that this leverages the [polynomial remainder theorem](/2020/03/16/polynomials-for-crypto.html#the-polynomial-remainder-theorem).
+Note that this leverages the [polynomial remainder theorem](polynomials#the-polynomial-remainder-theorem).
 
 ### Verifying an evaluation proof
 
@@ -64,7 +64,7 @@ e(g,g)^{\phi(\tau)-y} &= e(g,g)^{q(\tau)(\tau-a)}\\\\\
 \end{align}
 
 This effectively checks that $q(X) = \frac{\phi(X) - y}{X-a}$ by checking this equality holds for $X=\tau$.
-In other words, it checks that the [polynomial remainder theorem](/2020/03/16/polynomials-for-crypto.html#the-polynomial-remainder-theorem) holds at $X\=\tau$.
+In other words, it checks that the [polynomial remainder theorem](polynomials#the-polynomial-remainder-theorem) holds at $X\=\tau$.
 
 ## Batch proofs
 
@@ -77,7 +77,7 @@ A_I(X) &=\prod_{i\in I} (X - e_i)\\\\\
 R_I(e_i) &= y_i,\forall i\in I\\\\\
 \end{align}
 
-$R_I(X)$ can be interpolated via [Lagrange interpolation](/2020/03/16/polynomials-for-crypto.html#lagrange-interpolation) in $O(\vert I\vert\log^2{\vert I\vert})$ time[^vG13ModernCh10] as:
+$R_I(X)$ can be interpolated via [Lagrange interpolation](polynomials#lagrange-interpolation) in $O(\vert I\vert\log^2{\vert I\vert})$ time[^vG13ModernCh10] as:
 
 \begin{align}
 R_I(X)=\sum_{i\in I} y_i \prod_{j\in I,j\ne i}\frac{X - e_j}{e_i - e_j}

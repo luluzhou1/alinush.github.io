@@ -118,7 +118,7 @@ $</div> <!-- $ -->
 
 ## Background and notation
 
-Mostly, assuming familiarity with [Groth16](/groth16) and its [QAP/R1CS](/qap-r1cs)-based computational model.
+Mostly, assuming familiarity with [Groth16](/groth16) and its [QAP/R1CS](/r1cs)-based computational model.
 
 {: .note}
 We'll be using [additive group notation](/groth16#pairing-friendly-groups).
@@ -220,7 +220,7 @@ The verification key is also _almost the same_ as in Groth16's, except it lacks 
 Let's start by observing that given some ZK circuit code written in some zkDSL (e.g., `circom` or [NoirLang](https://x.com/NoirLang), it is easy to compile it and obtain the QAP polynomials from Eq. $\ref{eq:qap}$.
 
  > A cry is heard: _"But you said R1CS, not QAP!"_.
- > Yes, I did. But recall that [they are one and the same](/qap-r1cs).
+ > Yes, I did. But recall that [they are one and the same](/r1cs).
 
 Also, let's for now assume that the $\ptau(\tau,\alpha,\beta)$ powers-of-$\tau$ from Eq. $\ref{eq:ptau}$ are available to the verifier. (We can think of compressing them later.) 
 
