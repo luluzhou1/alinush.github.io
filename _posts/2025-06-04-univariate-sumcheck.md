@@ -47,11 +47,11 @@ Recall the definition of a degree-$(n-1)$ [Lagrange polynomial](/lagrange-interp
 \end{align}
 A key observation is: 
 \begin{align}
-\lagr_i(0) = \frac{\omega^i(0^n - 1)}{n(0-\omega^i} = \frac{\omega^i (-1)}{n(-\omega^i)} = n^{-1}
+\lagr_i(0) = \frac{\omega^i(0^n - 1)}{n(0-\omega^i)} = \frac{\omega^i (-1)}{n(-\omega^i)} = n^{-1}
 \end{align}
 Next, given a degree-$(n-1)$ polynomial $p(X)$, we can write it as: 
 \begin{align}
-p(X) &= \sum_{i\in[n]} \lagr_i(X)p(\omega^i)\Rightarrow
+p(X) &= \sum_{i\in[n]} \lagr_i(X)p(\omega^i)
 \end{align}
 As a result, evaluation $p(X)$ at $X=0$, we get:
 \begin{align}
@@ -149,6 +149,9 @@ e\left(R_1, g_2^{\tau^{M - d}}\right) &\equals e(\pi_D, g_2)\\\\\
 d &\stackrel{?}{<} n-1
 \end{align}
 
+{: .todo}
+Prove the PIOP.
+
 ### Verifier time ($\approx$ 1.2 ms)
 
 The two pairing equations in the verifier can be combined into one by picking a random scalar $\alpha\in\F$ (e.g., via Fiat-Shamir[^FS87]) and only checking:
@@ -195,6 +198,10 @@ Specifically, the univariate sumcheck from Eq. \ref{eq:univariate-sumcheck} woul
  0 &= tX^n - t - tX^n + t\Leftrightarrow\\\\\
  0 &= 0
 \end{align}
+
+## Acknowledgements
+
+Thanks to Weijie Wang for his great summary presentation of these results and for the counter-example on what goes wrong when you don't do a degree check on $r(X)$.
 
 ## References
 
