@@ -33,7 +33,8 @@ In this blog, we describe the sumcheck protcols as polynomial interactive oracle
 
 ## Related work
 
-A new paper proposes a more efficient univariate sumcheck[^ZSG24e].
+A new paper proposes a more-efficient univariate sumcheck for $\sum_i p(\omega^i)$[^ZSG24e].
+(IIUC, linear prover time!)
 
 {: .todo}
 Analyze!
