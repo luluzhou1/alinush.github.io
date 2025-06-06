@@ -7,7 +7,7 @@ tags:
 title: Bayer-Groth verifiable shuffle
 #date: 2020-11-05 20:45:59
 #published: false
-permalink: TODO
+permalink: bayer-groth
 #sidebar:
 #    nav: cryptomat
 #article\_header:
