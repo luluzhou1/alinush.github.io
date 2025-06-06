@@ -2,7 +2,7 @@
 tags: 
  - papers 
  - polynomials 
- - bls
+ - BLS
  - interpolation
  - fast fourier transform (FFT)
 title: How to do threshold BLS the right way

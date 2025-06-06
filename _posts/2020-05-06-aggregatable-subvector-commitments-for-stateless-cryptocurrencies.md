@@ -5,7 +5,7 @@ tags:
  - fast fourier transform (FFT)
  - lagrange 
  - aggregation 
- - kzg
+ - KZG
  - polynomial commitments
  - stateless validation
  - papers

@@ -2,7 +2,7 @@
 tags:
  - digital signatures
  - distributed key generation (DKG)
- - bls
+ - BLS
  - aggregation
  - multilinear maps
 title: "What the Smurf? Silent-setup & unique threshold signatures!"

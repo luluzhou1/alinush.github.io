@@ -1,7 +1,7 @@
 ---
 tags:
  - polynomials 
- - kzg
+ - KZG
  - polynomial commitments
 title: Kate-Zaverucha-Goldberg (KZG) Constant-Sized Polynomial Commitments
 date: 2020-05-06 22:38:00

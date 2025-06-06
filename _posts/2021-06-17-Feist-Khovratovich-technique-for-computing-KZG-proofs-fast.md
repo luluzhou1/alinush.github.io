@@ -2,7 +2,7 @@
 #layout: article
 tags:
 - vector commitments (VCs)
-- kzg
+- KZG
 - bilinear maps (pairings)
 - fast fourier transform (FFT)
 title: Feist-Khovratovich technique for computing KZG proofs fast

@@ -4,7 +4,7 @@ tags:
  - polynomials
  - verifiable secret sharing (VSS)
  - distributed key generation (DKG)
- - kzg
+ - KZG
  - polynomial commitments
  - stateless validation
  - fast fourier transform (FFT)

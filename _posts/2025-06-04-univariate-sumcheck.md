@@ -1,7 +1,7 @@
 ---
 tags:
  - fast-fourier transform (FFT)
- - kzg
+ - KZG
  - polynomial commitments
  - polynomials
  - sumcheck

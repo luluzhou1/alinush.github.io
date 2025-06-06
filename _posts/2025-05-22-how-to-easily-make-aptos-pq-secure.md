@@ -1,7 +1,8 @@
 ---
 tags:
  - distributed key generation (DKG)
- - bls
+ - BLS
+ - ECDSA
  - keyless
  - post-quantum
  - schnorr
