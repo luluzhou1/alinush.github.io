@@ -2,7 +2,7 @@
 tags:
  - hidden-order groups
  - assumptions
- - rsa
+ - RSA
 title: Cryptographic Assumptions in Hidden-Order Groups
 #date: 2020-11-05 20:45:59
 #published: false
