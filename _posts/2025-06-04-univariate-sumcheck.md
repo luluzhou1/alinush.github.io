@@ -1,5 +1,10 @@
 ---
 tags:
+ - fast-fourier transform (FFT)
+ - kzg
+ - polynomial commitments
+ - polynomials
+ - sumcheck
 title: Univariate sumcheck
 #date: 2020-11-05 20:45:59
 #published: false

@@ -1,5 +1,9 @@
 ---
 tags:
+ - zero-knowledge proofs (ZKPs)
+ - polynomials
+ - interpolation
+ - rank-1 constraint systems (R1CS)
 title: The Spartan zkSNARK framework
 #date: 2020-11-05 20:45:59
 published: false 
@@ -17,21 +21,18 @@ permalink: spartan
 
 <!--more-->
 
+{% include zkp.md %}
+{% include mle.md %}
+
 <!-- Here you can define LaTeX macros -->
 <div style="display: none;">$
 \def\b{\mathbf{b}}
 \def\btau{\boldsymbol{\tau}}
-\def\B{\mathbb{B}}
-\def\binS{\B^s}
-\def\eq{\mathsf{eq}}
-\def\i{\mathbf{i}}
-\def\j{\mathbf{j}}
+\def\binS{\bin^s}
+\def\i{\boldsymbol{i}}
+\def\inst{\mathbb{x}}
+\def\j{\boldsymbol{j}}
 \def\r{\mathbf{r}}
-\def\SC{\mathsf{Sumcheck}}
-\def\x{\mathbf{x}}
-\def\X{\mathbf{X}}
-\def\y{\mathbf{y}}
-\def\Y{\mathbf{Y}}
 $</div> <!-- $ -->
 
 ## Introduction
@@ -47,29 +48,40 @@ By the end of this blog post, you should be able to fully understand the Spartan
  - multilinear extensions (MLEs)
  - MLE PCS
  - sumcheck protocol
- - sumcheck reduction algorithm $\SC_s(F, S, \r)\rightarrow (\pi,e)$ that reduces $\sum_{\b \in \binS} F(\b) = S$ to (1) verifying a sumcheck proof $\pi$ and (2) verifiying a polynomial evaluation proof that $F(\r) = e$ for some random $\r\in \F^s$ (picked after $F$ is fixed).
+ - sumcheck reduction algorithm $\SC(F, S, \r)\rightarrow (\pi,e)$ that reduces $\sum_{\b \in \binS} F(\b) = S$ to (1) verifying a sumcheck proof $\pi$ and (2) verifiying a polynomial evaluation proof that $F(\r) = e$ for some random $\r\in \F^s$ (picked after $F$ is fixed).
 
 ### $\mathsf{eq}(\mathbf{X};\mathbf{b})$ Lagrange polynomials
 
 We want to define a polynomial $\eq$ that evaluates to 1 when $\X = \b$ and to 0 when $\X \in \binS \setminus\\{\b\\}$:
 \begin{align}
-\eq(\X;\b) = \begin{cases}
+\term{\eq(\X;\b)} &\bydef \begin{cases}
 1,\ \text{if}\ \X = \b\\\\\
 0,\ \text{if}\ \X \ne \b, \X \in \binS
-\end{cases}
-\end{align}
-
-\begin{align}
-\eq_s(\X;\b) &\bydef \eq_s(X_1,\ldots, X_s; b_1,\ldots,b_s)\\\\\
-&= \prod_{i\in[s]}\left(b_i X_i + (1 - b_i) (1 - X_i)\right)
+\end{cases}\\\\\
+&= \prod_{i\in[s]}\left(b_i X_i + (1 - b_i) (1 - X_i)\right)\\\\\
+&\bydef \term{\eq(X_1,\ldots, X_s; b_1,\ldots,b_s)}\\\\\
 \end{align}
 
 {: .note}
-Evaluating each term $b_i X_i + (1-b_i)(1-X_i)$ at $b_i$ yields $b_i^2 + (1-b_i)^2$ which is always equal to 1 for $b_i\in\\{0,1\\}$.
-But evaluating at $(1-b_i)$ yields $b_i(1-b_i) + (1-b_i)(1-(1-b_i)) = b_i(1-b_i)+(1-b_i)b_i=2b_i(1-b_i)$ which is always 0.
+The number of variables $s$ is clear from context, typically, so we do not include it anywhere in the notation.
 
 {: .note}
-When the number of variables $s$ is clear from context, we simply use $\eq(\X;\b)$.
+<details>
+<summary>
+<em>👇 Why does this work? 👇</em>
+</summary>
+Try and evaluate $\eq(X,\b)$ at $\X = \b$ by evaluating each product term $b_i X_i + (1-b_i)(1-X_i)$ at $X_i = b_i$!
+<br /><br/>
+
+It would yield $b_i^2 + (1-b_i)^2$, which is always equal to 1 for $b_i\in\{0,1\}$.
+So all product terms are 1 when $\X=\b$.
+<br /><br/>
+
+Next, try to evaluate at $X=\b'$ when $\b'\ne\b$.
+In this case, there will be an index $i\in [s]$ such that $b'_i \ne b_i \Rightarrow b_i' = (1-b_i)$.
+So, evaluating the $i$th product term at $(1-b_i)$ yields $b_i(1-b_i) + (1-b_i)(1-(1-b_i)) = b_i(1-b_i)+(1-b_i)b_i=2b_i(1-b_i)$ which is always 0.
+Therefore, the product is zero when $\X\ne \b$.
+</details>
  
 ### Zerocheck
 
@@ -102,9 +114,9 @@ Then, again from the definition of $G(\cdot)$ from Eq. \ref{eq:G}, this implies 
 (Because one of the terms of the sum will have a non-zero $F(\x)$ value.)
 Roughly, this contradicts the Schwartz-Zippel lemma.
 
-## R1CS matrices
+### R1CS matrices
 
-[R1CS](/r1cs) matrices $A, B, C$ are assumed to be **square** (of $m$ rows and $m$ columns) and **sparse**, with $n$ non-zero entries.
+[R1CS](/r1cs) matrices $\term{A}, \term{B}, \term{C}$ are assumed to be **square** (of $\term{m}$ rows and $m$ columns) and **sparse**, with $\term{n}$ non-zero entries.
 
 Constraint system is **satisfiable** if exists $z\in \F^m$ such that:
 \begin{align}
@@ -114,16 +126,21 @@ A z \circ B z = C z
 where:
 \begin{align}
 \label{eq:z}
-z = (io, 1, w) \in \mathbb{F}^{|io|} \times \mathbb{F} \times \mathbb{F}^{m-|io|-1}
+\term{z} = (\term{io}, 1, \term{w}) \in \mathbb{F}^{|io|} \times \mathbb{F} \times \mathbb{F}^{m-|io|-1}
 \end{align}
-with $io$ being the **public statement** and $w$ being the **private witness**.
+with $\term{io}$ being the **public statement** and $\term{w}$ being the **private witness**.
 
-An **R1CS instance** is defined as:
+### R1CS instance
+
+For convenience, an **R1CS instance** is defined as:
 \begin{align}
 \label{eq:r1cs-instance}
-\mathbb{x} = (\mathbb{F},A,B,C,io,m,n)
+\term{\inst} = (\mathbb{F},A,B,C,io,m,n)
 \end{align}
-Note that it includes the public input $io$.
+
+{: .note}
+Note that an R1CS instance includes the public statement $io$, but not the private witness $w$.
+It also includes the R1CS (square) matrix size $m$ and the # of non-zero entries $n$.
 
 {: .definition}
 An R1CS instance is said to be **satisfiable** iff. exists a private witness $w$ s.t. Equation $\ref{eq:r1cs-sat}$ holds.
@@ -131,12 +148,12 @@ We also say the instance is **satisfied by** $w$.
 
 ## R1CS SAT $\Leftrightarrow$ zero sumcheck on degree-3 $\log{m}$-variate polynomial
 
-Let $s=\lceil \log{m} \rceil$, where $\log$'s base is always 2.
+Let $\term{s}=\lceil \log{m} \rceil$, where $\log$'s base is always 2.
 
 We represent the R1CS matrices $A$, $B$ and $C$ as **multilinear extensions (MLE)**.
 For example, for $A \bydef (A_{i,j})\_{i,j\in[m)}$, we define:
 \begin{align}
-\tilde{A}(X_1, \ldots, X_s, Y_1,\ldots,Y_s) \bydef \tilde{A}(\X,\Y) = \sum_{\i,\j \in \binS} A_{i,j} \cdot \eq(\X, \i)\eq(\Y,\j)
+\term{\tilde{A}(X_1, \ldots, X_s, Y_1,\ldots,Y_s)} \bydef \term{\tilde{A}(\X,\Y)} = \sum_{\i,\j \in \binS} A_{i,j} \cdot \eq(\X, \i)\eq(\Y,\j)
 \end{align}
 such that:
 \begin{align}
@@ -146,7 +163,7 @@ where $i\in[m)$ is a row index, $j\in[m)$ is a column index and $\i,\j\in \binS$
 
 Similarly, the vector $z = (io, 1, w) \in \mathbb{F}^m$ can be viewed as an MLE:
 \begin{align}
-\tilde{Z} : \binS \rightarrow \mathbb{F},\ \text{s.t.}\ \tilde{Z}(\j) = z_j, \forall j\in[m)
+\term{\tilde{Z}} : \binS \rightarrow \mathbb{F},\ \text{s.t.}\ \tilde{Z}(\j) = z_j, \forall j\in[m)
 \end{align}
 
 Then, satisfiability of an R1CS instance $A,B,C$ with public input $io$ by witness $w$ can be expressed as:
@@ -157,43 +174,58 @@ Then, satisfiability of an R1CS instance $A,B,C$ with public input $io$ by witne
 %\Leftrightarrow\\\\\
 %\forall \x\in \binS, \sum_{\j\in\binS} \tilde{A}(\x,\j) Z(\j) \cdot \sum_{\j\in\binS} \tilde{B}(\x,\j) Z(\j) - \sum_{\j\in\binS} \tilde{C}(\x,\j) Z(\j) = 0\Leftrightarrow\\\\\
 \end{align}
-So, if w.r.t. the R1CS instance $\mathbb{x}$, we define a degree-2 multivariate polynomial:
+More formally, define a degree-2 multivariate polynomial $\term{F}$ associated with the R1CS instance $\inst$:
 \begin{align}
 \label{eq:F}
-F(\X)
-&\bydef \sum_{j\in\binS} \tilde{A}(\X,j) Z(j) \cdot \sum_{j\in\binS} \tilde{B}(\X,j) Z(j) - \sum_{j\in\binS} \tilde{C}(\X,j) Z(j)
+\term{F(\X)}
+&\bydef \sum_{\j\in\binS} \tilde{A}(\X,\j) Z(\j) \cdot \sum_{\j\in\binS} \tilde{B}(\X,\j) Z(\j) - \sum_{\j\in\binS} \tilde{C}(\X,\j) Z(\j)
 \end{align}
 
 Then, the main result of Spartan can be stated as a theorem:
 
 {: .theorem}
-An R1CS instance $\mathbb{x}$ (see Eq. \ref{eq:r1cs-instance}) is satisfied by a witness $w \Leftrightarrow F(\x) = 0$ for all $\x \in \binS$ (i.e., $F$ is zero on the hypercube).
+An R1CS instance $\inst$ (see Eq. \ref{eq:r1cs-instance}) is satisfied by a witness $w \Leftrightarrow F(\x) = 0$ for all $\x \in \binS$ (i.e., $F$ is zero on the hypercube).
 
-Of course, [we know from before](#zero-check) that such a zerocheck on $F$ can be reduced to a sumcheck on another related polynomial defined below.
+Of course, [we know from before](#zero-check) that such a zerocheck on $F$ can be reduced to a sumcheck on another related polynomial $\term{Q}$:
 \begin{align}
 \label{eq:Q}
-Q(\X)\bydef F(\X)\cdot \eq(\X, \btau)
+\term{Q(\X)}\bydef F(\X)\cdot \eq(\X, \term{\btau})
 %G(\Y)\bydef \sum_{x\in\binS} F(\x)\cdot \eq(\x, \Y)
 \end{align}
-where $\btau\randget\F^s$ is randomly picked by the prover.
+where $\term{\btau}\randget\F^s$ is randomly picked by the prover.
 Specifically:
 \begin{align}
 \label{eq:sumcheck-1}
 F(\x) &= 0,\forall x\in\binS \Leftrightarrow \sum_{\x\in\binS} F(\x)\cdot \eq(\x,\btau) = 0,\btau\randget\F^s
 \end{align}
-This sumcheck from Eq. \ref{eq:sumcheck-1} is (mostly) reduced to verifying a polynomial evaluation proof at a random point $\r_x\in \F^s$:
+This sumcheck from Eq. \ref{eq:sumcheck-1} is (mostly) reduced to verifying a polynomial evaluation $\term{e_x}$ at a random point $\term{\r_x}\in \F^s$:
 \begin{align}
-Q(\r_x) = F(\r_x)\cdot \eq(\r_x,\btau)=e_x
+\term{e_x} \bydef Q(\r_x) = F(\r_x)\cdot \eq(\term{\r_x},\btau)
 \end{align}
 by running the sumcheck protocol:
 \begin{align}
-e_x \gets \SC_s(Q, 0, \r_x)
+(\term{\pi_x} ,e_x) \gets \SC(Q, 0, \r_x) = \SC(F\cdot \eq_\btau, 0, \r_x)
 \end{align}
 First, note that it is easy to verify the $\eq(\r_x,\btau)$ part of the evaluation.
 Unfortunately, verifying that $F(\r_x)$ is correct is trickier, due to $F$'s complicated formula from Eq. \ref{eq:F}.
 
+Fortunately, Spartan observes that this complicated formula itself is sumcheck-like!
+
 {: .todo}
 Continue...
+
+## Spark compiler
+
+{: .todo}
+Define algorithms for Spark that can be used below.
+
+## Spartan PIOP framework
+
+### $\mathsf{Spartan}.\mathsf{Prove}(\mathbb{x}; \mathbf{w}) \Rightarrow \pi$  
+
+### $\mathsf{Spartan}.\mathsf{Verify}(\mathbb{x}; \mathbf{\pi}) \Rightarrow \\{0,1\\}$  
+
+
 
 ## References
 
@@ -225,7 +257,7 @@ F(X)
 
 Then, the main result of Spartan can be stated as follows. 
 
-**Theorem**: An R1CS instance $\mathbb{x}$ is satisfied by $w$, iff. $F(X) = 0$ for all $X \in [m) = \\{0,1\\}^s$ (i.e., $F$ is zero on the hypercube).
+**Theorem**: An R1CS instance $\inst$ is satisfied by $w$, iff. $F(X) = 0$ for all $X \in [m) = \\{0,1\\}^s$ (i.e., $F$ is zero on the hypercube).
 
 -->
 
