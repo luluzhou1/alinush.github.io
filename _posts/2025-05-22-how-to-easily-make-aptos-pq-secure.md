@@ -1,5 +1,10 @@
 ---
 tags:
+ - distributed key generation (DKG)
+ - bls
+ - keyless
+ - post-quantum
+ - schnorr
 title: How to easily make Aptos post-quantum secure
 #date: 2020-11-05 20:45:59
 #published: false
