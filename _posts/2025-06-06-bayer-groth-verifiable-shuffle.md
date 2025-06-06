@@ -85,6 +85,12 @@ It's a bit hard to see but because $B_i$ gets multiplied by $x^i$ and and $B'_i$
 This means that $B'_i$ will only be cancelled out by a corresponding $B_j$ with $j = \pi(i)$.
 So that's why get the non-intuitive equality above.
 
+## Open question
+
+{: .todo}
+Can we improve upon the BG12 approach by leveraging [univariate sumchecks](/univariate-sumcheck) for the product argument and/or multi-exponentiation argument (or even multivariate ones)?
+Or Bulletproof-like (G)IPAs?
+
 ## References
 
 For cited works, see below 👇👇

@@ -26,13 +26,13 @@ permalink: spartan
 
 <!-- Here you can define LaTeX macros -->
 <div style="display: none;">$
-\def\b{\mathbf{b}}
+\def\b{\boldsymbol{b}}
 \def\btau{\boldsymbol{\tau}}
 \def\binS{\bin^s}
 \def\i{\boldsymbol{i}}
 \def\inst{\mathbb{x}}
 \def\j{\boldsymbol{j}}
-\def\r{\mathbf{r}}
+\def\r{\boldsymbol{r}}
 $</div> <!-- $ -->
 
 ## Introduction
@@ -48,7 +48,7 @@ By the end of this blog post, you should be able to fully understand the Spartan
  - multilinear extensions (MLEs)
  - MLE PCS
  - sumcheck protocol
- - sumcheck reduction algorithm $\SC(F, S, \r)\rightarrow (\pi,e)$ that reduces $\sum_{\b \in \binS} F(\b) = S$ to (1) verifying a sumcheck proof $\pi$ and (2) verifiying a polynomial evaluation proof that $F(\r) = e$ for some random $\r\in \F^s$ (picked after $F$ is fixed).
+ - sumcheck reduction algorithm $\SC(F, S; \r)\rightarrow (\pi,e)$ that reduces $\sum_{\b \in \binS} F(\b) = S$ to (1) verifying a sumcheck proof $\pi$ and (2) verifiying a polynomial evaluation proof that $F(\r) = e$ for some random $\r\in \F^s$ (picked after $F$ is fixed).
 
 ### $\mathsf{eq}(\mathbf{X};\mathbf{b})$ Lagrange polynomials
 
@@ -60,6 +60,7 @@ We want to define a polynomial $\eq$ that evaluates to 1 when $\X = \b$ and to 0
 \end{cases}\\\\\
 &= \prod_{i\in[s]}\left(b_i X_i + (1 - b_i) (1 - X_i)\right)\\\\\
 &\bydef \term{\eq(X_1,\ldots, X_s; b_1,\ldots,b_s)}\\\\\
+&\bydef \term{\eq_\b(X_1,\ldots, X_s)}\\\\\
 \end{align}
 
 {: .note}
@@ -83,13 +84,13 @@ So, evaluating the $i$th product term at $(1-b_i)$ yields $b_i(1-b_i) + (1-b_i)(
 Therefore, the product is zero when $\X\ne \b$.
 </details>
  
-### Zerocheck
+### Multivariate zerocheck
 
-Suppose, we want to check that a polynomial
+We want to check that:
 \begin{align}
 F(\X) = 0, \forall X\in \binS
 \end{align}
-Then, there is a nice zerocheck-to-sumcheck reduction for this!
+There is a nice zerocheck-to-sumcheck reduction for this!
 Let:
 \begin{align}
 \label{eq:G}
@@ -150,6 +151,8 @@ We also say the instance is **satisfied by** $w$.
 
 Let $\term{s}=\lceil \log{m} \rceil$, where $\log$'s base is always 2.
 
+### Step 1: From R1CS matrices, public statement and private witness to MLEs
+
 We represent the R1CS matrices $A$, $B$ and $C$ as **multilinear extensions (MLE)**.
 For example, for $A \bydef (A_{i,j})\_{i,j\in[m)}$, we define:
 \begin{align}
@@ -163,8 +166,14 @@ where $i\in[m)$ is a row index, $j\in[m)$ is a column index and $\i,\j\in \binS$
 
 Similarly, the vector $z = (io, 1, w) \in \mathbb{F}^m$ can be viewed as an MLE:
 \begin{align}
-\term{\tilde{Z}} : \binS \rightarrow \mathbb{F},\ \text{s.t.}\ \tilde{Z}(\j) = z_j, \forall j\in[m)
+\term{Z} : \binS \rightarrow \mathbb{F},\ \text{s.t.}\ Z(\j) = z_j, \forall j\in[m)
 \end{align}
+
+{: .definition}
+It may be useful to refer to the $\tilde{A},\tilde{B},\tilde{C}$ and $Z$ MLEs as **the R1CS instance MLEs**.
+(Slightly abusing notation though, since $Z$ contains the witnness $w$ too, which the R1CS instance $\inst$ does not.)
+
+### Step 2: R1CS satisfiability $\Leftrightarrow$ zerocheck
 
 Then, satisfiability of an R1CS instance $A,B,C$ with public input $io$ by witness $w$ can be expressed as:
 
@@ -186,30 +195,90 @@ Then, the main result of Spartan can be stated as a theorem:
 {: .theorem}
 An R1CS instance $\inst$ (see Eq. \ref{eq:r1cs-instance}) is satisfied by a witness $w \Leftrightarrow F(\x) = 0$ for all $\x \in \binS$ (i.e., $F$ is zero on the hypercube).
 
+### Step 3: From zerocheck to sumcheck
+
 Of course, [we know from before](#zero-check) that such a zerocheck on $F$ can be reduced to a sumcheck on another related polynomial $\term{Q}$:
 \begin{align}
 \label{eq:Q}
-\term{Q(\X)}\bydef F(\X)\cdot \eq(\X, \term{\btau})
+\term{Q(\X)}\bydef F(\X)\cdot \eq_\term{\btau}(\X)
 %G(\Y)\bydef \sum_{x\in\binS} F(\x)\cdot \eq(\x, \Y)
 \end{align}
 where $\term{\btau}\randget\F^s$ is randomly picked by the prover.
 Specifically:
 \begin{align}
 \label{eq:sumcheck-1}
-F(\x) &= 0,\forall x\in\binS \Leftrightarrow \sum_{\x\in\binS} F(\x)\cdot \eq(\x,\btau) = 0,\btau\randget\F^s
+F(\x) &= 0,\forall x\in\binS \Leftrightarrow \sum_{\x\in\binS} F(\x)\cdot \eq_\btau(\x) = 0,\btau\randget\F^s
 \end{align}
-This sumcheck from Eq. \ref{eq:sumcheck-1} is (mostly) reduced to verifying a polynomial evaluation $\term{e_x}$ at a random point $\term{\r_x}\in \F^s$:
+This sumcheck from Eq. \ref{eq:sumcheck-1} is reduced to (1) verifying a polynomial evaluation $\term{e_x}$ at a random point $\term{\r_x}\in \F^s$ 
 \begin{align}
-\term{e_x} \bydef Q(\r_x) = F(\r_x)\cdot \eq(\term{\r_x},\btau)
+\term{e_x} \bydef Q(\r_x)
+%= F(\r_x)\cdot \eq(\term{\r_x},\btau)
 \end{align}
-by running the sumcheck protocol:
+...and (2) verifying a sumcheck proof $\term{\pi_x}$ by running the sumcheck protocol:
 \begin{align}
-(\term{\pi_x} ,e_x) \gets \SC(Q, 0, \r_x) = \SC(F\cdot \eq_\btau, 0, \r_x)
+\label{eq:first-sumcheck}
+(\term{\pi_x} ,e_x) \gets \SC(Q, 0; \r_x)
+%= \SC(F\cdot \eq_\btau, 0; \r_x)
 \end{align}
-First, note that it is easy to verify the $\eq(\r_x,\btau)$ part of the evaluation.
+First, note that it is easy to verify the $\eq_\btau(\r_x)$ part of the evaluation.
 Unfortunately, verifying that $F(\r_x)$ is correct is trickier, due to $F$'s complicated formula from Eq. \ref{eq:F}.
 
 Fortunately, Spartan observes that this complicated formula itself is sumcheck-like!
+
+{: .definition}
+We refer to the sumcheck from Eq. \ref{eq:first-sumcheck} as Spartan's **first sumcheck**!
+
+### Step 4: From $F(\boldsymbol{r}_x)$ to sumchecks on the R1CS instance MLEs
+
+i.e., to $\sum_\j \tilde{U}(\r_x, \j)$ (for each R1CS matrix $U$) sumchecks plus a $\sum_\j Z(\j)$ sumcheck will be needed to evaluate $F$ as per Eq. \ref{eq:F}.
+
+Specifically, to prove $F(\r_x)$ set $\X = \r_x$ in its Eq. \ref{eq:F} formula:
+\begin{align}
+\label{eq:Frx}
+F(\r_x)
+&= \sum_{\j\in\binS} \tilde{A}(\r_x,\j) Z(\j) \cdot \sum_{\j\in\binS} \tilde{B}(\r_x,\j) Z(\j) - \sum_{\j\in\binS} \tilde{C}(\r_x,\j) Z(\j)\\\\\
+\end{align}
+If we denote the three sums above by:
+\begin{align}
+\label{eq:three-sumchecks}
+\term{v_A} &\bydef \sum_{\j\in\binS} \tilde{A}(\r_x,\j) Z(\j)\\\\\
+\term{v_B} &\bydef \sum_{\j\in\binS} \tilde{B}(\r_x,\j) Z(\j)\\\\\
+\term{v_C} &\bydef \sum_{\j\in\binS} \tilde{C}(\r_x,\j) Z(\j)\\\\\
+\end{align}
+...we have:
+\begin{align}
+F(\r_x) = v_A \cdot v_B - v_C
+\end{align}
+
+### Step 5: From three sumchecks to four MLE openings
+
+The three sumchecks from Eq. \ref{eq:three-sumchecks} can be batched into a single one (a small detail that I hope will not complicate the exposition too much).
+First, pick random scalars:
+\begin{align}
+\term{(r_A, r_B, r_C)}\randget\F^3\\\\\
+\end{align}
+Second, reduce the three sumchecks above into one sumcheck (via a random linear combination):
+\begin{align}
+\label{eq:batched-sumcheck}
+\term{v} &\bydef r\_A v\_A \cdot r\_B v\_B - r\_C v\_C \\\\\
+&= r\_A\left(\sum\_{\j\in\binS} \tilde{A}(\r\_x,\j) Z(\j)\right) +
+r\_B\left(\sum\_{\j\in\binS} \tilde{B}(\r\_x,\j) Z(\j)\right) + 
+r\_C\left(\sum\_{\j\in\binS} \tilde{C}(\r\_x,\j) Z(\j)\right)\\\\\
+&= \sum\_{\j\in\binS} \left(\underbrace{r_A \tilde{A}(\r\_x,\j) Z(\j) +
+ r_B \tilde{B}(\r\_x,\j) Z(\j) + 
+ r_C \tilde{C}(\r\_x,\j) Z(\j)}\_{\term{M\_{\r_x}(\j)}}\right)\\\\\
+\end{align}
+As a result, the prover only does a single sumcheck on the (implicit) $\term{M_{\r_x}(\Y)}$ polynomial from above (instead of three as per Eq. \ref{eq:three-sumchecks}:
+\begin{align}
+\label{eq:second-sumcheck}
+(\pi_y, e_y) \gets \SC(M_{\r_x}, v; \r_y)
+\end{align}
+
+{: .definition}
+We refer to the sumcheck from Eq. \ref{eq:second-sumcheck} as Spartan's **second sumcheck**!
+(Recall the first one was in Eq. \ref{eq:first-sumcheck}).
+
+Of course, this second sumcheck ultimately reduces to evaluating the $\tilde{A},\tilde{B},\tilde{C}$ R1CS MLEs and the $Z$ MLE (from [Step 1](#step-1-from-r1cs-matrices-public-statement-and-private-witness-to-mles)) at $\X = \r_x$ and $\Y=\r_y$.
 
 {: .todo}
 Continue...
