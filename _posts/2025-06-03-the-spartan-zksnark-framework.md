@@ -93,25 +93,25 @@ F(\X) = 0, \forall X\in \binS
 There is a nice zerocheck-to-sumcheck reduction for this!
 Let:
 \begin{align}
-\label{eq:G}
-G(\Y)\bydef \sum_{\x\in\binS} F(\x)\cdot\eq(\x;\Y)
+\label{eq:zerocheck}
+Q(\Y)\bydef \sum_{\x\in\binS} F(\x)\cdot\eq(\x;\Y)
 \end{align}
 It can be shown the zerocheck is equivalent to picking a random $\btau\in\F^s$ and checking:
 \begin{align}
-G(\btau) = \sum_{\x\in\binS} \left(F(\x)\cdot \eq(\x; \btau)\right) = 0
+Q(\btau) = \sum_{\x\in\binS} \left(F(\x)\cdot \eq(\x; \btau)\right) = 0
 \end{align}
 Let's see why.
 
 **Theorem** (informal):
-Pick $\btau$ randomly. Then, $G(\btau) = 0 \Leftrightarrow F(\x) = 0, \forall \x \in \binS$.
+Pick $\btau$ randomly. Then, $Q(\btau) = 0 \Leftrightarrow F(\x) = 0, \forall \x \in \binS$.
 (Roughly. There is a probability with which this does **not** hold. See lemma 4.3 in [Sett19e][^Sett19e] for a formal claim.)
 
 **Proof** ("$\Leftarrow$"):
-This follows from the definition of $G(\cdot)$ from Eq. \ref{eq:G}, by just swapping $F(\X)$ with 0 and observing $G$ is zero everywhere, including at $\btau$.
+This follows from the definition of $Q(\cdot)$ from Eq. \ref{eq:zerocheck}, by just swapping $F(\X)$ with 0 and observing $Q$ is zero everywhere, including at $\btau$.
 
 **Proof** [by contradiction] ("$\Rightarrow$"):
-Suppose that $G(\btau) = 0$ at a random $\tau$ yet $\exists x\in\binS$ such that $F(\x) \ne 0$.
-Then, again from the definition of $G(\cdot)$ from Eq. \ref{eq:G}, this implies that $G(\Y)$ is a non-zero polynomial.
+Suppose that $Q(\btau) = 0$ at a random $\tau$ yet $\exists x\in\binS$ such that $F(\x) \ne 0$.
+Then, again from the definition of $Q(\cdot)$ from Eq. \ref{eq:zerocheck}, this implies that $Q(\Y)$ is a non-zero polynomial.
 (Because one of the terms of the sum will have a non-zero $F(\x)$ value.)
 Roughly, this contradicts the Schwartz-Zippel lemma.
 
@@ -144,10 +144,15 @@ Note that an R1CS instance includes the public statement $io$, but not the priva
 It also includes the R1CS (square) matrix size $m$ and the # of non-zero entries $n$.
 
 {: .definition}
-An R1CS instance is said to be **satisfiable** iff. exists a private witness $w$ s.t. Equation $\ref{eq:r1cs-sat}$ holds.
+An R1CS instance is said to be **satisfiable** iff. exists a private witness $w$ s.t. Eq. $\ref{eq:r1cs-sat}$ holds.
 We also say the instance is **satisfied by** $w$.
 
 ## R1CS SAT $\Leftrightarrow$ zero sumcheck on degree-3 $\log{m}$-variate polynomial
+
+We focus this blog post on explaining how Spartan obtains a SNARK (no ZK) by reducing R1CS satisfiability from Eq. \ref{eq:r1cs-sat} to two sumchecks and a batched polynomial evaluation.
+
+{: .todo}
+ZK!
 
 Let $\term{s}=\lceil \log{m} \rceil$, where $\log$'s base is always 2.
 
@@ -173,7 +178,7 @@ Similarly, the vector $z = (io, 1, w) \in \mathbb{F}^m$ can be viewed as an MLE:
 It may be useful to refer to the $\tilde{A},\tilde{B},\tilde{C}$ and $Z$ MLEs as **the R1CS instance MLEs**.
 (Slightly abusing notation though, since $Z$ contains the witnness $w$ too, which the R1CS instance $\inst$ does not.)
 
-### Step 2: R1CS satisfiability $\Leftrightarrow$ zerocheck
+### Step 2: R1CS satisfiability $\Leftrightarrow$ degree-2 zerocheck
 
 Then, satisfiability of an R1CS instance $A,B,C$ with public input $io$ by witness $w$ can be expressed as:
 
@@ -195,12 +200,15 @@ Then, the main result of Spartan can be stated as a theorem:
 {: .theorem}
 An R1CS instance $\inst$ (see Eq. \ref{eq:r1cs-instance}) is satisfied by a witness $w \Leftrightarrow F(\x) = 0$ for all $\x \in \binS$ (i.e., $F$ is zero on the hypercube).
 
-### Step 3: From zerocheck to sumcheck
+### Step 3: From zerocheck to degree-3 sumcheck
 
-Of course, [we know from before](#zero-check) that such a zerocheck on $F$ can be reduced to a sumcheck on another related polynomial $\term{Q}$:
+{: .todo}
+Do I really need to introduce $G$ here?
+
+Of course, [we know from before](#zero-check) that such a zerocheck on $F$ can be reduced to a sumcheck on another related polynomial $\term{G}$:
 \begin{align}
-\label{eq:Q}
-\term{Q(\X)}\bydef F(\X)\cdot \eq_\term{\btau}(\X)
+\label{eq:G}
+\term{G(\X)}\bydef F(\X)\cdot \eq_\term{\btau}(\X)
 %G(\Y)\bydef \sum_{x\in\binS} F(\x)\cdot \eq(\x, \Y)
 \end{align}
 where $\term{\btau}\randget\F^s$ is randomly picked by the prover.
@@ -211,13 +219,13 @@ F(\x) &= 0,\forall x\in\binS \Leftrightarrow \sum_{\x\in\binS} F(\x)\cdot \eq_\b
 \end{align}
 This sumcheck from Eq. \ref{eq:sumcheck-1} is reduced to (1) verifying a polynomial evaluation $\term{e_x}$ at a random point $\term{\r_x}\in \F^s$ 
 \begin{align}
-\term{e_x} \bydef Q(\r_x)
+\term{e_x} \bydef G(\r_x)
 %= F(\r_x)\cdot \eq(\term{\r_x},\btau)
 \end{align}
 ...and (2) verifying a sumcheck proof $\term{\pi_x}$ by running the sumcheck protocol:
 \begin{align}
 \label{eq:first-sumcheck}
-(\term{\pi_x} ,e_x) \gets \SC(Q, 0; \r_x)
+(\term{\pi_x} ,e_x) \gets \SC(G, 0; \r_x)
 %= \SC(F\cdot \eq_\btau, 0; \r_x)
 \end{align}
 First, note that it is easy to verify the $\eq_\btau(\r_x)$ part of the evaluation.
@@ -228,7 +236,7 @@ Fortunately, Spartan observes that this complicated formula itself is sumcheck-l
 {: .definition}
 We refer to the sumcheck from Eq. \ref{eq:first-sumcheck} as Spartan's **first sumcheck**!
 
-### Step 4: From $F(\boldsymbol{r}_x)$ to sumchecks on the R1CS instance MLEs
+### Step 4: From $F(\boldsymbol{r}_x)$ to degree-2 sumchecks on the R1CS instance MLEs
 
 i.e., to $\sum_\j \tilde{U}(\r_x, \j)$ (for each R1CS matrix $U$) sumchecks plus a $\sum_\j Z(\j)$ sumcheck will be needed to evaluate $F$ as per Eq. \ref{eq:F}.
 
@@ -252,7 +260,7 @@ F(\r_x) = v_A \cdot v_B - v_C
 
 ### Step 5: From three sumchecks to four MLE openings
 
-The three sumchecks from Eq. \ref{eq:three-sumchecks} can be batched into a single one (a small detail that I hope will not complicate the exposition too much).
+The three degree-2 sumchecks from Eq. \ref{eq:three-sumchecks} can be batched into a single one, also degree-2 (a small detail that I hope will not complicate the exposition too much).
 First, pick random scalars:
 \begin{align}
 \term{(r_A, r_B, r_C)}\randget\F^3\\\\\
@@ -260,7 +268,7 @@ First, pick random scalars:
 Second, reduce the three sumchecks above into one sumcheck (via a random linear combination):
 \begin{align}
 \label{eq:batched-sumcheck}
-\term{v} &\bydef r\_A v\_A \cdot r\_B v\_B - r\_C v\_C \\\\\
+\term{t} &\bydef r\_A v\_A \cdot r\_B v\_B - r\_C v\_C \\\\\
 &= r\_A\left(\sum\_{\j\in\binS} \tilde{A}(\r\_x,\j) Z(\j)\right) +
 r\_B\left(\sum\_{\j\in\binS} \tilde{B}(\r\_x,\j) Z(\j)\right) + 
 r\_C\left(\sum\_{\j\in\binS} \tilde{C}(\r\_x,\j) Z(\j)\right)\\\\\
@@ -268,10 +276,10 @@ r\_C\left(\sum\_{\j\in\binS} \tilde{C}(\r\_x,\j) Z(\j)\right)\\\\\
  r_B \tilde{B}(\r\_x,\j) Z(\j) + 
  r_C \tilde{C}(\r\_x,\j) Z(\j)}\_{\term{M\_{\r_x}(\j)}}\right)\\\\\
 \end{align}
-As a result, the prover only does a single sumcheck on the (implicit) $\term{M_{\r_x}(\Y)}$ polynomial from above (instead of three as per Eq. \ref{eq:three-sumchecks}:
+As a result, the prover only does a single sumcheck on the (implicit) $\term{M_{\r_x}(\Y)}$ polynomial from above (instead of three as per Eq. \ref{eq:three-sumchecks}):
 \begin{align}
 \label{eq:second-sumcheck}
-(\pi_y, e_y) \gets \SC(M_{\r_x}, v; \r_y)
+(\pi_y, e_y) \gets \SC(M_{\r_x}, t; \r_y)
 \end{align}
 
 {: .definition}
@@ -279,9 +287,22 @@ We refer to the sumcheck from Eq. \ref{eq:second-sumcheck} as Spartan's **second
 (Recall the first one was in Eq. \ref{eq:first-sumcheck}).
 
 Of course, this second sumcheck ultimately reduces to evaluating the $\tilde{A},\tilde{B},\tilde{C}$ R1CS MLEs and the $Z$ MLE (from [Step 1](#step-1-from-r1cs-matrices-public-statement-and-private-witness-to-mles)) at $\X = \r_x$ and $\Y=\r_y$.
+As long as the verifier has commitments to the R1CS MLEs and to (the public part of) $Z$, it can verify this 2nd sumcheck (and everything else described so far)!
+
+And **that** is the most difficult task in Spartan: it needs an efficient polynomial commitment scheme (PCS) for the MLEs representing the sparse R1CS matrices: a.k.a., a **sparse MLE PCS** to efficiently prove that:
+\begin{align}
+\label{eq:r1cs-evals}
+v_1 \bydef \tilde{A}(\r_x,\r_y)\\\\\
+v_2 \bydef \tilde{B}(\r_x,\r_y)\\\\\
+v_3 \bydef \tilde{C}(\r_x,\r_y)\\\\\
+\end{align}
+After, the verifier can check that $e_y \equals M(\r_x,\r_y)$ as:
+\begin{align}
+e_y \equals (r_A v_1 + r_B v_2 + r_C v_3) \cdot Z(\r_y)
+\end{align}
 
 {: .todo}
-Continue...
+Continue... explain the Z evaluations, maybe find better notation for $v_1, v_2, v_3$.
 
 ## Spark compiler
 
