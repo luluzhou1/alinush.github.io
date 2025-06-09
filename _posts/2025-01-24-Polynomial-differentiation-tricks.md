@@ -42,7 +42,7 @@ This situation arises in Groth16's computation of its [quotient polynomial $h(X)
 The following theorem can (sometimes) be applied to compute $h(\omega^i) = f'(\omega^i)/g'(\omega^i)$, where $f'$ and $g'$ are the derivatives:
 
 {: .theorem}
-$\forall f,g,h\in \F[X],\forall u\in \F$, if $f(X) = g(X)h(X)$ and $g(u) = 0$, then $f'(u) = g'(u) h(u)$, where $f'$ and $g'$ are the formal derivatives of $f$ and $g$, respectively.
+$\forall f,g,h\in \F[X]$ s.t. $f(X) = g(X)h(X)$, if $g(u) = 0$ for some $u\in\F$, then $f'(u) = g'(u) h(u)$, where $f'$ and $g'$ are the formal derivatives of $f$ and $g$, respectively.
 
 **Proof:**
 Begin by differentiating $f(X)$:
