@@ -1,9 +1,9 @@
 <div style="display: none;">$
-\def\bin{\mathbb{B}}
+\def\bin{\{0,1\}}
 \def\eq{\mathsf{eq}}
 \def\SC{\mathsf{SumCheck}}
 \def\x{\boldsymbol{x}}
-\def\X{\mathbf{X}}
-\def\y{\mathbf{y}}
+\def\X{\boldsymbol{X}}
+\def\y{\boldsymbol{y}}
 \def\Y{\boldsymbol{Y}}
 $</div> <!-- $ -->

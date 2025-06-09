@@ -175,6 +175,8 @@ cryptomat:
         url: /lagrange-interpolation
       - title: KZG polynomial commitments
         url: /kzg
+      #- title: PST polynomial commitments
+      #  url: /pst
       - title: Differentiation tricks
         url: /2025/01/24/Polynomial-differentiation-tricks.html
       - title: Univariate sumcheck
@@ -200,8 +202,8 @@ cryptomat:
         url: /r1cs
       - title: Groth16
         url: /groth16
-    #  - title: Spartan
-    #    url: /spartan
+      - title: Spartan
+        url: /spartan
     #  - title: PLONK
     #    url: /plonk
     #  - title: $\Sigma$-protocols
