@@ -754,6 +754,9 @@ First, I think the dense MLE PCS for $\witn$ has to have hiding commitments with
 Second, the univariate polynomials in Spartan's first and second sumchecks have to be blinded.
 And that's it? Because the third sumcheck inside the sparse MLE PCS is on a public polynomial!
 
+{: .todo}
+Generalize to non-square R1CS matrices with $N$ non-zero entries and $n$ rows / R1CS constraints, s.t. $n$ is not necessarily equal to $m$.
+
 ### Acknowledgements
 
 Thanks to Weijie Wang for explaining Spark[^Sett19e].
