@@ -697,7 +697,8 @@ Compute the necessary openings:
     - sparse MLE openings for the R1CS matrices
 
 {: .todo}
-The two MLE openings should be batchable into one, even if at different points, via a sumcheck apparently[^GLHplus24e].
+Two $f_1(\r_1) = v_1,f_2(\r_2) = v_2$ MLE openings can be batched via a sumcheck:
+pick a random $\alpha\in\F$ and check that $v_1 + \alpha v_2 \equals \sum_\b \left(f_1(\b) \eq_{\r_1}(\b) + \alpha f_2(\b)\eq_{\r_2}(\b)\right)$
 (This will drive up the proof size though.)
 
 ### $\mathsf{Spartan}_{\mathcal{D},\mathcal{S}}.\mathsf{Verify}^{\mathcal{FS}(\cdot)}(\mathbb{x}; \mathbf{\pi}) \Rightarrow \\{0,1\\}$
