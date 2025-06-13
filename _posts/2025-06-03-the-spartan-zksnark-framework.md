@@ -82,7 +82,7 @@ For example, Groth16 pays $O(N\log N)$ FFT work and $O(M) + O(N)$ MSMs (see brea
     - $\Rightarrow$ linear-time (concretely-efficient) prover!
 1. PCS-based, multilinear or univariate, depending on choice of sumcheck ☝️
 1. It poses a very nice research question: _What is the most efficient PCS for sparse MLEs?_
-1. For structured / repetitive / unifrom circuits, Spartan's [most expensive step](#step-71-spark-a-dense-to-sparse-mle-pcs-compiler) can be done by the verifier!
+1. For structured / repetitive / unifrom circuits, Spartan's [most expensive step](#8-sparse-mle-pcs-leftarrow-sumcheck--dense-mle-pcs-aka-spark) can be done by the verifier!
 
 ### Technical overview
 
@@ -349,7 +349,7 @@ This section describes things from the **lens of polynomial interactive oracle p
 
 Let $\term{s}=\lceil \log{m} \rceil$, where $\log$'s base is always 2.
 
-### Step 1: MLEs of R1CS matrices, public statement and private witness
+### (1) MLEs of R1CS matrices, public statement and private witness
 
 We represent the R1CS matrices $A$, $B$ and $C$ as **multilinear extensions (MLE)** $\term{\tilde{A}}, \term{\tilde{B}},\term{\tilde{C}}$, as explained in [the preliminaries](#multilinear-extensions-mles) (see Eq. \ref{eq:mle-matrix}).
 <!--For example, for $A \bydef (A_{i,j})\_{i,j\in[m)}$, we define:
@@ -382,7 +382,7 @@ Later on, it will be useful to note that, given an MLE $\term{\tilde{P}}$ for th
 \tilde{Z}(\Y) &= Y\_0 \cdot \underbrace{\term{\tilde{P}(Y_1, \ldots, Y_{s-1})}}\_{\text{MLE for}\ (\stmt,1)} + (1-Y_0)\cdot \underbrace{\term{\tilde{W}(Y_1,\ldots,Y_{s-1})}}_{\text{MLE for}\ \witn}
 \end{align}
 
-### Step 2: R1CS satisfiability $\Leftrightarrow$ deg-2 zerocheck on $F(\X)$
+### (2): R1CS satisfiability $\Leftarrow$ degree-2 zerocheck on $F(\X)$
 
 Then, satisfiability of an R1CS instance $A,B,C$ with public input $\stmt$ by witness $\witn$ can be expressed as:
 
@@ -406,7 +406,7 @@ Then, the main result of Spartan can be stated as a theorem:
 {: .theorem}
 An R1CS instance $\inst$ (see Eq. \ref{eq:r1cs-instance}) is satisfied by a witness $\witn \Leftrightarrow F(\X) = 0$ for all $\X \in \binS$ (i.e., $F$ is zero on the hypercube).
 
-### Step 3: Zerocheck on $F(\boldsymbol{X})$ $\Leftrightarrow$ deg-3 sumcheck on $F(\boldsymbol{X})\eq_\btau(\boldsymbol{X})$
+### (3) Zerocheck on $F(\boldsymbol{X})$ $\Leftarrow$ degree-3 0-sumcheck on $F(\boldsymbol{X})\eq_\btau(\boldsymbol{X})$
 
 [We know from above](#zero-check) that a zerocheck on $F$ can be reduced to a sumcheck on another related polynomial: <!-- $\term{G}$: -->
 \begin{align}
@@ -439,7 +439,7 @@ Now, thanks to sumcheck, the verifier's work is reduced to just checking that th
 While verifying the $\eq_\btau(\r_x)$ part is easy, the $F(\r_x)$ part is trickier, due to $F$'s complicated formula from Eq. \ref{eq:F}.
 Fortunately, Spartan observes that this complicated formula itself is sumcheck-like!
 
-### Step 4: From $F(\boldsymbol{r}_x)$ to degree-2 sumchecks 
+### (4) Opening $F(\boldsymbol{r}_x)$ $\Leftarrow$ degree-2 sumchecks 
 
 <!--i.e., to $\sum_\j \tilde{V}(\r_x, \j)$ (for each R1CS matrix $V$) sumchecks plus a $\sum_\j \tilde{Z}(\j)$ sumcheck will be needed to evaluate $F$ as per Eq. \ref{eq:F}.-->
 
@@ -467,7 +467,7 @@ F(\r_x) \equals v_A \cdot v_B - v_C
 
 Therefore, we have reduced verifying $F(\r_x)$ to verifying these three sumchecks from Eq. \ref{eq:three-sumchecks}!
 
-### Step 5: From three sumchecks to four MLE openings
+### (5) Degree-2 sumchecks $\Leftarrow$ Opening $Z(\r_y), A(\r_x,\r_y),\ldots, C(\r_x,\r_y)$
 
 Luckily, the sumchecks from Eq. \ref{eq:three-sumchecks} can be batched into a single one (while remaining degree-2). 
 
@@ -510,11 +510,11 @@ After the R1CS openings above are verified, the verifier can check that $e_y \eq
 \begin{align}
 e_y \equals (r_A \cdot a_{x,y} + r_B \cdot b_{x,y} + r_C \cdot c_{x,y}) \cdot \tilde{Z}(\r_y)
 \end{align}
-Before explaining [how to get a sparse MLE PCS](#step-7-from-dense-mle-pcs-to-sparse), how does the verifier check $\tilde{Z}(\r_y)$?
+Before explaining [how to open the R1CS $A,B,C$ matrix MLEs](#7-opening-aboldsymbolr_xboldsymbolr_yldots-cboldsymbolr_xboldsymbolr_y-leftarrow-sparse-mle-pcs), how does the verifier check the $\tilde{Z}(\r_y)$ opening?
 
-### Step 6: Opening $\tilde{Z}(\boldsymbol{r}_y)$
+### (6) Opening $\tilde{Z}(\boldsymbol{r}_y)$
 
-Recall from [Step 1 above](#step-1-mles-of-r1cs-matrices-public-statement-and-private-witness) that:
+Recall from [Step 1 above](#1-mles-of-r1cs-matrices-public-statement-and-private-witness) that:
  - $\tilde{Z}$ is the size $2^s$ MLE of $z = (\stmt, 1, \witn)\in\F^m$ and
  - $\tilde{P}$ is the size $2^{s-1}$ MLE of **only** the public statement $(\stmt, 1)\in \F^{m/2}$ 
  - $\tilde{W}$ is the size $2^{s-1}$ MLE of **only** the private witness $\witn\in \F^{m/2}$
@@ -534,9 +534,9 @@ Therefore, it suffices to give the verifier an opening proof w.r.t. $c_\witn$:
 So, given $\r_y$, $\stmt$, $c_\witn$, $e_w$ and $\pi_w$, the verifier will have everything it needs to verify $\tilde{Z}(\r_y)$ as per Eq. \ref{eq:zry}!
  
 
-### Step 7: From sparse MLE PCS to dense
+### (7) Opening $A(\boldsymbol{r}_x,\boldsymbol{r}_y),\ldots, C(\boldsymbol{r}_x,\boldsymbol{r}_y)$ $\Leftarrow$ sparse MLE PCS
 
-As explained in [Step 5](#step-5-from-three-sumchecks-to-four-mle-openings), the **main challenge** is we need an efficient PCS for sparse MLEs.
+As explained in [Step 5](#5-degree-2-sumchecks-leftarrow-opening-zr_y-ar_xr_yldots-cr_xr_y), the **main challenge** is we need an efficient PCS for sparse MLEs.
 
 This is crucial for opening the R1CS MLEs at a random point in the second sumcheck from Eq. \ref{eq:second-sumcheck}.
 
@@ -551,7 +551,7 @@ To address this problem, Spartan proposes a compiler, called **Spark**.
 
 Spark can take any dense MLE PCS for size-$n$ MLEs and turn it into a **sparse** one for size $m^2$ MLEs with only $n \approx m$ non-zero entries.
 
-### Step 7.1: Spark: a dense-to-sparse MLE PCS compiler
+### (8) Sparse MLE PCS $\Leftarrow$ sumcheck & dense MLE PCS (a.k.a., Spark)
 
 Recall that $m=2^s$ and that we have a size-$m^2$ MLE $\tilde{V}$ of a sparse R1CS matrix, say, $V=(V\_{i,j})\_{i,j\in[m)}$ with $n\approx m$ non-zero entries:
 \begin{align}
