@@ -519,31 +519,37 @@ We refer to this Eq. \ref{eq:second-sumcheck} sumcheck as Spartan's **second sum
 
 As before, the prover sends a sumcheck proof $\term{\pi_y}$ that reduces verifying the claimed sum $T$ to verifying an evaluation $\term{e_y}\bydef M_{\r_x}(\term{\r_y})$ at a random $\term{\r_y}\in\F^s$ picked by the verifer.
 
-To verify the $e_y$ evaluation, it needs to check:
+Specifically, it needs to check:
 \begin{align}
-e_y &\equals M\_{\r_x}(\r_j) \Leftrightarrow\\\\\
-    &\equals
- r_A \cdot \underbrace{\tilde{A}(\r\_x,\r_y)}\_{\term{a_{x,y}}} \tilde{Z}(\r_y) +
- r_B \cdot \underbrace{\tilde{B}(\r\_x,\r_y)}\_{\term{b_{x,y}}} \tilde{Z}(\r_y) + 
- r_C \cdot \underbrace{\tilde{C}(\r\_x,\r_y)}\_{\term{c_{x,y}}} \tilde{Z}(\r_y)
+M\_{\r_x}(\r_j) &=
+ r_A \cdot \underbrace{\tilde{A}(\r\_x,\r_j)}\_{\term{a_{x,y}}} \tilde{Z}(\r_j) +
+ r_B \cdot \underbrace{\tilde{B}(\r\_x,\r_j)}\_{\term{b_{x,y}}} \tilde{Z}(\r_j) + 
+ r_C \cdot \underbrace{\tilde{C}(\r\_x,\r_j)}\_{\term{c_{x,y}}} \tilde{Z}(\r_j)
 \end{align}
 
-Since the verifier has the $\oracle{\tilde{A}},\oracle{\tilde{B}},\oracle{\tilde{C}}$ oracles, it can query for the $(a_{x,y},b_{x,y},c_{x,y})$ evaluations on the R1CS matrix MLEs.
+Since the verifier has the $\oracle{\tilde{A}},\oracle{\tilde{B}},\oracle{\tilde{C}}$ oracles, it is easy to verify the $a_{x,y},b_{x,y},c_{x,y}$ evaluations on the R1CS matrices.
 
-Plus, recall from Eq. \ref{eq:Z} that the verifier has an $\oracle{\tilde{Z}}$ oracle.
-Therefore, it can also easily verify $\term{e_z} \equals \tilde{Z}(\r_y)$.
+And recall from Step 1 that the verifier has an $\oracle{\tilde{Z}}$ oracle.
+Therefore, it can also easily verify $\term{e_z} \equals tilde{Z}(\r_y)$.
 
-Therefore, the verifier can simply check.
+So it can query them $(\r_x,\r_y)$:
+\begin{align}
+\label{eq:r1cs-evals}
+\term{a_{x,y}} &\bydef \tilde{A}(\r_x,\r_y)\\\\\
+\term{b_{x,y}} &\bydef \tilde{B}(\r_x,\r_y)\\\\\
+\term{c_{x,y}} &\bydef \tilde{C}(\r_x,\r_y)\\\\\
+\term{e_z}     &\bydef \tilde{Z}(\r_y)\\\\\
+\end{align}
+Therefore, the verifier has an implicit $\oracle{M_{\r_x}}$ oracle as per Eq. \ref{eq:second-sumcheck} and can simply check.
 \begin{align}
 e_y &\equals (r_A \cdot a_{x,y} + r_B \cdot b_{x,y} + r_C \cdot c_{x,y}) \cdot e_z
 \end{align}
 
-All of this sounds easy in theory: in the PIOP model.
-In practice, **the most difficult task in Spartan** is instantiating the PIOP model with the right **sparse** R1CS MLEs, so as to enable efficient opening proofs for the R1CS MLEs!
+**This is the most difficult task in Spartan**: instantiating the PIOP model with the right polynomial commitment scheme (PCS) for the **sparse** R1CS MLEs, so as to enable efficient opening proofs for:
 
-### (6) Opening $A(\boldsymbol{r}_x,\boldsymbol{r}_y),\ldots, C(\boldsymbol{r}_x,\boldsymbol{r}_y)$ $\Leftarrow$ sparse MLE PCS
+### (7) Opening $A(\boldsymbol{r}_x,\boldsymbol{r}_y),\ldots, C(\boldsymbol{r}_x,\boldsymbol{r}_y)$ $\Leftarrow$ sparse MLE PCS
 
-As explained in [Step 5](#5-degree-2-sumchecks-leftarrow-opening-zr_y-ar_xr_yldots-cr_xr_y), the **main challenge** is we need an efficient PCS for the $\tilde{A},\tilde{B}$ and $\tilde{C}$ sparse MLEs.
+As explained in [Step 5](#5-degree-2-sumchecks-leftarrow-opening-zr_y-ar_xr_yldots-cr_xr_y), the **main challenge** is we need an efficient PCS for sparse MLEs.
 
 This is crucial for opening the R1CS MLEs at a random point in the second sumcheck from Eq. \ref{eq:second-sumcheck}.
 
@@ -558,7 +564,7 @@ To address this problem, Spartan proposes a compiler, called **Spark**.
 
 Spark can take any dense MLE PCS for size-$n$ MLEs and turn it into a **sparse** one for size $m^2$ MLEs with only $n \approx m$ non-zero entries.
 
-### (7) Sparse MLE PCS $\Leftarrow$ sumcheck & dense MLE PCS (a.k.a., Spark)
+### (8) Sparse MLE PCS $\Leftarrow$ sumcheck & dense MLE PCS (a.k.a., Spark)
 
 Recall that $m=2^s$ and that we have a size-$m^2$ MLE $\tilde{V}$ of a sparse R1CS matrix, say, $V=(V\_{i,j})\_{i,j\in[m)}$ with $n\approx m$ non-zero entries:
 \begin{align}
