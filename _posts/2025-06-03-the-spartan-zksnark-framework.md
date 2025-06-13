@@ -40,10 +40,11 @@ permalink: spartan
 \def\binN{\bin^{\log{n}}}
 \def\C{\mathcal{C}}
 \def\i{\boldsymbol{i}}
-\def\inst{\mathbb{x}}
+\def\inst{\mathbf{i}}
 \def\j{\boldsymbol{j}}
 \def\k{\boldsymbol{k}}
 \def\r{\boldsymbol{r}}
+\def\z{\mathbf{z}}
 \def\Z{\boldsymbol{Z}}
 %
 \def\bit{\mathsf{bit}}
@@ -82,7 +83,7 @@ For example, Groth16 pays $O(N\log N)$ FFT work and $O(M) + O(N)$ MSMs (see brea
     - $\Rightarrow$ linear-time (concretely-efficient) prover!
 1. PCS-based, multilinear or univariate, depending on choice of sumcheck ☝️
 1. It poses a very nice research question: _What is the most efficient PCS for sparse MLEs?_
-1. For structured / repetitive / unifrom circuits, Spartan's [most expensive step](#8-sparse-mle-pcs-leftarrow-sumcheck--dense-mle-pcs-aka-spark) can be done by the verifier!
+1. For structured / repetitive / uniform circuits, Spartan's [most expensive step](#8-sparse-mle-pcs-leftarrow-sumcheck--dense-mle-pcs-aka-spark) can be done by the verifier!
 
 ### Technical overview
 
@@ -91,7 +92,7 @@ For example, Groth16 pays $O(N\log N)$ FFT work and $O(M) + O(N)$ MSMs (see brea
 1. Commit to them via a sparse MLE PCS $\Rightarrow$ get a universal setup!
 
 Proving:
-1. Commit to the MLE extension $\tilde{Z}(\Y)$ of the **statement-witness vector** $z = (\stmt, 1, \witn)$ containing the statement and witness 
+1. Commit to the MLE extension $\tilde{Z}(\Y)$ of the **statement-witness vector** $\z = (\stmt, 1, \witn)$ containing the statement and witness 
 1. Reduce R1CS satisfiability to zerocheck on $F(\X) = \sum_\j \tilde{A}(\X,\j)\tilde{Z}(\j) \sum_\j\tilde{B}(\X,\j)\tilde{Z}(\j) - \sum_\j \tilde{C}(\X,\j)\tilde{Z}(\j)$ over boolean hypercube
 1. Reduce zerocheck to 0-sumcheck on $F(\X)\eq_\btau(\X)$ where $\tau$ is a random point
 1. Reduce 0-sumcheck to opening $F(\X)$ at $\X=\r_x$ for a random point $\r_x$
@@ -109,6 +110,7 @@ We assume familiarity with the [multivariate sumcheck](#multivariate-sumcheck) p
 ### Notation
 
  - we use $[s) \bydef \\{0,1,\ldots,s-1\\}$
+ <!-- $\mathbf{a} \concat \mathbf{b}$ denotes the concatenation of two vectors into one -->
  - we refer to a sumcheck that verifies a polynomial sums to 0 over the hypercube as a **0-sumcheck**
  - We assume all algorithms have oracle access to the same Fiat-Shamir transcript $\FS$
  - we typically denote the **boolean hypercube** of size $2^s$ as $\binS$
@@ -172,14 +174,14 @@ Therefore, the product is zero when $\X\ne \b$.
 
 ### Multilinear extensions (MLEs)
 
-Given a **vector** $\vec{V} = [v_0, \ldots v_{n-1}]$, where $n = 2^\ell$, it can be represented as a degree-1 multivariate polynomial with $\ell$ variables, a.k.a. a **multilinear extension (MLE)**, by interpolation via the Lagrange polynomials from above:
+Given a **vector** $V = [V_0, \ldots V_{n-1}]$, where $n = 2^\ell$, it can be represented as a degree-1 multivariate polynomial with $\ell$ variables, a.k.a. a **multilinear extension (MLE)**, by interpolation via the Lagrange polynomials from above:
 \begin{align}
 \label{eq:mle}
-\tilde{V}(\X) \bydef \sum_{i\in [n)} v_i \cdot \eq_i(\X)
+\tilde{V}(\X) \bydef \sum_{i\in [n)} V_i \cdot \eq_i(\X)
 \end{align}
 This way, if $\i=[i_0,\ldots,i_{s-1}]$ is the binary representation of $i$, we have:
 \begin{align}
-\tilde{V}(\i) = v_i,\forall i \in [n)
+\tilde{V}(\i) = V_i,\forall i \in [n)
 \end{align}
 
 Similarly, we can represent a **matrix** $(A_{i,j})_{i,j\in[m)}$ as an MLE:
@@ -218,29 +220,31 @@ Let $m\bydef 2^s$.
 Spartan additionally needs a **"sparse" multilinear polynomial commitment scheme** used to commit to size-$m^2$ MLEs where most of the terms in the MLE are zero.
 For example, perhaps only $n = o(2^{2s})$ or $n = O(m)$ terms are non-zero.
 
-Since Spartan needs to commit to the three [sparse R1CS matrices](/r1cs#sparsity) and evaluate their MLEs at a random point, we (restrictively) define our sparse MLE PCS algorithms to allow for exactly this!
+{: .note}
+Our sparse MLE PCS definition below is **specialized** for Spartan's use case of committing to three MLEs for the [sparse R1CS matrices](/r1cs#sparsity)!
+So, our algorithms always operate over these three (commitments to) matrices!
 
 #### $\sparse.\setup(s, n)\rightarrow (\prk,\vk)$
 
-Sets up a scheme for committing to three multilinear polynomials over $2s$ variables, such that each polynomial interpolate an $m\times m$ (R1CS) matrix with at most $n$ non-zero entries and $m\bydef 2^s$.
+Sets up a scheme for committing to three multilinear polynomials over $2s$ variables, such that each polynomial interpolates an $m\times m$ (R1CS) matrix with at most $n$ non-zero entries and $m\bydef 2^s$.
 Returns the proving key $\prk$ and the verification $\vk$.
 (Recall matrix interpolation from [here](#multilinear-extensions-mles).)
 
 #### $\sparse.\commit(\prk, \tilde{A}, \tilde{B}, \tilde{C})\rightarrow (c_A, c_B, c_C)$
 
-Computes commitments to the three MLEs of matrices $A,B$ and $C$.
+Returns commitments $(c_A, c_B, c_C)$ to the three MLEs of the $A,B$ and $C$ matrices.
 
-#### $\sparse.\open^\FSo(\prk, (\tilde{A},\tilde{B},\tilde{C}), (\x,\y)) \rightarrow (e_a, e_b, e_c; \pi)$
+#### $\sparse.\open^\FSo(\prk, (\tilde{A},\tilde{B},\tilde{C}), (\r_x,\r_y)) \rightarrow (e_a, e_b, e_c; \pi)$
 
 Creates an opening proof $\pi$ arguing all the following evaluations hold:
 \begin{align}
 \label{eq:sparse-mle-evals}
-\tilde{A}(\x,\y) &= e_a\\\\\
-\tilde{B}(\x,\y) &= e_b\\\\\
-\tilde{C}(\x,\y) &= e_c\\\\\
+\tilde{A}(\r_x,\r_y) &= e_a\\\\\
+\tilde{B}(\r_x,\r_y) &= e_b\\\\\
+\tilde{C}(\r_x,\r_y) &= e_c\\\\\
 \end{align}
 
-#### $\sparse.\verify^\FSo(\vk, (c_A,c_B,c_C), (\x,\y); \pi) \rightarrow \\{0,1\\}$
+#### $\sparse.\verify^\FSo(\vk, (c_A,c_B,c_C), (\r_x,\r_y); \pi) \rightarrow \\{0,1\\}$
 
 Verifies that the opening proof $\pi$ correctly argues that the evaluations in Eq. \ref{eq:sparse-mle-evals} hold for the MLEs committed in $c_A, c_B$ and $c_C$.
 
@@ -248,34 +252,42 @@ Verifies that the opening proof $\pi$ correctly argues that the evaluations in E
 
 #### $\SC.\prove^{\FSo}(F, T, s, d)\rightarrow (e,\pi;\r)$ 
 
-Returns a proof $\pi$ that the claimed sum $T=\sum_{\b \in \binS} F(\b)$ reduces to verifiying that $F(\r) = e$, for some random $\r\fsget \F^s$, picked via Fiat-Shamir on the transcript so far, maintained via the $\FSo$ oracle.
+Returns a **sumcheck proof** $\pi$ that the claimed sum $T=\sum_{\b \in \binS} F(\b)$ is valid iff. $F(\r) = e$, for some random $\r\fsget \F^s$, picked via Fiat-Shamir on the transcript so far (maintained via the $\FSo$ oracle).
 Here, $s$ denotes the number of variables in $F$ and $d$ denotes the maximum degree of a variable in $F$.
-Additionally, returns the evaluation claim $e$ and the randomness $\r$. (This useful in higher-level protocols that exhibit such a sumcheck proof, as these protocols have now reducing the sumcheck proving task to an opening proof that $F(\r) \equals e$.)
+Additionally, returns the evaluation claim $e$ and the randomness $\r$, so it can be verified separately **outside** this algorithm.
+
+{: .note}
+Note that the sumcheck proof merely **reduces** verifying the sum $T$ to verifying the evaluation claim $e\equals F(\r)$.
+Why do we formalize it in this way?
+Because it is very useful in higher-level protocols that use sumcheck!
+Such protocols tend to further reduce verifying the evaluation claim $e$ to yet another sumcheck, so returning an opening proof for $e$ here would not be useful for them (e.g., this happens in [Step 4](#4-opening-fboldsymbolr_x-leftarrow-degree-2-sumchecks) of Spartan).
 
 #### $\SC.\verify^\FSo(T, e, d; \pi)\rightarrow (b\in\\{0,1\\}; \r)$
 
-Verifies a proof $\pi$ which argues that the claimed sum $T=\sum_{\b\in\binS} F(\b)$ is correct (for some unspecified polynomial $F$ whose variables have max-degree $d$).
-This is only meaningful if one has already checked **outside this algorithm** that $F(\r) = e$, against some oracle to $F$ (e.g., a polynomial commitment).
+Verifies the sumcheck proof $\pi$ that the claimed sum $T=\sum_{\b\in\binS} F(\b)$ is correct iff., for a **previously-fixed** polynomial $F$[^fixed-polynomial] whose variables have max-degree $d$, we have $F(\r) = e$.
+As a result, the verifier must check **outside this algorithm** that $F(\r) = e$ against some oracle to $F$ (e.g., a polynomial commitment).
 Here, $\r\fsget\F^s$ is a random point derived via Fiat-Shamir.
 Returns a success bit $b\in\\{0,1\\}$ and the randomness $\r$ used.
 
 {: .note}
-Note that all algorithm are non-interactive and assume a Fiat-Shamir[^FS87] oracle that maintains the transcript so far and can use it to derive randomness.
-(A bit awkward but makes it easier to reason about securely-using sumcheck in a black-box fashion in [our later description of Spartan](#spartan-piop-framework-for-non-zk-snarks).)
+Note that our sumcheck algorithms are non-interactive and assume a Fiat-Shamir[^FS87] oracle that maintains the transcript of messages sent by the prover to the verifier.
+This transcript is used to derive public randomness in the non-interactive setting (which, in the interactive setting, the verifier would just pick).
+This formalization, although a bit awkward, makes it easier to reason about securely-using sumcheck in a black-box fashion in [our later description of Spartan](#spartan-piop-framework-for-non-zk-snarks).)
 
 ### Multivariate zerocheck
 
-We want to prove a zerocheck; i.e., that:
+We want to 
+One of the tasks in Spartan is to prove a **zerocheck** on a polynomial $F$ (see [Step 3](#3-zerocheck-on-fboldsymbolx-leftarrow-degree-3-0-sumcheck-on-fboldsymbolxeq_btauboldsymbolx)), i.e.:
 \begin{align}
 F(\X) = 0, \forall \X\in \binS
 \end{align}
-There is a nice zerocheck-to-sumcheck reduction for this!
+There is a nice **zerocheck-to-sumcheck reduction** for this!
 Let:
 \begin{align}
 \label{eq:zerocheck}
 Q(\Y)\bydef \sum_{\b\in\binS} F(\b)\cdot\eq_\b(\Y)
 \end{align}
-(Note that $Q(\b) = F(\b),\forall \b\in\binS$.)
+<!-- (Note that $Q(\b) = F(\b),\forall \b\in\binS$.) -->
 
 It can be shown that the zerocheck is equivalent to picking a random $\btau\in\F^s$ and checking:
 \begin{align}
@@ -285,7 +297,13 @@ Q(\btau)
     \label{eq:0-sumcheck}
     \sum_{\b\in\binS} F(\b)\cdot \eq_\btau(\b) &= 0
 \end{align}
-In other words, it's equivalent to doing a 0-sumcheck on $F(\X)\cdot\eq_\tau(\X)$ as per Eq. \ref{eq:0-sumcheck}!
+In other words, it's equivalent to doing a **0-sumcheck** on $F(\X)\cdot\eq_\tau(\X)$ as per Eq. \ref{eq:0-sumcheck}!
+
+{: .note}
+What's the intuition?
+It is simply checking that a random linear combination between the $F(\b)$'s and the random $\eq_\b(\tau)$ coefficients is zero!
+In fact, other polynomials could be used to represent the random coefficients.
+e.g., instead of $\eq_\b(\X)$ one could use $r_\b(\X) \bydef \prod_{\i\in \binS} X_i^{b_i}$.
 
 <details>
 <summary>
@@ -307,23 +325,23 @@ Then, again, from the definition of $Q(\cdot)$ from Eq. \ref{eq:zerocheck}, this
 Roughly, this contradicts the Schwartz-Zippel lemma.
 </details>
 
-### R1CS matrices
+### R1CS
 
-[R1CS](/r1cs) matrices $\term{A}, \term{B}, \term{C}$ are assumed to be **square** (of $\term{m}$ rows and $m$ columns) and **sparse**, with $\term{n}$ non-zero entries.
+Spartan is a SNARK for [R1CS](/r1cs) satisfiability.
 
-The R1CS is said to be **satisfiable** if exists a **statement-witness vector** $z\in \F^m$ such that:
+The R1CS matrices $\term{A}, \term{B}, \term{C}$ are assumed to be **square** (of $\term{m}$ rows and $m$ columns) and **sparse**, with $\term{n}$ non-zero entries.
+
+The R1CS is said to be **satisfiable** if exists a **statement-witness vector** $\z\in \F^m$ such that:
 \begin{align}
 \label{eq:r1cs-sat}
-A z \circ B z = C z
+A \z \circ B \z = C \z
 \end{align}
 where:
 \begin{align}
 \label{eq:z}
-\term{z} = (\term{\stmt}, 1, \term{\witn}) \in \mathbb{F}^{|\stmt|} \times \mathbb{F} \times \mathbb{F}^{m-|\stmt|-1}
+\term{\z} = (\term{\stmt}, 1, \term{\witn}) \in \mathbb{F}^{|\stmt|} \times \mathbb{F} \times \mathbb{F}^{m-|\stmt|-1}
 \end{align}
 with $\term{\stmt}$ being the **public statement** and $\term{\witn}$ being the **private witness**.
-
-### R1CS instance
 
 For convenience, an **R1CS instance** is defined as:
 \begin{align}
@@ -345,13 +363,16 @@ We focus this blog post on explaining how Spartan obtains a SNARK (no ZK) by red
 
 This section describes things from the **lens of polynomial interactive oracle proofs (PIOPs)**, so it assumes interaction between the SNARK **prover** and the **verifier**.
 
-[Later on](#spartan-piop-framework-for-non-zk-snarks), we describe Spartan as a non-interactive framework for obtaining SNARKs given sumcheck, a dense MLE PCS, and a sparse MLE PCS as abstract primitives.
+[Later on](#spartan-piop-framework-for-non-zk-snarks), we more formally describe the Spartan framework to construct a SNARK from:
+1. the [sumcheck protocol](#multivariate-sumcheck)
+2. a [dense MLE PCS](#dense-mle-pcs)
+3. a [sparse MLE PCS](#sparse-mle-pcs) (typically, obtained via Spartan's dense-to-sparse MLE compiler called _Spark_)
 
-Let $\term{s}=\lceil \log{m} \rceil$, where $\log$'s base is always 2.
+**Notation:** Let $\term{s}=\lceil \log{m} \rceil$, where $\log$'s base is always 2.
 
 ### (1) MLEs of R1CS matrices, public statement and private witness
 
-We represent the R1CS matrices $A$, $B$ and $C$ as **multilinear extensions (MLE)** $\term{\tilde{A}}, \term{\tilde{B}},\term{\tilde{C}}$, as explained in [the preliminaries](#multilinear-extensions-mles) (see Eq. \ref{eq:mle-matrix}).
+We represent the R1CS matrices $A$, $B$ and $C$ as [multilinear extensions (MLE)](#multilinear-extensions-mles) $\term{\tilde{A}}, \term{\tilde{B}},\term{\tilde{C}}$ (see Eq. \ref{eq:mle-matrix}).
 <!--For example, for $A \bydef (A_{i,j})\_{i,j\in[m)}$, we define:
 \begin{align}
 %\term{\tilde{A}(X_1, \ldots, X_s, Y_1,\ldots,Y_s)} \bydef
@@ -364,25 +385,23 @@ such that:
 where $i\in[m)$ is a row index, $j\in[m)$ is a column index and $\i,\j\in \binS$ are their $s$-bit binary representations, 
 -->
 
-Similarly, the **statement-witness vector** $z = (\stmt, 1, \witn) \in \mathbb{F}^m$ can be viewed as an MLE:
-\begin{align}
-\term{\tilde{Z}} : \binS \rightarrow \mathbb{F},\ \text{s.t.}\ \tilde{Z}(\j) = z_j, \forall j\in[m)
-\end{align}
+Let:
+ 1. $\term{\tilde{P}}$ denote the size $2^{s-1}$ MLE of **only** the public statement $(\stmt, 1)\in \F^{m/2}$
+ 2. $\term{\tilde{W}}$ denote the size $2^{s-1}$ MLE of **only**  the private witness $\witn\in \F^{m/2}$
+    + _Note:_ We assume, without loss of generality, that $\|\witn\| = \|\stmt\|+1$
+ 3. $\z \bydef (\stmt, 1, \witn) \in \mathbb{F}^m$ denote the **statement-witness vector**, as per Eq. \ref{eq:z}
+ 4. $\term{\tilde{Z}}$ denote the size-$2^s$ MLE of $\z$
 
-Assume (without loss of generality) that $\|\witn\| = \|\stmt\|+1$.
- 
-Let $\term{\tilde{W}}$ denote the size $2^{s-1}$ MLE of **only**  the private witness $\witn\in \F^{m/2}$.
+As an MLE, $\tilde{Z}$ can be _decomposed_[^SCPplus22] into its left half $\tilde{P}$ and right half $\tilde{W}$:
+\begin{align}
+\label{eq:Z}
+\term{\tilde{Z}}(\Y) &= Y\_0 \cdot \underbrace{\term{\tilde{P}}(Y_1, \ldots, Y_{s-1})}\_{\text{MLE for}\ (\stmt,1)} + (1-Y_0)\cdot \underbrace{\term{\tilde{W}}(Y_1,\ldots,Y_{s-1})}_{\text{MLE for}\ \witn}
+\end{align}
 
 The prover begins by sending the verifier an _oracle_ $\oracle{\tilde{W}}$ to $\tilde{W}$.
 (Recall we are describing Spartan from the lens of PIOPs.)
 
-Later on, it will be useful to note that, given an MLE $\term{\tilde{P}}$ for the public statement $\stmt$ and the $\oracle{\tilde{W}}$ oracle, the verifier will be able to check an opening on $\tilde{Z}$ easily because:
-\begin{align}
-\label{eq:Z}
-\tilde{Z}(\Y) &= Y\_0 \cdot \underbrace{\term{\tilde{P}(Y_1, \ldots, Y_{s-1})}}\_{\text{MLE for}\ (\stmt,1)} + (1-Y_0)\cdot \underbrace{\term{\tilde{W}(Y_1,\ldots,Y_{s-1})}}_{\text{MLE for}\ \witn}
-\end{align}
-
-### (2): R1CS satisfiability $\Leftarrow$ degree-2 zerocheck on $F(\X)$
+### (2) R1CS satisfiability $\Leftarrow$ degree-2 zerocheck on $F(\X)$
 
 Then, satisfiability of an R1CS instance $A,B,C$ with public input $\stmt$ by witness $\witn$ can be expressed as:
 
@@ -392,14 +411,14 @@ Then, satisfiability of an R1CS instance $A,B,C$ with public input $\stmt$ by wi
 %\Leftrightarrow\\\\\
 %\forall \x\in \binS, \sum_{\j\in\binS} \tilde{A}(\x,\j) \tilde{Z}(\j) \cdot \sum_{\j\in\binS} \tilde{B}(\x,\j) \tilde{Z}(\j) - \sum_{\j\in\binS} \tilde{C}(\x,\j) \tilde{Z}(\j) = 0\Leftrightarrow\\\\\
 \end{align}
-More formally, define a degree-2 multivariate polynomial $\term{F}$ associated with the R1CS instance $\inst$:
+To prove the above equation holds, define a multivariate polynomial $\term{F}$ associated with the R1CS instance $\inst$:
 \begin{align}
 \label{eq:F}
 \term{F(\X)}
 &\bydef \sum_{\j\in\binS} \tilde{A}(\X,\j) \tilde{Z}(\j) \cdot \sum_{\j\in\binS} \tilde{B}(\X,\j) \tilde{Z}(\j) - \sum_{\j\in\binS} \tilde{C}(\X,\j) \tilde{Z}(\j)
 \end{align}
 
-Note that $F(\X)$ contains a product of two MLEs, so it is a degree-2 multivariate polynomial.
+Note that $F(\X)$ contains a product of two MLEs, so it is a **degree-2** multivariate polynomial.
 
 Then, the main result of Spartan can be stated as a theorem:
 
@@ -408,7 +427,7 @@ An R1CS instance $\inst$ (see Eq. \ref{eq:r1cs-instance}) is satisfied by a witn
 
 ### (3) Zerocheck on $F(\boldsymbol{X})$ $\Leftarrow$ degree-3 0-sumcheck on $F(\boldsymbol{X})\eq_\btau(\boldsymbol{X})$
 
-[We know from above](#zero-check) that a zerocheck on $F$ can be reduced to a sumcheck on another related polynomial: <!-- $\term{G}$: -->
+[We know from above](#zero-check) that a zerocheck on $F$ can be reduced to a 0-sumcheck on another related polynomial: <!-- $\term{G}$: -->
 \begin{align}
 \label{eq:G}
 F(\X)\cdot \eq_\term{\btau}(\X)
@@ -417,7 +436,7 @@ where $\term{\btau}\randget\F^s$ is randomly picked by the verifier.
 Specifically, the sumcheck will be:
 \begin{align}
 \label{eq:first-sumcheck}
-F(\b) &= 0,\forall \b\in\binS \Leftrightarrow \sum_{\b\in\binS} F(\b)\cdot \eq_\btau(\b) = 0,\btau\randget\F^s
+\sum_{\b\in\binS} F(\b)\cdot \eq_\btau(\b) \equals 0
 \end{align}
 
 To convince the verifier, the prover will send two things.
@@ -434,10 +453,11 @@ Second, a sumcheck proof $\term{\pi_x}$, which the verifier will check against t
 {: .definition}
 We refer to the sumcheck from Eq. \ref{eq:first-sumcheck} as Spartan's **first sumcheck**!
 
-Now, thanks to sumcheck, the verifier's work is reduced to just checking that the $e_x$ evaluation from Eq. \ref{eq:ex} is correct!
+Once the sumcheck proof is verified, the remaining verifier work is checking that the $e_x$ evaluation from Eq. \ref{eq:ex} is correct!
 
-While verifying the $\eq_\btau(\r_x)$ part is easy, the $F(\r_x)$ part is trickier, due to $F$'s complicated formula from Eq. \ref{eq:F}.
-Fortunately, Spartan observes that this complicated formula itself is sumcheck-like!
+Fortunately, verifying the $\eq_\btau(\r_x)$ part of $e_x$ is easy.
+Unfortunately, the $F(\r_x)$ part is trickier: $F$'s formula from Eq. \ref{eq:F} includes three other sums!
+Fortunately, Spartan observes that these sums can also be proved using sumcheck!
 
 ### (4) Opening $F(\boldsymbol{r}_x)$ $\Leftarrow$ degree-2 sumchecks 
 
@@ -479,7 +499,7 @@ Second, randomly combine the $v_A, v_B, v_C$ sumchecks via these scalars:
 \begin{align}
 \label{eq:batched-sumcheck}
 \term{T} 
-&\bydef r\_A v\_A + r\_B v\_B - r\_C v\_C \\\\\
+&\bydef r\_A v\_A + r\_B v\_B + r\_C v\_C \\\\\
 &= r\_A\left(\sum\_{\j\in\binS} \tilde{A}(\r\_x,\j) \tilde{Z}(\j)\right) +
 r\_B\left(\sum\_{\j\in\binS} \tilde{B}(\r\_x,\j) \tilde{Z}(\j)\right) + 
 r\_C\left(\sum\_{\j\in\binS} \tilde{C}(\r\_x,\j) \tilde{Z}(\j)\right)\\\\\
@@ -496,7 +516,7 @@ We refer to this Eq. \ref{eq:second-sumcheck} sumcheck as Spartan's **second sum
 
 As before, the prover sends a sumcheck proof $\term{\pi_y}$ that reduces verifying the claimed sum $T$ to verifying an evaluation $\term{e_y}\bydef M_{\r_x}(\term{\r_y})$ at a random $\term{\r_y}\in\F^s$ picked by the verifer.
 
-Put differently, once the verifier verifies $\pi_y$ w.r.t. $(T,e_y)$, the verifier is only left with the task of verifying the $e_y$ opening w.r.t. to an $\oracle{M_{\r_x}}$ oracle, which can be obtained from $\oracle{\tilde{A}},\oracle{\tilde{B}},\oracle{\tilde{C}},\oracle{\tilde{Z}}$ oracles.
+Put differently, once the verifier verifies $\pi_y$ w.r.t. $(T,e_y)$, the verifier is only left with the task of verifying the $e_y$ opening w.r.t. to an $\oracle{M_{\r_x}}$ oracle, which can be obtained from the $\oracle{\tilde{A}},\oracle{\tilde{B}},\oracle{\tilde{C}},\oracle{\tilde{Z}}$ oracles.
 
 **This is the most difficult task in Spartan**: instantiating the PIOP model with the right polynomial commitment scheme (PCS) for the **sparse** R1CS MLEs, so as to enable efficient opening proofs for:
 \begin{align}
@@ -515,7 +535,7 @@ Before explaining [how to open the R1CS $A,B,C$ matrix MLEs](#7-opening-aboldsym
 ### (6) Opening $\tilde{Z}(\boldsymbol{r}_y)$
 
 Recall from [Step 1 above](#1-mles-of-r1cs-matrices-public-statement-and-private-witness) that:
- - $\tilde{Z}$ is the size $2^s$ MLE of $z = (\stmt, 1, \witn)\in\F^m$ and
+ - $\tilde{Z}$ is the size $2^s$ MLE of $\z = (\stmt, 1, \witn)\in\F^m$ and
  - $\tilde{P}$ is the size $2^{s-1}$ MLE of **only** the public statement $(\stmt, 1)\in \F^{m/2}$ 
  - $\tilde{W}$ is the size $2^{s-1}$ MLE of **only** the private witness $\witn\in \F^{m/2}$
     + and the verifier has an oracle $\oracle{\tilde{W}}$ to it
@@ -531,7 +551,7 @@ Therefore, it suffices to give the verifier an opening proof w.r.t. $c_\witn$:
 (\term{e_w}, \term{\pi_w}) \gets \dense.\open^\FSo(\tilde{W}, (r\_{y,t})_{t\in[1,s)})
 \end{align}
 
-So, given $\r_y$, $\stmt$, $c_\witn$, $e_w$ and $\pi_w$, the verifier will have everything it needs to verify $\tilde{Z}(\r_y)$ as per Eq. \ref{eq:zry}!
+So, given $\stmt$ and $(c_\witn, \r_y, e_w, \pi_w)$, the verifier will have everything it needs to verify $\tilde{Z}(\r_y)$ as per Eq. \ref{eq:zry}!
  
 
 ### (7) Opening $A(\boldsymbol{r}_x,\boldsymbol{r}_y),\ldots, C(\boldsymbol{r}_x,\boldsymbol{r}_y)$ $\Leftarrow$ sparse MLE PCS
@@ -777,5 +797,7 @@ Thanks to Justin Thaler, Kabir Peshawaria and Guru Vamsi Policharla for explaini
 ## References
 
 For cited works, see below 👇👇
+
+[^fixed-polynomial]: Viewed from the PIOP lens, "fixed" here means that the sumcheck prover first sent a polynomial oracle $\oracle{F}$ to the verifier **and** only after that it invoked $\SC.\prove$ on $F$. (In practice, this means the prover first sent a commitment to the polynomial $F$ to the verifier.)
 
 {% include refs.md %}
