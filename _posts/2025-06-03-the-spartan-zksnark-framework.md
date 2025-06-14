@@ -808,6 +808,7 @@ Thanks to Justin Thaler, Kabir Peshawaria and Guru Vamsi Policharla for explaini
 
 ### Extra resources
 
+ - Srinath Setty's [HackMD on Spartan and Spark](https://hackmd.io/@srinathsetty/spartan)
  - [Sumcheck implementations, Kabir Peshawaria](https://gitlab.com/IrreducibleOSS/binius/-/tree/ad2d620e56dff3b18d502c6dafa557d6988ad920/crates/core/src/protocols)
     + [Simpler Python code here](https://github.com/IrreducibleOSS/binius-models/blob/main/binius_models/ips/sumcheck.py)
 
