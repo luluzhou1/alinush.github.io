@@ -664,20 +664,20 @@ Commit to the witness and set up the Fiat-Shamir transcript:
  - $c_\witn\gets\dense.\commit(\ck_\dense,\tilde{W})$
  - add $(\vk,c_\witn)$ to $\FS$ transcript
 
-Prove the first sumcheck:
+Prove the first [sumcheck](#scprovefsof-t-s-drightarrow-epir):
  - $\btau \fsget \F^s$
  - Let $Z \bydef (\stmt, 1, \witn)\in \F^m$
  - Let $F(\X) \bydef \sum_{\j\in\binS} \tilde{A}(\X,\j) \tilde{Z}(\j) \cdot \sum_{\j\in\binS} \tilde{B}(\X,\j) \tilde{Z}(\j) - \sum_{\j\in\binS} \tilde{C}(\X,\j) \tilde{Z}(\j)$
- - $(\pi_x, e_x; \r_x\in\F^s) \gets \SC.\prove(F\cdot \eq_\btau, 0, s, 3)$ (see Eq. \ref{eq:F})
+ - $(e_x, \pi_x; \r_x\in\F^s) \gets \SC.\prove(F\cdot \eq_\btau, 0, s, 3)$ (see Eq. \ref{eq:F})
 
-Prove the second sumcheck:
+Prove the second [sumcheck](#scprovefsof-t-s-drightarrow-epir):
  - $(r_A, r_B, r_C) \fsget \F^3$
  - Let $M_{\r_x}(\Y) \bydef r_A \tilde{A}(\r\_x,\Y) \tilde{Z}(\Y) + r_B \tilde{B}(\r\_x,\Y) \tilde{Z}(\Y) + r_C \tilde{C}(\r\_x,\Y) \tilde{Z}(\Y)$
  - $v_A \gets \sum_{\j\in\binS} \tilde{A}(\r_x,\j) \tilde{Z}(\j)$
  - $v_B \gets \sum_{\j\in\binS} \tilde{B}(\r_x,\j) \tilde{Z}(\j)$
  - $v_C \gets \sum_{\j\in\binS} \tilde{C}(\r_x,\j) \tilde{Z}(\j)$
- - $T\gets r_A v_A + r_B v_B + r_C V_C$ 
- - $(\pi_y, e_y; \r_y) \gets \SC.\prove(M_{\r_x}, T, s, 2)$ (see Eq. \ref{eq:second-sumcheck})
+ - $T\gets r_A v_A + r_B v_B + r_C v_C$ 
+ - $(e_y, \pi_y; \r_y) \gets \SC.\prove(M_{\r_x}, T, s, 2)$ (see Eq. \ref{eq:second-sumcheck})
 
 <!-- The Spartan proof, defined as a macro, to avoid mistakes -->
 <div style="display: none;">$
@@ -688,21 +688,29 @@ Prove the second sumcheck:
     a_{x,y}, b_{x,y}, c_{x,y},\pi_{x,y}\\ \end{pmatrix}}
 $</div>
 
-Compute the necessary openings:
+Compute one dense and one sparse MLE opening:
  - $(e_w, \pi_w) \gets\dense.\open^\FSo(\ck_\dense, \tilde{W},(r_{y,t})_{t\in[1,s)})$
  - $(a_{x,y},b_{x,y},c_{x,y};\pi_{x,y})\gets \sparse.\open^\FSo\begin{pmatrix}
     \ck_\sparse,
     (\tilde{A}, \tilde{B}, \tilde{C}),%\\\\\
     (\r_x,\r_y)
     \end{pmatrix}$
+
+Done:
  - $\pi\gets\spartanProof$
 
 #### Prover time
 
  - Witness-dependent:
-    - dense MLE commitment to witness vector $W\bydef \witn$ (would need ZK)
-    + degree-3 sumcheck for $F\cdot \eq_\btau$ (would need ZK)
-    + degree-2 sumcheck for $M_{\r_x}$ (would need ZK)
+    - dense MLE commitment to size-$m/2$ witness vector $W$ (would need ZK)
+    + degree-3 sumcheck over $F(\X)\cdot \eq_\btau(\X)$ (would need ZK)
+        - Recall $\tilde{Z}(\j) = z_j$, where $\z$ is the statement-witness vector from Eq. \ref{eq:z}
+        - Recall $\eq_\btau(\X)$ is a size-1 MLE
+<!-- Let $\tilde{V}_j(\X) \bydef \tilde{V}(\X,\j)$ for every R1CS matrix $V\in\\{A,B,C\\}$ be an MLE of size-$m$ -->
+        - Let $\tilde{V}'(\X) \bydef \sum_{\j \in \binS} \tilde{V}(\X,\j) z_j$ for every R1CS matrix $V\in\\{A,B,C\\}$
+            + Note that $V(\X,\j)$ is a size-$m$ _precomputable_ MLE for the $j$th column of matrix $V$
+        - Sumcheck is over $\left(\tilde{A}'(\X)\cdot\tilde{B}'(\X) + \tilde{C}'(\X)\right)\cdot\eq_\btau(\X)$
+    + degree-2 sumcheck over $M_{\r_x}(\Y)$ (would need ZK)
     - dense MLE opening for $\tilde{W}$ (would need ZK)
  - Witness-independent:
     - sparse MLE openings for the R1CS matrices
@@ -710,25 +718,42 @@ Compute the necessary openings:
 {: .todo}
 Two $f_1(\r_1) = v_1,f_2(\r_2) = v_2$ MLE openings can be batched via a sumcheck:
 pick a random $\alpha\in\F$ and check that $v_1 + \alpha v_2 \equals \sum_\b \left(f_1(\b) \eq_{\r_1}(\b) + \alpha f_2(\b)\eq_{\r_2}(\b)\right)$
-(This will drive up the proof size though.)
+(This will further drive up the proof size though.)
+
+#### Ideal proof size we can hope for
+
+**tl;dr:** Not even accounting for the MLE openings, looks like it will be $> 80+2592+1952+192=4816$ bytes.
+
+ - $1 \times \Gr_1 + 1 \times \F$, for the dense MLE commitment $c_\witn$ to $W$ and the $e_w$ evaluation
+    - i.e., $48+32 = 80$ bytes
+ - **TODO:** ideal dense MLE opening size, for $\pi_w$
+ - $((3+1)\log{m} + 1)\times \F$, for $(\pi_x, e_x)$
+    + e.g., for $m=2^{20}\Rightarrow (4 \cdot 20 + 1)\cdot 32 = 81\cdot32 = 2592$ bytes
+ - $((2+1)\log{m} + 1)\times \F$, for $(\pi_y, e_y)$
+    + e.g., for $m=2^{20}\Rightarrow (3 \cdot 20 + 1)\cdot 32 = 61\cdot32 = 1952$ bytes
+ - $6 \times \F$, for $v_A,v_B,v_C,a_{x,y},b_{x,y},c_{x,y}$
+    - i.e., $6 \cdot 32 = 192$ bytes
+ - **TODO:** ideal sparse MLE opening size, for $\pi_{x,y}$
+
+{: .note}
+Unclear whether committing to the sumcheck univariate polynomials would help for small degrees like 2 and 3, since we'd need to also reveal evaluations and their (batched) proofs.
 
 ### $\mathsf{Spartan}_{\mathcal{D},\mathcal{S}}.\mathsf{Verify}^{\mathcal{FS}(\cdot)}(\mathbb{x}; \mathbf{\pi}) \Rightarrow \\{0,1\\}$
 
 Parse the proof and set up the Fiat-Shamir transcript:
  - $\spartanProof\parse\pi$
  - add $(\vk,c_\witn)$ to $\FS$ transcript
- - $\r\fsget \F^s$
 
-Verify the first sumcheck:
+Verify the first [sumcheck](#scverifyfsot-e-d-pirightarrow-bin01-r):
  - $\btau \fsget \F^s$
  - $(s_x; \r_x) \gets \SC.\verify^\FSo(0, e_x, 3; \pi_x)$
  - **assert** $s_x \equals 1$
  - **assert** $e_x \equals (v_A \cdot v_B - v_C)\cdot \eq_\btau(\r_x)$
 
-Verify the second sumcheck:
+Verify the second [sumcheck](#scverifyfsot-e-d-pirightarrow-bin01-r):
  - Let $P \bydef (\stmt, 1) \in \F^{m/2}$
  - $(r_A, r_B, r_C) \fsget \F^3$
- - $T\gets r_A v_A + r_B v_B + r_C V_C$
+ - $T\gets r_A v_A + r_B v_B + r_C v_C$
  - $(s_y; \r_y) \gets \SC.\verify^\FSo(T, e_y, 2; \pi_y)$
  - **assert** $s_y \equals 1$
  - $z_y \gets \left(r_{y,0} \tilde{P}(r_{y,1},\ldots,r_{y,s-1}) + (1-r_{y,0})e_w\right)$ 
