@@ -8,8 +8,8 @@ title: The Spartan zkSNARK framework
 #date: 2020-11-05 20:45:59
 #published: false 
 permalink: spartan
-#sidebar:
-#    nav: cryptomat
+sidebar:
+    nav: cryptomat
 #article_header:
 #  type: cover
 #  image:
