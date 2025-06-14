@@ -83,7 +83,7 @@ For example, Groth16 pays $O(N\log N)$ FFT work and $O(M) + O(N)$ MSMs (see brea
     - $\Rightarrow$ linear-time (concretely-efficient) prover!
 1. PCS-based, multilinear or univariate, depending on choice of sumcheck ☝️
 1. It poses a very nice research question: _What is the most efficient PCS for sparse MLEs?_
-1. For structured / repetitive / uniform circuits, Spartan's [most expensive step](#8-sparse-mle-pcs-leftarrow-sumcheck--dense-mle-pcs-aka-spark) can be done by the verifier!
+1. For structured / repetitive / uniform circuits, Spartan's [most expensive step](#6-sparse-mle-pcs-leftarrow-sumcheck--dense-mle-pcs-aka-spark) can be done by the verifier!
 
 ### Technical overview
 
@@ -541,11 +541,7 @@ e_y &\equals (r_A \cdot a_{x,y} + r_B \cdot b_{x,y} + r_C \cdot c_{x,y}) \cdot e
 All of this sounds easy in theory: in the PIOP model.
 In practice, **the most difficult task in Spartan** is instantiating the PIOP model with the right **sparse** R1CS MLEs, so as to enable efficient opening proofs for the R1CS MLEs!
 
-### (6) Opening $A(\boldsymbol{r}_x,\boldsymbol{r}_y),\ldots, C(\boldsymbol{r}_x,\boldsymbol{r}_y)$ $\Leftarrow$ sparse MLE PCS
-
-As explained in [Step 5](#5-degree-2-sumchecks-leftarrow-opening-zr_y-ar_xr_yldots-cr_xr_y), the **main challenge** is we need an efficient PCS for the $\tilde{A},\tilde{B}$ and $\tilde{C}$ sparse MLEs.
-
-This is crucial for opening the R1CS MLEs at a random point in the second sumcheck from Eq. \ref{eq:second-sumcheck}.
+#### Naive sparse MLE PCS
 
 A naive MLE PCS would be **extremely-inefficient**:
  - the R1CS matrices are of size $m\times m\Rightarrow$ they can be represented as a size-$m^2$ vector $V$. 
@@ -554,11 +550,9 @@ A naive MLE PCS would be **extremely-inefficient**:
     1. The size of the structured reference string (SRS) could be $\Theta(m^2)$, which is too large
     2. The opening time for $\tilde{V}(\r_x,\r_y)$ in all previously-known dense MLE PCS schemes is $\Theta(m^2)$! (Would love to be shown wrong on this.)
 
-To address this problem, Spartan proposes a compiler, called **Spark**.
+### (6) Sparse MLE PCS $\Leftarrow$ sumcheck & dense MLE PCS (a.k.a., Spark)
 
-Spark can take any dense MLE PCS for size-$n$ MLEs and turn it into a **sparse** one for size $m^2$ MLEs with only $n \approx m$ non-zero entries.
-
-### (7) Sparse MLE PCS $\Leftarrow$ sumcheck & dense MLE PCS (a.k.a., Spark)
+Spartan proposes a compiler, called **Spark**, which can take any dense MLE PCS for size-$n$ MLEs and turn it into a **sparse** one for size $m^2$ MLEs with only $n \approx m$ non-zero entries.
 
 Recall that $m=2^s$ and that we have a size-$m^2$ MLE $\tilde{V}$ of a sparse R1CS matrix, say, $V=(V\_{i,j})\_{i,j\in[m)}$ with $n\approx m$ non-zero entries:
 \begin{align}
