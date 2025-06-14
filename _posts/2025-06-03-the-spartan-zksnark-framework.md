@@ -56,6 +56,8 @@ permalink: spartan
 \def\rowbits#1{\overrightarrow{\mathsf{row}_{#1}}}
 \def\colbits#1{\overrightarrow{\mathsf{col}_{#1}}}
 %
+\def\ck{\mathsf{ck}}
+\def\ok{\mathsf{ok}}
 \def\dense{\mathcal{\green{D}}}
 \def\sparse{\mathcal{\red{S}}}
 \def\setup{\mathsf{Setup}}
@@ -109,11 +111,13 @@ We assume familiarity with the [multivariate sumcheck](#multivariate-sumcheck) p
 
 ### Notation
 
- - we use $[s) \bydef \\{0,1,\ldots,s-1\\}$
+ - We use $[s) \bydef \\{0,1,\ldots,s-1\\}$
  <!-- $\mathbf{a} \concat \mathbf{b}$ denotes the concatenation of two vectors into one -->
- - we refer to a sumcheck that verifies a polynomial sums to 0 over the hypercube as a **0-sumcheck**
+ - We refer to a sumcheck that verifies a polynomial sums to 0 over the hypercube as a **0-sumcheck**
  - We assume all algorithms have oracle access to the same Fiat-Shamir transcript $\FS$
- - we typically denote the **boolean hypercube** of size $2^s$ as $\binS$
+ - We typically denote the **boolean hypercube** of size $2^s$ as $\binS$
+ - We use $a\fsget S$ to denote sampling from a set $S$ in a deterministic manner using the Fiat-Shamir transcript $\FS$ derived so far
+ - We often use $\tilde{V}$ to refer the MLE of a vector or matrix $V$.
 
 ### Binary vectors
 
@@ -198,19 +202,19 @@ This way, we similarly have:
 
 Spartan uses a **"dense" multilinear polynomial commitment scheme** to commit to size-$2^s$ MLEs where most of the $2^s$ terms are non-zero.
 
-#### $\dense.\setup(s)\rightarrow (\prk,\vk)$
+#### $\dense.\setup(s)\rightarrow (\ck,\ok)$
 
-Returns a proving key $\prk$ used to commit to multilinear polynomials over $s$ variables and to create **opening proofs** and a verification key $\vk$ used to verify openings.
+Returns a **commitment key** $\ck$ used to commit to multilinear polynomials over $s$ variables and to create **opening proofs** and an **opening key** $\ok$ used to verify openings.
 
-#### $\dense.\commit(\prk, \tilde{F})\rightarrow c$
+#### $\dense.\commit(\ck, \tilde{F})\rightarrow c$
 
 Computes the commitment $c$ to the multilinear polynomial $\tilde{F}(X_0,\ldots,X_{s-1})$.
 
-#### $\dense.\open^\FSo(\prk, \tilde{F}, \boldsymbol{a}) \rightarrow (e, \pi)$
+#### $\dense.\open^\FSo(\ck, \tilde{F}, \boldsymbol{a}) \rightarrow (e, \pi)$
 
 Creates an opening proof $\pi$ arguing that $\tilde{F}(\boldsymbol{a}) = e$, for $a\in \F^s$ and $e\in \F$.
 
-#### $\dense.\verify^\FSo(\vk, c, \boldsymbol{a}, b; \pi) \rightarrow \\{0,1\\}$
+#### $\dense.\verify^\FSo(\ok, c, \boldsymbol{a}, b; \pi) \rightarrow \\{0,1\\}$
 
 Verifies that the opening proof $\pi$ correctly argues that $\tilde{F}(\boldsymbol{a}) = b$ where $\tilde{F}$ is the polynomial committed in $c$.
 
@@ -224,17 +228,17 @@ For example, perhaps only $n = o(2^{2s})$ or $n = O(m)$ terms are non-zero.
 Our sparse MLE PCS definition below is **specialized** for Spartan's use case of committing to three MLEs for the [sparse R1CS matrices](/r1cs#sparsity)!
 So, our algorithms always operate over these three (commitments to) matrices!
 
-#### $\sparse.\setup(s, n)\rightarrow (\prk,\vk)$
+#### $\sparse.\setup(s, n)\rightarrow (\ck,\ok)$
 
 Sets up a scheme for committing to three multilinear polynomials over $2s$ variables, such that each polynomial interpolates an $m\times m$ (R1CS) matrix with at most $n$ non-zero entries and $m\bydef 2^s$.
-Returns the proving key $\prk$ and the verification $\vk$.
+Returns the **commitment key** $\ck$ and the **opening key** $\ok$.
 (Recall matrix interpolation from [here](#multilinear-extensions-mles).)
 
-#### $\sparse.\commit(\prk, \tilde{A}, \tilde{B}, \tilde{C})\rightarrow (c_A, c_B, c_C)$
+#### $\sparse.\commit(\ck, \tilde{A}, \tilde{B}, \tilde{C})\rightarrow (c_A, c_B, c_C)$
 
 Returns commitments $(c_A, c_B, c_C)$ to the three MLEs of the $A,B$ and $C$ matrices.
 
-#### $\sparse.\open^\FSo(\prk, (\tilde{A},\tilde{B},\tilde{C}), (\r_x,\r_y)) \rightarrow (e_a, e_b, e_c; \pi)$
+#### $\sparse.\open^\FSo(\ck, (\tilde{A},\tilde{B},\tilde{C}), (\r_x,\r_y)) \rightarrow (e_a, e_b, e_c; \pi)$
 
 Creates an opening proof $\pi$ arguing all the following evaluations hold:
 \begin{align}
@@ -244,7 +248,7 @@ Creates an opening proof $\pi$ arguing all the following evaluations hold:
 \tilde{C}(\r_x,\r_y) &= e_c\\\\\
 \end{align}
 
-#### $\sparse.\verify^\FSo(\vk, (c_A,c_B,c_C), (\r_x,\r_y); \pi) \rightarrow \\{0,1\\}$
+#### $\sparse.\verify^\FSo(\ok, (c_A,c_B,c_C), (\r_x,\r_y); \pi) \rightarrow \\{0,1\\}$
 
 Verifies that the opening proof $\pi$ correctly argues that the evaluations in Eq. \ref{eq:sparse-mle-evals} hold for the MLEs committed in $c_A, c_B$ and $c_C$.
 
@@ -511,7 +515,7 @@ r\_C\left(\sum\_{\j\in\binS} \tilde{C}(\r\_x,\j) \tilde{Z}(\j)\right)\\\\\
 Now, the prover proves _one_ sumcheck on the $\term{M_{\r_x}(\Y)}$ polynomial from above (instead of three as per Eq. \ref{eq:three-sumchecks}). 
 
 _Small note:_
-In practice, this can be done **carefully** so as to not lose efficiency from the random linear combination which would make the coefficients of $M_{\r_x}$ large. 
+In practice, this single $M_{\r_x}$ sumcheck can be **batched, carefully,** so as to not blow up the size of the involved field elements from the $(r_A,r_B,r_C)$ random linear combination.
 
 {: .definition}
 We refer to this Eq. \ref{eq:second-sumcheck} sumcheck as Spartan's **second sumcheck**!
@@ -519,53 +523,58 @@ We refer to this Eq. \ref{eq:second-sumcheck} sumcheck as Spartan's **second sum
 
 As before, the prover sends a sumcheck proof $\term{\pi_y}$ that reduces verifying the claimed sum $T$ to verifying an evaluation $\term{e_y}\bydef M_{\r_x}(\term{\r_y})$ at a random $\term{\r_y}\in\F^s$ picked by the verifer.
 
-To verify the $e_y$ evaluation, it needs to check:
+To verify the $e_y$ evaluation, the verifier needs to check:
 \begin{align}
-e_y &\equals M\_{\r_x}(\r_j) \Leftrightarrow\\\\\
+e_y &\equals M\_{\r_x}(\r_y) \Leftrightarrow\\\\\
+    \label{eq:mrx-opening}
+    &\equals \left(
+        r_A \cdot \underbrace{\tilde{A}(\r\_x,\r_y)}\_{\term{a_{x,y}}} +
+        r_B \cdot \underbrace{\tilde{B}(\r\_x,\r_y)}\_{\term{b_{x,y}}} + 
+        r_C \cdot \underbrace{\tilde{C}(\r\_x,\r_y)}\_{\term{c_{x,y}}}
+    \right)
+        \cdot \underbrace{\tilde{Z}(\r_y)}\_{\term{e_z}}\\\\\
     &\equals
- r_A \cdot \underbrace{\tilde{A}(\r\_x,\r_y)}\_{\term{a_{x,y}}} \tilde{Z}(\r_y) +
- r_B \cdot \underbrace{\tilde{B}(\r\_x,\r_y)}\_{\term{b_{x,y}}} \tilde{Z}(\r_y) + 
- r_C \cdot \underbrace{\tilde{C}(\r\_x,\r_y)}\_{\term{c_{x,y}}} \tilde{Z}(\r_y)
+        (r_A \cdot \term{a_{x,y}} + r_B \cdot \term{b_{x,y}} + r_C \cdot \term{c_{x,y}}) \cdot \term{e_z}
 \end{align}
 
-Since the verifier has the $\oracle{\tilde{A}},\oracle{\tilde{B}},\oracle{\tilde{C}}$ oracles, it can query for the $(a_{x,y},b_{x,y},c_{x,y})$ evaluations on the R1CS matrix MLEs.
+_In theory_ (i.e., in the PIOP model), this is easy to do:
+ 1. The verifier has oracles $\oracle{\tilde{A}},\oracle{\tilde{B}},\oracle{\tilde{C}} \Rightarrow$ it can query for the $(a_{x,y},b_{x,y},c_{x,y})$ evaluations
+ 2. The verifier has a $\oracle{\tilde{Z}}$ oracle (recall from Eq. \ref{eq:Z}) $\Rightarrow$ it can also query for the $e_z$ evaluation
 
-Plus, recall from Eq. \ref{eq:Z} that the verifier has an $\oracle{\tilde{Z}}$ oracle.
-Therefore, it can also easily verify $\term{e_z} \equals \tilde{Z}(\r_y)$.
-
-Therefore, the verifier can simply check.
-\begin{align}
-e_y &\equals (r_A \cdot a_{x,y} + r_B \cdot b_{x,y} + r_C \cdot c_{x,y}) \cdot e_z
-\end{align}
-
-All of this sounds easy in theory: in the PIOP model.
-In practice, **the most difficult task in Spartan** is instantiating the PIOP model with the right **sparse** R1CS MLEs, so as to enable efficient opening proofs for the R1CS MLEs!
+_In practice_, **this is the most difficult task in Spartan**: instantiating the PIOP model with the right **sparse** R1CS MLEs, so as to enable efficient opening proofs for the $(a_{x,y},b_{x,y},c_{x,y})$ evaluations.
 
 #### Naive sparse MLE PCS
 
-A naive MLE PCS would be **extremely-inefficient**:
- - the R1CS matrices are of size $m\times m\Rightarrow$ they can be represented as a size-$m^2$ vector $V$. 
- - they are sparse, so only $n \approx m$ entries in $V$ are non-zero.
- - even though committing to the sparse MLE $\tilde{V}$ could be done in $O(n)$, not $O(m^2)$ via a **dense MLE PCS** scheme (e.g., PST[^PST13e]), two problems remain:
-    1. The size of the structured reference string (SRS) could be $\Theta(m^2)$, which is too large
-    2. The opening time for $\tilde{V}(\r_x,\r_y)$ in all previously-known dense MLE PCS schemes is $\Theta(m^2)$! (Would love to be shown wrong on this.)
+It's useful to clarify why a naive sparse MLE PCS would be **extremely-inefficient**.
+
+First, recall that:
+ - Every R1CS matrix is of size $m\times m\Rightarrow$ can be naively represented as a size-$m^2$ vector $V\Leftrightarrow$ a size-$m^2$ MLE. 
+ - Every R1CS matrix is sparse $\Leftrightarrow$ around $n \approx m$ entries in $V$ are non-zero.
+
+Even though committing to the sparse MLE $\tilde{V}$ could be done in $O(n)$, not $O(m^2)$ via a **dense MLE PCS** scheme (e.g., PST[^PST13e]), two problems remain:
+ 1. The size of the structured reference string (SRS) could be $\Theta(m^2)$, which is too large
+ 2. The opening time for $\tilde{V}(\r_x,\r_y)$ in all previously-known dense MLE PCS schemes is $\Theta(m^2)$! (Would love to hear if this is wrong.)
 
 ### (6) Sparse MLE PCS $\Leftarrow$ sumcheck & dense MLE PCS (a.k.a., Spark)
 
-Spartan proposes a compiler, called **Spark**, which can take any dense MLE PCS for size-$n$ MLEs and turn it into a **sparse** one for size $m^2$ MLEs with only $n \approx m$ non-zero entries.
+To efficiently address the challenges above, Spartan proposes a compiler, called **Spark**.
+
+**Spark** can take any [dense MLE PCS](#dense-mle-pcs) for size-$n$ MLEs and turn it into a [**sparse** one](#sparse-mle-pcs) for size $m^2$ MLEs with only $n \approx m$ non-zero entries.
 
 Recall that $m=2^s$ and that we have a size-$m^2$ MLE $\tilde{V}$ of a sparse R1CS matrix, say, $V=(V\_{i,j})\_{i,j\in[m)}$ with $n\approx m$ non-zero entries:
 \begin{align}
 \tilde{V}(\X,\Y) = \sum\_{\i\in\binS,\j\in\binS} V\_{i,j}\cdot\eq\_i(\X)\eq\_j(\Y)
 \end{align}
 
-Our goal is to come up with an MLE PCS so we can efficiently and provably open $\tilde{V}$ at the random $(\r_x,\r_y)$ point picked by the verifier:
+Spark's goal is to come up with a sparse MLE PCS that can efficiently open $\tilde{V}(\r_x,\r_y)$ as per Eq. \ref{eq:mrx-opening}:
 \begin{align}
 \label{eq:r1cs-matrix-sumcheck}
 \tilde{V}(\r_x,\r_y) = \sum_{\i\in\binS,\j\in\binS} A_{i,j}\cdot\eq_i(\r_x)\eq_j(\r_y)
 \end{align}
 
-For each R1CS matrix $V$, the universal setup will commit to three **dense** MLEs representing the non-zero entries $V_{i,j}$ in the matrix and their locations $i,j$.
+How?
+
+First, for each R1CS matrix $V$, the universal setup will commit to three **dense** MLEs representing the non-zero entries $V_{i,j}$ in the matrix and their locations $i,j$.
 
 Denote the set of non-zero entries in a matrix $V$ by:
 \begin{align}
@@ -603,7 +612,7 @@ As a result, we can rewrite the R1CS matrix sumcheck from Eq. \ref{eq:r1cs-matri
 \end{align}
 
 {: .error}
-Unfortunately, the term inside the sum above from Eq. \ref{eq:r1cs-dense-sumcheck} is **not** a polynomial.
+Unfortunately, the expression being summed over above in Eq. \ref{eq:r1cs-dense-sumcheck} is **not** a polynomial.
 This is because $\bits$'s domain is $[m)$ and we cannot evaluate it on arbitrary field elements in $\F$.
 
 My understanding so far is that Spark is an efficient protocol for "linearizing" the $\eq_{\r_x}(\bits(\row(\r_k)))$ expression into an MLE that agrees with it over hypercube (and its $\col$ counterpart).
@@ -623,51 +632,51 @@ Describe the Spark approach, later refined by Lasso[^STW23e] and Shout[^ST25e].
     a_{x,y}, b_{x,y}, c_{x,y},\pi_{x,y}\\ \end{pmatrix}}
 $</div>
 
-We describe Spartan as a **framework** for obtaining (non-ZK) SNARKs given a dense MLE PCS $\dense$ and a sparse MLE PCS $\sparse$ (from a compiler like Spark[^Sett19e]).
+We describe Spartan as a **framework** for obtaining (non-ZK) SNARKs given a [dense MLE PCS](#dense-mle-pcs) $\dense$ and a [sparse MLE PCS](#sparse-mle-pcs) $\sparse$ (from a compiler like Spark[^Sett19e]).
 
-Recall the main notation from before:
-\begin{align}
-Z &\bydef (\stmt, 1, \witn)\in \F^m\\\\\
-P &\bydef (\stmt, 1)\\\\\
-W &\bydef \witn\\\\\
-F(\X) &\bydef \sum_{\j\in\binS} \tilde{A}(\X,\j) \tilde{Z}(\j) \cdot \sum_{\j\in\binS} \tilde{B}(\X,\j) \tilde{Z}(\j) - \sum_{\j\in\binS} \tilde{C}(\X,\j) \tilde{Z}(\j)\\\\\
-\label{eq:mrx}
-M_{\r_x}(\Y) &\bydef r_A \tilde{A}(\r\_x,\Y) \tilde{Z}(\Y) + r_B \tilde{B}(\r\_x,\Y) \tilde{Z}(\Y) + r_C \tilde{C}(\r\_x,\Y) \tilde{Z}(\Y)\\\\\
-\end{align}
-
- - We often use $\tilde{V}$ to refer the MLE of a vector or matrix $V$.
-    + (Recall that the R1CS matrices are denoted by $A,B,C$.)
- - We use $a\fsget S$ to denote sampling from a set $S$ in a deterministic manner using the Fiat-Shamir transcript derived so far
 
 ### $\mathsf{Spartan}_{\mathcal{D},\mathcal{S}}.\mathsf{Setup}(A, B, C) \Rightarrow (\prk,\vk)$
 
- - Let $m$ denote the number of rows and columns in the square matrices $A,B,C$
- - Let $n_A,n_B,n_C$ denote the max number of non-zero entries in $A,B$ and $C$, respectively
+Notation:
+
+ - $m\bydef 2^s$ denote the number of rows and columns in the square R1CS matrices $A,B,C$
+ - $n_A,n_B,n_C$ denote the max number of non-zero entries in $A,B$ and $C$, respectively
  - $n\gets \max{(n_A,n_B,n_C)}$
- - $(\prk_\dense,\vk_\dense)\gets \dense.\setup(s-1)$
- - $(\prk_\sparse,\vk_\sparse)\gets \sparse.\setup(s, n)$
- - $(c_A,c_B,c_C) \gets \sparse.\commit(\prk_\sparse, \tilde{A}, \tilde{B}, \tilde{C})$
- - $\vk\gets (c_A,c_B,c_C,\vk_\dense,\vk_\sparse)$
- - $\prk\gets (A,B,C,\vk, \prk_\dense,\prk_\sparse)$
+
+Set up the dense and sparse PCSs:
+ - $(\ck_\dense,\ok_\dense)\gets \dense.\setup(s-1)$
+ - $(\ck_\sparse,\ok_\sparse)\gets \sparse.\setup(s, n)$
+
+Commit to the R1CS matrices:
+ - $(c_A,c_B,c_C) \gets \sparse.\commit(\ck_\sparse, \tilde{A}, \tilde{B}, \tilde{C})$
+
+Bureaucratically track the commitments and the PCS's opening keys and commitments keys: 
+ - $\vk\gets (c_A,c_B,c_C,\ok_\dense,\ok_\sparse)$
+ - $\prk\gets (A,B,C,\vk, \ck_\dense,\ck_\sparse)$
 
 ### $\mathsf{Spartan}_{\mathcal{D},\mathcal{S}}.\mathsf{Prove}^{\mathcal{FS}(\cdot)}(\mathsf{prk}, \mathbf{x}; \mathbf{w}) \Rightarrow \pi$ 
 
+Recall $m\bydef 2^s$ is the # of rows and columns in the R1CS matrices.
+
 Commit to the witness and set up the Fiat-Shamir transcript:
- - $(\cdot,\cdot,\cdot,\vk,\prk_\dense,\cdot)\parse \prk$
- - $c_\witn\gets\dense.\commit(\prk_\dense,\tilde{W})$
+ - $(\cdot,\cdot,\cdot,\vk,\ck_\dense,\cdot)\parse \prk$
+ - $c_\witn\gets\dense.\commit(\ck_\dense,\tilde{W})$
  - add $(\vk,c_\witn)$ to $\FS$ transcript
 
 Prove the first sumcheck:
  - $\btau \fsget \F^s$
+ - Let $Z \bydef (\stmt, 1, \witn)\in \F^m$
+ - Let $F(\X) \bydef \sum_{\j\in\binS} \tilde{A}(\X,\j) \tilde{Z}(\j) \cdot \sum_{\j\in\binS} \tilde{B}(\X,\j) \tilde{Z}(\j) - \sum_{\j\in\binS} \tilde{C}(\X,\j) \tilde{Z}(\j)$
  - $(\pi_x, e_x; \r_x\in\F^s) \gets \SC.\prove(F\cdot \eq_\btau, 0, s, 3)$ (see Eq. \ref{eq:F})
 
 Prove the second sumcheck:
+ - $(r_A, r_B, r_C) \fsget \F^3$
+ - Let $M_{\r_x}(\Y) \bydef r_A \tilde{A}(\r\_x,\Y) \tilde{Z}(\Y) + r_B \tilde{B}(\r\_x,\Y) \tilde{Z}(\Y) + r_C \tilde{C}(\r\_x,\Y) \tilde{Z}(\Y)$
  - $v_A \gets \sum_{\j\in\binS} \tilde{A}(\r_x,\j) \tilde{Z}(\j)$
  - $v_B \gets \sum_{\j\in\binS} \tilde{B}(\r_x,\j) \tilde{Z}(\j)$
  - $v_C \gets \sum_{\j\in\binS} \tilde{C}(\r_x,\j) \tilde{Z}(\j)$
- - $(r_A, r_B, r_C) \fsget \F^3$
  - $T\gets r_A v_A + r_B v_B + r_C V_C$ 
- - $(\pi_y, e_y; \r_y) \gets \SC.\prove(M_{\r_x}, T, s, 2)$ (see Eq. \ref{eq:mrx} and \ref{eq:second-sumcheck})
+ - $(\pi_y, e_y; \r_y) \gets \SC.\prove(M_{\r_x}, T, s, 2)$ (see Eq. \ref{eq:second-sumcheck})
 
 <!-- The Spartan proof, defined as a macro, to avoid mistakes -->
 <div style="display: none;">$
@@ -679,9 +688,10 @@ Prove the second sumcheck:
 $</div>
 
 Compute the necessary openings:
- - $(e_w, \pi_w) \gets\dense.\open^\FSo(\prk_\dense, \tilde{W},(r_{y,t})_{t\in[1,s)})$
+ - Let $W \bydef \witn\in \F^{m/2}$
+ - $(e_w, \pi_w) \gets\dense.\open^\FSo(\ck_\dense, \tilde{W},(r_{y,t})_{t\in[1,s)})$
  - $(a_{x,y},b_{x,y},c_{x,y};\pi_{x,y})\gets \sparse.\open^\FSo\begin{pmatrix}
-    \prk_\sparse,
+    \ck_\sparse,
     (\tilde{A}, \tilde{B}, \tilde{C}),%\\\\\
     (\r_x,\r_y)
     \end{pmatrix}$
@@ -716,6 +726,7 @@ Verify the first sumcheck:
  - **assert** $e_x \equals (v_A \cdot v_B - v_C)\cdot \eq_\btau(\r_x)$
 
 Verify the second sumcheck:
+ - Let $P \bydef (\stmt, 1) \in \F^{m/2}$
  - $(r_A, r_B, r_C) \fsget \F^3$
  - $T\gets r_A v_A + r_B v_B + r_C V_C$
  - $(s_y; \r_y) \gets \SC.\verify^\FSo(T, e_y, 2; \pi_y)$
@@ -724,13 +735,13 @@ Verify the second sumcheck:
  - **assert** $e_y \equals (r_A \cdot a_{x,y} + r_B \cdot b_{x,y} + r_C \cdot c_{x,y}) \cdot z_y$
  
 Verify the $e_w \equals \tilde{W}(\r_y)$ opening:
- - $(\cdot,\cdot,\cdot,\vk_\dense,\cdot) \gets \vk$
- - **assert** $\dense.\verify^\FSo(\vk_\dense, c_\witn, (r_{y,t})_{t\in[1,s)}, e_w; \pi_w)$
+ - $(\cdot,\cdot,\cdot,\ok_\dense,\cdot) \gets \vk$
+ - **assert** $\dense.\verify^\FSo(\ok_\dense, c_\witn, (r_{y,t})_{t\in[1,s)}, e_w; \pi_w)$
 
 Verify the R1CS MLE evaluations:
- - $(c_A, c_B, c_C,\cdot,\vk_\sparse) \gets \vk$
+ - $(c_A, c_B, c_C,\cdot,\ok_\sparse) \gets \vk$
  - **assert** $\sparse.\verify^\FSo\begin{pmatrix}
-    \vk_\sparse,
+    \ok_\sparse,
     (c_A, c_B, c_C),
     (\r_x, \r_y),
     (a_{x,y}, b_{x,y}, c_{x,y});
