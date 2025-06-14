@@ -660,6 +660,7 @@ Recall $m\bydef 2^s$ is the # of rows and columns in the R1CS matrices.
 
 Commit to the witness and set up the Fiat-Shamir transcript:
  - $(\cdot,\cdot,\cdot,\vk,\ck_\dense,\cdot)\parse \prk$
+ - Let $W \bydef \witn\in \F^{m/2}$
  - $c_\witn\gets\dense.\commit(\ck_\dense,\tilde{W})$
  - add $(\vk,c_\witn)$ to $\FS$ transcript
 
@@ -688,7 +689,6 @@ Prove the second sumcheck:
 $</div>
 
 Compute the necessary openings:
- - Let $W \bydef \witn\in \F^{m/2}$
  - $(e_w, \pi_w) \gets\dense.\open^\FSo(\ck_\dense, \tilde{W},(r_{y,t})_{t\in[1,s)})$
  - $(a_{x,y},b_{x,y},c_{x,y};\pi_{x,y})\gets \sparse.\open^\FSo\begin{pmatrix}
     \ck_\sparse,
