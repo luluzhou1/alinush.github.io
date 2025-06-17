@@ -3044,6 +3044,8 @@
 
 [^SP21]: **BLST Cryptographic Implementation Review**, by Eric Schorn and Thomas Pornin, 2021
 
+[^SP25e]: **SubLogarithmic} Linear Time {SNARKs} from Compressed Sum-Check**, by Nitin Singh and Sikhar Patranabis, *in Cryptology {ePrint} Archive, Paper 2025/908*, 2025, [[URL]](https://eprint.iacr.org/2025/908)
+
 [^SPP10]: **Increased Resilience in Threshold Cryptography: Sharing a Secret with Devices That Cannot Store Shares**, by Simoens, Koen and Peeters, Roel and Preneel, Bart, *in Pairing-Based Cryptography - Pairing 2010*, 2010
 
 [^SPP10e]: **Increased Resilience in Threshold Cryptography: Sharing a Secret with Devices That Cannot Store Shares**, by Koen Simoens and Roel Peeters and Bart Preneel, *in Cryptology ePrint Archive, Report 2010/207*, 2010, [[URL]](https://eprint.iacr.org/2010/207)
@@ -3317,6 +3319,8 @@
 [^WLGplus78]: **SIFT: Design and analysis of a fault-tolerant computer for aircraft control**, by J. H. Wensley and L. Lamport and J. Goldberg and M. W. Green and K. N. Levitt and P. M. Melliar-Smith and R. E. Shostak and C. B. Weinstock, *in Proceedings of the IEEE*, 1978
 
 [^WLPZ23e]: **The Locality of Memory Checking**, by Weijie Wang and Yujie Lu and Charalampos Papamanthou and Fan Zhang, *in Cryptology ePrint Archive, Paper 2023/1358*, 2023, [[URL]](https://eprint.iacr.org/2023/1358)
+
+[^WOSplus25e]: **Efficient Proofs of Possession for Legacy Signatures**, by Anna P. Y. Woo and Alex Ozdemir and Chad Sharp and Thomas Pornin and Paul Grubbs, *in Cryptology {ePrint} Archive, Paper 2025/538*, 2025, [[URL]](https://eprint.iacr.org/2025/538)
 
 [^WR19]: **How to End Password Reuse on the Web**, by Wang, Ke Coby and Reiter, Michael K, *in NDSS'19*, 2019
 
