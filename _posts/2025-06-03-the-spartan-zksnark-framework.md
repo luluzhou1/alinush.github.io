@@ -729,8 +729,10 @@ pick a random $\alpha\in\F$ and check that $v_1 + \alpha v_2 \equals \sum_\b \le
  - **TODO:** ideal dense MLE opening size, for $\pi_w$
  - $((3+1)\log{m} + 1)\times \F$, for $(\pi_x, e_x)$
     + e.g., for $m=2^{20}\Rightarrow (4 \cdot 20 + 1)\cdot 32 = 81\cdot32 = 2592$ bytes
+    - or, via HyperPLONK[^CBBZ22e] tricks, ignoring batched opening proof size: $\log{m}\times \Gr_1 + (\log{m} + 1)\times \F = 20 \times 48 + 21 \times 32 = 960 + 672 = 1632$ bytes
  - $((2+1)\log{m} + 1)\times \F$, for $(\pi_y, e_y)$
     + e.g., for $m=2^{20}\Rightarrow (3 \cdot 20 + 1)\cdot 32 = 61\cdot32 = 1952$ bytes
+    - or, same as above via HyperPLONK tricks $\Rightarrow 1632$ bytes
  - $6 \times \F$, for $v_A,v_B,v_C,a_{x,y},b_{x,y},c_{x,y}$
     - i.e., $6 \cdot 32 = 192$ bytes
  - **TODO:** ideal sparse MLE opening size, for $\pi_{x,y}$
