@@ -46,7 +46,7 @@ Analyze!
 
 ## Sumcheck for $\sum_i p(\omega^i)$
 
-Recall the definition of a degree-$(n-1)$ [Lagrange polynomial](/lagrange-interpolation) when the evaluation domain is $\mathbb{H} = \\{\omega^0,\ldots,\omega^{n-1}\\}$: i.e., the set of all $n$th roots of unity.
+Recall the definition of a degree $<n$ [Lagrange polynomial](/lagrange-interpolation) when the evaluation domain is $\mathbb{H} = \\{\omega^0,\ldots,\omega^{n-1}\\}$: i.e., the set of all $n$th roots of unity.
 \begin{align}
 \lagr_i(X) = \frac{\omega^i(X^n - 1)}{n(X-\omega^i)}
 \end{align}
@@ -54,7 +54,7 @@ A key observation is:
 \begin{align}
 \lagr_i(0) = \frac{\omega^i(0^n - 1)}{n(0-\omega^i)} = \frac{\omega^i (-1)}{n(-\omega^i)} = n^{-1}
 \end{align}
-Next, given a degree-$(n-1)$ polynomial $p(X)$, we can write it as: 
+Next, given a degree $<n$ polynomial $p(X)$, we can write it as: 
 \begin{align}
 p(X) &= \sum_{i\in[n]} \lagr_i(X)p(\omega^i)
 \end{align}
@@ -86,7 +86,7 @@ We first describe a _naive_ protocol and then the actual optimized one.
 
 ### Naive protocol
 
-First, interpolate degree-$(n-1)$ (not $2n-1$!) polynomial $c(X)$ such that:
+First, interpolate degree $< n$ (not $2n-1$!) polynomial $c(X)$ such that:
 \begin{align}
 \label{eq:c}
 c(\omega^i) \bydef a(\omega^i)b(\omega^i)
