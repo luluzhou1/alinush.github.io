@@ -295,6 +295,14 @@ In February 2025, I gave a 25 minute workshop on keyless accounts at AZTEC's [No
 
 ## Resources
 
+### Papers
+
+ - FREpack[^SZ23e], useful for arithemtizing foreign arithmetic better.
+ - Spartan for interactive R1CS[^WOSplus25e], useful for in-circuit lookups and other FS-based protocols.
+ - Hekathon[^RMHplus24e], may be useful for splitting the proving task
+
+### Code
+
  - [AnonAdhar code](https://github.com/anon-aadhaar/anon-aadhaar/blob/main/packages/circuits/src/helpers/signature.circom), by PSE, does RSA2048-SHA2-256 signature verification in `circom` within ~900K R1CS constraints
  - [TheFrozenFire/snark-jwt-verify](https://github.com/TheFrozenFire/snark-jwt-verify/tree/master)
  - [emmaguo13/nozee](https://github.com/emmaguo13/nozee)
