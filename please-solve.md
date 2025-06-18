@@ -13,9 +13,9 @@ permalink: /please-solve
 
 These are great research problems to solve that I wish I had time to work more on.
 
-## Efficient homomorphic Merkle trees
+## Efficient Homomorphic Merkle (Herkle) trees 
 
-A homomorphic Merkle tree has an extremely useful property: given a change $\Delta$ to one of its leaves $\ell$, every node in the tree can be updated homomorphically, knowing only the change $\Delta$ and the leaf $\ell$. In particular, the tree's root can be updated homorphically too, which can be very useful!
+A homomorphic Merkle tree, or a **Herkle tree** has an extremely useful property: given a change $\Delta$ to one of its leaves $\ell$, every node in the tree can be updated homomorphically, knowing only the change $\Delta$ and the leaf $\ell$. In particular, the tree's root can be updated homorphically too, which can be very useful!
 
 In contrast, a non-homomorphic tree such as a SHA2-based one, requires first updating that node's child, which in turn requires the child's child to be updated and so on.
 
@@ -25,10 +25,13 @@ The state of the art construction is by Papamanthou et al.[^PSTY13] from lattice
 However, its efficiency is not great.
 In particular, when parameterized to instantiate a depth-256 prefix tree, it is likely very inefficient.
 (Some performance numbers were initialy explored in an earlier version of Edrax[^CPZ18].)
+There are other constructions from pairings, but they are bounded-depth: for a tree of depth $\ell$ a trusted setup of size $2^\ell$ needs to be performed[^TCZplus20]$^,$[^SCPplus22].
 
-**Open problem 1:** Devise a homomorphic Merkle tree construction that can support a large number of updates per second in one core (e.g., tens of thousands).
+Applications:
+ 1. Homomorphic and maintainable authenticated dictionaries for authenticating blockchain validation state
+ 2. Trivially-shardable authenticated nullifier sets for anonymous cryptocurrencies
 
-**Open problem 2:** Solve open problem 1 such that the Merkle tree can have up to $2^{256}$ leaves.
+**Open problem 1:** Devise an arbitrary-depth homomorphic Merkle tree construction that can support a large number of updates per second in one core (e.g., tens of thousands). e.g., the Merkle tree should be able to have up to $2^{256}$ leaves.
 
 ## Compress AMT proofs to KZG proofs
 
