@@ -300,6 +300,8 @@ In February 2025, I gave a 25 minute workshop on keyless accounts at AZTEC's [No
  - FREpack[^SZ23e], useful for arithemtizing foreign arithmetic better.
  - Spartan for interactive R1CS[^WOSplus25e], useful for in-circuit lookups and other FS-based protocols.
  - Hekathon[^RMHplus24e], may be useful for splitting the proving task
+ - [UltraGroth](https://hackmd.io/@Merlin404/Hy_O2Gi-h), Groth16 for interactive R1CS
+    + Also, [see this note](https://zkresear.ch/t/discussions-on-lookups-in-groth16-ultragroth/290)
 
 ### Code
 
