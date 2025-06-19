@@ -210,9 +210,10 @@ Returns a **commitment key** $\ck$ used to commit to multilinear polynomials ove
 
 Computes the commitment $c$ to the multilinear polynomial $\tilde{F}(X_0,\ldots,X_{s-1})$.
 
-#### $\dense.\open^\FSo(\ck, \tilde{F}, \boldsymbol{a}) \rightarrow (e, \pi)$
+#### $\dense.\open^\FSo(\ck, c, \tilde{F}, \boldsymbol{a}) \rightarrow (e, \pi)$
 
-Creates an opening proof $\pi$ arguing that $\tilde{F}(\boldsymbol{a}) = e$, for $a\in \F^s$ and $e\in \F$.
+Creates an opening proof $\pi$ arguing that $\tilde{F}(\boldsymbol{a}) = e$, where
+$\tilde{F}$ is committed in $c$, $\boldsymbol{a}\in \F^s$ and $e \in \F$.
 
 #### $\dense.\verify^\FSo(\ok, c, \boldsymbol{a}, b; \pi) \rightarrow \\{0,1\\}$
 
@@ -689,7 +690,7 @@ Prove the second [sumcheck](#scprovefsof-t-s-drightarrow-epir):
 $</div>
 
 Compute one dense and one sparse MLE opening:
- - $(e_w, \pi_w) \gets\dense.\open^\FSo(\ck_\dense, \tilde{W},(r_{y,t})_{t\in[1,s)})$
+ - $(e_w, \pi_w) \gets\dense.\open^\FSo(\ck_\dense, c_\witn, \tilde{W},(r_{y,t})_{t\in[1,s)})$
  - $(a_{x,y},b_{x,y},c_{x,y};\pi_{x,y})\gets \sparse.\open^\FSo\begin{pmatrix}
     \ck_\sparse,
     (\tilde{A}, \tilde{B}, \tilde{C}),%\\\\\
