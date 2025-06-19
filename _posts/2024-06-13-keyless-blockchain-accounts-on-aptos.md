@@ -302,6 +302,7 @@ In February 2025, I gave a 25 minute workshop on keyless accounts at AZTEC's [No
  - Hekathon[^RMHplus24e], may be useful for splitting the proving task
  - [UltraGroth](https://hackmd.io/@Merlin404/Hy_O2Gi-h), Groth16 for interactive R1CS
     + Also, [see this note](https://zkresear.ch/t/discussions-on-lookups-in-groth16-ultragroth/290)
+ - Reef[^AIMplus23e], potentially-useful for in-circuit regex matching
 
 ### Code
 
