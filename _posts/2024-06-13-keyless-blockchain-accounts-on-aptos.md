@@ -303,6 +303,12 @@ In February 2025, I gave a 25 minute workshop on keyless accounts at AZTEC's [No
  - [UltraGroth](https://hackmd.io/@Merlin404/Hy_O2Gi-h), Groth16 for interactive R1CS
     + Also, [see this note](https://zkresear.ch/t/discussions-on-lookups-in-groth16-ultragroth/290)
  - Reef[^AIMplus23e], potentially-useful for in-circuit regex matching
+ - FLIP-and-prove R1CS[^NPR24e], potentially-useful for folding SHA2
+
+### Misc
+ 
+ - [SoK: Hash functions in Zero Knowledge Proofs](https://github.com/ingonyama-zk/papers/blob/main/sok_zk_friendly_hashes.pdf), Karthik Inbasekar
+ - [A Brief History of Lookup Arguments](https://github.com/ingonyama-zk/papers/blob/main/lookups.pdf), Tomer Solberg
 
 ### Code
 
@@ -310,6 +316,10 @@ In February 2025, I gave a 25 minute workshop on keyless accounts at AZTEC's [No
  - [TheFrozenFire/snark-jwt-verify](https://github.com/TheFrozenFire/snark-jwt-verify/tree/master)
  - [emmaguo13/nozee](https://github.com/emmaguo13/nozee)
  - [emmaguo13/zk-blind](https://github.com/emmaguo13/zk-blind)
+ - [noir-r1cs](https://github.com/worldfnd/ProveKit/tree/main/noir-r1cs)
+ - [semaphore-rs](https://github.com/worldcoin/semaphore-rs)
+ - [WHIR in arkworks](https://github.com/WizardOfMenlo/whir)
+ - [hyrax-pcs-commit](https://github.com/worldcoin/hyrax-pcs-commit)
 
 ## Apendix
 

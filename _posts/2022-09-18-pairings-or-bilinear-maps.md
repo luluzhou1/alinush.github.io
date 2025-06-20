@@ -296,11 +296,17 @@ To mitigate against this, the PKG can be decentralized into multiple authorities
 Let $H_1 : \\{0,1\\}^\* \rightarrow \Gr_1^\*$ and $H_T : \Gr_T \rightarrow \\{0,1\\}^n$ be two hash functions modeled as random oracles.
 To encrypt an $n$-bit message $m$ to a user with email address $id$, one computes:
 \begin{align}
-    \pk_{id} &= e(H_1(id), \mpk) \in \Gr_T\\\\\
+    \pk_{id} &= e(H_1(id), \mpk) \bydef e(H_1(id), g_2)^{\msk}\in \Gr_T\\\\\
     r &\randget \Zp\\\\\
     \label{eq:ibe-ctxt}
-    c &= \left(g_2^r, m \xor H_T\left(\left(\pk_{id}\right)^r\right)\right) \in \Gr_2\times \\{0,1\\}^n
+    c &= \left(
+        \underbrace{g_2^r}\_{u}, 
+        \underbrace{m \xor H_T\left(\left(\pk_{id}\right)^r\right)}\_{v}
+    \right) 
+    \in \Gr_2\times \\{0,1\\}^n
 \end{align}
+
+**Note:** Later on, we'll use $(\pk_{id})^r = e(H_1(id), g_2^{\msk})^r = e(H_1(id), g_2^r)^\msk = e(H_1(id)^\msk, u) \bydef e(\dsk_{id}, u)$, where $\dsk_{id}$ will be the **decryption secret key** for $id$.
 
 To decrypt, the user with email address $id$ must first obtain their **decryption secret key** $\dsk_{id}$ from the PKG.
 For this, we assume the PKG has a way of authenticating the user, before handing them their secret key. 

@@ -1,6 +1,6 @@
 ---
 title: What is a Merkle tree?
-permalink: /merkle
+permalink: merkle
 sidebar:
     nav: cryptomat
 tags:

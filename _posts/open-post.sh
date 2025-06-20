@@ -1,56 +1,102 @@
 #!/bin/bash
 
-scriptdir=$(cd $(dirname $(readlink -f $0)); pwd -P)
+scriptdir=$(cd "$(dirname "$0")"; pwd -P)
 postdir="$scriptdir/"
-line=1
-
-is_number()
-{
-    local re='^[0-9]+$'
-    if [[ "$1" =~ $re ]] ; then
-        return 1
-    else
-        return 0
-    fi
-}
-
 cd "$postdir/"
-  
-files=`find . -name "*.md"`
 
-files=`echo "$files" | grep -v "/_drafts/"`
-files=`echo "$files" | grep -v "/files/"`
-files=`echo "$files" | grep -v "/templ.md"`
-files=`echo "$files" | grep -v "/TODO.md"`
-files=`echo "$files" | grep -v "/refs.md"`
-files=`echo "$files" | grep -v "/*welcome.md"`
-files=`echo "$files" | grep -v "/*header-image.md"`
+# Gather and filter markdown files
+files=$(find . -name "*.md" | grep -vE "/_drafts/|/files/|/templ.md|/TODO.md|/refs.md|/*welcome.md|/*header-image.md" | cut -c 3- | sort -r)
 
-files=`echo "$files" | cut -c 3-` # cuts the first two characters (i.e., the ./)
+# Arrays
+index_keys=()
+index_files=()
+perma_keys=()
+perma_files=()
+titles=()
+all_files=()
+all_keys=()
 
-files=`echo "$files" | sort`
+display_titles=()
+index=1
 
-sorted_files=`echo "$files" | sort -r`
+# Collect metadata
+for file in $files; do
+    permalink=$(grep -m 1 '^permalink:' "$file" | sed -E 's/^permalink:[[:space:]]*//')
+    title=$(grep -m 1 '^title:' "$file" | sed -E 's/^title:[[:space:]]*//;s/^"//;s/"$//')
+    [ -z "$title" ] && title="(untitled)"
 
-if [ $# -eq 0 ]; then
-    titles=`grep '^title:' $sorted_files | cut -f 3- -d':' | sed -e 's/^[[:space:]]*//'`
-
-    # remove quotes from titles of the form "<title>" and just use <title>
-    titles=`echo "$titles" | gsed -e 's/^"//'  -e 's/"$//'`
-
-    echo "$titles" | awk '{printf "%d\t%s\n", NR, $0}' | more
-else
-    line=$1
-    if [ -z "$line" ]; then
-        line=1
-    elif is_number "$line"; then
-        echo "ERROR: '$line' is not a number"
-        exit 1
+    if [ -z "$permalink" ]; then
+        key="$index"
+        index_keys=("${index_keys[@]}" "$index")
+        index_files=("${index_files[@]}" "$file")
+        index=$((index + 1))
+    else
+        key="$permalink"
+        perma_keys=("${perma_keys[@]}" "$permalink")
+        perma_files=("${perma_files[@]}" "$file")
     fi
-    files=`echo "$files" | tail -n "$line"`
-    file=`echo "$files" | head -n 1`
 
-    vim "$file"
-    echo "$file"
+    all_keys=("${all_keys[@]}" "$key")
+    all_files=("${all_files[@]}" "$file")
+    titles=("${titles[@]}" "$title")
+    display_titles=("${display_titles[@]}" "$title")
+done
+
+# If no input, display list
+if [ $# -eq 0 ]; then
+    for title in "${display_titles[@]}"; do
+        echo "$title"
+    done | more
+    exit 0
+fi
+
+# Otherwise, fuzzy open
+input="$1"
+file_to_open=""
+
+# Exact match: number
+i=0
+for key in "${index_keys[@]}"; do
+    if [ "$key" = "$input" ]; then
+        file_to_open="${index_files[$i]}"
+        break
+    fi
+    i=$((i + 1))
+done
+
+# Exact match: permalink
+if [ -z "$file_to_open" ]; then
+    i=0
+    for key in "${perma_keys[@]}"; do
+        if [ "$key" = "$input" ]; then
+            file_to_open="${perma_files[$i]}"
+            break
+        fi
+        i=$((i + 1))
+    done
+fi
+
+# Fuzzy match (permalink or title)
+if [ -z "$file_to_open" ]; then
+    i=0
+    for key in "${all_keys[@]}"; do
+        title="${titles[$i]}"
+        match_key=$(echo "$key" | tr '[:upper:]' '[:lower:]')
+        match_title=$(echo "$title" | tr '[:upper:]' '[:lower:]')
+        match_input=$(echo "$input" | tr '[:upper:]' '[:lower:]')
+        if echo "$match_key" | grep -q "$match_input" || echo "$match_title" | grep -q "$match_input"; then
+            file_to_open="${all_files[$i]}"
+            break
+        fi
+        i=$((i + 1))
+    done
+fi
+
+# Open or error
+if [ -n "$file_to_open" ]; then
+    vim "$file_to_open"
+else
+    echo "No match found for '$input'"
+    exit 1
 fi
 

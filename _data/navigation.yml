@@ -119,6 +119,13 @@ cryptomat:
         url: /2020/11/05/cryptographic-assumptions-in-hidden-order-groups.html
     #  - title: DL, CDH, DDH, SXDH, KEA, q-SDH, q-BSDH, q-PKE
 
+  #- title: Commitments
+  #  children:
+  #    - title: Pedersen
+  #      url: /pedersen
+  #    - title: AFGHO
+  #      url: /afgho
+
   - title: Digital signatures
     children:
       - title: BBS+ signatures
@@ -131,10 +138,14 @@ cryptomat:
         url: /schnorr
       - title: Threshold BLS
         url: /threshold-bls
+      #- title: RSA
+      #  url: /rsa
       #- title: Wendy signatures
       #  url: /wendy
       #- title: Guillou-Quisquater (GQ)
       #  url: /gq
+      #- title: Rabin 
+      #  url: /rabin
 
   - title: Verifiable randomn functions (VRFs)
     children:
@@ -181,6 +192,8 @@ cryptomat:
         url: /2025/01/24/Polynomial-differentiation-tricks.html
       - title: Univariate sumcheck
         url: /univariate-sumcheck
+      - title: Multivariate sumcheck
+        url: /sumcheck
       #- title: FRI
       #  url: /fri
       #-title: STIR
@@ -204,12 +217,12 @@ cryptomat:
         url: /groth16
       - title: Spartan
         url: /spartan
+      - title: Marlin
+        url: /marlin
     #  - title: PLONK
     #    url: /plonk
     #  - title: $\Sigma$-protocols
     #    url: /sigma-protocols
-    #  - title: Sumcheck
-    #    url: /sumcheck
     #  - title: Simulation
     #    url: /2020/05/07/zero-knowledge-simulation.html
 
@@ -228,8 +241,6 @@ cryptomat:
   #      url: /garbled-circuits
   #    - title: <some-PIR>
   #      url: /<some-pir>
-  #    - title: Univariate sumcheck
-  #      url: /univariate-sumcheck
   #    - title: <some-iO>
   #      url: /<some-io>
 

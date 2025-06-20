@@ -829,9 +829,14 @@ Thanks to Justin Thaler, Kabir Peshawaria and Guru Vamsi Policharla for explaini
 ### Extra resources
 
  - Srinath Setty's [HackMD on Spartan and Spark](https://hackmd.io/@srinathsetty/spartan)
+ - encrypt.a41.io's [Spartan writeup](https://encrypt.a41.io/zk/snark/spartan)
  - [Sumcheck implementations, Kabir Peshawaria](https://gitlab.com/IrreducibleOSS/binius/-/tree/ad2d620e56dff3b18d502c6dafa557d6988ad920/crates/core/src/protocols)
     + [Simpler Python code here](https://github.com/IrreducibleOSS/binius-models/blob/main/binius_models/ips/sumcheck.py)
  - Sub-logarithmic sumcheck[^SP25e]
+ - [Sumchecks from Ingonyama](https://github.com/ingonyama-zk/papers/blob/main/sumcheck_201_book.pdf)
+ - [Hyrax PCS](https://xn--2-umb.com/24/hyrax-pcs/)
+ - [Brakedown PCS](https://xn--2-umb.com/24/brakedown/)
+ - [WHIR PCS](https://xn--2-umb.com/24/whir/)
 
 ## References
 
