@@ -1,6 +1,6 @@
 ---
 tags:
- - fast-fourier transform (FFT)
+ - fast fourier transform (FFT)
  - KZG
  - polynomial commitments
  - polynomials

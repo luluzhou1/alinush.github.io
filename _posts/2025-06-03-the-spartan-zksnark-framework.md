@@ -826,6 +826,8 @@ Thanks to Justin Thaler, Kabir Peshawaria and Guru Vamsi Policharla for explaini
 
 <div align="center"><img style="width:75%" src="/pictures/spartan.png" /></div>
 
+### Wrapping Spartan's verifier
+
 ### Extra resources
 
  - Srinath Setty's [HackMD on Spartan and Spark](https://hackmd.io/@srinathsetty/spartan)
