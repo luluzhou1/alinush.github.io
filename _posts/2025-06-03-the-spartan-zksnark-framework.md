@@ -640,7 +640,7 @@ We describe Spartan as a **framework** for obtaining (non-ZK) SNARKs given a [de
 
 Notation:
 
- - $m\bydef 2^s$ denote the number of rows and columns in the square R1CS matrices $A,B,C$
+ - $m\bydef 2^s$ denote the number of rows and columns in the square [R1CS matrices](#r1cs) $A,B,C$
  - $n_A,n_B,n_C$ denote the max number of non-zero entries in $A,B$ and $C$, respectively
  - $n\gets \max{(n_A,n_B,n_C)}$
 
@@ -651,7 +651,7 @@ Set up the dense and sparse PCSs:
 Commit to the R1CS matrices:
  - $(c_A,c_B,c_C) \gets \sparse.\commit(\ck_\sparse, \tilde{A}, \tilde{B}, \tilde{C})$
 
-Bureaucratically track the commitments and the PCS's opening keys and commitments keys: 
+Bureaucratically-track the commitments and the PCS's opening keys and commitments keys: 
  - $\vk\gets (c_A,c_B,c_C,\ok_\dense,\ok_\sparse)$
  - $\prk\gets (A,B,C,\vk, \ck_\dense,\ck_\sparse)$
 
@@ -663,6 +663,7 @@ Commit to the witness and set up the Fiat-Shamir transcript:
  - $(\cdot,\cdot,\cdot,\vk,\ck_\dense,\cdot)\parse \prk$
  - Let $W \bydef \witn\in \F^{m/2}$
  - $c_\witn\gets\dense.\commit(\ck_\dense,\tilde{W})$
+    + _ZK:_ Would need changes
  - add $(\vk,c_\witn)$ to $\FS$ transcript
 
 Prove the first [sumcheck](#scprovefsof-t-s-drightarrow-epir):
@@ -670,6 +671,7 @@ Prove the first [sumcheck](#scprovefsof-t-s-drightarrow-epir):
  - Let $Z \bydef (\stmt, 1, \witn)\in \F^m$
  - Let $F(\X) \bydef \sum_{\j\in\binS} \tilde{A}(\X,\j) \tilde{Z}(\j) \cdot \sum_{\j\in\binS} \tilde{B}(\X,\j) \tilde{Z}(\j) - \sum_{\j\in\binS} \tilde{C}(\X,\j) \tilde{Z}(\j)$
  - $(e_x, \pi_x; \r_x\in\F^s) \gets \SC.\prove(F\cdot \eq_\btau, 0, s, 3)$ (see Eq. \ref{eq:F})
+    + _ZK:_ Would need changes
 
 Prove the second [sumcheck](#scprovefsof-t-s-drightarrow-epir):
  - $(r_A, r_B, r_C) \fsget \F^3$
@@ -679,6 +681,8 @@ Prove the second [sumcheck](#scprovefsof-t-s-drightarrow-epir):
  - $v_C \gets \sum_{\j\in\binS} \tilde{C}(\r_x,\j) \tilde{Z}(\j)$
  - $T\gets r_A v_A + r_B v_B + r_C v_C$ 
  - $(e_y, \pi_y; \r_y) \gets \SC.\prove(M_{\r_x}, T, s, 2)$ (see Eq. \ref{eq:second-sumcheck})
+    + _ZK:_ Would need changes
+    + _Performance:_ This can be carefully implemented so as to only apply the random linear combination on the univariate polynomial sumcheck messages and work mostly over small field elements.
 
 <!-- The Spartan proof, defined as a macro, to avoid mistakes -->
 <div style="display: none;">$
@@ -691,13 +695,14 @@ $</div>
 
 Compute one dense and one sparse MLE opening:
  - $(e_w, \pi_w) \gets\dense.\open^\FSo(\ck_\dense, c_\witn, \tilde{W},(r_{y,t})_{t\in[1,s)})$
+    + _ZK:_ Would need changes
  - $(a_{x,y},b_{x,y},c_{x,y};\pi_{x,y})\gets \sparse.\open^\FSo\begin{pmatrix}
     \ck_\sparse,
     (\tilde{A}, \tilde{B}, \tilde{C}),%\\\\\
     (\r_x,\r_y)
     \end{pmatrix}$
 
-Done:
+We are done:
  - $\pi\gets\spartanProof$
 
 #### Prover time
@@ -727,13 +732,14 @@ pick a random $\alpha\in\F$ and check that $v_1 + \alpha v_2 \equals \sum_\b \le
 
  - $1 \times \Gr_1 + 1 \times \F$, for the dense MLE commitment $c_\witn$ to $W$ and the $e_w$ evaluation
     - i.e., $48+32 = 80$ bytes
- - **TODO:** ideal dense MLE opening size, for $\pi_w$
+ - **TODO:** ideal dense MLE ZK PCS opening size, for $\pi_w$ 
+    + e.g., PST[^PST13] (not ZK) would be $(\log{m}-1)\times \Gr_1\Rightarrow$ for $m=20$ we have $19 \times 48 = 912$ bytes
  - $((3+1)\log{m} + 1)\times \F$, for $(\pi_x, e_x)$
     + e.g., for $m=2^{20}\Rightarrow (4 \cdot 20 + 1)\cdot 32 = 81\cdot32 = 2592$ bytes
-    - or, via HyperPLONK[^CBBZ22e] tricks, ignoring batched opening proof size: $\log{m}\times \Gr_1 + (\log{m} + 1)\times \F = 20 \times 48 + 21 \times 32 = 960 + 672 = 1632$ bytes
+    - or, via HyperPLONK[^CBBZ22e] tricks that avoid extra evaluations, ignoring batched opening proof size: $\log{m}\times \Gr_1 + (\log{m} + 1)\times \F = 20 \times 48 + 21 \times 32 = 960 + 672 = 1632$ bytes
  - $((2+1)\log{m} + 1)\times \F$, for $(\pi_y, e_y)$
     + e.g., for $m=2^{20}\Rightarrow (3 \cdot 20 + 1)\cdot 32 = 61\cdot32 = 1952$ bytes
-    - or, same as above via HyperPLONK tricks $\Rightarrow 1632$ bytes
+    - or, as before via HyperPLONK tricks $\Rightarrow 1632$ bytes
  - $6 \times \F$, for $v_A,v_B,v_C,a_{x,y},b_{x,y},c_{x,y}$
     - i.e., $6 \cdot 32 = 192$ bytes
  - **TODO:** ideal sparse MLE opening size, for $\pi_{x,y}$
@@ -750,6 +756,7 @@ Parse the proof and set up the Fiat-Shamir transcript:
 Verify the first [sumcheck](#scverifyfsot-e-d-pirightarrow-bin01-r):
  - $\btau \fsget \F^s$
  - $(s_x; \r_x) \gets \SC.\verify^\FSo(0, e_x, 3; \pi_x)$
+    + _ZK:_ Would need changes
  - **assert** $s_x \equals 1$
  - **assert** $e_x \equals (v_A \cdot v_B - v_C)\cdot \eq_\btau(\r_x)$
 
@@ -758,6 +765,7 @@ Verify the second [sumcheck](#scverifyfsot-e-d-pirightarrow-bin01-r):
  - $(r_A, r_B, r_C) \fsget \F^3$
  - $T\gets r_A v_A + r_B v_B + r_C v_C$
  - $(s_y; \r_y) \gets \SC.\verify^\FSo(T, e_y, 2; \pi_y)$
+    + _ZK:_ Would need changes
  - **assert** $s_y \equals 1$
  - $z_y \gets \left(r_{y,0} \tilde{P}(r_{y,1},\ldots,r_{y,s-1}) + (1-r_{y,0})e_w\right)$ 
  - **assert** $e_y \equals (r_A \cdot a_{x,y} + r_B \cdot b_{x,y} + r_C \cdot c_{x,y}) \cdot z_y$
@@ -765,6 +773,7 @@ Verify the second [sumcheck](#scverifyfsot-e-d-pirightarrow-bin01-r):
 Verify the $e_w \equals \tilde{W}(\r_y)$ opening:
  - $(\cdot,\cdot,\cdot,\ok_\dense,\cdot) \gets \vk$
  - **assert** $\dense.\verify^\FSo(\ok_\dense, c_\witn, (r_{y,t})_{t\in[1,s)}, e_w; \pi_w)$
+    + _ZK:_ Would need changes
 
 Verify the R1CS MLE evaluations:
  - $(c_A, c_B, c_C,\cdot,\ok_\sparse) \gets \vk$
@@ -784,15 +793,23 @@ Succeed:
  - verify degree-3 sumcheck
  - verify degree-2 sumcheck
  - verify dense PCS opening
- - verify sparse PCS opening
+ - verify sparse PCS opening; will involve at least:
+    + one degree-2 sumcheck (if not worse)
+    + verifying some dense MLE PCS openings, hopefully batched
 
 ## Conclusion
 
+I like Spartan a lot!
+It is very interesting to think of how to instantiate it efficiently so as to strike the desired proof size and verifier time without sacrificing prover time too much.
+
 {: .todo}
 Cost of making it ZK?
-First, I think the dense MLE PCS for $\witn$ has to have hiding commitments with ZK openings.
+First, the dense MLE PCS for $\witn$ must have hiding commitments and ZK opening proofs.
 Second, the univariate polynomials in Spartan's first and second sumchecks have to be blinded.
-And that's it? Because the third sumcheck inside the sparse MLE PCS is on a public polynomial!
+And that's it: the third sumcheck inside the sparse MLE PCS is on a public polynomial!
+
+{: .todo}
+Generalize to $\|\stmt\| + 1 \ne \|\witn\|$ and also being non-powers of two.
 
 {: .todo}
 Generalize to non-square R1CS matrices with $N$ non-zero entries and $n$ rows / R1CS constraints, s.t. $n$ is not necessarily equal to $m$.
