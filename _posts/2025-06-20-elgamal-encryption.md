@@ -87,7 +87,6 @@ This has efficiency advantages when composing Twisted ElGamal with $\Sigma$-prot
 
  - **return** $C - \dk \cdot D$
 
-
 #### Correctness
 
 Correctness holds because:
@@ -98,6 +97,13 @@ C - \dk \cdot D
  &= (m \cdot G + r \cdot H) - r\cdot H\\\\\
  &= m\cdot G
 \end{align}
+
+## Conclusion
+
+{: .todo}
+Threshold variant.
+Weighted variant.
+DLog algorithms.
 
 ## Appendix
 
