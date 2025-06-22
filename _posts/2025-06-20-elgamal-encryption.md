@@ -30,7 +30,11 @@ $</div> <!-- $ -->
  - We assume a group $\Gr$ where Decisional Diffie-Hellman (DDH) is hard
  - We use additive group notation for $\Gr$
 
-## ElGamal
+## Standard ElGamal
+
+## Damgård's ElGamal
+
+In this variant, the encryption pubkey is $\ek \bydef \dk \cdot H$ where $H$ is another generator such that $\log_G{H}$ is unknown and hard to compute.
 
 ### $\mathsf{E}.\mathsf{KGen}(1^\lambda) \rightarrow (\dk, \ek)$
 
