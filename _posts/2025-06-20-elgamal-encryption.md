@@ -22,7 +22,7 @@ permalink: elgamal
 <!-- Here you can define LaTeX macros -->
 <div style="display: none;">$
 \def\ek{\mathsf{ek}}
-\def\dk{\mathsf{ek}}
+\def\dk{\mathsf{dk}}
 $</div> <!-- $ -->
 
 ## Preliminaries
@@ -30,19 +30,21 @@ $</div> <!-- $ -->
  - We assume a group $\Gr$ where Decisional Diffie-Hellman (DDH) is hard
  - We use additive group notation for $\Gr$
 
-## ElGamal
+## Exponentiated ElGamal
 
-In this variant, the encryption pubkey is $\ek \bydef \dk \cdot H$ where $H$ is another generator such that $\log_G{H}$ is unknown and hard to compute.
+This variant of ElGamal (first proposed by Cramer, Gennaro and Schoenmakers[^CGS97]?) encrypts a field element $m\in\F$ by "exponentiating" it into $m\cdot G$.
+The encryption pubkey is $\ek \bydef \dk \cdot H$, where $H$ is another generator such that $\log_G{H}$ is unknown and hard to compute.
+
+Note that the [original ElGamal paper](#original-elgamal) is described as only encrypting group element messages $m\in \Gr$.
+As a result, it only needs one generator $H$.
 
 ### $\mathsf{E}.\mathsf{KGen}(1^\lambda) \rightarrow (\mathsf{dk}, \mathsf{ek})$
 
  - $\dk \randget \F$
  - $\ek \gets \dk \cdot H$
 
-{: .note}
-The [original ElGamal paper](#original-elgamal) reuses $G$ for the $\ek$ instead of a different $H$.
-
 ### $\mathsf{E}.\mathsf{Enc}(\mathsf{ek}, m; r) \rightarrow (C, D)$
+
 
  - $C \gets m \cdot G + r\cdot \ek$
  - $D \gets r \cdot H$
@@ -51,9 +53,51 @@ The [original ElGamal paper](#original-elgamal) reuses $G$ for the $\ek$ instead
 
  - **return** $C - \dk \cdot D$
 
+#### Correctness
+
+Correctness holds because:
+\begin{align}
+C - \dk \cdot D 
+ &= (m \cdot G + r\cdot \ek) - \dk\cdot(r\cdot H)\\\\\
+ &= (m \cdot G + (r\cdot \dk) \cdot H) - (\dk\cdot r)\cdot H\\\\\
+ &= m\cdot G
+\end{align}
+
 ## Twisted ElGamal
 
 {: .todo}
+I believe this was first proposed by Chen et al.[^CMTA20]?
+
+This variant of ElGamal adds a small _twist_: the $r \cdot G $ and  $r\cdot \ek$ components from [exponentiated ElGamal](#exponentiated-elgamal) are switched out.
+
+The **advantage** is that the first component of the ciphertext (i.e. , $C$ from above) can now be treated as a Pedersen commitment to the encrypted message $m$.
+
+This has efficiency advantages when composing Twisted ElGamal with $\Sigma$-protocols and other ZK proof systems like Bulletproofs[^BBBplus18].
+
+### $\mathsf{E}.\mathsf{KGen}(1^\lambda) \rightarrow (\mathsf{dk}, \mathsf{ek})$
+ 
+ - $\dk \randget \F$
+ - $\ek \gets \dk^{-1} \cdot H$
+
+### $\mathsf{E}.\mathsf{Enc}(\mathsf{ek}, m; r) \rightarrow (C, D)$
+ - $C \gets m \cdot G + r\cdot H$
+ - $D \gets r \cdot \ek$
+
+### $\mathsf{E}.\mathsf{Dec}(\mathsf{dk}, (C,D)) \rightarrow m\cdot G$
+
+ - **return** $C - \dk \cdot D$
+
+
+#### Correctness
+
+Correctness holds because:
+\begin{align}
+C - \dk \cdot D 
+ &= (m \cdot G + r\cdot H) - \dk\cdot(r\cdot \ek)\\\\\
+ &= (m \cdot G + r \cdot H) - (\dk\cdot r\cdot\dk^{-1}) H\\\\\
+ &= (m \cdot G + r \cdot H) - r\cdot H\\\\\
+ &= m\cdot G
+\end{align}
 
 ## Appendix
 
