@@ -498,6 +498,8 @@
 
 [^BGKplus23e]: **Fiat-Shamir Security of FRI and Related SNARKs**, by Alexander R. Block and Albert Garreta and Jonathan Katz and Justin Thaler and Pratyush Ranjan Tiwari and Michał Zając, *in Cryptology ePrint Archive, Paper 2023/1071*, 2023, [[URL]](https://eprint.iacr.org/2023/1071)
 
+[^BGKplus24e]: **Large-Scale {MPC}: Scaling Private Iris Code Uniqueness Checks to Millions of Users**, by Remco Bloemen and Bryan Gillespie and Daniel Kales and Philipp Sippl and Roman Walch, *in Cryptology {ePrint} Archive, Paper 2024/705*, 2024, [[URL]](https://eprint.iacr.org/2024/705)
+
 [^BGKS19e]: **DEEP-FRI: Sampling Outside the Box Improves Soundness**, by Eli Ben-Sasson and Lior Goldberg and Swastik Kopparty and Shubhangi Saraf, *in Cryptology ePrint Archive, Report 2019/336*, 2019, [[URL]](https://ia.cr/2019/336)
 
 [^BGLS03]: **Aggregate and Verifiably Encrypted Signatures from Bilinear Maps**, by Boneh, Dan and Gentry, Craig and Lynn, Ben and Shacham, Hovav, *in Advances in Cryptology --- EUROCRYPT 2003*, 2003
@@ -996,6 +998,8 @@
 
 [^CGPW24e]: **Practical Mempool Privacy via One-time Setup Batched Threshold Encryption**, by Arka Rai Choudhuri and Sanjam Garg and Guru-Vamsi Policharla and Mingyuan Wang, *in Cryptology {ePrint} Archive, Paper 2024/1516*, 2024, [[URL]](https://eprint.iacr.org/2024/1516)
 
+[^CGS97]: **A Secure and Optimally Efficient Multi-Authority Election Scheme**, by Cramer, Ronald and Gennaro, Rosario and Schoenmakers, Berry, *in Advances in Cryptology --- EUROCRYPT '97*, 1997
+
 [^CGT23e]: **SoK: Privacy-Preserving Signatures**, by Alishah Chator and Matthew Green and Pratyush Ranjan Tiwari, *in Cryptology ePrint Archive, Paper 2023/1039*, 2023, [[URL]](https://eprint.iacr.org/2023/1039)
 
 [^CGV15]: **Aggregate Pseudorandom Functions and Connections to Learning**, by Aloni Cohen and Shafi Goldwasser and Vinod Vaikuntanathan, *in Cryptology ePrint Archive, Report 2015/038*, 2015, [[URL]](https://eprint.iacr.org/2015/038)
@@ -1043,6 +1047,8 @@
 [^CK20]: **From Rerandomizability to Sequential Aggregation: Efficient Signature Schemes Based on SXDH Assumption**, by Sanjit Chatterjee and R. Kabaleeshwaran, *in Cryptology ePrint Archive, Report 2020/575*, 2020, [[URL]](https://eprint.iacr.org/2020/575)
 
 [^CKGS98]: **Private information retrieval**, by Benny Chor and Eyal Kushilevitz and Oded Goldreich and Madhu Sudan, *in Journal of the {ACM}*, 1998, [[URL]](https://doi.org/10.1145%2F293347.293350)
+
+[^CKKplus25e]: **On the Adaptive Security of {FROST**, by Elizabeth Crites and Jonathan Katz and Chelsea Komlo and Stefano Tessaro and Chenzhi Zhu, *in Cryptology {ePrint} Archive, Paper 2025/1061*, 2025, [[URL]](https://eprint.iacr.org/2025/1061)
 
 [^CKKS16e]: **Homomorphic Encryption for Arithmetic of Approximate Numbers**, by Jung Hee Cheon and Andrey Kim and Miran Kim and Yongsoo Song, *in Cryptology ePrint Archive, Paper 2016/421*, 2016, [[URL]](https://eprint.iacr.org/2016/421)
 
@@ -1445,6 +1451,8 @@
 [^Diam20]: **"Many-out-of-Many" Proofs with Applications to Anonymous Zether**, by Benjamin E. Diamond, *in Cryptology ePrint Archive, Report 2020/293*, 2020, [[URL]](https://eprint.iacr.org/2020/293)
 
 [^Dolev82]: **The Byzantine generals strike again**, by Danny Dolev, *in Journal of Algorithms*, 1982, [[URL]](http://www.sciencedirect.com/science/article/pii/0196677482900049)
+
+[^Dore24e]: **TaSSLE}: Lasso for the commitment-phobic**, by Tesseract Dore, *in Cryptology {ePrint} Archive, Paper 2024/1075*, 2024, [[URL]](https://eprint.iacr.org/2024/1075)
 
 [^Drake20Kate]: **Kate commitments from the Lagrange basis without FFTs**, by Justin Drake, 2020, [[URL]](https://ethresear.ch/t/kate-commitments-from-the-lagrange-basis-without-ffts/6950)
 
@@ -3110,7 +3118,7 @@
 
 [^SZ20e]: **Polynomial IOPs for Linear Algebra Relations**, by Alan Szepieniec and Yuncong Zhang, *in Cryptology ePrint Archive, Paper 2020/1022*, 2020, [[URL]](https://eprint.iacr.org/2020/1022)
 
-[^SZ23e]: **$\mathsf{{FREPack}}$: Improved {SNARK} Frontend for Highly Repetitive Computations**, by Sriram Sridhar and Yinuo Zhang, *in Cryptology {ePrint} Archive, Paper 2023/1240*, 2023, [[URL]](https://eprint.iacr.org/2023/1240)
+[^SZ23e]: **FREPack}: Improved {SNARK} Frontend for Highly Repetitive Computations**, by Sriram Sridhar and Yinuo Zhang, *in Cryptology {ePrint} Archive, Paper 2023/1240*
 
 [^Saha99]: **Non-malleable non-interactive zero knowledge and adaptive chosen-ciphertext security**, by A. Sahai, *in 40th Annual Symposium on Foundations of Computer Science (Cat. No.99CB37039)*, 1999
 
@@ -3161,6 +3169,8 @@
 [^Shou04]: **Sequences of games: a tool for taming complexity in security proofs**, by Victor Shoup, *in Cryptology ePrint Archive, Report 2004/332*, 2004, [[URL]](https://ia.cr/2004/332)
 
 [^Shou05]: **A Computational Introduction to Number Theory and Algebra**, by Shoup, Victor, 2005
+
+[^Shou25e]: **Simple {VESS**, by Victor Shoup, *in Cryptology {ePrint} Archive, Paper 2025/1175*, 2025, [[URL]](https://eprint.iacr.org/2025/1175)
 
 [^Shoup00]: **Practical Threshold Signatures**, by Shoup, Victor, *in Advances in Cryptology --- EUROCRYPT 2000*, 2000
 
@@ -3327,6 +3337,8 @@
 [^WRK17e]: **Global-Scale Secure Multiparty Computation**, by Xiao Wang and Samuel Ranellucci and Jonathan Katz, *in Cryptology ePrint Archive, Paper 2017/189*, 2017, [[URL]](https://eprint.iacr.org/2017/189)
 
 [^WS07]: **An Efficient Identification Protocol and the Knowledge-of-Exponent Assumption**, by J. Wu and D.R. Stinson, *in Cryptology ePrint Archive, Report 2007/479*, 2007, [[URL]](https://eprint.iacr.org/2007/479)
+
+[^WS08e]: **On The Security of The {ElGamal} Encryption Scheme and Damgard’s Variant**, by J.  Wu and D. R.  Stinson, *in Cryptology {ePrint} Archive, Paper 2008/200*, 2008, [[URL]](https://eprint.iacr.org/2008/200)
 
 [^WS79]: **Some remarks concerning the M.I.T. public-key cryptosystem**, by Williams, H. C. and Schmid, B., *in BIT Numerical Mathematics*, 1979, [[URL]](https://doi.org/10.1007/BF01931269)
 
