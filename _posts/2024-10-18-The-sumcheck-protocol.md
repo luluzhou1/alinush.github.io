@@ -68,7 +68,12 @@ The **key idea** is: reduce a sumcheck of size $\mu$ to a sumcheck of size $\mu-
 
 We do this until we "run out" of variables and $\V$ is simply left with the task of evaluating $f(r_1, r_2,\ldots,r_\mu)$.
 
-We explain the algorithm below.
+We explain the **interactive** sumcheck protocol below.
+First, there is an [initialization](#initialization) phase for both $\P$ and $\V$.
+Then, there $\mu$ rounds of interaction.
+We begin by describing the first two rounds, as a warm up.
+Then, we explain what a general round $j$ looks likely.
+We finish by describing the last round which handles things a bit differently.
 
 ### Initialization
 
@@ -101,7 +106,7 @@ We explain the algorithm below.
 
 ### Round $j \lt \mu$ (general case)
 
-The algorithm continues in this fashion for every round $j \lt \mu$:
+The protocol continues in this fashion for every round $j \lt \mu$:
   - $\P$ computes $\term{g_j(X)} \gets \underbrace{\sum_{b_{j+1} \in \bin} \cdots \sum_{b_\mu \in \bin}}\_{\mu-j\ \text{variables}} f(r_1, \ldots, r_{j-1}, X, b_{j+1}, \ldots,b_\mu)$.
   - $\P \xrightarrow{g_j(X)}\V$
   - $\V$ checks:
