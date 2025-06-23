@@ -60,7 +60,7 @@ The sumcheck protocol allows a **prover** $\term{\P}$ to convince a **verifier**
 {: .note}
 Both $\P$ and $\V$ have access to the same $\term{\mu}$-variate polynomial $f$, although $\V$ is assumed to only have **oracle access** (e.g., typically, via a polynomial commitment scheme).
 
-While the sumcheck protocol inherently must-require $\P$ to compute $O(2^\mu)$ polynomial evaluations of $f$ it **surprisingly** only requires $\V$ to compute **a single** _random_ polynomial evaluation of $f$, together with some other sumcheck verification work linear in the number of variables (which is typically sublinear in the number of coefficients of the polynomial).
+While the sumcheck protocol inherently must require $\P$ to compute $O(2^\mu)$ polynomial evaluations of $f$ it **surprisingly** only requires $\V$ to compute **a single** _random_ polynomial evaluation of $f$, together with some other sumcheck verification work linear in the number of variables (which is typically sublinear in the number of coefficients of the polynomial).
 
 ## Overview
 
@@ -68,7 +68,7 @@ The **key idea** is: reduce a sumcheck of size $\mu$ to a sumcheck of size $\mu-
 
 We do this until we "run out" of variables and $\V$ is simply left with the task of evaluating $f(r_1, r_2,\ldots,r_\mu)$.
 
-We explain the algorihtm 
+We explain the algorithm below.
 
 ### Initialization
 
@@ -131,6 +131,9 @@ The **sumcheck proof** will consist of all the univariate polynomials sent by th
   g\_j(X) &\bydef \sum_{i\in[0, d\_j]} g\_{j, i} X^i \bydef [g_{j,0}, g_{j,1},\ldots,g_{j,d_j}]
 \end{align}
 
+{: .note}
+The prover can send the $d+1$ coefficients of the polynomials, as expressed above, or $d+1$ different evaluations.
+
 ## Properties
 
 The sumcheck protocol has many nice properties:
@@ -172,6 +175,7 @@ For example, when using KZG commitments, the proof is reduced to (1) $\mu\times 
 
 ### Acknowledgements
 Most of this write-up is a re-transcription of Justin Thaler's notes[^Thal20], as an excercise in making sure I understand things well enough.
+Thanks to Wicher Malten for early feedback on this post.
 
 ### Prize-winning stuff
 
