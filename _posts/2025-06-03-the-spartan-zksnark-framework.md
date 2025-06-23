@@ -68,7 +68,7 @@ $</div> <!-- $ -->
 
 ## Introduction
 
-Spartan[^Sett19e]$^,$[^Sett20] is a framework for building zkSNARK schemes using the well-known **sumcheck protocol**[^LFKN92]$^,$[^Thal20] and a **sparse multilinear (MLE) polynomial commitment scheme (PCS)**.
+Spartan[^Sett19e]$^,$[^Sett20] is a framework for building zkSNARK schemes using the well-known [sumcheck protocol](#multivariate-sumcheck)[^LFKN92]$^,$[^Thal20] and a **sparse multilinear (MLE) polynomial commitment scheme (PCS)**.
 
 Spartan is a SNARK for [R1CS](/r1cs) satisfiability.
 Usually, such R1CS SNARKs are built by viewing the R1CS as a [QAP](/r1cs/#quadratic-arithmetic-programs-qaps).
@@ -81,7 +81,7 @@ For example, Groth16 pays $O(N\log N)$ FFT work and $O(M) + O(N)$ MSMs (see brea
 ### Why I really like Spartan
 
 1. Most of the prover work is delegatable, **publicly!**
-1. Sumcheck-based, either multivariate or [univariate](/univariate-sumcheck)
+1. Sumcheck-based, either [multivariate](/sumcheck) or [univariate](/univariate-sumcheck)
     - $\Rightarrow$ linear-time (concretely-efficient) prover!
 1. PCS-based, multilinear or univariate, depending on choice of sumcheck ☝️
 1. It poses a very nice research question: _What is the most efficient PCS for sparse MLEs?_
@@ -254,6 +254,8 @@ Creates an opening proof $\pi$ arguing all the following evaluations hold:
 Verifies that the opening proof $\pi$ correctly argues that the evaluations in Eq. \ref{eq:sparse-mle-evals} hold for the MLEs committed in $c_A, c_B$ and $c_C$.
 
 ### Multivariate sumcheck
+
+The [multivariate sumcheck](/sumcheck) protocol consists of a prover algorithm and a verifier one.
 
 #### $\SC.\prove^{\FSo}(F, T, s, d)\rightarrow (e,\pi;\r)$ 
 
