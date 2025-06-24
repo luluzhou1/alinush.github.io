@@ -2250,6 +2250,8 @@
 
 [^KN08]: **Identity-Based Signatures**, by Kiltz, Eike and Neven, G., *in Cryptology and Information Security Series on Identity-Based Cryptography*, 2008
 
+[^KO21]: **Proposal: $\Sigma$-protocols**, by Stephan Krenn and Michel Orru, 2021, [[URL]](https://docs.zkproof.org/pages/standards/accepted-workshop4/proposal-sigma.pdf)
+
 [^KOR05]: **Identity-Based Zero-Knowledge**, by Katz, Jonathan and Ostrovsky, Rafail and Rabin, Michael O., *in Security in Communication Networks*, 2005
 
 [^KOR19]: **Revisiting User Privacy for Certificate Transparency**, by D. Kales and O. Omolola and S. Ramacher, *in 2019 IEEE European Symposium on Security and Privacy (EuroS P)*, 2019

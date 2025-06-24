@@ -21,8 +21,10 @@ sidebar:
 
 <!-- Here you can define LaTew macros -->
 <div style="display: none;">$
-\def\prover{\mathcal{P}}
-\def\verifier{\mathcal{V}}
+\def\P{\mathcal{P}}
+\def\V{\mathcal{V}}
+\def\str{\mathsf{str}}
+\def\binL{\{0,1\}^{2\lambda}}
 $</div> <!-- $ -->
 
 ## Introduction
@@ -37,6 +39,7 @@ Skipping over 30+ years of $\Sigma$-protocol design and jmping right into it.
  - $\F$ is a finite field of prime order $p \approx 2^{2\lambda}$
  - $\Gr$ is a group where computing discrete logs is hard, also of prime order $p$
  - We are using additive group notation for $\Gr$ (e.g., $P_1 + P_2\in\Gr$ and $a\cdot P\bydef \underbrace{P+P+\ldots+P}_{a\ \text{times}}\in \Gr$). 
+ - $\N$ denotes all the natural numbers
 
 ## $\Sigma$-protocols for linear relations
 
@@ -63,13 +66,13 @@ Boneh and Shoup[^BS23] show that it is very easy to build $\Sigma$-protocols for
     \phi(w_1,\ldots,w_1) \equals 1
 \end{align}
 
-A $\Sigma$-protocol for $\mathcal{R}_\mathsf{lin}$, where a **prover** $\prover$ convinces the **verifier** $\verifier$, in zero-knowledge, that it knows secret $w_i$'s such that $\phi(w_1,\ldots,w_n)=1$ follows below:
+A $\Sigma$-protocol for $\mathcal{R}_\mathsf{lin}$, where a **prover** $\P$ convinces the **verifier** $\V$, in zero-knowledge, that it knows secret $w_i$'s such that $\phi(w_1,\ldots,w_n)=1$ follows below:
 
 <table style="border-collapse: collapse; border: 1px solid grey; table-layout: fixed; width: 575px;">
 <tr><td style="border: none;">
-  $\underline{\prover\begin{pmatrix}(G_{i,j})_{i\in[m],j\in[n]}, (U_i)_{i\in[m]}\textbf{;}\\\, (w_i)_{i\in[n]}\end{pmatrix}}$
+  $\underline{\P\begin{pmatrix}(G_{i,j})_{i\in[m],j\in[n]}, (U_i)_{i\in[m]}\textbf{;}\\\, (w_i)_{i\in[n]}\end{pmatrix}}$
 </td><td style="border: none; text-align: right;">
-  $\underline{\verifier\left((G_{i,j})_{i\in[m],j\in[n]}, (U_i)_{i\in[m]}\right)\rightarrow \{0,1\}}$
+  $\underline{\V\left((G_{i,j})_{i\in[m],j\in[n]}, (U_i)_{i\in[m]}\right)\rightarrow \{0,1\}}$
 </td></tr>
 
 <tr><td style="border: none; text-align: left;" colspan="2">
@@ -98,6 +101,10 @@ A $\Sigma$-protocol for $\mathcal{R}_\mathsf{lin}$, where a **prover** $\prover$
 </td></tr>
 </table>
 
+{: .note}
+This protocols works across _different groups_: i.e., when $U_i, G_{i,j}\in \Gr_i$ and the $\Gr_i$'s are different but of the same prime order $p$!
+(However, the faster verification optimization [described below](#performance) will be affected.)
+
 ## Implementation pitfalls
 
 ### Performance
@@ -122,32 +129,57 @@ One can show that, except with negligible probability, this batched check is as 
 {: .note}
 The check above is now a single size-$(nm + m)$ MSM!
 
-### Secure deserialization via subgroup checks 
+### Secure deserialization
 
-Always make sure your deserialization routine in the library you are using checks two things:
+$\Sigma$-protocol proofs are usually sent over the network to the verifier $\V$.
+
+Therefore, a crucial security-sensitive operation is never captured in academic descriptions like the one above:
+**the verifier must correctly-deserialize the received proof into group and field elements**!
+
+Always make sure your group element deserialization routine in the elliptic curve library you are using checks two things:
 1. The deserialized point satisfies the elliptic curve equation
 2. The deserialized point lies in the subgroup of prime order $p = \|\F\| = \|\Gr\|$
     + Most deployed cryptography only works over prime order subgroups and big security issues can arise otherwise (see [here](/schnorr#fn:devalence))
 
+Be careful how you handle deserialization of field elements too:
+1. A conservative approach is to always reject bytes that encode a number $\ge p$, since field elements are in $[0, p)$.
+
 ### Fiat-Shamir transform
 
-Hash everything: a description $\Gr$, the prime order $p$, the sizes $n,m$, all the $G_{i,j}$'s, all the $U_i$'s, all the messages so far (i.e., the $A_i$'s), and any application-specific context $\mathsf{ctx}$.
+Hash everything: a description of $\Gr$ (e.g., _"Edwards 25519"_), the prime order $p$, the sizes $n,m$, all the $G_{i,j}$'s, all the $U_i$'s, all the messages so far (i.e., the $A_i$'s), and any application-specific context $\mathsf{ctx}$.
 
 Specifically:
 \begin{align}
 \mathsf{ctx} &\gets \text{"withdrawal protocol / Aptos confidential assets"}\\\\\
-e &\gets H\_\mathsf{FS}(\Gr, p, n, m, (G\_{i,j})\_{i\in[m],j\in[n]}, (U\_i, A\_i)\_{i\in[m]}, \mathsf{ctx})
+e &\gets H\_\mathsf{FS}(\mathsf{desc}(\Gr), p, n, m, (G\_{i,j})\_{i\in[m],j\in[n]}, (U\_i, A\_i)\_{i\in[m]}, \mathsf{ctx})
+\end{align}
+where $H_\mathsf{FS}$ is a cryptographic hash function:
+\begin{align}
+H\_\mathsf{FS} : \str \times \N^3 \times \Gr^{mn} \times \Gr^{2m}\times \str\rightarrow \binL
 \end{align}
 
-{: .warning}
-But don't hash too much either!
-e.g., don't hash arbitrary stuff "just for safety", since this opens up grinding attack vectors.
+However, even this description can be **dangerously misleading** as it assumes people know how to instantiate collision-resistant $H\_\mathsf{FS}$ given a more general collision-resistant hash function $H : \\{0,1\\}^\*\rightarrow \binL$ that just hashes bit streams.
+
+Yet, in practice, people implement this wrong.
+
+For example, imagine a hash function $H_2 : \str \times \str \rightarrow \binL$ for hashing two strings $s_1,s_2 \in \str$, but **mis**implemented to hash them by concatenating them as $H(s_1 \concat s_2)$ using the general hash function $H$ from above.
+If so, then the hash of $s_1 = \text{"a"}$ and $s_2 = \text{"bc"}$ will collide with that of $s_1' = \text{"ab"}$ and $s_2' = \text{"c"}$ will collide, since they are both $H_2(\text{"a"},\text{"bc"})=H_2(\text{"ab"},\text{"c"})=H(\text{"abc"})$.
 
 {: .warning}
-You'd find out the hard way, but don't hash the secret witness (e.g., the $w_i$'s), because both the prover **and** the verifier need to be able to compute the hash, and the verifier doesn't have the witness (since $\Sigma$-protocols are ZK!)
+$\Rightarrow$ Just use the [spongefish library](https://github.com/arkworks-rs/spongefish), really[^CO25e].
 
 {: .warning}
-Just use the [spongefish library](https://github.com/arkworks-rs/spongefish), really[^CO25e].
+Be sure to not hash unecessary stuff.
+e.g., don't hash arbitrary stuff "just for safety", since this may open up grinding attack vectors.
+
+{: .warning}
+You'd find out the hard way, but don't hash the secret witness (e.g., the $w_i$'s), because both the prover **and** the verifier need to be able to compute the hash, and the verifier doesn't have the witness, since $\Sigma$-protocols are ZK!
+
+## Extra resources
+
+ - Composing $\Sigma$-protocols can also be tricky. Hope to add notes here later.
+ - ZKProof workshop $\Sigma$-protocols proposal[^KO21] with [slides here](https://docs.zkproof.org/pages/standards/slides-w4/sigma.pdf)
+ - Ivan Damgaard's write-up[^Dam10]
 
 ## References
 
