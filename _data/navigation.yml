@@ -221,8 +221,8 @@ cryptomat:
         url: /marlin
     #  - title: PLONK
     #    url: /plonk
-    #  - title: $\Sigma$-protocols
-    #    url: /sigma-protocols
+      - title: $\Sigma$-protocols
+        url: /sigma
     #  - title: Simulation
     #    url: /2020/05/07/zero-knowledge-simulation.html
 

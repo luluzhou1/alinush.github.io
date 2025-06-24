@@ -2844,7 +2844,7 @@
 
 [^Pede91A]: **A Threshold Cryptosystem without a Trusted Party**, by Pedersen, Torben Pryds, *in Advances in Cryptology -- EUROCRYPT '91*, 1991, [[URL]](http://link.springer.com/10.1007/3-540-46416-6{\_}47)
 
-[^Pede91N]: **Non-Interactive and Information-Theoretic Secure Verifiable Secret Sharing**, by Pedersen, Torben Pryds, *in Proceedings on Advances in Cryptology*, 1992
+[^Pede91Comm]: **Non-Interactive and Information-Theoretic Secure Verifiable Secret Sharing**, by Pedersen, Torben Pryds, *in Proceedings on Advances in Cryptology*, 1992
 
 [^Peikert15]: **A Decade of Lattice Cryptography**, by Chris Peikert, *in Cryptology ePrint Archive, Report 2015/939*, 2015, [[URL]](https://eprint.iacr.org/2015/939)
 
