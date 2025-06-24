@@ -146,19 +146,20 @@ Be careful how you handle deserialization of field elements too:
 
 ### Fiat-Shamir transform
 
-Hash everything: a description of $\Gr$ (e.g., _"Edwards 25519"_), the prime order $p$, the sizes $n,m$, all the $G_{i,j}$'s, all the $U_i$'s, all the messages so far (i.e., the $A_i$'s), and any application-specific context $\mathsf{ctx}$.
+Hash everything: a description of $\Gr$ (e.g., _"Edwards 25519"_), the prime order $p$, the sizes $n,m$, the formula $\phi$, all the $G_{i,j}$'s, all the $U_i$'s, all the messages so far (i.e., the $A_i$'s), and any application-specific context $\mathsf{ctx}$.
 
 Specifically:
 \begin{align}
 \mathsf{ctx} &\gets \text{"withdrawal protocol / Aptos confidential assets"}\\\\\
-e &\gets H\_\mathsf{FS}(\mathsf{desc}(\Gr), p, n, m, (G\_{i,j})\_{i\in[m],j\in[n]}, (U\_i, A\_i)\_{i\in[m]}, \mathsf{ctx})
+e &\gets H\_\mathsf{FS}(\mathsf{desc}(\Gr), p, n, m, \phi, (G\_{i,j})\_{i\in[m],j\in[n]}, (U\_i, A\_i)\_{i\in[m]}, \mathsf{ctx})
 \end{align}
 where $H_\mathsf{FS}$ is a cryptographic hash function:
 \begin{align}
-H\_\mathsf{FS} : \str \times \N^3 \times \Gr^{mn} \times \Gr^{2m}\times \str\rightarrow \binL
+H\_\mathsf{FS} : \str \times \N^3 \times \Phi \times \Gr^{mn} \times \Gr^{2m}\times \str\rightarrow \binL
 \end{align}
+and (informally) $\Phi$ is the set of all possible formulas like $\phi$.
 
-However, even this description can be **dangerously misleading** as it assumes people know how to instantiate collision-resistant $H\_\mathsf{FS}$ given a more general collision-resistant hash function $H : \\{0,1\\}^\*\rightarrow \binL$ that just hashes bit streams.
+However, even this description can be **dangerously misleading** as it assumes people know how to instantiate a collision-resistant $H\_\mathsf{FS}$ given a more general collision-resistant hash function $H : \\{0,1\\}^\*\rightarrow \binL$ that just hashes bit streams.
 
 Yet, in practice, people implement this wrong.
 
