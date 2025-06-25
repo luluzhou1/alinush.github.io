@@ -68,15 +68,15 @@ Boneh and Shoup[^BS23] remind us that it is very easy to build $\Sigma$-protocol
 \end{align}
 
 {: .note}
-i.e., a $\Sigma$-protocol whereby a **prover** $\P$ can convince a **verifier** $\V$, in zero-knowledge, that it knows secret $w_i$'s such that $\phi(w_1,\ldots,w_n)=1$ follows. 
+i.e., a $\Sigma$-protocol whereby a **prover** $\P_\phi$ can convince a **verifier** $\V_\phi$, in zero-knowledge, that it knows secret $w_i$'s such that $\phi(w_1,\ldots,w_n)=1$ follows. 
 
 A $\Sigma$-protocol for $\Rlin$ follows below:
 
-<table style="border-collapse: collapse; border: 1px solid grey; table-layout: fixed; width: 575px;">
+<table style="border-collapse: collapse; border: 1px solid grey; table-layout: fixed; width: 532px;">
 <tr><td style="border: none;">
-  $\underline{\P\begin{pmatrix}(G_{i,j})_{i\in[m],j\in[n]}, (U_i)_{i\in[m]}\textbf{;}\\\, (w_i)_{i\in[n]}\end{pmatrix}}$
+  $\underline{\P_\phi\begin{pmatrix}(G_{i,j})_{i\in[m],j\in[n]}, (U_i)_{i\in[m]}\textbf{;}\\\, (w_i)_{i\in[n]}\end{pmatrix}}$
 </td><td style="border: none; text-align: right;">
-  $\underline{\V\left((G_{i,j})_{i\in[m],j\in[n]}, (U_i)_{i\in[m]}\right)\rightarrow \{0,1\}}$
+  $\underline{\V_\phi\begin{pmatrix}(G_{i,j})_{i\in[m],j\in[n]},\\\ (U_i)_{i\in[m]}\end{pmatrix}\rightarrow \{0,1\}}$
 </td></tr>
 
 <tr><td style="border: none; text-align: left;" colspan="2">
@@ -133,7 +133,7 @@ Boneh and Shoup[^BS23] give a few examples of popular $\Sigma$-protocols viewed 
 
 ### Performance
 
-In practice, the verifier $\V$ would use a **multi-scalar multiplication (MSM)** to check all the $A_i + e\cdot U_i \equals \sum_{j\in[n]} \sigma_j \cdot G_{i,j}$ equations faster.
+In practice, the verifier would use a **multi-scalar multiplication (MSM)** to check all the $A_i + e\cdot U_i \equals \sum_{j\in[n]} \sigma_j \cdot G_{i,j}$ equations faster.
 
 How? Using a well-known **random-linear combination trick**.
 
@@ -155,7 +155,7 @@ The check above is now a single size-$(nm + m)$ MSM!
 
 ### Secure deserialization
 
-In reality, $\Sigma$-protocol proofs are sent over the network to the verifier $\V$.
+In reality, $\Sigma$-protocol proofs are sent over the network to the verifier.
 
 Thefore, a crucial security-sensitive aspect is not captured in academic descriptions like the one above:
 **the verifier must correctly-deserialize the received proof**!
