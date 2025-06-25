@@ -3,12 +3,13 @@ tags: motorcycling
 title: Lessons learned motorcycling from CA to TX
 #date: 2020-11-05 20:45:59
 #published: false
+permalink: motorcycling-from-ca-to-tx
 #sidebar:
 #    nav: cryptomat
 article_header:
   type: cover
   image:
-    src: /pictures/looking-back.jpg
+    src: /pictures/inyokern-178-looking-back.jpg
 ---
 
 A few tips and tricks for my next, long motorcyle trip.
