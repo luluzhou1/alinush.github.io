@@ -6,8 +6,8 @@ title: $\Sigma$-protocols
 #date: 2020-11-05 20:45:59
 #published: false
 permalink: sigma
-sidebar:
-    nav: cryptomat
+#sidebar:
+#    nav: cryptomat
 #article_header:
 #  type: cover
 #  image:
@@ -34,7 +34,7 @@ Skipping over 30+ years of $\Sigma$-protocol design and jmping right into it.
 ## Preliminaries
 
  - $[m]\bydef\\{1,\ldots,m\\}$
- - $\bigwedge_{i \in [m]} C_i \bydef C_1 \wedge C_2\wedge\ldots C_m$ denotes the logical "and" of multiple statements $C_i$
+ - $\bigwedge_{i \in [m]} C_i \bydef C_1 \wedge C_2\wedge\ldots C_m$ denotes the "logical and" of multiple statements $C_i$
  - $\lambda$ denotes a security parameter; typically $\lambda = 128$ bits of security
  - $\F$ is a finite field of prime order $p \approx 2^{2\lambda}$
  - $\Gr$ is a group where computing discrete logs is hard, also of prime order $p$
@@ -43,20 +43,20 @@ Skipping over 30+ years of $\Sigma$-protocol design and jmping right into it.
 
 ## $\Sigma$-protocols for linear relations
 
-Consider a **linear check** of the form on group elements $G_j\in\Gr$:
+Consider a **linear check** on group elements $G_j\in\Gr$ of the following form:
 \begin{align}
 U \equals
 \sum_{j\in [n]} w_j \cdot G_j 
 \end{align}
 
-Denote the "logical and" of a bunch of such checks on the same inputs $w_1, \ldots, w_n\in\F$ by:
+Denote the "logical and" of a bunch of such checks w.r.t. the same $w_j$ scalars by: 
 \begin{align}
 \term{\phi(w_1,\ldots,w_n)} \bydef \left\\{
 \bigwedge_{i\in[m]}\left( \term{U_i} \equals \sum_{j\in[n]} \term{w_j}\cdot \term{G_{i,j}}\right)
 \right\\}
 \end{align}
 
-Boneh and Shoup[^BS23] show that it is very easy to build $\Sigma$-protocols for this general class of **arbitrary linear relations**; i.e., for:
+Boneh and Shoup[^BS23] remind us that it is very easy to build $\Sigma$-protocols for this general class of **arbitrary linear relations** defined below:
 \begin{align}
 \term{\mathcal{R}_\mathsf{lin}}\begin{pmatrix}
     (G\_{i,j})\_{i\in[m],j\in[n]}, (U\_i)\_{i\in[m]}
@@ -66,7 +66,10 @@ Boneh and Shoup[^BS23] show that it is very easy to build $\Sigma$-protocols for
     \phi(w_1,\ldots,w_1) \equals 1
 \end{align}
 
-A $\Sigma$-protocol for $\mathcal{R}_\mathsf{lin}$, where a **prover** $\P$ convinces the **verifier** $\V$, in zero-knowledge, that it knows secret $w_i$'s such that $\phi(w_1,\ldots,w_n)=1$ follows below:
+{: .note}
+i.e., a $\Sigma$-protocol whereby a **prover** $\P$ can convince a **verifier** $\V$, in zero-knowledge, that it knows secret $w_i$'s such that $\phi(w_1,\ldots,w_n)=1$ follows. 
+
+A $\Sigma$-protocol for $\mathcal{R}_\mathsf{lin}$ follows below:
 
 <table style="border-collapse: collapse; border: 1px solid grey; table-layout: fixed; width: 575px;">
 <tr><td style="border: none;">
@@ -101,6 +104,18 @@ A $\Sigma$-protocol for $\mathcal{R}_\mathsf{lin}$, where a **prover** $\P$ conv
 </td></tr>
 </table>
 
+### Notes
+
+ - Prover time:
+    + $m$ size-$n$ MSMs in $\Gr$
+    + $n$ additions in $\F$
+    + $n$ multiplications in $\F$
+ - Proof size:
+    - $m$ $\Gr$ group elements
+    - $n$ $\F$ field elements
+ - Verifier time:
+    - size-$(m(n+1))$ MSM in $\Gr$ (see [here](#performance))
+
 {: .note}
 This protocols works across _different groups_: i.e., when $U_i, G_{i,j}\in \Gr_i$ and the $\Gr_i$'s are different but of the same prime order $p$!
 (However, the faster verification optimization [described below](#performance) will be affected.)
@@ -109,44 +124,46 @@ This protocols works across _different groups_: i.e., when $U_i, G_{i,j}\in \Gr_
 
 ### Performance
 
-The description above does not account for an important optimization used in practice to make the verifier faster: using multi-scalar multiplication (MSM) in the last step, when the verifier checks $A_i + e\cdot U_i \equals \sum_{j\in[n]} \sigma_j \cdot G_{i,j}$.
+In practice, the verifier $\V$ would use a **multi-scalar multiplication (MSM)** to check all the $A_i + e\cdot U_i \equals \sum_{j\in[n]} \sigma_j \cdot G_{i,j}$ equations faster.
 
-How?
+How? Using a well-known **random-linear combination trick**.
 
 The verifier picks **random**, $\lambda$-bit wide $\beta_i$'s.
-Note that, for the $i$th equation, the verifier could, in principle, equivalently check:
+The $i$th equation can be multipled on both sides by $\beta_i$:
 \begin{align}
 \beta_i \cdot \left(A_i + e \cdot U_i\right) &\equals \beta_i \left(\sum_{j\in[n]}\sigma_j\cdot G_{i,j}\right)\Leftrightarrow\\\\\
 \beta_i \cdot \left(A_i + e \cdot U_i + \sum_{j\in[n]}\sigma_j\cdot G_{i,j}\right) &\\equals 0\\\\\
 \beta_i \cdot A_i + (\beta_i \cdot e) \cdot U_i + \sum_{j\in[n]}(\beta_i \cdot \sigma_j)\cdot G_{i,j} &\\equals 0
 \end{align}
-Then, the verifier simply adds all these checks together, resulting in a single check:
+Then, all such equations can be combined into a single one:
 \begin{align}
 \sum_{i\in [m]}\left( \beta_i\cdot A_i + (\beta_i \cdot e) \cdot U_i\right) + \sum_{i\in[m],j\in[n]}\left( (\beta_i \cdot \sigma_j) \cdot G_{i,j}\right) &\\equals 0
 \end{align}
-One can show that, except with negligible probability, this batched check is as $\approx$ as sound as the original check:
+One can show that, except with negligible probability, this batched check is $\approx$ as sound as the original check:
 
 {: .note}
 The check above is now a single size-$(nm + m)$ MSM!
 
 ### Secure deserialization
 
-$\Sigma$-protocol proofs are usually sent over the network to the verifier $\V$.
+In reality, $\Sigma$-protocol proofs are sent over the network to the verifier $\V$.
 
-Therefore, a crucial security-sensitive operation is never captured in academic descriptions like the one above:
-**the verifier must correctly-deserialize the received proof into group and field elements**!
+Thefore, a crucial security-sensitive aspect is not captured in academic descriptions like the one above:
+**the verifier must correctly-deserialize the received proof**!
 
-Always make sure your group element deserialization routine in the elliptic curve library you are using checks two things:
-1. The deserialized point satisfies the elliptic curve equation
-2. The deserialized point lies in the subgroup of prime order $p = \|\F\| = \|\Gr\|$
-    + Most deployed cryptography only works over prime order subgroups and big security issues can arise otherwise (see [here](/schnorr#fn:devalence))
+Here's a few pro tips below.
 
-Be careful how you handle deserialization of field elements too:
-1. A conservative approach is to always reject bytes that encode a number $\ge p$, since field elements are in $[0, p)$.
+1. In your elliptic curve library, make sure your group element deserialization routine checks two things: 
+   - The deserialized point satisfies the elliptic curve equation
+   - The deserialized point lies in the subgroup of prime order $p = \|\F\| = \|\Gr\|$
+       + Otherwise, there may be big security issues (e.g., see [here](/schnorr#fn:devalence))
+
+2. Carefully-handle field element deserialization too:
+   - A conservative approach: always reject bytes that encode a number $\ge p$, since field elements are in $[0, p)$.
 
 ### Fiat-Shamir transform
 
-Hash everything: a description of $\Gr$ (e.g., _"Edwards 25519"_), the prime order $p$, the sizes $n,m$, the formula $\phi$, all the $G_{i,j}$'s, all the $U_i$'s, all the messages so far (i.e., the $A_i$'s), and any application-specific context $\mathsf{ctx}$.
+**tl;dr:** Hash everything and nothing more: a description of $\Gr$ (e.g., _"Edwards 25519"_), the prime order $p$, the sizes $n,m$, the formula $\phi$, all the $G_{i,j}$'s, all the $U_i$'s, all the messages so far (i.e., the $A_i$'s), and any application-specific context $\mathsf{ctx}$.
 
 Specifically:
 \begin{align}
@@ -159,12 +176,14 @@ H\_\mathsf{FS} : \str \times \N^3 \times \Phi \times \Gr^{mn} \times \Gr^{2m}\ti
 \end{align}
 and (informally) $\Phi$ is the set of all possible formulas like $\phi$.
 
-However, even this description can be **dangerously misleading** as it assumes people know how to instantiate a collision-resistant $H\_\mathsf{FS}$ given a more general collision-resistant hash function $H : \\{0,1\\}^\*\rightarrow \binL$ that just hashes bit streams.
+However, even this description can be **dangerously misleading**.
+It tends to assume folks know how to instantiate a collision-resistant $H\_\mathsf{FS}$ given a more general collision-resistant hash function $H : \\{0,1\\}^\*\rightarrow \binL$ that just hashes bits.
 
-Yet, in practice, people implement this wrong.
+Unfortunately, in practice, folks often implement this wrong.
 
-For example, imagine a hash function $H_2 : \str \times \str \rightarrow \binL$ for hashing two strings $s_1,s_2 \in \str$, but **mis**implemented to hash them by concatenating them as $H(s_1 \concat s_2)$ using the general hash function $H$ from above.
-If so, then the hash of $s_1 = \text{"a"}$ and $s_2 = \text{"bc"}$ will collide with that of $s_1' = \text{"ab"}$ and $s_2' = \text{"c"}$ will collide, since they are both $H_2(\text{"a"},\text{"bc"})=H_2(\text{"ab"},\text{"c"})=H(\text{"abc"})$.
+For example, folks **mis**implement a hash function $H_2 : \str \times \str \rightarrow \binL$ that hashes two variable-length strings $s_1,s_2 \in \str$ by concatenating the two strings and hashing the result as $H(s_1 \concat s_2)$, using a general hash function $H$ for bits.
+
+As a result, the hash of $s_1 = \text{"a"}$ and $s_2 = \text{"bc"}$ will collide with that of $s_1' = \text{"ab"}$ and $s_2' = \text{"c"}$ will collide, since they are both $H_2(\text{"a"},\text{"bc"})=H_2(\text{"ab"},\text{"c"})=H(\text{"abc"})$.
 
 {: .warning}
 $\Rightarrow$ Just use the [spongefish library](https://github.com/arkworks-rs/spongefish), really[^CO25e].
@@ -178,7 +197,7 @@ You'd find out the hard way, but don't hash the secret witness (e.g., the $w_i$'
 
 ## Extra resources
 
- - Composing $\Sigma$-protocols can also be tricky. Hope to add notes here later.
+ - Composing $\Sigma$-protocols can also be tricky. Hope to expand on it later.
  - ZKProof workshop $\Sigma$-protocols proposal[^KO21] with [slides here](https://docs.zkproof.org/pages/standards/slides-w4/sigma.pdf)
  - Ivan Damgaard's write-up[^Dam10]
 
