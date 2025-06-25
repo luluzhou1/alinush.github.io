@@ -25,6 +25,7 @@ permalink: sigma
 \def\V{\mathcal{V}}
 \def\str{\mathsf{str}}
 \def\binL{\{0,1\}^{2\lambda}}
+\def\Rlin{\mathcal{R}_\mathsf{lin}}
 $</div> <!-- $ -->
 
 ## Introduction
@@ -58,7 +59,7 @@ Denote the "logical and" of a bunch of such checks w.r.t. the same $w_j$ scalars
 
 Boneh and Shoup[^BS23] remind us that it is very easy to build $\Sigma$-protocols for this general class of **arbitrary linear relations** defined below:
 \begin{align}
-\term{\mathcal{R}_\mathsf{lin}}\begin{pmatrix}
+\term{\Rlin}\begin{pmatrix}
     (G\_{i,j})\_{i\in[m],j\in[n]}, (U\_i)\_{i\in[m]}
     \textbf{;}\\\\\
     w_1,\ldots,w_n\end{pmatrix} = 1
@@ -69,7 +70,7 @@ Boneh and Shoup[^BS23] remind us that it is very easy to build $\Sigma$-protocol
 {: .note}
 i.e., a $\Sigma$-protocol whereby a **prover** $\P$ can convince a **verifier** $\V$, in zero-knowledge, that it knows secret $w_i$'s such that $\phi(w_1,\ldots,w_n)=1$ follows. 
 
-A $\Sigma$-protocol for $\mathcal{R}_\mathsf{lin}$ follows below:
+A $\Sigma$-protocol for $\Rlin$ follows below:
 
 <table style="border-collapse: collapse; border: 1px solid grey; table-layout: fixed; width: 575px;">
 <tr><td style="border: none;">
@@ -119,6 +120,14 @@ A $\Sigma$-protocol for $\mathcal{R}_\mathsf{lin}$ follows below:
 {: .note}
 This protocols works across _different groups_: i.e., when $U_i, G_{i,j}\in \Gr_i$ and the $\Gr_i$'s are different but of the same prime order $p$!
 (However, the faster verification optimization [described below](#performance) will be affected.)
+
+### Examples of formulas $\phi$
+
+Boneh and Shoup[^BS23] give a few examples of popular $\Sigma$-protocols viewed through this lens of proving the $\Rlin$ relation:
+
+ - [Schnorr](/schnorr) proofs use $\phi(\sk) = \left\\{\pk \equals \sk \cdot G\right\\}$, where $\sk\in\F$ is the secret key and $\pk\in\Gr$ is the public key
+ - Okamoto signatures[^Okam93] use $\phi(\sk_1,\sk_2) = \left\\{\pk \equals \sk_1 \cdot G_1 + \sk_2\cdot G_2\right\\}$, where $(\sk_1,\sk_2)\in\F^2$ is the secret key and $\pk\in\Gr$ is the public key
+ - Discrete log equality proofs (a.k.a. Chaum-Pedersen[^CP92] proofs) use $\phi(w_1, w_2) = \left\\{ H_1 = w_1\cdot G_1 \wedge H_2 = w_2\cdot G_2 \right\\}$
 
 ## Implementation pitfalls
 
@@ -200,6 +209,7 @@ You'd find out the hard way, but don't hash the secret witness (e.g., the $w_i$'
  - Composing $\Sigma$-protocols can also be tricky. Hope to expand on it later.
  - ZKProof workshop $\Sigma$-protocols proposal[^KO21] with [slides here](https://docs.zkproof.org/pages/standards/slides-w4/sigma.pdf)
  - Ivan Damgaard's write-up[^Dam10]
+ - Section 19.5.4 in Boneh and Shoup's textbook[^BS23] further generalizes $\Rlin$ as a group homomorphism
 
 ## References
 
