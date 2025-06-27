@@ -210,6 +210,8 @@ You'd find out the hard way, but don't hash the secret witness (e.g., the $w_i$'
  - ZKProof workshop $\Sigma$-protocols proposal[^KO21] with [slides here](https://docs.zkproof.org/pages/standards/slides-w4/sigma.pdf)
  - Ivan Damgaard's write-up[^Dam10]
  - Section 19.5.4 in Boneh and Shoup's textbook[^BS23] further generalizes $\Rlin$ as a group homomorphism
+ - $\Sigma$-protocols from VSS[^ZCYW23e]
+ - Compressed $\Sigma$-protocols[^AC20e]
 
 ## References
 
