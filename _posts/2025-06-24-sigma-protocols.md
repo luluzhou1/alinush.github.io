@@ -15,7 +15,7 @@ permalink: sigma
 ---
 
 {: .info}
-**tl;dr:** A quick note on the most commonly-occuring variant of $\Sigma$-protocols.
+**tl;dr:** A quick note on the most commonly-occuring variant of $\Sigma$-protocols, inspired from the Boneh-Shoup textbook!
 
 <!--more-->
 
@@ -30,7 +30,8 @@ $</div> <!-- $ -->
 
 ## Introduction
 
-Skipping over 30+ years of $\Sigma$-protocol design and jmping right into it.
+Skipping over 30+ years of $\Sigma$-protocol design and jmping right into the (most?) useful generalization from the Boneh-Shoup[^BS23] textbook.
+(Actually, I think the most useful one may be the preimage of a homomorphism one...)
 
 ## Preliminaries
 
