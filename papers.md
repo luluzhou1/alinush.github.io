@@ -7,6 +7,8 @@ titles:
 key: page-papers
 ---
 
+**DekartProof: Efficient Vector Range Proofs and Their Applications**, Dan Boneh, Trisha Datta, Rex Fernando, Kamilla Nazirkhanova, Alin Tomescu, _in Cryptology ePrint Archive_, <a class="button button--success button--rounded button--sm" href="https://eprint.iacr.org/2025/1159.pdf"><i class="fas fa-download"></i>PDF</a>
+
 **Distributed Randomness using Weighted VRFs**, by Sourav Das and Benny Pinkas and Alin Tomescu and Zhuolun Xiang, _EUROCRYPT'25_, <a class="button button--success button--rounded button--sm" href="https://eprint.iacr.org/2024/198"><i class="fas fa-download"></i>PDF</a>
 
 **Verifiable Secret Sharing Simplified**, Sourav Das, Zhuolun Xiang, Alin Tomescu, Alexander Spiegelman, Benny Pinkas, Ling Ren, _IEEE S&P'25_, <a class="button button--success button--rounded button--sm" href="https://eprint.iacr.org/2023/1196.pdf"><i class="fas fa-download"></i>PDF</a>
