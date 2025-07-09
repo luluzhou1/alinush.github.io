@@ -27,7 +27,6 @@ sidebar:
 <!-- Here you can define LaTeX macros -->
 <div style="display: none;">$
 %
-\def\aux{\mathsf{aux}}
 \def\oracle#1{\langle #1 \rangle}
 \def\prove{\mathsf{Prove}}
 \def\FS{\mathcal{FS}}
@@ -39,9 +38,7 @@ sidebar:
 \def\binS{\bin^s}
 \def\binN{\bin^{\log{n}}}
 \def\C{\mathcal{C}}
-\def\i{\boldsymbol{i}}
 \def\inst{\mathbf{i}}
-\def\j{\boldsymbol{j}}
 \def\k{\boldsymbol{k}}
 \def\r{\boldsymbol{r}}
 \def\z{\mathbf{z}}

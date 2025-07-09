@@ -23,8 +23,6 @@ In particular, R1CS is just a reformulation of QAPs as linear equations and, the
 
 <!-- Here you can define LaTeX macros -->
 <div style="display: none;">$
-\def\mat#1{\mathbf{#1}}
-%
 \def\gu{\textcolor{magenta}{u}}
 \def\rv{\textcolor{red}{v}}
 \def\bw{\textcolor{blue}{w}}
@@ -41,8 +39,8 @@ This blog post explains two different characterizations of NP, which are useful 
 
 ## Notation
 
- - We use [linear algebra notation](/2025/01/20/Basics-of-linear-algebra.html)
-    - In particular, $\circ$ denotes a [Hadamard product](/2025/01/20/Basics-of-linear-algebra.html#hadamard-products)!
+ - We use [linear algebra notation](/linear-algebra)
+    - In particular, $\circ$ denotes a [Hadamard product](/linear-algebra#hadamard-products)!
 
 ## History
 
@@ -133,7 +131,7 @@ However, **the most common way** to look at R1CS you will find in the academic l
 \end{align}
 
 **Notes:**
- - Recall that $\circ$ denotes a [Hadamard product](/2025/01/20/Basics-of-linear-algebra.html#hadamard-products)!
+ - Recall that $\circ$ denotes a [Hadamard product](/linear-algebra#hadamard-products)!
  - $m$ is typically called the **number of (R1CS) variables**.
  - $n$ is typically called the **number of (R1CS) constraints** or equations (equal to the # of multiplications needed to compute $R$)
 

@@ -1,6 +1,7 @@
 ---
 tags: 
  - science 
+permalink: science
 title: "Science: Process, not Truth"
 article_header:
   type: cover

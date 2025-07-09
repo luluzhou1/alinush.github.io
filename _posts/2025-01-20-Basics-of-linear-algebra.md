@@ -4,6 +4,7 @@ tags:
 title: Basics of linear algebra
 #date: 2020-11-05 20:45:59
 #published: false
+permalink: linear-algebra
 sidebar:
     nav: cryptomat
 #article_header:
@@ -19,7 +20,6 @@ sidebar:
 
 <!-- Here you can define LaTeX macros -->
 <div style="display: none;">$
-\def\mat#1{\mathbf{#1}}
 $</div> <!-- $ -->
 
 We typically assume all vector and matrix elements are from a finite field $\F$, but these definitions can be generalized.
