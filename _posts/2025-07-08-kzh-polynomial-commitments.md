@@ -70,7 +70,7 @@ $f(\X,\Y)\in \mle{\term{\nu},\term{\mu}}$
 representing a matrix of $\term{n} = 2^\nu$ rows and $\term{m}=2^\mu$ columns, where
 $\X\in \bin^\nu$ indicates the row and $\Y\in\bin^\mu$ indicates the column.
 
-### $\mathsf{KZH}_2.\mathsf{Setup}(1^\lambda, \nu,\mu) \rightarrow (\mathsf{vk},\mathsf{prk})$
+### $\mathsf{KZH}_2.\mathsf{Setup}(1^\lambda, \nu,\mu) \rightarrow (\mathsf{vk},\mathsf{prk})$[^N]
  
 Notation:
  - $n \gets 2^\nu$ denotes the # of matrix rows
@@ -138,9 +138,6 @@ Return the VK and proving key:
  - $\vk\gets (V',\V,\A)$
  - $\prk\gets (\vk, \H)$
 
-{: .note}
-In the KZH paper[^KZHB25e], the setup algorithm only takes $N$ as input (but they confusingly denote it by $k$?)
-
 {: .warning}
 Interestingly, the $G_i$'s and $V$ generators are neither needed in the $\prk$ (when proving) nor in the $\vk$ (when verifying), although the KZH paper does include them.
 They would indeed be useful when trying to verify correctness of the $\prk$ and $\vk$.
@@ -184,21 +181,17 @@ Partially-evaluate $f\in \mle{\nu,\mu}$:
 \end{align}-->
 
 {: .note}
-When $\x\in\bin^\nu$ and $\y\in{\bin^\mu}$, the step above involves **zero work** $f_\x(\Y)$ is just the $x$th column in the matrix encoded by $f$.
-Furthermore, $z=f(\x,\y)$, passed in by the caller, is just the entry at location $(x,y)$ in the matrix.
+When $\x\in\bin^\nu$ and $\y\in{\bin^\mu}$, the step above involves **zero work**:  $f_\x(\Y)$ is just the $x$th column in the matrix encoded by $f$.
+Furthermore, $z=f(\x,\y)$ is simply the entry at location $(x,y)$ in the matrix.
 
 {: .warning}
-However, when $\x$ is not on the hypercube, computing $f_\x$ will require $O(nm)$ $\F$ multiplications (i.e., partial evaluation of $\eq$ Lagrange polynomials and then a size-$n$ random-linear combination of all the row MLEs).
-Then, computing $z = f_\x(\y)$ will require another $O(m)$ $\F$ multiplications.
+However, when $\x$ is not on the hypercube, computing $f_\x$ will require $O(nm)$ $\F$ multiplications (i.e., partial evaluations of $\eq$ Lagrange polynomials and a size-$n$ random-linear combination of all the row MLEs).
+Then, computing $z = f_\x(\y)$ will require $O(m)$ $\F$ multiplications.
 
 <!-- TODO: should give algorithms for evaluating the eq polynomials fast in another blog -->
 
-Return the proof:
+Return the proof[^open]:
  - $\pi \gets (f_\x, \aux) \in \F^m \times \Gr_1^n$
-
-{: .note}
-In the KZH paper[^KZHB25e], the evaluation $z$ is also included in the proof, but this is unnecessary.
-Furthermore, the paper's opening algorithm unnecessarily includes the proving key $\prk$ as a a parameter, even thought it does **not** use it at all.
 
 ### $\mathsf{KZH}_2.\mathsf{Verify}(\mathsf{vk}, C, (\boldsymbol{x}, \boldsymbol{y}), z; \pi)\rightarrow (z, \pi)$
 
@@ -212,14 +205,32 @@ Parse the VK and the proof:
     &\parse \aux\\\\\
 \end{align}
 
-Check the $D_i$ row commitments are consistent with the full commitment $C$:
+Check the row commitments are consistent with the full commitment (via size-$(n+1)$ multipairing):
 \begin{align}
-e(C, V') \equals \sum_{i\in[n)} e(D_i, V_i)\\\\\
+e(C, V') \equals \sum_{i\in[n)} e(D_i, V_i)\Leftrightarrow\\\\\
 \end{align}
 
-{: .todo}
-Perf.
-Correctness proof.
+\begin{align}
+e\left(\sum_{i\in[n)}\sum_{j\in[m)} f(\i,\j)\cdot H_{i,j}, \alpha\cdot V\right) 
+    &\equals
+\sum_{i\in[n)} e\left(\sum_{j\in[m)} f(\i, \j)\cdot A_i, \tau_i \cdot V\right)
+\Leftrightarrow
+\\\\\\
+e\left(\sum_{i\in[n)}\sum_{ j\in[m)} (f(\i,\j)\cdot \tau_i) \cdot G_j, \alpha\cdot V\right) 
+    &\equals
+\sum_{i\in[n)} e\left(\sum_{j\in[m)} (f(\i, \j)\cdot \alpha) \cdot G_i, \tau_i \cdot V\right)
+\Leftrightarrow
+\\\\\\
+e\left(\sum_{i\in[n)}\sum_{ j\in[m)} (f(\i,\j)\cdot \alpha\cdot \tau_i) \cdot G_j, V\right) 
+    &\equals
+\sum_{i\in[n)} e\left(\sum_{j\in[m)} (f(\i, \j)\cdot \alpha\cdot\tau_i) \cdot G_i, V\right)
+\Leftrightarrow
+\\\\\\
+e\left(\sum_{i\in[n)}\sum_{ j\in[m)} (f(\i,\j)\cdot \alpha\cdot \tau_i) \cdot G_j, V\right) 
+    &=
+e\left(\sum_{i\in[n)} \sum_{j\in[m)} (f(\i, \j)\cdot \alpha\cdot\tau_i) \cdot G_i, V\right)
+\end{align}
+{: .info}
 
 Check the auxiliary data:
 \begin{align}
@@ -251,3 +262,6 @@ Describe concretely with table for $\kzhTwo$ and $\kzhK$, explaining eval proofs
 For cited works, see below 👇👇
 
 {% include refs.md %}
+
+[^N]: In the KZH paper[^KZHB25e], the setup algorithm only takes $N$ as input (but they confusingly denote it by $k$?)
+[^open]: In the KZH paper[^KZHB25e], the evaluation $z$ is also included in the proof, but this is unnecessary. Furthermore, the paper's opening algorithm unnecessarily includes the proving key $\prk$ as a a parameter, even thought it does **not** use it at all.
