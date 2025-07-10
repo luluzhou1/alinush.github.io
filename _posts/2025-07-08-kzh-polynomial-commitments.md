@@ -149,19 +149,24 @@ Parse the $\prk$ as:
 ((V',\V, \A), \H) 
     &\parse \prk,\ \text{where:}\\\\\
 \A
-    &= (A\_j)\_{j\in[m)}\\\\\
+    &= (A\_j)\_{j\in[m)} = \alpha\cdot \G=(\alpha\cdot G_j)\_{j\in[m)}\\\\\
 \H 
-    &= (H\_{i,j})\_{i\in[n),j\in[m)}
+    &= (H\_{i,j})\_{i\in[n),j\in[m)} = (\tau\_i \cdot \G)\_{i\in[n)}
 \end{align}
 
 Compute the **full commitment** to $f$ (via 1 size-$N$ MSM):
 \begin{align}
-\term{C} \gets \sum_{i \in [n)} \sum_{j\in [m)} f(\i, \j)\cdot H_{i,j}\in \Gr_1
+\term{C} 
+    \gets \sum_{i \in [n)} \sum_{j\in [m)} f(\i, \j)\cdot H_{i,j}
+    \bydef \emph{\sum_{i\in [n)} \vec{f_i} \cdot \mat{H}_i} \in \Gr_1
 \end{align}
+where $\vec{f\_i}\bydef(f(\i,\j))\_{\j \in\bin^\mu}$ denotes the $i$th row of the matrix encoded by $f$.
 
 Compute the $n$ **row commitments** of $f$ (via $n$ size-$m$ MSMs):
 \begin{align}
-\term{D_i} \gets \sum_{j\in[m)} f(\i, \j) \cdot A_j\in\Gr_1
+\term{D_i} 
+    \gets \sum_{j\in[m)} f(\i, \j) \cdot A_j
+    \bydef \emph{\vec{f_i} \cdot \A}\in\Gr_1
 ,
 \forall i\in[n)
 \end{align}
@@ -211,6 +216,27 @@ e(C, V') \equals \sum_{i\in[n)} e(D_i, V_i)\Leftrightarrow\\\\\
 \end{align}
 
 \begin{align}
+e\left(\sum_{i\in[n)} \vec{f_i} \cdot \mat{H}\_i, \alpha\cdot V\right) 
+    &\equals
+\sum_{i\in[n)} e\left(\vec{f_i} \cdot \A, \tau_i \cdot V\right)
+\Leftrightarrow
+\\\\\\
+\sum_{i\in[n)} e\left(\vec{f_i} \cdot \mat{H}\_i, \alpha\cdot V\right) 
+    &\equals
+\sum_{i\in[n)} e\left(\vec{f_i} \cdot \A, \tau_i \cdot V\right)
+\Leftrightarrow
+\\\\\\
+\sum_{i\in[n)} e\left((\vec{f_i} \cdot \tau_i) \cdot \G, \alpha\cdot V\right) 
+    &\equals
+\sum_{i\in[n)} e\left((\vec{f_i} \cdot \alpha)\cdot \G, \tau_i \cdot V\right)
+\Leftrightarrow
+\\\\\\
+\sum_{i\in[n)} e\left(\vec{f_i} \cdot \G, (\alpha\cdot \tau_i)\cdot V\right) 
+    &\goddamnequals
+\sum_{i\in[n)} e\left(\vec{f_i} \cdot \G, (\alpha\cdot \tau_i)\cdot V\right)
+\end{align}
+<!--
+\begin{align}
 e\left(\sum_{i\in[n)}\sum_{j\in[m)} f(\i,\j)\cdot H_{i,j}, \alpha\cdot V\right) 
     &\equals
 \sum_{i\in[n)} e\left(\sum_{j\in[m)} f(\i, \j)\cdot A_i, \tau_i \cdot V\right)
@@ -230,6 +256,8 @@ e\left(\sum_{i\in[n)}\sum_{ j\in[m)} (f(\i,\j)\cdot \alpha\cdot \tau_i) \cdot G_
     &=
 e\left(\sum_{i\in[n)} \sum_{j\in[m)} (f(\i, \j)\cdot \alpha\cdot\tau_i) \cdot G_i, V\right)
 \end{align}
+-->
+(Thus correctness holds.)
 {: .info}
 
 Check the auxiliary data:
