@@ -9,8 +9,8 @@ title: KZH polynomial commitments
 #date: 2020-11-05 20:45:59
 #published: false
 permalink: kzh
-sidebar:
-    nav: cryptomat
+#sidebar:
+#    nav: cryptomat
 #article_header:
 #  type: cover
 #  image:
@@ -27,16 +27,29 @@ sidebar:
 \def\kzh#1{\mathsf{KZH}_{#1}}
 \def\kzhTwo{\kzh{2}}
 \def\kzhK{\kzh{k}}
+\def\kzhTwoGen{\kzhTwo^{n, m}}
+\def\kzhTwoSqr{\kzhTwo^{\sqrt{N},\sqrt{N}}}
 \def\kzhSetup#1{\kzh{#1}.\mathsf{Setup}}
 \def\kzhOpen#1{\kzh{#1}.\mathsf{Open}}
 \def\tobin#1{\langle #1 \rangle}
 \def\vect#1{\boldsymbol{#1}}
 \def\btau{\vect{\tau}}
 \def\prk{\mathsf{prk}}
+\def\ck{\mathsf{ck}}
 \def\G{\vect{G}}
 \def\A{\vect{A}}
-\def\V{\vect{V}}
+\def\V{\widetilde{V}}
+\def\Vp{\V'}
+\def\VV{\widetilde{\vect{V}}}
 \def\H{\mat{H}}
+%\def\msm#1#2{#1\text{-}\vec{\gr}_{#2}^\times}
+\def\msm#1#2{\mathsf{msm}_{#2}^{#1}}
+\def\Fmul#1{#1\ \F^\times}
+\def\Gadd#1#2{#1\ \Gr_{#2}^+}
+\def\Gmul#1#2{#1\ \Gr_{#2}^\times}
+\def\Fadd#1{#1\ \F^+}
+\def\pair{\mathbb{P}}
+\def\multipair#1{\mathbb{P}^{#1}}
 %\def\?{\vect{?}}
 % - Let $\tobin{i}_s$ denote the $s$-bit binary representation of $i$
 $</div> <!-- $ -->
@@ -58,10 +71,18 @@ $</div> <!-- $ -->
  - $(v_0, v_2, \ldots, v_{n-1})^\top$ denotes the transpose of a row vector
  - We typically use bolded variables to indicate vectors and matrices
     - e.g., a matrix $\mat{A}$ consists of rows $\mat{A}\_i,\forall i\in[n)$, where each row $\mat{A}\_i$ consists of entries $A_{i,j},\forall j\in[m)$
-    - e.g., vectors $\V$ are typically italicized while matrices $\mat{M}$ are not
+    - e.g., vectors $\A$ are typically italicized while matrices $\mat{M}$ are not
  - We use $\vect{a}\cdot G\bydef (a_0\cdot G,a_1\cdot G,\ldots, a_{n-1}\cdot G)$
  - We use $a\cdot \G\bydef (a\cdot G_0,a\cdot G_1,\ldots, a\cdot G_{n-1})$
  - We use $\langle \vect{a}, \G\rangle \bydef \sum_{i\in[n)} a_i\cdot G_i$
+ - Recall the definition of $\eq(\x,\boldsymbol{b})$ Lagrange polynomials from [here](/spartan#mathsfeqmathbfxmathbfb-lagrange-polynomials)
+ - For time complexities, we use:
+    + $\Fadd{n}$ for $n$ field additions.
+    + $\Fmul{n}$ for $n$ field multiplications in $\F$
+    + $\msm{n}{b}$ for a single multi-scalar multiplication (MSM) in $\Gr_b$ of size $n$
+    - $\Gadd{n}{b}$ for $n$ additions in $\Gr_b$
+    - $\Gmul{n}{b}$ for $n$ individual scalar multiplications in $\Gr_b$
+    + $\multipair{n}$ for a multipairing of size $n$ and $\pair$ for one pairing
 
 ## $\mathsf{KZH}_2$ construction
 
@@ -70,7 +91,7 @@ $f(\X,\Y)\in \mle{\term{\nu},\term{\mu}}$
 representing a matrix of $\term{n} = 2^\nu$ rows and $\term{m}=2^\mu$ columns, where
 $\X\in \bin^\nu$ indicates the row and $\Y\in\bin^\mu$ indicates the column.
 
-### $\mathsf{KZH}_2.\mathsf{Setup}(1^\lambda, \nu,\mu) \rightarrow (\mathsf{vk},\mathsf{prk})$[^N]
+### $\mathsf{KZH}_2.\mathsf{Setup}(1^\lambda, \nu,\mu) \rightarrow (\mathsf{vk},\mathsf{ck})$[^N]
  
 Notation:
  - $n \gets 2^\nu$ denotes the # of matrix rows
@@ -81,88 +102,106 @@ Pick trapdoors and generators:
  - $\term{\alpha}\randget\F$
  - $\term{\btau} \bydef (\tau_0, \tau_1,\ldots,\tau_{n-1})\randget \F^n$
  - $\term{\G}\bydef(G_0,\ldots, G_{m-1})\randget \Gr_1^m$
- - $\term{V}\randget \Gr_2$
+ - $\term{\V}\randget \Gr_2$
 
 Compute $\H\in\Gr_1^{n \times m}$:
 \begin{align}
-\forall i\in[n),j\in[m),
 H\_{i,j} 
-    &\gets \tau\_i \cdot G_j\\\\\
-\forall i\in[n),
+    &\gets \tau\_i \cdot G_j\in \Gr_1
+,
+\forall i\in[n),j\in[m)
+\\\\\
 \H\_i
     &\gets \tau_i\cdot \G
     %\\\\\
-    \bydef (\tau_i \cdot G_0,\tau_i\cdot G_1,\dots,\tau_i\cdot G_{m-1})\\\\\
+    \bydef (\tau_i \cdot G_0,\tau_i\cdot G_1,\dots,\tau_i\cdot G_{m-1})\in\Gr_1^m
+,
+\forall i\in[n)
+\\\\\
     %&\bydef (H\_{i,0},\ldots,H_{i,m-1})\\\\\
 \term{\H}
     &\bydef \begin{pmatrix}
-        \H\_0\\\\\ 
-        \H\_1\\\\\ 
-        \vdots\\\\\
-        \H\_{n-1}\\\\\
+        \text{ ---} & \H\_0 & \text{--- }\\\\\ 
+        \text{ ---} & \H\_1 & \text{--- }\\\\\ 
+         & \vdots & \\\\\
+        \text{ ---} & \H\_{n-1} & \text{--- }\\\\\
     \end{pmatrix}
     %\\\\\
     \bydef \begin{pmatrix}
-        \tau_0 \cdot \G\\\\\
-        \tau_1\cdot\G\\\\\
-        \vdots\\\\\
-        \tau_{n-1}\cdot\G\\\\\
+        \text{ ---} & \tau_0 \cdot \G & \text{--- }\\\\\
+        \text{ ---} & \tau_1\cdot\G & \text{--- }\\\\\
+        &\vdots &\\\\\
+        \text{ ---} &\tau_{n-1}\cdot\G & \text{--- }\\\\\
     \end{pmatrix}
-    \bydef\begin{pmatrix}
-        \tau_0 \cdot G_0 &\tau_0 \cdot G_1 &  \dots & \tau_0\cdot G_{m-1}\\\\\
-        \tau_1 \cdot G_0 &\tau_1 \cdot G_1 & \dots & \tau_1\cdot G_{m-1}\\\\\
-        \vdots  &   & & \vdots\\\\\
-        \tau_{n-1} \cdot G_0 & \tau_{n-1}\cdot G_1 & \dots & \tau_{n-1}\cdot G_{m-1}\\\\\
-    \end{pmatrix}\\\\\
-    &\bydef (\btau\cdot G_0,\btau\cdot G_1,\ldots,\btau\cdot G_{m-1})
+    %\bydef\begin{pmatrix}
+    %    \tau_0 \cdot G_0 &\tau_0 \cdot G_1 &  \dots & \tau_0\cdot G_{m-1}\\\\\
+    %    \tau_1 \cdot G_0 &\tau_1 \cdot G_1 & \dots & \tau_1\cdot G_{m-1}\\\\\
+    %    \vdots  &   & & \vdots\\\\\
+    %    \tau_{n-1} \cdot G_0 & \tau_{n-1}\cdot G_1 & \dots & \tau_{n-1}\cdot G_{m-1}\\\\\
+    %\end{pmatrix}
+    %\\\\\
+    \bydef \begin{pmatrix}
+        \| & \| & & \| \\\\\
+        \btau\cdot G_0 &
+        \btau\cdot G_1 &
+        \cdots &
+        \btau\cdot G_{m-1}\\\\\
+        \| & \| & & \| \\\\\
+    \end{pmatrix}
 \end{align}
 
-Compute $\A\in\Gr_1^m$, $\V\in\Gr_2^n$ and $V'\in\Gr_2$:
+Compute $\A\in\Gr_1^m$, $\VV\in\Gr_2^n$ and $\Vp\in\Gr_2$:
 \begin{align}
 \term{\A}
     &\gets (\alpha\cdot\G)
     %\\\\\
-    \bydef (\alpha\cdot G_0, \alpha\cdot G_1,\ldots,\alpha\cdot G_{m-1})\\\\\
+    \bydef (\alpha\cdot G_0, \alpha\cdot G_1,\ldots,\alpha\cdot G_{m-1})\in\Gr_1^m\\\\\
     %&\bydef (A_0,\ldots,A_{m-1})\\\\\
-\term{\V}
-    &\gets (\btau\cdot V)
+\term{\VV}
+    &\gets (\btau\cdot \V)
     %\\\\\
-    \bydef (\tau_0\cdot V, \tau_1\cdot V,\ldots,\tau_{n-1}\cdot V)\\\\\
+    \bydef (\tau_0\cdot \V, \tau_1\cdot \V,\ldots,\tau_{n-1}\cdot \V)\in\Gr_2^n\\\\\
     %&\bydef (V_0,\ldots,V_{n-1})\\\\\
-\term{V'}
-    &\gets \alpha\cdot V\\\\\
+\term{\Vp}
+    &\gets \alpha\cdot \V\in\Gr_2\\\\\
 \end{align}
 
 Return the VK and proving key:
 
- - $\vk\gets (V',\V,\A)$
- - $\prk\gets (\vk, \H)$
+ - $\vk\gets (\Vp,\VV,\A)$
+ - $\ck\gets (\A, \H)$[^ck]
 
 {: .warning}
-Interestingly, the $G_i$'s and $V$ generators are neither needed in the $\prk$ (when proving) nor in the $\vk$ (when verifying), although the KZH paper does include them.
-They would indeed be useful when trying to verify correctness of the $\prk$ and $\vk$.
+Interestingly, the $G_i$'s and $\V$ generators are not needed in the $\ck$ (when proving) nor in the $\vk$ (when verifying), although the KZH paper does include them.
+They would indeed be useful when trying to verify correctness of the $\ck$ and $\vk$.
 
-### $\mathsf{KZH}_2.\mathsf{Commit}(\mathsf{prk}, f(\boldsymbol{X},\boldsymbol{Y})) \rightarrow (C, \mathsf{aux})$
+### $\mathsf{KZH}_2.\mathsf{Commit}(\mathsf{ck}, f(\boldsymbol{X},\boldsymbol{Y})) \rightarrow (C, \mathsf{aux})$
 
-Parse the $\prk$ as:
+Parse the $\ck$ as:
 \begin{align}
-((V',\V, \A), \H) 
-    &\parse \prk,\ \text{where:}\\\\\
+((\cdot,\cdot, \A), \H) 
+    &\parse \ck,\ \text{where:}\\\\\
 \A
-    &= (A\_j)\_{j\in[m)} = \alpha\cdot \G=(\alpha\cdot G_j)\_{j\in[m)}\\\\\
+    &= 
+    %(A\_j)\_{j\in[m)} = 
+    \alpha\cdot \G
+    %=(\alpha\cdot G_j)\_{j\in[m)}
+    \\\\\
 \H 
-    &= (H\_{i,j})\_{i\in[n),j\in[m)} = (\tau\_i \cdot \G)\_{i\in[n)}
+    &=
+    %(H\_{i,j})\_{i\in[n),j\in[m)} = 
+    (\tau\_i \cdot \G)\_{i\in[n)}
 \end{align}
 
-Compute the **full commitment** to $f$ (via 1 size-$N$ MSM):
+Let $\term{\vec{f_i}\bydef(f(\i,\j))\_{\j \in\bin^\mu}}$ denote the $i$th row of the matrix encoded by $f$.
+Compute the **full commitment** to $f$ (via a single $\msm{N}{1}$):
 \begin{align}
 \term{C} 
     \gets \sum_{i \in [n)} \sum_{j\in [m)} f(\i, \j)\cdot H_{i,j}
     \bydef \emph{\sum_{i\in [n)} \vec{f_i} \cdot \mat{H}_i} \in \Gr_1
 \end{align}
-where $\vec{f\_i}\bydef(f(\i,\j))\_{\j \in\bin^\mu}$ denotes the $i$th row of the matrix encoded by $f$.
 
-Compute the $n$ **row commitments** of $f$ (via $n$ size-$m$ MSMs):
+Compute the $n$ **row commitments** of $f$ (via $n$ $\msm{m}{1}$):
 \begin{align}
 \term{D_i} 
     \gets \sum_{j\in[m)} f(\i, \j) \cdot A_j
@@ -178,31 +217,31 @@ Set the auxiliary info to be these $n$ row commitments:
 
 Partially-evaluate $f\in \mle{\nu,\mu}$:
 \begin{align}
-\term{f_\x(\Y)} \gets f(\x, \Y) \in \mle{\mu}
+\term{f_\x(\Y)} &\gets f(\x, \Y) \in \mle{\mu}
+\\\\\
+\label{eq:fxY}
+&\bydef \sum_{i\in[n)} \eq(\x, \i) f(\i,\Y)
 \end{align}
 <!--Evaluate $f(\x,\y)$:
 \begin{align}
 \term{z}\gets f_\x(\y) \bydef f(\x,\y)
 \end{align}-->
 
+Return the proof[^open]:
+ - $\pi \gets (f_\x, \aux) \in \F^m \times \Gr_1^n$
+
 {: .note}
 When $\x\in\bin^\nu$ and $\y\in{\bin^\mu}$, the step above involves **zero work**:  $f_\x(\Y)$ is just the $x$th column in the matrix encoded by $f$.
 Furthermore, $z=f(\x,\y)$ is simply the entry at location $(x,y)$ in the matrix.
-
-{: .warning}
-However, when $\x$ is not on the hypercube, computing $f_\x$ will require $O(nm)$ $\F$ multiplications (i.e., partial evaluations of $\eq$ Lagrange polynomials and a size-$n$ random-linear combination of all the row MLEs).
-Then, computing $z = f_\x(\y)$ will require $O(m)$ $\F$ multiplications.
-
-<!-- TODO: should give algorithms for evaluating the eq polynomials fast in another blog -->
-
-Return the proof[^open]:
- - $\pi \gets (f_\x, \aux) \in \F^m \times \Gr_1^n$
+When $\x$ is an arbitrary, point, computing all the $\eq(\x, \i)$'s requires $\Fmul{2n}$ (see [appendix](#computing-all-mathsfeqboldsymbolxboldsymbolis)).
+Then, assuming a Lagrange-basis representation for all $f(\i,\Y)$ rows, combining them together as per Eq. \ref{eq:fxY} will require (1) $\Fmul{m}$ for each row $i$ to multiply $\eq(\x, \i)$ by $f(\i,\Y)$ and (2) $\Fadd{(n-1)m}$ to add all multiplied rows together.
+So, $\Fmul{n(m + 2)} + \Fadd{(n-1)m}$ in total.
 
 ### $\mathsf{KZH}_2.\mathsf{Verify}(\mathsf{vk}, C, (\boldsymbol{x}, \boldsymbol{y}), z; \pi)\rightarrow (z, \pi)$
 
 Parse the VK and the proof:
 \begin{align}
-(V',\V,\A)
+(\Vp,\VV,\A)
     &\parse \vk\\\\\
 (f_\x,\aux)
     &\parse\pi\\\\\
@@ -210,69 +249,62 @@ Parse the VK and the proof:
     &\parse \aux\\\\\
 \end{align}
 
-Check the row commitments are consistent with the full commitment (via size-$(n+1)$ multipairing):
+Check the row commitments are consistent with the full commitment (via a multipairing $\multipair{n+1}$):
 \begin{align}
-e(C, V') \equals \sum_{i\in[n)} e(D_i, V_i)\Leftrightarrow\\\\\
+e(C, \Vp) \equals \sum_{i\in[n)} e(D_i, V_i)\Leftrightarrow\\\\\
 \end{align}
-
-\begin{align}
-e\left(\sum_{i\in[n)} \vec{f_i} \cdot \mat{H}\_i, \alpha\cdot V\right) 
-    &\equals
-\sum_{i\in[n)} e\left(\vec{f_i} \cdot \A, \tau_i \cdot V\right)
-\Leftrightarrow
-\\\\\\
-\sum_{i\in[n)} e\left(\vec{f_i} \cdot \mat{H}\_i, \alpha\cdot V\right) 
-    &\equals
-\sum_{i\in[n)} e\left(\vec{f_i} \cdot \A, \tau_i \cdot V\right)
-\Leftrightarrow
-\\\\\\
-\sum_{i\in[n)} e\left((\vec{f_i} \cdot \tau_i) \cdot \G, \alpha\cdot V\right) 
-    &\equals
-\sum_{i\in[n)} e\left((\vec{f_i} \cdot \alpha)\cdot \G, \tau_i \cdot V\right)
-\Leftrightarrow
-\\\\\\
-\sum_{i\in[n)} e\left(\vec{f_i} \cdot \G, (\alpha\cdot \tau_i)\cdot V\right) 
-    &\goddamnequals
-\sum_{i\in[n)} e\left(\vec{f_i} \cdot \G, (\alpha\cdot \tau_i)\cdot V\right)
-\end{align}
-<!--
-\begin{align}
-e\left(\sum_{i\in[n)}\sum_{j\in[m)} f(\i,\j)\cdot H_{i,j}, \alpha\cdot V\right) 
-    &\equals
-\sum_{i\in[n)} e\left(\sum_{j\in[m)} f(\i, \j)\cdot A_i, \tau_i \cdot V\right)
-\Leftrightarrow
-\\\\\\
-e\left(\sum_{i\in[n)}\sum_{ j\in[m)} (f(\i,\j)\cdot \tau_i) \cdot G_j, \alpha\cdot V\right) 
-    &\equals
-\sum_{i\in[n)} e\left(\sum_{j\in[m)} (f(\i, \j)\cdot \alpha) \cdot G_i, \tau_i \cdot V\right)
-\Leftrightarrow
-\\\\\\
-e\left(\sum_{i\in[n)}\sum_{ j\in[m)} (f(\i,\j)\cdot \alpha\cdot \tau_i) \cdot G_j, V\right) 
-    &\equals
-\sum_{i\in[n)} e\left(\sum_{j\in[m)} (f(\i, \j)\cdot \alpha\cdot\tau_i) \cdot G_i, V\right)
-\Leftrightarrow
-\\\\\\
-e\left(\sum_{i\in[n)}\sum_{ j\in[m)} (f(\i,\j)\cdot \alpha\cdot \tau_i) \cdot G_j, V\right) 
-    &=
-e\left(\sum_{i\in[n)} \sum_{j\in[m)} (f(\i, \j)\cdot \alpha\cdot\tau_i) \cdot G_i, V\right)
-\end{align}
--->
-(Thus correctness holds.)
-{: .info}
 
 Check the auxiliary data:
 \begin{align}
-\sum_{j\in[m)} f_\x(\j) \cdot A_j \equals \sum_{i\in[n)}\eq(\x, \i) \cdot D_i
+\label{eq:kzh2-verify-aux}
+\sum_{j\in[m)} f_\x(\j) \cdot A_j \equals \sum_{i\in[n)}\eq(\x, \i) \cdot D_i\Leftrightarrow
 \end{align}
-
-{: .todo}
-Perf.
-Link to $\eq$ polynomial definition.
-Correctness proof.
 
 Check $z$ against the partially-evaluated $f_\x$:
 \begin{align}
 z\equals f_\x(\y) 
+\end{align}
+
+{: .note}
+Assuming $f_\x$ is received in Lagrange basis, computing all $f_\x(\j)$ is just fetching entries.
+Therefore, the LHS of the auxiliary check from Eq. \ref{eq:kzh2-verify-aux} **always** involves an $\msm{m}{1}$.
+When $(\x,\y)$ are on the hypercube (1) the RHS is a single $\Gr_1$ scalar multiplication which can be absorbed into the MSM on the LHS and (2) the last check on $z$ involves simply fetching the $y$th entry in $f_\x$.
+When $(\x,\y)$ are arbitrary, the RHS involves $\Fmul{2n}$ to evaluate all $\eq(\x,\i)$ Lagrange polynomials (see [appendix](#computing-all-mathsfeqboldsymbolxboldsymbolis)) and then an $\msm{n}{1}$ which can be absorbed into the LHS.
+The final check involves evaluating the $f_\x$ MLE at an arbitrary $\y$.
+This involves evaluating all $\eq(\y,\j)$ Lagrange polynomials in $\Fmul{2m}$ time and then taking a dot product in $\Fmul{m} + \Fadd{m}$ time.
+
+#### Correctness
+
+The first check is correct because:
+\begin{align}
+e(C, \Vp) &\equals \sum_{i\in[n)} e(D_i, V_i)\Leftrightarrow\\\\\
+e\left(\sum_{i\in[n)} \vec{f_i} \cdot \mat{H}\_i, \alpha\cdot \V\right) 
+    &\equals
+\sum_{i\in[n)} e\left(\vec{f_i} \cdot \A, \tau_i \cdot \V\right)
+\Leftrightarrow
+\\\\\\
+\sum_{i\in[n)} e\left(\vec{f_i} \cdot \mat{H}\_i, \alpha\cdot \V\right) 
+    &\equals
+\sum_{i\in[n)} e\left(\vec{f_i} \cdot \A, \tau_i \cdot \V\right)
+\Leftrightarrow
+\\\\\\
+\sum_{i\in[n)} e\left((\vec{f_i} \cdot \tau_i) \cdot \G, \alpha\cdot \V\right) 
+    &\equals
+\sum_{i\in[n)} e\left((\vec{f_i} \cdot \alpha)\cdot \G, \tau_i \cdot \V\right)
+\Leftrightarrow
+\\\\\\
+\sum_{i\in[n)} e\left(\vec{f_i} \cdot \G, (\alpha\cdot \tau_i)\cdot \V\right) 
+    &\goddamnequals
+\sum_{i\in[n)} e\left(\vec{f_i} \cdot \G, (\alpha\cdot \tau_i)\cdot \V\right)
+\end{align}
+
+The second check is correct because:
+\begin{align}
+\sum_{j\in[m)} f_\x(\j) \cdot A_j &\equals \sum_{i\in[n)}\eq(\x, \i) \cdot D_i\Leftrightarrow\\\\\
+\alpha \sum_{j\in[m)} f(\x, \j) \cdot G_j &\equals \sum_{i\in[n)}\eq(\x, \i) \cdot \left( \sum_{j\in [m)} f(\i,\j) \cdot A_j \right)\Leftrightarrow\\\\\
+\alpha \sum_{j\in[m)} \sum_{i\in[n)} \eq(\x,\i) f(\i, \j) \cdot G_j &\equals \sum_{i\in[n)}\eq(\x, \i) \cdot \alpha \left( \sum_{j\in [m)} f(\i,\j) \cdot G_j \right)\Leftrightarrow\\\\\
+\alpha \sum_{i\in[n)} \sum_{i\in[m)} \eq(\x,\i) f(\i, \j) \cdot G_j &\equals \alpha \sum_{i\in[n)}\eq(\x, \i) \cdot \left( \sum_{j\in [m)} f(\i,\j) \cdot G_j \right)\Leftrightarrow\\\\\
+\alpha \sum_{i\in[n)} \sum_{i\in[m)} \eq(\x,\i) f(\i, \j) \cdot G_j &\goddamnequals \alpha \sum_{i\in[n)} \sum_{j\in [m)} \eq(\x, \i) f(\i,\j) \cdot G_j
 \end{align}
 
 ### Efficient instantiation
@@ -283,7 +315,86 @@ Typically, when commiting to a size-$N$ MLE, the scheme is most-efficiently set 
 ## Performance
 
 {: .todo}
-Describe concretely with table for $\kzhTwo$ and $\kzhK$, explaining eval proofs for hypercube and for non-hypercube points. Account for all pre-processing. Explain that $\kzh{\log_2{N}}$ yields $2\log_2{N}$-sized proofs.
+Include vanilla $\kzhK(d)$, explaining eval proofs for hypercube and for non-hypercube points and how $\kzh{\log_2{N}}$ yields $2\log_2{N}$-sized proofs.
+Include the optimized variant of $\kzhK(d)$.
+
+{: .info}
+We use $\kzhTwo(n,m)$ to refer to the $\kzhTwo$ scheme set up with [$\kzhSetup{2}(1^\lambda, \log_2{n},\log_2{m})$](#mathsfkzh_2mathsfsetup1lambda-numu-rightarrow-mathsfvkmathsfck)
+
+<!-- Here you can define LaTeX macros -->
+<div style="display: none;">$
+\def\read#1{\mathsf{read}\left(#1\right)}
+\def\sqN{\sqrt{N}}
+$</div> <!-- $ -->
+
+Setup, commitments and proof sizes:
+
+|--------------+-------+-------+-------------+--------+-------|
+| Scheme       | $\ck$ | $\vk$ | Commit time | $\aux$ | $\pi$ |
+|--------------|-------|-------|-------------|--------|-------|
+| $\kzhTwoGen$ | $\Gr_2^{n+1}, \Gr_1^{m+nm}     $ | $\Gr_2^{n+1}, \Gr_1^m$ | $\msm{nm}{1} + n\cdot\msm{m}{1}$       | $\Gr_1^n$    | $\F^m, \Gr_1^n$ |
+| $\kzhTwoSqr$ | $\Gr_2^{\sqN+1}, \Gr_1^{N+\sqN}$ | $\Gr_2^{\sqN+1}\times\Gr_1^\sqN$ | $\msm{N}{1} + \sqN\cdot\msm{\sqN}{1}$ | $\Gr_1^\sqN$ | $\F^\sqN, \Gr_1^\sqN$ |
+|--------------+-------+-------+-------------|--------|-------|
+
+Openings at arbitry points:
+
+|--------------+--------------------+---------------|
+| Scheme       | Open time (random) | Verifier time |
+|--------------|--------------------|---------------|
+| $\kzhTwoGen$ | $\Fmul{nm} + \Fadd{nm} + \read{\aux}$ | $\multipair{n+1} + \msm{m+n}{1} + \Fmul{(2n+3m)} + \Fadd{m}$ |
+|--------------|--------------------|---------------|
+| $\kzhTwoSqr$ | $\Fmul{N} + \Fadd{N} + \read{\aux}$   | $\multipair{\sqN+1} + \msm{2\sqN}{1} + \Fmul{5\sqN} + \Fadd{\sqN}$ |
+|--------------+--------------------+---------------|
+
+Openings at points on the hypercube:
+
+|--------------+-----------------------+---------------|
+| Scheme       | Open time (hypercube) | Verifier time |
+|--------------|-----------------------|---------------|
+| $\kzhTwoGen$ | $\read{\aux}$         | $\multipair{n+1} + \msm{m+1}{1}$       | 
+|--------------|-----------------------|---------------|
+| $\kzhTwoSqr$ | $\read{\aux}$         | $\multipair{\sqN+1} + \msm{\sqN+1}{1}$ | 
+|--------------+-----------------------+---------------|
+
+
+{: .warning}
+For "Open time (random)" the time should technically have $\Fmul{n(m+2)} + \Fadd{(n-1)m}$ instead, but it's peanuts, so ignoring.
+
+## Appendix
+
+### Computing all $\mathsf{eq}(\boldsymbol{x},\boldsymbol{i})$'s
+
+This can be done using a tree-based algorithm.
+Here is an example when $\i\in\\{0,1\\}^3$:
+```
+                               1                                 <-- level 0
+                         /           \
+                      /                 \    
+                   /                       \  
+                /                             \
+           (1 - x_0)                          x_0                <-- level 1
+        /             \                 /             \
+   (1 - x_1)          x_1          (1 - x_1)          x_1        <-- level 2
+    /     \         /     \         /     \         /     \          (4 muls)
+(1-x_2)   x_2   (1-x_2)   x_2   (1-x_2)   x_2   (1-x_2)   x_2    <-- level 3
+   |       |       |       |       |       |       |       |         (8 muls)
+   |       |       |       |       |       |       |       |
+eq_0(x) eq_1(x) eq_2(x) eq_3(x) eq_4(x) eq_5(x) eq_6(x) eq_7(x)  <-- results
+```
+
+One can see that, given $\x\in\F^n$, one needs to:
+ - compute all negations $(1-x_k),\forall k\in[\log_2{n})$ in $\log_2{n}$ field additions
+    + **TODO:** Is the negation here problematic, performance-wise? Can a more efficient basis be used?
+ - At every level $k\in[2,\log_2{n}]$ in the tree, compute $2^k$ field multiplications
+
+So, for $n=2^\ell$, the number of field multiplications can be upper bounded by $T(n) = T(n/2) + n = 2n-1$.
+But since we are skipping the $2$ multiplications at level 1 and the $1$ multiplication at level 0, it is really:
+
+$$\Fmul{2n-4}$$
+
+e.g., for $n=8$, it is $2 \cdot 8 - 4 = 16 - 4 = 12$
+
+For all intents and purposes, we're gonna use $\Fmul{2n}$.
 
 ## References
 
@@ -291,5 +402,6 @@ For cited works, see below 👇👇
 
 {% include refs.md %}
 
+[^ck]: We are excluding the $\Vp$ and $\VV$ components from $\kzhTwo$'s $\ck$ because are not actually needed to create a commitment.
 [^N]: In the KZH paper[^KZHB25e], the setup algorithm only takes $N$ as input (but they confusingly denote it by $k$?)
-[^open]: In the KZH paper[^KZHB25e], the evaluation $z$ is also included in the proof, but this is unnecessary. Furthermore, the paper's opening algorithm unnecessarily includes the proving key $\prk$ as a a parameter, even thought it does **not** use it at all.
+[^open]: In the KZH paper[^KZHB25e], the evaluation $z$ is also included in the proof, but this is unnecessary. Furthermore, the paper's opening algorithm unnecessarily includes the proving key $\ck$ as a a parameter, even thought it does **not** use it at all.
